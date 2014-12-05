@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- ld31 strings -->
+
+<objects>
+
+	<object class="StringTable" name="strings">
+		<table>{
+			"AppTitle" = "ld31"
+			}</table>
+	</object>
+
+</objects>

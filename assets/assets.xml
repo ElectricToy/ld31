@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- ld31 assets -->
+
+<objects>
+	
+	<include url="assets/freshscene2d_assets.xml" subsume-root="true" />
+	<include url="assets/freshgame_assets.xml" subsume-root="true" />
+	
+	<!-- Fonts and textures -->
+	
+	<object class="FontLoaderConfigured" name="uni05_53_8">
+		<fontMetricsFilePath>uni05_53_8.fontmap</fontMetricsFilePath>
+	</object>
+	<object class="TextureLoaderConfigured" name="uni05_53_8">
+		<basePath>assets/font</basePath>
+		<filePath>uni05_53_8</filePath>
+	</object>
+
+		
+	<!-- Sounds -->
+	
+	<!-- Shaders -->
+	
+</objects>

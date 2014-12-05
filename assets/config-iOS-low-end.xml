@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- ld31 Application Configuration - iOS LOW END-->
+
+<objects>
+	<include url="assets/config-iOS.xml" subsume-root="true" />
+
+	<object class="AppStageConfig" name="config">
+		<desiredFramesPerSecond>30</desiredFramesPerSecond>
+	</object>
+</objects>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- ld31 Application Configuration - Web -->
+
+<objects>
+	<include url="assets/config.xml" subsume-root="true" />
+
+	<object class="AppStageConfig" name="config">
+	</object>
+</objects>

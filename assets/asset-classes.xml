@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- Megadventure -->
+
+<objects>
+	
+	<class name="TextureLoaderConfigured" extends="TextureLoader">
+		<basePath>assets/art/</basePath>
+		<extension>png</extension>
+		<doMipMap>false</doMipMap>
+		<filterMode>Nearest</filterMode>
+	</class>
+	
+	<class name="AudioCueLoaderConfigured" extends="AudioCueLoader">
+		<basePath>assets/audio/</basePath>
+		<extension>wav</extension>
+		<maxSimultaneousSounds>8</maxSimultaneousSounds>
+	</class>
+	
+	<class name="LongAudioCueLoaderConfigured" extends="AudioCueLoaderConfigured">
+		<extension>mp3</extension>
+	</class>
+
+	<class name="FontLoaderConfigured" extends="FontLoader">
+		<basePath>assets/font/</basePath>
+	</class>
+
+</objects>

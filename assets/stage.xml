@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- ld31 Normal Stage -->
+
+<objects root="AppStage'theStage'">
+
+	<object class="AppStage" name="theStage">
+		<stageDimensions>960,0</stageDimensions>
+
+		<children>
+
+			<!-- TODO Example stage -->
+
+			<object class="MovieClip" name="$^_spinner">
+				<scale>200</scale>
+
+				<children>
+					<object class="MovieClip" name="$^_pulsar">
+						<children>
+							<object class="Sprite">
+								<texture>Texture'white_simple'</texture>
+							</object>
+						</children>
+
+						<passthrough>
+							<keyframe>
+								<child name="$1"><color>Red</color></child>
+								<tween type="Linear" />
+							</keyframe>
+							<keyframe rel-s="1.0"> 	<!-- 1 second later -->
+								<child name="$1"><color>Green</color></child>
+								<tween type="Linear" />
+							</keyframe>
+							<keyframe rel-s="1.0">
+								<child name="$1"><color>Blue</color></child>
+								<tween type="Linear" />
+							</keyframe>
+							<keyframe rel-s="1.0">
+								<child name="$1"><color>Red</color></child>
+								<tween type="Linear" />
+							</keyframe>
+						</passthrough>
+					</object>
+				</children>
+
+				<passthrough>
+					<keyframe>
+						<child name="$1"><rotation>0</rotation></child>
+						<tween type="Linear" />
+					</keyframe>
+					<keyframe rel-s="6.1">
+						<child name="$1"><rotation>359</rotation></child>
+					</keyframe>
+				</passthrough>
+			</object>
+
+		</children>			
+
+	</object>
+	
+</objects>
