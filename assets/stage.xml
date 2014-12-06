@@ -3,16 +3,13 @@
 <!-- platformer Normal Stage -->
 
 <objects root="AppStage'theStage'">
-
-	<const type="color" name="TorchLight">ffff9900</const>
-
+		
 	<object class="AppStage" name="theStage">
 		<stageDimensions>960,0</stageDimensions>
-		<clearColor>White</clearColor>
 
 		<children>
 
-			<object class="World" name="world">
+			<object class="ldWorld" name="world">
 				<position>-480,-320</position>
 				<gravity>0</gravity>
 				
@@ -24,17 +21,17 @@
 
 					</object>
 					
-					<object class="Actor" name="$^_player">
+					<object class="Actor" name="player">
 						<texture>Texture'white_simple'</texture>
 						<color>ff000030</color>
 						<position>448,320</position>
 						<scale>5,7</scale>
-						<dimensions>4,6</dimensions>
+						<dimensions>9,13</dimensions>
 						
 						<groundedDrag>32</groundedDrag>
 						<airDrag>32</airDrag>
 						<airControl>1</airControl>
-						<controllerImpulseScale>2000,2000</controllerImpulseScale>
+						<controllerImpulseScale>4000</controllerImpulseScale>
 						<jumpImpulseScale>0</jumpImpulseScale>
 						
 						<controller>
@@ -51,10 +48,20 @@
 								<color>ffffdd80</color>
 								<radius>400</radius>
 							</object>
+							<object class="LightTorch" name="starting_torch">
+								<position>448,320</position>
+							</object>
 						</children>
 					</object>
 					
 				</children>
+				
+				<attachments>
+					<object class="Attachment">
+						<attached>LightTorch'starting_torch'</attached>
+						<to>Actor'player'</to>
+					</object>
+				</attachments>
 			</object>
 
 		</children>

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1F48219F1A33706D006E4360 /* ldPlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F48219D1A33706D006E4360 /* ldPlayerController.cpp */; };
+		1F4821A31A337109006E4360 /* ldWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4821A11A337109006E4360 /* ldWorld.cpp */; };
 		1F51FBE71A3244E6008EEAA1 /* libFreshGame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F51FBE61A3244E1008EEAA1 /* libFreshGame.a */; };
 		1F51FBEB1A324548008EEAA1 /* AppStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F51FBE81A324548008EEAA1 /* AppStage.cpp */; };
 		1F8BF02E18C6725E007C5E7F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8BF02D18C6725E007C5E7F /* Cocoa.framework */; };
@@ -127,6 +128,8 @@
 /* Begin PBXFileReference section */
 		1F48219D1A33706D006E4360 /* ldPlayerController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ldPlayerController.cpp; sourceTree = "<group>"; };
 		1F48219E1A33706D006E4360 /* ldPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ldPlayerController.h; sourceTree = "<group>"; };
+		1F4821A11A337109006E4360 /* ldWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ldWorld.cpp; sourceTree = "<group>"; };
+		1F4821A21A337109006E4360 /* ldWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ldWorld.h; sourceTree = "<group>"; };
 		1F51FBE81A324548008EEAA1 /* AppStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppStage.cpp; sourceTree = "<group>"; };
 		1F51FBE91A324548008EEAA1 /* AppStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStage.h; sourceTree = "<group>"; };
 		1F51FBEA1A324548008EEAA1 /* Essentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Essentials.h; sourceTree = "<group>"; };
@@ -242,6 +245,8 @@
 				1F8BF06418C67355007C5E7F /* main.cpp */,
 				1F48219D1A33706D006E4360 /* ldPlayerController.cpp */,
 				1F48219E1A33706D006E4360 /* ldPlayerController.h */,
+				1F4821A11A337109006E4360 /* ldWorld.cpp */,
+				1F4821A21A337109006E4360 /* ldWorld.h */,
 			);
 			name = src;
 			path = ../../src;
@@ -408,6 +413,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F4821A31A337109006E4360 /* ldWorld.cpp in Sources */,
 				1F51FBEB1A324548008EEAA1 /* AppStage.cpp in Sources */,
 				1F48219F1A33706D006E4360 /* ldPlayerController.cpp in Sources */,
 				1F8BF06618C67355007C5E7F /* main.cpp in Sources */,

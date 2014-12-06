@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- platformer classes -->
+<!-- ld31 classes -->
 
 <objects>
+	
+	<const type="color" name="TorchLight">ffff9900</const>
 	
 	<class name="FloorTileTemplate" extends="TileTemplate">
 		<atlasSubTexture>0,0</atlasSubTexture>
@@ -15,7 +17,7 @@
 		<gradientHost>Sprite'$^_host_light_gradient'</gradientHost>
 		<overlay>Sprite'$^_overlay'</overlay>
 		
-		<overlayRadiusScalar>1</overlayRadiusScalar>
+		<overlayRadiusScalar>0.9</overlayRadiusScalar>
 		
 		<children>
 			<object class="DisplayObjectContainer" name="$^_host">
@@ -44,6 +46,11 @@
 		</children>
 	</class>
 	
+	<class name="LightTorch" extends="LightSourceConfigured">
+		<color>TorchLight</color>
+		<radius>200</radius>
+	</class>
+
 	<class name="TileGridDefault" extends="TileGrid">
 		<texture>Texture'tile_atlas'</texture>
 		<atlasSubdivisions>2,1</atlasSubdivisions>
