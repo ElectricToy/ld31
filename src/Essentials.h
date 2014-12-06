@@ -61,6 +61,16 @@ namespace ld
 	
 	const real GROUND_Y = 100;
 	const real DEEP_GROUND_Y = 110;
+	
+	const real WORLD_PER_TILE = 16;
+	const real HALF_WORLD_PER_TILE = WORLD_PER_TILE * 0.5f;
+	
+	inline vec2 snapToGrid( const vec2& pos )
+	{
+		return vec2{
+			fr::roundToNearest( pos.x - HALF_WORLD_PER_TILE, WORLD_PER_TILE ) + HALF_WORLD_PER_TILE,
+			fr::roundToNearest( pos.y - HALF_WORLD_PER_TILE, WORLD_PER_TILE ) + HALF_WORLD_PER_TILE};
+	}
 }
 
 #endif
