@@ -19,7 +19,7 @@ namespace ld
 		FRESH_DECLARE_CLASS( Scene, DisplayObjectContainer );
 	public:
 		
-		typedef std::pair< Body::wptr, Body::wptr > Link;
+		typedef std::tuple< Body::wptr, Body::wptr, real > Link;
 		
 		void linkBodies( Body::ptr a, Body::ptr b );
 		

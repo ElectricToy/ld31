@@ -13,40 +13,25 @@ namespace
 {
 	using namespace ld;
 	
-	const real DAMPING = 0;
-	const real DESIRED_DIST = 20;
-	
-	void constrainBodies( Body& a, Body& b )
+	void constrainBodies( Body& a, Body& b, real restDistance )
 	{
-		const auto stiffness = std::min( a.stiffness(), b.stiffness() );
+		const auto delta = b.position() - a.position();
+		const auto dist = delta.length();
 		
-		// Constrain position.
-		//
+		if( dist > 0 )
 		{
-			const auto delta = b.position() - a.position();
+			const auto normal = delta / dist;
 			
-			const auto velDelta = b.velocity() - a.velocity();
+			const auto halfRestDelta = ( restDistance - dist ) * 0.5f;
 			
-			const auto force =
-				calculateSpringForceVector( delta, velDelta, stiffness, DAMPING, DESIRED_DIST );
+			const auto displacement = normal * halfRestDelta * 1.f;
 			
-			a.applyImpulse( force );
-			b.applyImpulse( -force );
-		}
-		
-		// Constrain rotation.
-		//
-		{
-			const auto delta = b.rotation() - a.rotation();
-			const auto dist = fr::abs( delta );
+			const auto totalMass = a.effectiveMass() + b.effectiveMass();
 			
-			const auto velDelta = b.angularVelocity() - a.angularVelocity();
+			const auto proportionA = b.effectiveMass() / totalMass;
 			
-			const auto force =
-				calculateSpringForce( delta, dist, velDelta, delta * velDelta, (angle) stiffness, (angle) DAMPING );
-			
-			a.applyTorque( force );
-			b.applyTorque( -force );
+			a.position( a.position() - displacement * proportionA );
+			b.position( b.position() + displacement * ( 1.0f - proportionA ));
 		}
 	}
 }
@@ -63,35 +48,41 @@ namespace ld
 	{
 		ASSERT( a && b );
 		ASSERT( a != b );
-		m_links.push_back( std::make_pair( a, b ));
+		m_links.emplace_back( a, b, distance( a->position(), b->position() ));
 	}
 	
 	void Scene::onAddedToStage()
 	{
 		Super::onAddedToStage();
 		
-		for( int i = 0; i < 40; ++i )
+		for( int y = 0; y < 24; ++y )
 		{
-			auto body = createObject< Body >( *getClass( "BodyDefault" ));
-			
-			body->teleport( vec2( 0, DEEP_GROUND_Y - ( i * 5.0f )) + makeRandomVector2( 20.0f ) );
-
-			size_t bodiesToLink = randInRange( 2, 4 );
-			for( size_t iChild = numChildren() - 1; iChild < numChildren(); --iChild )
+			for( int x = 0; x < 6; ++x )
 			{
-				if( auto other = getChildAt( iChild )->as< Body >())
+				auto body = createObject< Body >( *getClass( "BodyDefault" ));
+				
+				body->teleport( vec2( x * 5 + y * 3, DEEP_GROUND_Y + 60 - y * 20 ) + makeRandomVector2( 4.0f ));
+
+				size_t bodiesToLink = randInRange( 8,8 );
+				for( size_t iChild = numChildren() - 1; iChild < numChildren(); --iChild )
 				{
-					linkBodies( body, other );
-					--bodiesToLink;
-					
-					if( bodiesToLink == 0 )
+					if( auto other = getChildAt( iChild )->as< Body >())
 					{
-						break;
+						if( pctChance( 30 ))
+						{
+							linkBodies( body, other );
+							--bodiesToLink;
+							
+							if( bodiesToLink == 0 )
+							{
+								break;
+							}
+						}
 					}
 				}
+				
+				addChild( body );
 			}
-			
-			addChild( body );
 		}
 	}
 	
@@ -108,13 +99,16 @@ namespace ld
 		m_links.erase( std::remove_if(
 									  m_links.begin(),
 									  m_links.end(),
-									  [&]( const Link& link ) { return !link.first || !link.second; } ),
+									  [&]( const Link& link ) { return !std::get< 0 >( link ) || !std::get< 1 >( link ); } ),
 										  m_links.end() );
 										  
 
-		for( const auto& link : m_links )
+		for( int i = 0; i < 20; ++i )
 		{
-			constrainBodies( *link.first, *link.second );
+			for( const auto& link : m_links )
+			{
+				constrainBodies( *std::get< 0 >( link ), *std::get< 1 >( link ), std::get< 2 >( link ));
+			}
 		}
 	}
 	

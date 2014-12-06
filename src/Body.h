@@ -32,7 +32,9 @@ namespace ld
 		}
 		
 		bool underground() const	 { return m_position.y > GROUND_Y; }
-		real undergroundness() const { return fr::proportion( m_position.y, GROUND_Y, DEEP_GROUND_Y ); }
+		real undergroundness() const { return std::pow( clamp( fr::proportion( m_position.y, GROUND_Y, DEEP_GROUND_Y ), 0.0f, 1.0f ), 0.25f ); }
+		
+		real effectiveMass() const;
 		
 		inline vec2 velocity() const { return m_position - m_lastPosition; }
 		inline angle angularVelocity() const { return m_rotation - m_lastRotation; }
@@ -52,7 +54,7 @@ namespace ld
 		DVAR( real, m_mass, 1 );
 		DVAR( real, m_airDrag, 0.1 );
 		DVAR( real, m_buriedDrag, 0.5 );
-		DVAR( real, m_stiffness, 100 );
+		DVAR( real, m_stiffness, 200 );
 		DVAR( real, m_windDrag, 1 );
 		
 		VAR( vec2, m_lastPosition );

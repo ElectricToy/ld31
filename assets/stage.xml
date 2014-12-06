@@ -10,7 +10,7 @@
 		<children>
 
 			<object class="Scene" name="$^_scene">
-				<gravity>0,200</gravity>
+				<gravity>0,800</gravity>
 			</object>
 
 		</children>			

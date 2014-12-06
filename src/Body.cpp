@@ -28,7 +28,7 @@ namespace ld
 
 	void Body::applyGravity( const vec2& g )
 	{
-		if( m_mass > 0 )
+		if( m_mass > 0 && !underground() )
 		{
 			m_acceleration += g;
 		}
@@ -58,23 +58,24 @@ namespace ld
 		}
 	}
 	
+	real Body::effectiveMass() const
+	{
+		return m_mass + undergroundness() * 10000.0f;
+	}
+	
 	void Body::update()
 	{
-		const auto priorPosition = m_lastPosition;
-		
-		const auto drag = underground() ? m_buriedDrag : m_airDrag;
-		
-		m_position = updateVerlet( m_position, m_lastPosition, drag, m_acceleration, static_cast< real >( stage().secondsPerFrame() ));
-		
-		m_acceleration.setToZero();
-		
-		m_rotation = updateVerlet( m_rotation, m_lastRotation, drag, m_torque, static_cast< real >( stage().secondsPerFrame() ));
-		
-		if( underground() )
+		if( effectiveMass() > 0 )
 		{
-			// Pull toward last position.
-			//
-			m_position = lerp( m_position, priorPosition, undergroundness() );
+			const auto priorPosition = m_lastPosition;
+			
+			const auto drag = underground() ? m_buriedDrag : m_airDrag;
+			
+			m_position = updateVerlet( m_position, m_lastPosition, drag, m_acceleration, static_cast< real >( stage().secondsPerFrame() ));
+			
+			m_acceleration.setToZero();
+			
+			m_rotation = updateVerlet( m_rotation, m_lastRotation, drag, m_torque, static_cast< real >( stage().secondsPerFrame() ));
 		}
 		
 		Super::update();

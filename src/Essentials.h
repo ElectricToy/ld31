@@ -60,7 +60,7 @@ namespace ld
 	using fr::dynamic_freshptr_cast;
 	
 	const real GROUND_Y = 100;
-	const real DEEP_GROUND_Y = 120;
+	const real DEEP_GROUND_Y = 110;
 }
 
 #endif
