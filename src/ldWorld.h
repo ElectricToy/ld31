@@ -11,16 +11,16 @@
 
 #include "Essentials.h"
 #include "World.h"
+#include "TileGrid.h"
 
 namespace ld
 {
-	
 	class ldWorld : public fr::World
 	{
 		FRESH_DECLARE_CLASS( ldWorld, World );
 	public:
 		
-		// TODO
+		fr::TileGrid& tileGrid() const;
 		
 	private:
 		

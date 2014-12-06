@@ -7,7 +7,9 @@
 //
 
 #include "ldActor.h"
+#include "ldWorld.h"
 #include "Stage.h"
+#include "TileGrid.h"
 #include "ActorController.h"
 using namespace fr;
 
@@ -18,6 +20,25 @@ namespace ld
 	DEFINE_VAR( ldActor, vec2, m_stepStart );
 	DEFINE_DVAR( ldActor, real, m_stepSpeed );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldActor )
+
+	void ldActor::onAddedToStage()
+	{
+		Super::onAddedToStage();
+		
+		position( snapToGrid( position() ));
+	}
+	
+	ldWorld& ldActor::world() const
+	{
+		const auto ancestor = firstAncestorOfType< ldWorld >( *this );
+		ASSERT( ancestor );
+		return *ancestor;
+	}
+	
+	TileGrid& ldActor::tileGrid() const
+	{
+		return world().tileGrid();
+	}
 	
 	void ldActor::update()
 	{
@@ -28,17 +49,52 @@ namespace ld
 	
 	void ldActor::applyControllerImpulse( const vec2& i )
 	{
-		auto step = i.normal();
-		step.snapToMajorAxis();
+		if( !isStepping() && !i.isZero() )
+		{
+			// More than one direction implied here?
+			//
+			const vec2 steps[ 2 ] =
+			{
+				vec2( i.x, 0 ),
+				vec2( 0, i.y )
+			};
+
+			vec2 stepToPursue;
+			
+			for( int i = 0; i < 2; ++i )
+			{
+				const auto& potentialStep = steps[ i ];
+				if( !potentialStep.isZero() )
+				{
+					if( canStep( potentialStep ))
+					{
+						// We could do this. But if it's the direction we're already moving,
+						// and we have an alternative, then keep the alternative.
+						//
+						if( stepToPursue.isZero() || potentialStep != m_lastStepDirection )
+						{
+							stepToPursue = potentialStep;
+						}
+					}
+				}
+			}
+			
+			if( !stepToPursue.isZero() )
+			{
+				beginStepping( stepToPursue );
+			}
+		}
+	}
+
+	bool ldActor::canStep( const vec2& dir ) const
+	{
+		ASSERT( dir.x == 0 || dir.y == 0 );
 		
-		if( !isStepping() )
-		{
-			beginStepping( step );
-		}
-		else
-		{
-			m_pendingStepDirection = step;
-		}
+		const auto proposedStart = snapToGrid( position() );
+		const auto proposedDest = proposedStart + dir.normal() * WORLD_PER_TILE;
+		const fr::Direction fromDirection( -dir );
+		
+		return tileGrid().getTile( proposedDest ).isNavigable( fromDirection );
 	}
 	
 	void ldActor::beginStepping( const vec2& dir )
@@ -46,12 +102,18 @@ namespace ld
 		ASSERT( !isStepping() );
 		ASSERT( dir.x == 0 || dir.y == 0 );
 		
-		m_stepStart = snapToGrid( position() );
-		m_stepDirection = dir.normal();
+		// Refuse if there's a wall there.
+		//
+		if( canStep( dir ))
+		{
+			m_stepStart = snapToGrid( position() );
+			m_stepDirection = dir.normal();
+		}
 	}
 
 	void ldActor::stopStepping()
 	{
+		m_lastStepDirection = m_stepDirection;
 		m_stepDirection.setToZero();
 		position( snapToGrid( position() ));
 	}
@@ -80,12 +142,6 @@ namespace ld
 				//
 				stopStepping();
 			}
-		}
-		
-		if( !isStepping() && !m_pendingStepDirection.isZero() )
-		{
-			beginStepping( m_pendingStepDirection );
-			m_pendingStepDirection.setToZero();
 		}
 	}
 	

@@ -11,9 +11,11 @@
 
 #include "Essentials.h"
 #include "Actor.h"
+#include "TileGrid.h"
 
 namespace ld
 {
+	class ldWorld;
 	
 	class ldActor : public fr::Actor
 	{
@@ -22,13 +24,18 @@ namespace ld
 		
 		virtual void update() override;
 		
-		virtual void applyControllerImpulse( const vec2& i ) override;
+		SYNTHESIZE_GET( vec2, stepDirection );
+		bool canStep( const vec2& dir ) const;		
 		
-		// Disabled.
-		virtual void jump( real jumpPower ) override {}
+		void applyControllerImpulse( const vec2& i ) override;
+		
+		virtual void onAddedToStage() override;
 		
 	protected:
 
+		ldWorld& world() const;
+		fr::TileGrid& tileGrid() const;
+	
 		virtual void onLanded( const vec2& hitNormal ) override;
 		virtual void onBumpedWall( const vec2& hitNormal ) override;
 
@@ -41,10 +48,9 @@ namespace ld
 	
 		VAR( vec2, m_stepDirection );
 		VAR( vec2, m_stepStart );
-		DVAR( real, m_stepSpeed, 4.0f );
-	
-		vec2 m_pendingStepDirection;
-	
+		DVAR( real, m_stepSpeed, 6.0f );
+		
+		vec2 m_lastStepDirection;
 	};
 	
 }

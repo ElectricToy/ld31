@@ -7,7 +7,7 @@
 //
 
 #include "ldPlayerController.h"
-#include "Actor.h"
+#include "ldActor.h"
 using namespace fr;
 
 namespace ld
@@ -18,11 +18,10 @@ namespace ld
 	
 	void ldPlayerController::update()
 	{
-		if( const auto myHost = host() )
+		if( const auto myHost = host()->as< ldActor >() )
 		{
 			vec2 movementImpulse;
 			
-			// TODO make configurable.
 			if( Keyboard::isKeyDown( Keyboard::LeftArrow ) || Keyboard::isKeyDown( Keyboard::A ))
 			{
 				movementImpulse.x -= 1;
@@ -48,13 +47,10 @@ namespace ld
 	}
 	
 	FRESH_DEFINE_CALLBACK( ldPlayerController, onStageKeyDown, EventKeyboard )
-	{
-		if( host() && event.key() == Keyboard::Space )
-		{
-			host()->jump( 1.0 );
-		}
-		
-	}
-	
+	{}
+
+	FRESH_DEFINE_CALLBACK( ldPlayerController, onStageKeyUp, EventKeyboard )
+	{}
+
 }
 

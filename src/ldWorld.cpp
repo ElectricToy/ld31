@@ -16,7 +16,12 @@ namespace ld
 	
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldWorld )
 	
-	// TODO
+	TileGrid& ldWorld::tileGrid() const
+	{
+		const auto child = getChildByName< TileGrid >( "" );
+		ASSERT( child );
+		return *child;
+	}
 	
 }
 

@@ -25,8 +25,8 @@
 						<texture>Texture'white_simple'</texture>
 						<color>ff000030</color>
 						<position>448,320</position>
-						<scale>5,7</scale>
-						<dimensions>9,13</dimensions>
+						<scale>8</scale>
+						<dimensions>0</dimensions>
 						
 						<groundedDrag>32</groundedDrag>
 						<airDrag>32</airDrag>
@@ -35,7 +35,7 @@
 						<jumpImpulseScale>0</jumpImpulseScale>
 						
 						<controller>
-							<object class="PlayerController" />
+							<object class="ldPlayerController" />
 						</controller>
 					</object>
 					
