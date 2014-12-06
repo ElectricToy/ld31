@@ -1,13 +1,82 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- ld31 classes -->
+<!-- platformer classes -->
 
 <objects>
-
-	<class name="BodyDefault" extends="Body">
-		<texture>Texture'stroke'</texture>
-		<color>ff1c1a18</color>
-		<scale>0.03</scale>
+	
+	<class name="FloorTileTemplate" extends="TileTemplate">
+		<atlasSubTexture>0,0</atlasSubTexture>
+		<isSolid>false</isSolid>
+		<doesBlockLight>false</doesBlockLight>
+	</class>
+	
+	<class name="LightSourceConfigured" extends="LightSource">
+		<lightMask>LightMask'$^_host_light_mask'</lightMask>
+		<gradientHost>Sprite'$^_host_light_gradient'</gradientHost>
+		<overlay>Sprite'$^_overlay'</overlay>
+		
+		<overlayRadiusScalar>1</overlayRadiusScalar>
+		
+		<children>
+			<object class="DisplayObjectContainer" name="$^_host">
+				<maskStencilReadMode>MaskExclusive</maskStencilReadMode>
+				<mask>
+					<object class="LightMask" name="$^_light_mask">
+						<owner>LightSourceConfigured'$^^^'</owner>
+						<shaderProgram>ShaderProgram'SP_Pos2Only'</shaderProgram>
+						<mesh><object class="SimpleMesh" /></mesh>
+					</object>
+				</mask>
+					
+				<children>
+					<object class="Sprite" name="$^_light_gradient">
+						<shaderProgram>ShaderProgram'SP_LightDiffuse'</shaderProgram>
+						<blendMode>Add</blendMode>
+						<texture>Texture'light_glow'</texture>
+					</object>
+				</children>
+			</object>
+			<object class="Sprite" name="$^_overlay">
+				<shaderProgram>ShaderProgram'SP_LightDiffuse'</shaderProgram>
+				<blendMode>Add</blendMode>
+				<texture>Texture'light_glow'</texture>
+			</object>
+		</children>
+	</class>
+	
+	<class name="TileGridDefault" extends="TileGrid">
+		<texture>Texture'tile_atlas'</texture>
+		<atlasSubdivisions>2,1</atlasSubdivisions>
+		<texturesSubdivisionsPerTile>1</texturesSubdivisionsPerTile>
+		<tileSize>16</tileSize>
+		
+		<templates>
+			
+			<object class="FloorTileTemplate" name="floor_basic">
+				<creationColor>ffeaeaea</creationColor>
+			</object>
+			<object class="FloorTileTemplate" name="floor_tool_spawn_1">
+				<creationColor>ff079000</creationColor>
+			</object>
+			<object class="FloorTileTemplate" name="floor_tool_spawn_2">
+				<creationColor>ff42ff00</creationColor>
+			</object>
+			<object class="FloorTileTemplate" name="floor_tool_spawn_home">
+				<creationColor>ffccff00</creationColor>
+			</object>
+			<object class="FloorTileTemplate" name="floor_immutable">
+				<creationColor>fff17c3d</creationColor>
+			</object>
+			<object class="TileTemplate" name="wall_immutable">
+				<atlasSubTexture>1,0</atlasSubTexture>
+				<creationColor>ff444444</creationColor>
+			</object>
+			<object class="TileTemplate" name="wall_really_immutable">
+				<atlasSubTexture>1,0</atlasSubTexture>
+				<creationColor>ffc65112</creationColor>
+			</object>
+			
+		</templates>
 	</class>
 
 </objects>

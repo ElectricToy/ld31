@@ -1,19 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- ld31 Normal Stage -->
+<!-- platformer Normal Stage -->
 
 <objects root="AppStage'theStage'">
 
 	<object class="AppStage" name="theStage">
 		<stageDimensions>960,0</stageDimensions>
+		<clearColor>White</clearColor>
 
 		<children>
 
-			<object class="Scene" name="$^_scene">
-				<gravity>0,800</gravity>
+			<object class="World" name="world">
+				<position>-480,-320</position>
+				
+				<children>
+
+					<object class="TileGridDefault" name="$^_tileGrid">
+						
+						<creationGridImage>Texture'lvl001'</creationGridImage>
+
+					</object>
+					
+					<object class="Actor" name="$^_player">
+						<texture>Texture'white_simple'</texture>
+						<color>ff000030</color>
+						<position>456,320</position>
+						<scale>5,7</scale>
+						<dimensions>4,6</dimensions>
+						
+						<groundedDrag>32</groundedDrag>
+						<airDrag>0</airDrag>
+						<airControl>0.05</airControl>
+						<controllerImpulseScale>12000,0</controllerImpulseScale>
+						<jumpImpulseScale>0,-50000</jumpImpulseScale>
+						
+						<controller>
+							<object class="PlayerController" />
+						</controller>
+					</object>
+					
+					<object class="Lighting" name="$^_lighting">
+						<ambientColor>Black</ambientColor>
+						<tileGrid>TileGridDefault'$^^_tileGrid'</tileGrid>
+						<children>
+							<object class="LightSourceConfigured" name="light_nw_glow">
+								<position>600,320</position>
+								<color>ffff7010</color>
+								<radius>200</radius>
+							</object>
+						</children>
+					</object>
+					
+				</children>
 			</object>
 
-		</children>			
+		</children>
 
 	</object>
 	

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- ld31 assets -->
+<!-- platformer assets -->
 
 <objects>
 	
@@ -9,6 +9,14 @@
 	
 	<!-- Fonts and textures -->
 	
+	<object class="FontLoaderConfigured" name="pixelberry8">
+		<fontMetricsFilePath>pixelberry8.fontmap</fontMetricsFilePath>
+	</object>
+	<object class="TextureLoaderConfigured" name="pixelberry8">
+		<basePath>assets/font</basePath>
+		<filePath>pixelberry8</filePath>
+	</object>
+
 	<object class="FontLoaderConfigured" name="uni05_53_8">
 		<fontMetricsFilePath>uni05_53_8.fontmap</fontMetricsFilePath>
 	</object>
@@ -16,10 +24,26 @@
 		<basePath>assets/font</basePath>
 		<filePath>uni05_53_8</filePath>
 	</object>
-
+	
+	<object class="TextureLoaderConfigured" name="tile_atlas">
+		<extension>jpg</extension>
+	</object>
 		
+	<object class="TextureLoaderConfigured" name="light_glow">
+		<filePath>glow_white_noalpha32</filePath>
+		<filterMode>Bilinear</filterMode>
+	</object>
+	
+	<object class="TextureLoaderConfigured" name="lvl001">
+		<basePath>assets/lvl/</basePath>
+		<extension>png</extension>
+		<doMipMap>false</doMipMap>
+		<retainTexelData>true</retainTexelData>
+		<filterMode>Nearest</filterMode>
+	</object>
+	
 	<!-- Sounds -->
 	
-	<!-- Shaders -->
-	
+	<!-- Shaders -->	
+
 </objects>

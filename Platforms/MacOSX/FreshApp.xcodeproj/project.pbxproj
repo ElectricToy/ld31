@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1F51FBE71A3244E6008EEAA1 /* libFreshGame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F51FBE61A3244E1008EEAA1 /* libFreshGame.a */; };
 		1F51FBEB1A324548008EEAA1 /* AppStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F51FBE81A324548008EEAA1 /* AppStage.cpp */; };
-		1F70AD401A32BBFD00878D4E /* Body.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F70AD3E1A32BBFD00878D4E /* Body.cpp */; };
 		1F8BF02E18C6725E007C5E7F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8BF02D18C6725E007C5E7F /* Cocoa.framework */; };
 		1F8BF06618C67355007C5E7F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F8BF06418C67355007C5E7F /* main.cpp */; };
 		1F8BF24C18C67448007C5E7F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8BF24B18C67448007C5E7F /* Security.framework */; };
@@ -28,7 +27,6 @@
 		1FE0FE63192EFADD00B86F2F /* libFreshScene2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE0FE4B192EFA9700B86F2F /* libFreshScene2D.a */; };
 		1FE0FE64192EFADD00B86F2F /* libFreshTelemetry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE0FE4D192EFA9700B86F2F /* libFreshTelemetry.a */; };
 		1FE0FE65192EFADD00B86F2F /* libtinyxml.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE0FE4F192EFA9700B86F2F /* libtinyxml.a */; };
-		1FE84B511A32C0AA00506E1D /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FE84B4F1A32C0AA00506E1D /* Scene.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,8 +127,6 @@
 		1F51FBE81A324548008EEAA1 /* AppStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppStage.cpp; sourceTree = "<group>"; };
 		1F51FBE91A324548008EEAA1 /* AppStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStage.h; sourceTree = "<group>"; };
 		1F51FBEA1A324548008EEAA1 /* Essentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Essentials.h; sourceTree = "<group>"; };
-		1F70AD3E1A32BBFD00878D4E /* Body.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Body.cpp; sourceTree = "<group>"; };
-		1F70AD3F1A32BBFD00878D4E /* Body.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Body.h; sourceTree = "<group>"; };
 		1F8BF02A18C6725E007C5E7F /* ld31.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ld31.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F8BF02D18C6725E007C5E7F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		1F8BF03018C6725E007C5E7F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -149,8 +145,6 @@
 		1FB348ED1A2D0D0300536EC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = FreshApp/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		1FB348EF1A2D0D0300536EC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = FreshApp/en.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
 		1FE0FE3B192EFA9700B86F2F /* Fresh.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Fresh.xcodeproj; path = ../../../Fresh/Platforms/MacOSX/Fresh.xcodeproj; sourceTree = "<group>"; };
-		1FE84B4F1A32C0AA00506E1D /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
-		1FE84B501A32C0AA00506E1D /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,12 +235,8 @@
 			children = (
 				1F51FBE81A324548008EEAA1 /* AppStage.cpp */,
 				1F51FBE91A324548008EEAA1 /* AppStage.h */,
-				1F70AD3E1A32BBFD00878D4E /* Body.cpp */,
-				1F70AD3F1A32BBFD00878D4E /* Body.h */,
 				1F51FBEA1A324548008EEAA1 /* Essentials.h */,
 				1F8BF06418C67355007C5E7F /* main.cpp */,
-				1FE84B4F1A32C0AA00506E1D /* Scene.cpp */,
-				1FE84B501A32C0AA00506E1D /* Scene.h */,
 			);
 			name = src;
 			path = ../../src;
@@ -413,8 +403,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FE84B511A32C0AA00506E1D /* Scene.cpp in Sources */,
-				1F70AD401A32BBFD00878D4E /* Body.cpp in Sources */,
 				1F51FBEB1A324548008EEAA1 /* AppStage.cpp in Sources */,
 				1F8BF06618C67355007C5E7F /* main.cpp in Sources */,
 			);
