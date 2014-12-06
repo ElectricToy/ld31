@@ -4,5 +4,11 @@
 
 <objects>
 
+	<class name="BodyDefault" extends="Body">
+		<texture>Texture'stroke'</texture>
+		<color>ff1c1a18</color>
+		<scale>0.0625</scale>
+	</class>
+
 </objects>
 

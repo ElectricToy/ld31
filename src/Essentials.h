@@ -33,7 +33,6 @@ namespace fr
 
 namespace ld
 {
-
 	using fr::ClassInfo;
 	using fr::ClassName;
 	using fr::path;
@@ -59,6 +58,8 @@ namespace ld
 	using fr::ObjectId;
 	using fr::ClassFilter;
 	using fr::dynamic_freshptr_cast;
+	
+	const real GROUND_Y = 100;
 }
 
 #endif
