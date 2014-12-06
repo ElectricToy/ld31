@@ -24,25 +24,42 @@ namespace ld
 		SYNTHESIZE_GET( real, stiffness );
 		SYNTHESIZE_GET( real, windDrag );
 		
+		void teleport( const vec2& p )
+		{
+			const auto v = velocity();
+			m_position = p;
+			m_lastPosition = m_position - v;
+		}
+		
+		bool underground() const	 { return m_position.y > GROUND_Y; }
+		real undergroundness() const { return fr::proportion( m_position.y, GROUND_Y, DEEP_GROUND_Y ); }
+		
 		inline vec2 velocity() const { return m_position - m_lastPosition; }
+		inline angle angularVelocity() const { return m_rotation - m_lastRotation; }
 
 		virtual void update() override;
 		
 		virtual void postLoad() override;
 		
-		virtual void applyGravity( const vec2& g );
-		virtual void applyWind( const vec2& f );
-		virtual void applyImpulse( const vec2& i );
+		void applyGravity( const vec2& g );
+		void applyWind( const vec2& f );
+		void applyImpulse( const vec2& i );
 
+		void applyTorque( const angle t );
+		
 	private:
 
 		DVAR( real, m_mass, 1 );
-		DVAR( real, m_airDrag, 0 );
-		DVAR( real, m_stiffness, 300 );
+		DVAR( real, m_airDrag, 0.1 );
+		DVAR( real, m_buriedDrag, 0.5 );
+		DVAR( real, m_stiffness, 100 );
 		DVAR( real, m_windDrag, 1 );
 		
 		VAR( vec2, m_lastPosition );
 		VAR( vec2, m_acceleration );
+		
+		VAR( angle, m_lastRotation );
+		VAR( angle, m_torque );
 		
 	};
 	

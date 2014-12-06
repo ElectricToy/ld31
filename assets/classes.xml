@@ -7,7 +7,7 @@
 	<class name="BodyDefault" extends="Body">
 		<texture>Texture'stroke'</texture>
 		<color>ff1c1a18</color>
-		<scale>0.0625</scale>
+		<scale>0.03</scale>
 	</class>
 
 </objects>

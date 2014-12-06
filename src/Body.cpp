@@ -16,10 +16,13 @@ namespace ld
 	
 	DEFINE_DVAR( Body, real, m_mass );
 	DEFINE_DVAR( Body, real, m_airDrag );
+	DEFINE_DVAR( Body, real, m_buriedDrag );
 	DEFINE_DVAR( Body, real, m_stiffness );
 	DEFINE_DVAR( Body, real, m_windDrag );
 	DEFINE_VAR( Body, vec2, m_lastPosition );
 	DEFINE_VAR( Body, vec2, m_acceleration );
+	DEFINE_VAR( Body, angle, m_lastRotation );
+	DEFINE_VAR( Body, angle, m_torque );
 	
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Body )
 
@@ -47,13 +50,32 @@ namespace ld
 		}
 	}
 	
+	void Body::applyTorque( const angle t )
+	{
+		if( m_mass > 0 )
+		{
+			m_torque += t / m_mass;
+		}
+	}
+	
 	void Body::update()
 	{
-		m_position = updateVerlet( m_position, m_lastPosition, m_airDrag, m_acceleration, static_cast< real >( stage().secondsPerFrame() ));
+		const auto priorPosition = m_lastPosition;
+		
+		const auto drag = underground() ? m_buriedDrag : m_airDrag;
+		
+		m_position = updateVerlet( m_position, m_lastPosition, drag, m_acceleration, static_cast< real >( stage().secondsPerFrame() ));
 		
 		m_acceleration.setToZero();
 		
-		m_position.y = std::min( m_position.y, GROUND_Y );
+		m_rotation = updateVerlet( m_rotation, m_lastRotation, drag, m_torque, static_cast< real >( stage().secondsPerFrame() ));
+		
+		if( underground() )
+		{
+			// Pull toward last position.
+			//
+			m_position = lerp( m_position, priorPosition, undergroundness() );
+		}
 		
 		Super::update();
 	}

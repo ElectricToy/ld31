@@ -21,6 +21,10 @@ namespace ld
 		
 		typedef std::pair< Body::wptr, Body::wptr > Link;
 		
+		void linkBodies( Body::ptr a, Body::ptr b );
+		
+		virtual void onAddedToStage() override;
+		
 		virtual void update() override;
 		
 		template< typename FunctionT >
