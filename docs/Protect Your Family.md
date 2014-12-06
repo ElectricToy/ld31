@@ -11,17 +11,20 @@ Toughness (amount of damage required to kill)
 
 # Tasks
 
-Gridwise movement
+DONE Gridwise movement
+
+Inventory/Object pickup/drop/usage
 
 Initial setup
     Initial tools
     Family
 
-Inventory/Object pickup/drop/usage
-
 Monsters
+    Spawning
     Pathfinding
     AI
+    Breaking
+    Stealing
 
 Art
     Player

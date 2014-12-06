@@ -10,7 +10,7 @@
 #include "ldWorld.h"
 #include "Stage.h"
 #include "TileGrid.h"
-#include "ActorController.h"
+#include "Creature.h"
 using namespace fr;
 
 namespace ld
@@ -19,6 +19,8 @@ namespace ld
 	DEFINE_VAR( ldActor, vec2, m_stepDirection );
 	DEFINE_VAR( ldActor, vec2, m_stepStart );
 	DEFINE_DVAR( ldActor, real, m_stepSpeed );
+	DEFINE_VAR( ldActor, WeakPtr< Creature >, m_holder );
+
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldActor )
 
 	void ldActor::onAddedToStage()
@@ -26,6 +28,32 @@ namespace ld
 		Super::onAddedToStage();
 		
 		position( snapToGrid( position() ));
+	}
+	
+	void ldActor::onTouched( ldActor& other )
+	{}
+	
+	bool ldActor::isPickedUp() const
+	{
+		return m_holder != nullptr;
+	}
+	
+	bool ldActor::canBePickedUp() const
+	{
+		return !isPickedUp();
+	}
+	
+	void ldActor::bePickedUpBy( Creature& other )
+	{
+		ASSERT( !isPickedUp() );
+		stopStepping();
+		
+		m_holder = &other;
+	}
+	
+	void ldActor::beDroppedBy( Creature& other )
+	{		
+		m_holder = nullptr;
 	}
 	
 	ldWorld& ldActor::world() const
@@ -42,14 +70,16 @@ namespace ld
 	
 	void ldActor::update()
 	{
-		updateStepping();
-		
-		Super::update();
+		if( !isPickedUp() )
+		{
+			updateStepping();
+			Super::update();
+		}
 	}
 	
 	void ldActor::applyControllerImpulse( const vec2& i )
 	{
-		if( !isStepping() && !i.isZero() )
+		if( !isPickedUp() && !isStepping() && !i.isZero() )
 		{
 			// More than one direction implied here?
 			//
@@ -71,7 +101,7 @@ namespace ld
 						// We could do this. But if it's the direction we're already moving,
 						// and we have an alternative, then keep the alternative.
 						//
-						if( stepToPursue.isZero() || potentialStep != m_lastStepDirection )
+						if( stepToPursue.isZero() || potentialStep != m_facingDirection )
 						{
 							stepToPursue = potentialStep;
 						}
@@ -99,6 +129,7 @@ namespace ld
 	
 	void ldActor::beginStepping( const vec2& dir )
 	{
+		ASSERT( !isPickedUp() );
 		ASSERT( !isStepping() );
 		ASSERT( dir.x == 0 || dir.y == 0 );
 		
@@ -108,12 +139,12 @@ namespace ld
 		{
 			m_stepStart = snapToGrid( position() );
 			m_stepDirection = dir.normal();
+			m_facingDirection = m_stepDirection;
 		}
 	}
 
 	void ldActor::stopStepping()
 	{
-		m_lastStepDirection = m_stepDirection;
 		m_stepDirection.setToZero();
 		position( snapToGrid( position() ));
 	}
@@ -154,6 +185,11 @@ namespace ld
 	void ldActor::onBumpedWall( const vec2& hitNormal )
 	{
 		stopStepping();
+	}
+	
+	vec2 ldActor::facingDirection() const
+	{
+		return m_facingDirection;
 	}
 }
 

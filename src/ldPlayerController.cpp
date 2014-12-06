@@ -7,7 +7,7 @@
 //
 
 #include "ldPlayerController.h"
-#include "ldActor.h"
+#include "Human.h"
 using namespace fr;
 
 namespace ld
@@ -18,7 +18,7 @@ namespace ld
 	
 	void ldPlayerController::update()
 	{
-		if( const auto myHost = host()->as< ldActor >() )
+		if( const auto myHost = host()->as< Human >() )
 		{
 			vec2 movementImpulse;
 			
@@ -47,7 +47,24 @@ namespace ld
 	}
 	
 	FRESH_DEFINE_CALLBACK( ldPlayerController, onStageKeyDown, EventKeyboard )
-	{}
+	{
+		if( const auto myHost = host()->as< Human >() )
+		{
+			switch( event.key() )
+			{
+				case Keyboard::Z:
+					myHost->pickupTouchingActor();
+					break;
+					
+				case Keyboard::X:
+					myHost->dropHeldActor();
+					break;
+					
+				default:
+					break;
+			}
+		}
+	}
 
 	FRESH_DEFINE_CALLBACK( ldPlayerController, onStageKeyUp, EventKeyboard )
 	{}

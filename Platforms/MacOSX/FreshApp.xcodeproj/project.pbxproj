@@ -10,6 +10,12 @@
 		1F48219F1A33706D006E4360 /* ldPlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F48219D1A33706D006E4360 /* ldPlayerController.cpp */; };
 		1F4821A31A337109006E4360 /* ldWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4821A11A337109006E4360 /* ldWorld.cpp */; };
 		1F4821A91A337B92006E4360 /* ldActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4821A71A337B92006E4360 /* ldActor.cpp */; };
+		1F4821AC1A3389FF006E4360 /* Inventory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4821AA1A3389FF006E4360 /* Inventory.cpp */; };
+		1F4821AF1A338BCC006E4360 /* Human.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4821AD1A338BCC006E4360 /* Human.cpp */; };
+		1F4821B21A338E3B006E4360 /* Creature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4821B01A338E3B006E4360 /* Creature.cpp */; };
+		1F4821B51A33923A006E4360 /* Monster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4821B31A33923A006E4360 /* Monster.cpp */; };
+		1F4821B81A33B695006E4360 /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4821B61A33B695006E4360 /* Item.cpp */; };
+		1F4821BA1A33B7D8006E4360 /* items.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1F4821B91A33B7D8006E4360 /* items.xml */; };
 		1F51FBE71A3244E6008EEAA1 /* libFreshGame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F51FBE61A3244E1008EEAA1 /* libFreshGame.a */; };
 		1F51FBEB1A324548008EEAA1 /* AppStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F51FBE81A324548008EEAA1 /* AppStage.cpp */; };
 		1F8BF02E18C6725E007C5E7F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8BF02D18C6725E007C5E7F /* Cocoa.framework */; };
@@ -133,6 +139,17 @@
 		1F4821A21A337109006E4360 /* ldWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ldWorld.h; sourceTree = "<group>"; };
 		1F4821A71A337B92006E4360 /* ldActor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ldActor.cpp; sourceTree = "<group>"; };
 		1F4821A81A337B92006E4360 /* ldActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ldActor.h; sourceTree = "<group>"; };
+		1F4821AA1A3389FF006E4360 /* Inventory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Inventory.cpp; sourceTree = "<group>"; };
+		1F4821AB1A3389FF006E4360 /* Inventory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inventory.h; sourceTree = "<group>"; };
+		1F4821AD1A338BCC006E4360 /* Human.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Human.cpp; sourceTree = "<group>"; };
+		1F4821AE1A338BCC006E4360 /* Human.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Human.h; sourceTree = "<group>"; };
+		1F4821B01A338E3B006E4360 /* Creature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Creature.cpp; sourceTree = "<group>"; };
+		1F4821B11A338E3B006E4360 /* Creature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Creature.h; sourceTree = "<group>"; };
+		1F4821B31A33923A006E4360 /* Monster.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Monster.cpp; sourceTree = "<group>"; };
+		1F4821B41A33923A006E4360 /* Monster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Monster.h; sourceTree = "<group>"; };
+		1F4821B61A33B695006E4360 /* Item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Item.cpp; sourceTree = "<group>"; };
+		1F4821B71A33B695006E4360 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		1F4821B91A33B7D8006E4360 /* items.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = items.xml; path = ../../assets/items.xml; sourceTree = "<group>"; };
 		1F51FBE81A324548008EEAA1 /* AppStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppStage.cpp; sourceTree = "<group>"; };
 		1F51FBE91A324548008EEAA1 /* AppStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStage.h; sourceTree = "<group>"; };
 		1F51FBEA1A324548008EEAA1 /* Essentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Essentials.h; sourceTree = "<group>"; };
@@ -185,6 +202,7 @@
 		1F8BF02118C6725E007C5E7F = {
 			isa = PBXGroup;
 			children = (
+				1F4821B91A33B7D8006E4360 /* items.xml */,
 				1FE0FE3B192EFA9700B86F2F /* Fresh.xcodeproj */,
 				1F8BF26618C674E3007C5E7F /* assets */,
 				1F8BF06118C67355007C5E7F /* src */,
@@ -252,6 +270,16 @@
 				1F4821A21A337109006E4360 /* ldWorld.h */,
 				1F4821A71A337B92006E4360 /* ldActor.cpp */,
 				1F4821A81A337B92006E4360 /* ldActor.h */,
+				1F4821AA1A3389FF006E4360 /* Inventory.cpp */,
+				1F4821AB1A3389FF006E4360 /* Inventory.h */,
+				1F4821AD1A338BCC006E4360 /* Human.cpp */,
+				1F4821AE1A338BCC006E4360 /* Human.h */,
+				1F4821B01A338E3B006E4360 /* Creature.cpp */,
+				1F4821B11A338E3B006E4360 /* Creature.h */,
+				1F4821B31A33923A006E4360 /* Monster.cpp */,
+				1F4821B41A33923A006E4360 /* Monster.h */,
+				1F4821B61A33B695006E4360 /* Item.cpp */,
+				1F4821B71A33B695006E4360 /* Item.h */,
 			);
 			name = src;
 			path = ../../src;
@@ -391,6 +419,7 @@
 			files = (
 				1F8BF26718C674E3007C5E7F /* assets in Resources */,
 				1FB348F01A2D0D0300536EC8 /* InfoPlist.strings in Resources */,
+				1F4821BA1A33B7D8006E4360 /* items.xml in Resources */,
 				1FB348F11A2D0D0300536EC8 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,10 +447,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F4821B21A338E3B006E4360 /* Creature.cpp in Sources */,
 				1F4821A31A337109006E4360 /* ldWorld.cpp in Sources */,
 				1F51FBEB1A324548008EEAA1 /* AppStage.cpp in Sources */,
 				1F48219F1A33706D006E4360 /* ldPlayerController.cpp in Sources */,
+				1F4821B81A33B695006E4360 /* Item.cpp in Sources */,
+				1F4821B51A33923A006E4360 /* Monster.cpp in Sources */,
+				1F4821AF1A338BCC006E4360 /* Human.cpp in Sources */,
 				1F8BF06618C67355007C5E7F /* main.cpp in Sources */,
+				1F4821AC1A3389FF006E4360 /* Inventory.cpp in Sources */,
 				1F4821A91A337B92006E4360 /* ldActor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

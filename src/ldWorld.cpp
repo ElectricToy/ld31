@@ -22,6 +22,50 @@ namespace ld
 		ASSERT( child );
 		return *child;
 	}
+
+	void ldWorld::update()
+	{
+		Super::update();
+		
+		updateActorCollisions();
+	}
 	
+	void ldWorld::updateActorCollisions()
+	{
+		// Build list of actors.
+		//
+		std::vector< ldActor::ptr > actors;
+		forEachChild< ldActor >( [&]( ldActor& actor )
+								 {
+									 if( !actor.isMarkedForDeletion() )
+									 {
+										 actors.push_back( &actor );
+									 }
+								 } );
+		
+		for( size_t i = 0; i < actors.size(); ++i )
+		{
+			const auto outer = actors[ i ];
+			ASSERT( outer );
+			
+			for( size_t j = i + 1; j < actors.size(); ++j )
+			{
+				const auto inner = actors[ j ];
+				ASSERT( inner );				
+				ASSERT( inner != outer );
+				
+				checkCollision( *outer, *inner );
+			}
+		}
+	}
+	
+	void ldWorld::checkCollision( ldActor& a, ldActor& b )
+	{
+		if( a.collisionBounds().doesOverlap( b.collisionBounds() ))
+		{
+			a.onTouched( b );
+			b.onTouched( a );
+		}
+	}
 }
 

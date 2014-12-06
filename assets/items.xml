@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- ld31 items -->
+
+<objects>
+	
+	<class name="Door" extends="Item">
+		<isPlaying>false</isPlaying>
+		<passthrough>
+			<keyframe label="closed">
+				<texture>Texture'door'</texture>
+				<textureWindow>0,0,0.5,1</textureWindow>
+			</keyframe>
+			<keyframe label="open">
+				<texture>Texture'door'</texture>
+				<textureWindow>0.5,0,1,1</textureWindow>
+			</keyframe>
+		</passthrough>
+	</class>
+	
+</objects>

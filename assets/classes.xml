@@ -6,6 +6,8 @@
 	
 	<const type="color" name="TorchLight">ffff9900</const>
 	
+	<include url="assets/items.xml" subsume-root="true" />
+	
 	<class name="FloorTileTemplate" extends="TileTemplate">
 		<atlasSubTexture>0,0</atlasSubTexture>
 		<isSolid>false</isSolid>

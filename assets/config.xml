@@ -8,7 +8,7 @@
 		<documentsSubfolder>The Electric Toy Co/ld31</documentsSubfolder>
 		<logFileName>runlog.txt</logFileName>
 		<desiredFramesPerSecond>60</desiredFramesPerSecond>
-		<desiredWindowRect>0, 0, 960, 640</desiredWindowRect>
+		<desiredWindowRect>0, 0, 1440, 960</desiredWindowRect>
 		<classPath>assets/classes.xml</classPath>
 		<stringTablePath>assets/strings.xml</stringTablePath>
 		<assetDatabasePath>assets/asset-database.xml</assetDatabasePath>

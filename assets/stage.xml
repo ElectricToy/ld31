@@ -21,12 +21,12 @@
 
 					</object>
 					
-					<object class="ldActor" name="player">
+					<object class="Human" name="player">
 						<texture>Texture'white_simple'</texture>
 						<color>ff000030</color>
 						<position>448,320</position>
 						<scale>8</scale>
-						<dimensions>0</dimensions>
+						<dimensions>15</dimensions>
 						
 						<groundedDrag>32</groundedDrag>
 						<airDrag>32</airDrag>
@@ -35,10 +35,28 @@
 						<jumpImpulseScale>0</jumpImpulseScale>
 						
 						<controller>
-							<object class="ldPlayerController" />
+							<object class="ldPlayerController"></object>
 						</controller>
 					</object>
-					
+
+					<object class="Human" name="other">
+						<texture>Texture'white_simple'</texture>
+						<color>Red</color>
+						<position>448,320</position>
+						<scale>8</scale>
+						<dimensions>15</dimensions>
+						
+						<groundedDrag>32</groundedDrag>
+						<airDrag>32</airDrag>
+						<airControl>1</airControl>
+						<controllerImpulseScale>4000</controllerImpulseScale>
+						<jumpImpulseScale>0</jumpImpulseScale>
+					</object>
+
+					<object class="Door">
+						<position>448,240</position>
+					</object>
+
 					<object class="Lighting" name="$^_lighting">
 						<ambientColor>Black</ambientColor>
 						<tileGrid>TileGridDefault'$^^_tileGrid'</tileGrid>
@@ -53,7 +71,6 @@
 							</object>
 						</children>
 					</object>
-					
 				</children>
 				
 				<attachments>

@@ -12,6 +12,7 @@
 #include "Essentials.h"
 #include "World.h"
 #include "TileGrid.h"
+#include "ldActor.h"
 
 namespace ld
 {
@@ -21,6 +22,25 @@ namespace ld
 	public:
 		
 		fr::TileGrid& tileGrid() const;
+
+		virtual void update() override;
+		
+		template< typename FunctionT >
+		void touchingActors( const rect& bounds, FunctionT&& fn )
+		{
+			forEachChild< ldActor >( [&]( ldActor& actor )
+								 {
+									 if( !actor.isMarkedForDeletion() && actor.collisionBounds().doesOverlap( bounds ))
+									 {
+										 fn( actor );
+									 }
+								 } );
+		}
+		
+	protected:
+		
+		void updateActorCollisions();
+		void checkCollision( ldActor& a, ldActor& b );
 		
 	private:
 		

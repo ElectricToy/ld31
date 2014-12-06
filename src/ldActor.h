@@ -12,10 +12,12 @@
 #include "Essentials.h"
 #include "Actor.h"
 #include "TileGrid.h"
+#include "ActorController.h"
 
 namespace ld
 {
 	class ldWorld;
+	class Creature;
 	
 	class ldActor : public fr::Actor
 	{
@@ -23,13 +25,29 @@ namespace ld
 	public:
 		
 		virtual void update() override;
-		
+
+		virtual bool isPlayer() const { return false; }
+		virtual bool isHuman() const { return false; }
+		virtual bool isMonster() const { return false; }
+		virtual bool isCreature() const { return false; }
+		virtual bool isItem() const { return false; }
+	
 		SYNTHESIZE_GET( vec2, stepDirection );
 		bool canStep( const vec2& dir ) const;		
 		
 		void applyControllerImpulse( const vec2& i ) override;
 		
 		virtual void onAddedToStage() override;
+		
+		virtual void onTouched( ldActor& other );
+		
+		virtual bool canBePickedUp() const;
+		bool isPickedUp() const;
+		
+		virtual void bePickedUpBy( Creature& other );
+		virtual void beDroppedBy( Creature& other );
+		
+		vec2 facingDirection() const;
 		
 	protected:
 
@@ -50,7 +68,9 @@ namespace ld
 		VAR( vec2, m_stepStart );
 		DVAR( real, m_stepSpeed, 6.0f );
 		
-		vec2 m_lastStepDirection;
+		VAR( WeakPtr< Creature >, m_holder );
+		
+		vec2 m_facingDirection = vec2( 1, 0 );
 	};
 	
 }
