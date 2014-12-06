@@ -4,6 +4,8 @@
 
 <objects root="AppStage'theStage'">
 
+	<const type="color" name="TorchLight">ffff9900</const>
+
 	<object class="AppStage" name="theStage">
 		<stageDimensions>960,0</stageDimensions>
 		<clearColor>White</clearColor>
@@ -12,6 +14,7 @@
 
 			<object class="World" name="world">
 				<position>-480,-320</position>
+				<gravity>0</gravity>
 				
 				<children>
 
@@ -24,15 +27,15 @@
 					<object class="Actor" name="$^_player">
 						<texture>Texture'white_simple'</texture>
 						<color>ff000030</color>
-						<position>456,320</position>
+						<position>448,320</position>
 						<scale>5,7</scale>
 						<dimensions>4,6</dimensions>
 						
 						<groundedDrag>32</groundedDrag>
-						<airDrag>0</airDrag>
-						<airControl>0.05</airControl>
-						<controllerImpulseScale>12000,0</controllerImpulseScale>
-						<jumpImpulseScale>0,-50000</jumpImpulseScale>
+						<airDrag>32</airDrag>
+						<airControl>1</airControl>
+						<controllerImpulseScale>2000,2000</controllerImpulseScale>
+						<jumpImpulseScale>0</jumpImpulseScale>
 						
 						<controller>
 							<object class="PlayerController" />
@@ -43,10 +46,10 @@
 						<ambientColor>Black</ambientColor>
 						<tileGrid>TileGridDefault'$^^_tileGrid'</tileGrid>
 						<children>
-							<object class="LightSourceConfigured" name="light_nw_glow">
-								<position>600,320</position>
-								<color>ffff7010</color>
-								<radius>200</radius>
+							<object class="LightSourceConfigured" name="light_home">
+								<position>448,320</position>
+								<color>ffffdd80</color>
+								<radius>400</radius>
 							</object>
 						</children>
 					</object>
