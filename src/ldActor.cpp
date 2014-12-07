@@ -24,6 +24,9 @@ namespace ld
 	DEFINE_DVAR( ldActor, real, m_health );
 	DEFINE_DVAR( ldActor, bool, m_alive );
 	DEFINE_VAR( ldActor, WeakPtr< Creature >, m_holder );
+	DEFINE_VAR( ldActor, ClassInfo::cptr, m_lightClass );
+	DEFINE_DVAR( ldActor, real, m_lightRadius );
+	DEFINE_DVAR( ldActor, Color, m_lightColor );
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldActor )
 
@@ -93,6 +96,28 @@ namespace ld
 	void ldActor::update()
 	{
 		Super::update();
+		
+		if( m_lightClass && m_lightRadius > 0 && m_lightColor != Color::Invisible )
+		{
+			if( !m_lightSource )
+			{
+				m_lightSource = createObject< LightSource >( *m_lightClass );
+				
+				world().lighting()->addChild( m_lightSource );
+				world().attach( *m_lightSource, *this );
+			}
+			
+			m_lightSource->radius( m_lightRadius );
+			m_lightSource->color( m_lightColor );
+		}
+		else
+		{
+			if( m_lightSource )
+			{
+				m_lightSource->destroyWithAnimation();
+				m_lightSource = nullptr;
+			}
+		}
 	}
 
 	void ldActor::receiveDamage( real amount )

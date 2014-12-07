@@ -13,6 +13,7 @@
 #include "Actor.h"
 #include "TileGrid.h"
 #include "ActorController.h"
+#include "Lighting.h"
 
 namespace ld
 {
@@ -69,6 +70,13 @@ namespace ld
 		
 		VAR( WeakPtr< Creature >, m_holder );
 		
+		// Glow light.
+		//
+		VAR( ClassInfo::cptr, m_lightClass );
+		DVAR( real, m_lightRadius, 0 );
+		DVAR( Color, m_lightColor, Color::White );
+
+		fr::LightSource::ptr m_lightSource;
 	};
 	
 }
