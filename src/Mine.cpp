@@ -87,20 +87,17 @@ namespace ld
 	{
 		// Deal damage.
 		//
-		world().touchingActors( dangerArea(), [&]( ldActor& actor )
-							   {
-								   if( actor.alive() && actor.isCreature() && !actor.isPickedUp() )
-								   {
-									   if( !actor.isHuman() || m_harmsHumans )
-									   {
-										   const real distSquared = distanceSquared( actor.position(), position() );
-										   
-										   const real damage = distSquared > 0 ? m_maxDamage / distSquared : m_maxDamage;
-										   
-										   actor.receiveDamage( damage );
-									   }
-								   }
-							   } );
+		world().dealExplosionDamage( dangerArea(), position(), m_maxDamage, [&]( ldActor& actor )
+									{
+										if( actor.alive() && actor.isCreature() && !actor.isPickedUp() )
+										{
+											if( !actor.isHuman() || m_harmsHumans )
+											{
+												return true;
+											}
+										}
+										return false;
+									} );
 		
 		// Sound effect.
 		//

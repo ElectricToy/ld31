@@ -23,6 +23,47 @@ namespace ld
 	DEFINE_VAR( ldWorld, ClassInfo::cptr, m_playerControllerClass );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldWorld )
 
+	size_t ldWorld::numFreeHumans() const
+	{
+		// Humans that are alive and not captured.
+		
+		size_t count = 0;
+		forEachChild< Human >( [&]( const Human& human )
+							  {
+								  if( human.alive() && !human.isPickedUp() )
+								  {
+									  ++count;
+								  }
+							  } );
+		return count;
+	}
+	
+	size_t ldWorld::numLivingHumans() const
+	{
+		// Humans that are alive but possibly captured.
+		
+		size_t count = 0;
+		forEachChild< Human >( [&]( const Human& human )
+							  {
+								  if( human.alive() )
+								  {
+									  ++count;
+								  }
+							  } );
+		return count;
+	}
+	
+	size_t ldWorld::numHumans() const
+	{
+		// Humans that are in any state.
+		size_t count = 0;
+		forEachChild< Human >( [&]( const Human& human )
+							  {
+								  ++count;
+							  } );
+		return count;
+	}
+
 	bool ldWorld::isGameActive() const
 	{
 		return player() != nullptr;
@@ -57,7 +98,7 @@ namespace ld
 				
 				if( distanceScalar > 0 )
 				{
-					const real distSquared = distanceScalar * distanceSquared( vector_cast< real >( tilePos ), pos );
+					const real distSquared = distanceScalar * distanceSquared( myTileGrid.tileCenter( tilePos ), pos );
 					
 					if( distSquared < nearestDistSquared )
 					{

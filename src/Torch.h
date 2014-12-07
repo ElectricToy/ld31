@@ -23,6 +23,8 @@ namespace ld
 		virtual void update() override;
 		
 		virtual void onAddedToStage() override;
+
+	protected:
 		
 	private:
 		

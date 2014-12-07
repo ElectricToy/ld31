@@ -7,15 +7,31 @@
 //
 
 #include "AppStage.h"
+#include "ldWorld.h"
 using namespace fr;
 
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( AppStage )
-	
+	DEFINE_VAR( AppStage, ClassInfo::cptr, m_worldClass );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( AppStage )
 	
-	// TODO
+	void AppStage::onBeginPlay()
+	{
+		Super::onBeginPlay();
+		
+		createWorld();
+	}
+	
+	void AppStage::createWorld()
+	{
+		ASSERT( m_worldClass );
+		auto world = createObject< ldWorld >( *m_worldClass );
+		
+		addChildAt( world, 0 );
+		
+		world->onBeginPlay();
+	}
 	
 }
 

@@ -267,5 +267,77 @@
 		</templates>
 	</class>
 
+
+	<class name="WorldDefault" extends="ldWorld">
+		<position>-496,-336</position>
+		<gravity>0</gravity>
+		
+		<playerControllerClass>ldPlayerController</playerControllerClass>
+		
+		<monsterClassWeights>[
+			{ Troll, 1 },
+			]</monsterClassWeights>
+		
+		<children>
+			
+			<object class="TileGridDefault" name="$^_tileGrid">
+				
+				<creationGridImage>Texture'level001'</creationGridImage>
+				
+			</object>
+			
+			<object class="HumanDefault" name="$^_kid3">
+				<color>ffffff00</color>
+				<position>520,360</position>
+				
+				<stepSpeed>11</stepSpeed>
+				<grindDamage>4</grindDamage>
+			</object>
+			
+			<object class="HumanDefault" name="$^_kid2">
+				<color>ff00ff00</color>
+				<position>488,360</position>
+				
+				<stepSpeed>10</stepSpeed>
+				<grindDamage>10</grindDamage>
+			</object>
+			<object class="HumanDefault" name="$^_kid1">
+				<color>ff0000ff</color>
+				<position>456,360</position>
+				
+				<stepSpeed>9</stepSpeed>
+				<grindDamage>5</grindDamage>
+			</object>
+			
+			<object class="HumanDefault" name="$^_mom">
+				<color>ffff00ff</color>
+				<position>424,360</position>
+				
+				<stepSpeed>8</stepSpeed>
+				<grindDamage>6</grindDamage>
+			</object>
+			
+			<object class="HumanDefault" name="$^_dad">
+				<color>ff000030</color>
+				<position>448,320</position>
+				
+				<stepSpeed>6</stepSpeed>
+				<grindDamage>8</grindDamage>
+			</object>
+			
+			<object class="Lighting" name="$^_lighting">
+				<ambientColor>DarkBlue</ambientColor>
+				<tileGrid>TileGridDefault'$^^_tileGrid'</tileGrid>
+				<children>
+					<object class="LightSourceConfigured" name="$^_light_home">
+						<position>448,320</position>
+						<color>ffffdd80</color>
+						<radius>400</radius>
+					</object>
+				</children>
+			</object>
+		</children>
+	</class>
+
 </objects>
 

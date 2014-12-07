@@ -47,6 +47,11 @@ namespace ld
 	void Monster::updateAI()
 	{
 		Super::updateAI();
+
+		if( m_pursueee && ( m_pursueee->isPickedUp() || !m_pursueee->alive() ))
+		{
+			m_pursueee = nullptr;
+		}
 		
 		vec2 destination;
 		
@@ -76,6 +81,21 @@ namespace ld
 				destination = tileGrid().tileCenter( m_exitDestination );
 			}
 			// Else no change in destination, therefore no new travel command.
+		}
+		else if( world().numFreeHumans() == 0 )
+		{
+			// Go someplace random.
+			//
+			for( int i = 0; i < 3; ++i )		// Try at most a few places.
+			{
+				vec2 possibleDestination = randInRange( LEGAL_BOUNDS.ulCorner(), LEGAL_BOUNDS.brCorner() );
+				
+				if( !tileGrid().getTile( destination ).isSolid() )
+				{
+					destination = possibleDestination;
+					break;
+				}
+			}
 		}
 		else
 		{

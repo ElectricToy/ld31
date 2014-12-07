@@ -30,11 +30,11 @@ XXX     If pursuing, but > X + histeresis that human, stop pursuing.
 XXX Breaking
 XXX Stealing people
 XXX Item drop on death
-    Should kill active player.
+XXX Should kill active player.
 
 Humans
-    Should return home if released
-    If player dies, possess next available human
+XXX Should return home if released
+XXX If player dies, possess next available human
 
 Art
     GO FOR HEAVIER OUTLINES
@@ -86,9 +86,13 @@ Emscripten bugfixing (lighting), deployment
 
 BUG
     Human lights flicker when they're being moved.
-    Monster will dither when holding a human, unsure of which exit to take.
+    Human lights still glow in exit after departure
+XXX Monster will dither when holding a human, unsure of which exit to take.
+XXX Monsters take humans to far portal.
 
 Bonus
+    Flash human when it becomes player
+    Flash anything that receives damage
     Turrets
     Family Wander AI
     Pause

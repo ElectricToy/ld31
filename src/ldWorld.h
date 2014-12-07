@@ -32,6 +32,10 @@ namespace ld
 
 		bool isGameActive() const;				// I.e. some humans still alive.
 		
+		size_t numFreeHumans() const;			// Humans that are alive and not captured.
+		size_t numLivingHumans() const;			// Humans that are alive but possibly captured.
+		size_t numHumans() const;				// Humans that are in any state.
+		
 		virtual void update() override;
 		
 		template< typename FunctionT >
@@ -54,6 +58,22 @@ namespace ld
 		SmartPtr< Item > createItemNear( const ClassInfo& itemClass, const vec2& pos );
 		
 		virtual void onBeginPlay() override;
+		
+		template< typename FunctionT >
+		void dealExplosionDamage( const rect& damageBounds, const vec2& center, real power, FunctionT&& actorFilter )
+		{
+			touchingActors( damageBounds, [&]( ldActor& actor )
+								   {
+									   if( actor.alive() && actorFilter( actor ))
+									   {
+										   const real distSquared = distanceSquared( actor.position(), center );
+										   
+										   const real damage = distSquared > 0 ? power / distSquared : power;
+										   
+										   actor.receiveDamage( damage );
+									   }
+								   } );
+		}
 		
 	protected:
 		

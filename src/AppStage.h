@@ -20,9 +20,15 @@ namespace ld
 		FRESH_DECLARE_CLASS( AppStage, Stage );
 	public:
 		
-		// TODO
+		virtual void onBeginPlay() override;
+		
+	protected:
+		
+		void createWorld();
 		
 	private:
+		
+		VAR( ClassInfo::cptr, m_worldClass );
 		
 	};
 	
