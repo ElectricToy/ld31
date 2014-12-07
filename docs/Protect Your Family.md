@@ -46,7 +46,7 @@ XXX Torch
     Mine
     Turret
 
-Player can grind
+XXX Player can grind
 
 HUD
     Inventory Display

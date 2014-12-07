@@ -178,6 +178,7 @@
 			{ BlockGravel, 6 },
 			{ BlockBrick, 4 },
 			{ BlockStone, 2 },
+			{ MineConfigured, 1 },
 			]</itemClassWeights>
 	</class>
 
@@ -210,6 +211,7 @@
 					{ BlockGravel, 5 },
 					{ BlockBrick, 3 },
 					{ BlockStone, 1 },
+					{ MineConfigured, 1 },
 					]</itemClassWeights>
 			</object>
 			<object class="FloorTileTemplate" name="floor_immutable">

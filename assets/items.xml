@@ -37,7 +37,7 @@
 	</class>
 
 	<class name="DoorIron" extends="DoorBase">
-		<navDistanceScalar>20</navDistanceScalar>
+		<navDistanceScalar>40</navDistanceScalar>
 		<maxHealth>50</maxHealth>
 		<health>50</health>
 		<passthrough>
@@ -96,7 +96,17 @@
 		<children>
 			<object class="TorchGraphic"></object>
 		</children>
-		
+	</class>
+	
+	<class name="MineConfigured" extends="Mine">
+		<texture>Texture'mine'</texture>
+		<blocksHumans>false</blocksHumans>
+		<blocksMonsters>false</blocksMonsters>
+		<dieEmitterClass>ItemBreakParticles</dieEmitterClass>
+
+		<lightClass>LightTorch</lightClass>
+		<lightColor>Red</lightColor>
+		<lightWobble>0</lightWobble>
 	</class>
 
 </objects>

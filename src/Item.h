@@ -20,6 +20,8 @@ namespace ld
 		FRESH_DECLARE_CLASS( Item, ldActor );
 	public:
 		
+		SYNTHESIZE_GET( bool, placed );
+		
 		real navDistanceScalar() const;
 		
 		virtual bool isItem() const override { return true; }
