@@ -23,7 +23,7 @@ Monsters
     Spawning
 XXX Pathfinding
     AI
-    Breaking
+XXX Breaking
     Stealing
     Item drop
 
@@ -35,9 +35,9 @@ Art
     Logo
 
 Tools
-    Doors
+XXX Doors
 XXX     Wood
-        Iron
+XXX     Iron
     Walls
         Gravel
         Brick
@@ -57,9 +57,11 @@ SFX
     Monster steps, grunts
     Grind sounds
     Human screams when picked up
-
+    Explosions
 
 Game Over
+
+
 
 Bonus
     Family Wander AI
