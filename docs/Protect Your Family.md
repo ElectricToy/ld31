@@ -94,9 +94,10 @@ XXX Monsters take humans to far portal.
 
 Bonus
     Flash human when it becomes player
-    Flash anything that receives damage
     Turrets
-    Family Wander AI
+    Clock font monospace to avoid shifting
+XXX Family Wander AI
+    Flash anything that receives damage
     Pause
     Explosive Barrel
     Mine waits before exploding

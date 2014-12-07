@@ -11,6 +11,7 @@
 #include "Human.h"
 #include "AppStage.h"
 #include "SimpleButton.h"
+#include "TextField.h"
 using namespace fr;
 
 namespace ld
@@ -61,6 +62,28 @@ namespace ld
 	void HUD::update()
 	{
 		updateButtonEnablement();
+		
+		// Update clock.
+		//
+		if( auto clockText = getDescendantByName< TextField >( "_clocktext" ))
+		{
+			int hours, mins, seconds;
+			
+			const int timePlayedSeconds = world().timePlayedSeconds();
+			
+			hours = timePlayedSeconds / ( 60 * 60 );
+			mins = ( timePlayedSeconds / 60 ) % 60;
+			seconds = timePlayedSeconds % 60;
+			
+			std::ostringstream text;
+			text << std::setfill( '0' ) << std::setw( 2 ) << hours << ":"
+				<< std::setfill( '0' ) << std::setw( 2 ) << mins << ":"
+				<< std::setfill( '0' ) << std::setw( 2 ) << seconds;
+			
+			clockText->text( text.str() );
+		}
+		
+		
 		Super::update();
 	}
 	

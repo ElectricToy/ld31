@@ -28,7 +28,7 @@
 			<object class="DisplayObjectContainer" name="$^_controls">
 				<ignoreFrameAttachment>false</ignoreFrameAttachment>
 				<parentFrameAttachPoint>1,1</parentFrameAttachPoint>
-				<position>-45,-150</position>
+				<position>-48,-150</position>
 				<children>
 					
 					<object class="HUDButton" name="$^_take">
@@ -78,7 +78,35 @@
 							</object>
 						</children>
 					</object>
+				</children>
+			</object>
+			
+			<!-- CLOCK -->
+			
+			<object class="DisplayObjectContainer" name="$^_clock">
+				<ignoreFrameAttachment>false</ignoreFrameAttachment>
+				<parentFrameAttachPoint>1,1</parentFrameAttachPoint>
+				<position>-48,-35</position>
+				
+				<children>
+					<object class="Sprite" name="$^_survived">
+						<position>0</position>
+						<scale>0.25</scale>
+						<texture>Texture'ui_survived'</texture>
+					</object>
 					
+					<object class="TextField" name="$^_clocktext">
+						<position>0,16</position>
+						<color>fffe3c00</color>
+						
+						<text>00:00:00</text>
+						
+						<font>Font'pixelberry8'</font>
+						<fontSize>28</fontSize>
+						<alignment>Centered</alignment>
+						<verticalAlignment>Middle</verticalAlignment>
+						<isTouchEnabled>false</isTouchEnabled>
+					</object>
 					
 				</children>
 			</object>

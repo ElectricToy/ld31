@@ -21,6 +21,7 @@ namespace ld
 	FRESH_DEFINE_CLASS( ldWorld )
 	DEFINE_VAR( ldWorld, ClassWeights, m_monsterClassWeights );
 	DEFINE_VAR( ldWorld, ClassInfo::cptr, m_playerControllerClass );
+	DEFINE_DVAR( ldWorld, int, m_lastActiveUpdate );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldWorld )
 
 	size_t ldWorld::numFreeHumans() const
@@ -67,6 +68,11 @@ namespace ld
 	bool ldWorld::isGameActive() const
 	{
 		return player() != nullptr;
+	}
+	
+	int ldWorld::timePlayedSeconds() const
+	{
+		return static_cast< int >( m_lastActiveUpdate / stage().frameRate());
 	}
 	
 	ldTile& ldWorld::tileAt( const vec2& pos ) const
@@ -176,6 +182,11 @@ namespace ld
 		updateActorCollisions();
 		
 		pickActiveHuman();
+
+		if( isGameActive() )
+		{
+			++m_lastActiveUpdate;
+		}
 	}
 	
 	void ldWorld::updateActorCollisions()
@@ -220,7 +231,7 @@ namespace ld
 	{
 		// TODO Waves and so forth.
 		
-		if( pctChance( stage().secondsPerFrame() * 8 ))
+		if( pctChance( stage().secondsPerFrame() * 1 ))
 		{
 			auto monsterClass = randomClass( m_monsterClassWeights );
 			if( monsterClass )

@@ -32,6 +32,8 @@ namespace ld
 
 		bool isGameActive() const;				// I.e. some humans still alive.
 		
+		int timePlayedSeconds() const;
+		
 		size_t numFreeHumans() const;			// Humans that are alive and not captured.
 		size_t numLivingHumans() const;			// Humans that are alive but possibly captured.
 		size_t numHumans() const;				// Humans that are in any state.
@@ -87,6 +89,7 @@ namespace ld
 		
 		VAR( ClassWeights, m_monsterClassWeights );
 		VAR( ClassInfo::cptr, m_playerControllerClass );
+		DVAR( int, m_lastActiveUpdate, 0 );
 	};
 	
 }
