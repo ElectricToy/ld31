@@ -7,23 +7,47 @@
 //
 
 #include "Torch.h"
+#include "AppStage.h"
 using namespace fr;
+
+namespace
+{
+	const TimeType FIZZLE_TIME = 30.0;
+}
 
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( Torch )
 	DEFINE_DVAR( Torch, real, m_maxLightRadius );
-
+	DEFINE_DVAR( Torch, TimeType, m_deathTime );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Torch )
 	
 	void Torch::update()
 	{
 		if( alive() )
 		{
-			m_lightRadius = lerp( m_lightRadius, m_maxLightRadius, m_lightWakeupLerp );
+			real desiredLightRadius = m_maxLightRadius;
+			
+			// Update lifespan/fizzle.
+			//
+			const auto lifeRemaining = std::max( 0.0, m_deathTime - stage().time() );
+			if( lifeRemaining <= FIZZLE_TIME )
+			{
+				desiredLightRadius = lerp( 2.0f, m_maxLightRadius, static_cast< real >( std::pow( lifeRemaining / FIZZLE_TIME, 0.5 )));
+				
+				if( lifeRemaining <= 0 )
+				{
+					die();
+				}
+			}
+			
+			m_lightRadius = lerp( m_lightRadius, desiredLightRadius, m_lightWakeupLerp );
 		}
 		
-		Super::update();
+		if( doUpdate() )
+		{
+			Super::update();
+		}
 	}
 	
 	void Torch::onAddedToStage()
@@ -48,6 +72,10 @@ namespace ld
 		{
 			flame->color( m_lightColor );
 		}
+		
+		// Randomize lifespan.
+		//
+		m_deathTime = stage().time() + randInRange( 60 * 2, 60 * 10 );
 	}
 	
 }

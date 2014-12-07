@@ -149,6 +149,12 @@ namespace ld
 	{
 		m_alive = false;
 		
+		if( m_lightSource )
+		{
+			m_lightSource->destroyWithAnimation();
+			m_lightSource = nullptr;
+		}
+
 		if( m_dieEmitterClass )
 		{
 			auto particles = createObject< ParticleEmitter >( *m_dieEmitterClass );

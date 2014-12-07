@@ -27,6 +27,7 @@ namespace ld
 	private:
 		
 		DVAR( real, m_maxLightRadius, 180 );
+		DVAR( TimeType, m_deathTime, 0 );
 		
 		real m_lightWakeupLerp = 0.01f;
 	};
