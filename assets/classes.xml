@@ -90,12 +90,12 @@
 		<cycleDuration>1.5</cycleDuration>
 		<destroyWhenAllDead>true</destroyWhenAllDead>
 		<rectSpawnArea>(-4,-6,4,6)</rectSpawnArea>
-		<baseScale>8</baseScale>
+		<baseScale>12</baseScale>
 		<particleForce>0,-30.0</particleForce>
 		<spawnScaleRange>((0.25),(1.0))</spawnScaleRange>
 		<spawnSpeedRange>(0,1)</spawnSpeedRange>
 		<velocityDamping>0.1</velocityDamping>
-		<startingParticles>40</startingParticles>
+		<startingParticles>20</startingParticles>
 		<creationSpawnBurst>true</creationSpawnBurst>
 		<creationPauseAfterBurst>true</creationPauseAfterBurst>
 		<vecKeyframesScale>[
@@ -104,6 +104,27 @@
 			{1, (0)},
 			]</vecKeyframesScale>
 		<perParticleColorRange>(Gray,White)</perParticleColorRange>
+	</class>
+	
+	<class name="ExplosionParticles" extends="ParticleEmitter">
+		<particleTexture>Texture'white_simple'</particleTexture>
+		<cycleDuration>1</cycleDuration>
+		<destroyWhenAllDead>true</destroyWhenAllDead>
+		<baseScale>4</baseScale>
+		<spawnScaleRange>((0.25),(1.0))</spawnScaleRange>
+		<spawnSpeedRange>(0,10)</spawnSpeedRange>
+		<velocityDamping>0.06</velocityDamping>
+		<startingParticles>160</startingParticles>
+		<creationSpawnBurst>true</creationSpawnBurst>
+		<creationPauseAfterBurst>true</creationPauseAfterBurst>
+		<vecKeyframesScale>[
+			{0, (0)},
+			{0.15, (1)},
+			{1, (0)},
+			]</vecKeyframesScale>
+		<perParticleColorRange>(Red,Yellow)</perParticleColorRange>
+		<perFrameColorFlickerRange>(Red,White)</perFrameColorFlickerRange>
+		
 	</class>
 	
 	<class name="LightSourceConfigured" extends="LightSource">
@@ -149,7 +170,7 @@
 
 	<class name="HumanDefault" extends="Human">
 		<dimensions>15</dimensions>
-		<grindDamage>4</grindDamage>
+		<grindDamage>8</grindDamage>
 		
 		<groundedDrag>32</groundedDrag>
 		<airDrag>32</airDrag>

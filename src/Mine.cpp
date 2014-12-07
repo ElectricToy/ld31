@@ -110,8 +110,9 @@ namespace ld
 		//
 		if( lightSource() )
 		{
-			lightSource()->color( Color::White );
+			lightSource()->color( Color::Yellow );
 			lightSource()->radius( 480 );
+			lightSource()->setDestroyStyle( 1.5, 0.01 );
 		}
 		
 		die();

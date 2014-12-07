@@ -27,7 +27,7 @@ namespace ld
 		virtual bool isItem() const override { return true; }
 		
 		virtual bool doesBlock( const Creature& creature ) const;
-
+		
 		virtual bool canBePickedUpByTouch() const override;
 		virtual vec2 bePickedUpBy( Creature& other ) override;
 		virtual void beDroppedBy( Creature& other );

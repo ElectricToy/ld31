@@ -84,6 +84,7 @@
 	<class name="TorchConfigured" extends="Torch">
 		<blocksHumans>false</blocksHumans>
 		<blocksMonsters>false</blocksMonsters>
+		<blocksLightWhenPlaced>false</blocksLightWhenPlaced>
 		<mayBePlaced>false</mayBePlaced>
 		<dieEmitterClass>ItemBreakParticles</dieEmitterClass>
 		<suppressesHolderLight>true</suppressesHolderLight>
@@ -102,7 +103,8 @@
 		<texture>Texture'mine'</texture>
 		<blocksHumans>false</blocksHumans>
 		<blocksMonsters>false</blocksMonsters>
-		<dieEmitterClass>ItemBreakParticles</dieEmitterClass>
+		<blocksLightWhenPlaced>false</blocksLightWhenPlaced>
+		<dieEmitterClass>ExplosionParticles</dieEmitterClass>
 
 		<lightClass>LightTorch</lightClass>
 		<lightColor>Red</lightColor>

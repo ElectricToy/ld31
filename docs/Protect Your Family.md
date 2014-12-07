@@ -23,6 +23,10 @@ Monsters
     Spawning
 XXX Pathfinding
     AI
+        Move toward center area
+        If within X units of a live human, pursue, capture or kill that human
+        If pursuing, but > X + histeresis that human, stop pursuing.
+        If within Y units of a turret, destroy the turret.
 XXX Breaking
     Stealing people
     Item drop on death
@@ -43,8 +47,8 @@ XXX     Gravel
 XXX     Brick
 XXX     Stone
 XXX Torch
-    Mine
-        Explosion emitter
+XXX Mine
+XXX     Explosion emitter
     Turret
 
 XXX Player can grind
@@ -52,6 +56,9 @@ XXX Player can grind
 HUD
     Inventory Display
     Action buttons with enablement and hotkey hints
+        Take
+        Drop
+        Place ("Use?")
     Messages
     Electric toy logo
     Game logo (UL corner)
@@ -64,8 +71,9 @@ SFX
 
 Game Over
 
-
+Emscripten
 
 Bonus
     Family Wander AI
     Pause
+    Explosive Barrel
