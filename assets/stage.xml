@@ -26,52 +26,39 @@
 					</object>
 					
 					<object class="HumanDefault" name="kid3">
-						<texture>Texture'white_simple'</texture>
 						<color>ffffff00</color>
 						<position>520,360</position>
-						<scale>8</scale>
 						
 						<stepSpeed>11</stepSpeed>
 						<grindDamage>4</grindDamage>
 					</object>
 					
-					
-					
 					<object class="HumanDefault" name="kid2">
-						<texture>Texture'white_simple'</texture>
 						<color>ff00ff00</color>
 						<position>488,360</position>
-						<scale>8</scale>
 						
 						<stepSpeed>10</stepSpeed>
 						<grindDamage>10</grindDamage>
 					</object>
 					<object class="HumanDefault" name="kid1">
-						<texture>Texture'white_simple'</texture>
 						<color>ff0000ff</color>
 						<position>456,360</position>
-						<scale>8</scale>
 						
 						<stepSpeed>9</stepSpeed>
 						<grindDamage>5</grindDamage>
 					</object>
 
 					<object class="HumanDefault" name="mom">
-						<texture>Texture'white_simple'</texture>
 						<color>ffff00ff</color>
 						<position>424,360</position>
-						<scale>8</scale>
 						
 						<stepSpeed>8</stepSpeed>
 						<grindDamage>6</grindDamage>
 					</object>
 
-
 					<object class="HumanDefault" name="dad">
-						<texture>Texture'white_simple'</texture>
 						<color>ff000030</color>
 						<position>448,320</position>
-						<scale>8</scale>
 						
 						<stepSpeed>6</stepSpeed>
 						<grindDamage>8</grindDamage>

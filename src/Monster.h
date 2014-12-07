@@ -27,16 +27,20 @@ namespace ld
 		virtual void update() override;
 		
 	protected:
+
+		virtual void die() override;
 		
 		virtual void updateAI() override;
 
 	private:
 				
-		DVAR( real, m_awarenessRadius, WORLD_PER_TILE * 16 );
-		DVAR( real, m_beginPursuingRadius, WORLD_PER_TILE * 16 );
-		DVAR( real, m_giveUpPursuingRadius, WORLD_PER_TILE * 18 );
+		DVAR( real, m_awarenessRadius, WORLD_PER_TILE * 24 );
+		DVAR( real, m_beginPursuingRadius, WORLD_PER_TILE * 24 );
+		DVAR( real, m_giveUpPursuingRadius, WORLD_PER_TILE * 32 );
 		VAR( ldActor::wptr, m_pursueee );
 		VAR( fr::Vector2i, m_exitDestination );
+		VAR( ClassWeights, m_dropItemWeights );
+		DVAR( size_t, m_maxItemsToDrop, 2 );
 	};
 	
 }

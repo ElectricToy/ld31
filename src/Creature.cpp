@@ -111,7 +111,7 @@ namespace ld
 			
 			const auto& tile = world().tileAt( proposedDestination );
 			
-			if( !tile.isSolid() && tile.mayReceiveItem() )
+			if( tile.mayReceiveItem() )
 			{
 				world().detach( *m_heldActor, *this );
 				m_heldActor->position( proposedDestination );

@@ -18,7 +18,16 @@
 		<airControl>1</airControl>
 		<controllerImpulseScale>4000</controllerImpulseScale>
 		<jumpImpulseScale>0</jumpImpulseScale>
-		
+
+		<dropItemWeights>[
+			{ TorchConfigured, 5 },
+			{ DoorWood, 3 },
+			{ DoorIron, 2 },
+			{ BlockGravel, 1 },
+			{ BlockBrick, 3 },
+			{ BlockStone, 4 },
+			{ MineConfigured, 2 },
+		]</dropItemWeights>
 	</class>
 
 	<class name="Troll" extends="MonsterDefault">

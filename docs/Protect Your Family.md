@@ -17,7 +17,7 @@ XXX Inventory/Object pickup/drop/usage
 
 Initial setup
 XXX Initial tools
-    Family
+XXX Family
 
 Monsters
 XXX Spawning
@@ -28,12 +28,11 @@ XXX     If within X units of a live human, pursue, capture or kill that human
 XXX     If pursuing, but > X + histeresis that human, stop pursuing.
         If within Y units of a turret, destroy the turret.
 XXX Breaking
-    Stealing people
-    Item drop on death
+XXX Stealing people
+XXX Item drop on death
 
 Art
     GO FOR HEAVIER OUTLINES
-
     Player
     Family
     Monsters
@@ -54,6 +53,10 @@ XXX     Explosion emitter
     Turret
 
 XXX Player can grind
+
+Humans
+    Should return home if released
+    If player dies, possess next available human
 
 HUD
     Inventory Display
@@ -79,6 +82,10 @@ Waves
 Game Start/Over
 
 Emscripten bugfixing (lighting), deployment
+
+BUG
+    Human lights flicker when they're being moved.
+    Monster will dither when holding a human, unsure of which exit to take.
 
 Bonus
     Family Wander AI

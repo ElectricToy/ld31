@@ -48,6 +48,8 @@ namespace ld
 		
 		fr::Vector2i nearestTile( const vec2& pos, std::function< real( const ldTile&, const fr::Vector2i& ) >&& filter ) const;
 		
+		SmartPtr< Item > createItemNear( const ClassInfo& itemClass, const vec2& pos );
+		
 		virtual void onBeginPlay() override;
 		
 	protected:

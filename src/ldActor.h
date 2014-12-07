@@ -53,6 +53,8 @@ namespace ld
 
 		virtual void receiveDamage( real amount );
 		
+		virtual void die();
+		
 	protected:
 		
 		SYNTHESIZE_GET( fr::LightSource::ptr, lightSource );
@@ -63,8 +65,6 @@ namespace ld
 		ldWorld& world() const;
 		fr::TileGrid& tileGrid() const;
 		
-		virtual void die();
-	
 	private:
 
 		DVAR( vec2, m_carryOffset, vec2( 5, -5 ));

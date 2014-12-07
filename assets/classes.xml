@@ -170,6 +170,14 @@
 	<include url="assets/monsters.xml" subsume-root="true"></include>
 
 	<class name="HumanDefault" extends="Human">
+
+		<children>
+			<object class="Sprite">
+				<texture>Texture'white_simple'</texture>
+				<scale>8</scale>
+			</object>
+		</children>
+
 		<dimensions>15</dimensions>
 		<grindDamage>8</grindDamage>
 		

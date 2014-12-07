@@ -20,6 +20,8 @@ namespace ld
 	DEFINE_DVAR( Monster, real, m_beginPursuingRadius );
 	DEFINE_DVAR( Monster, real, m_giveUpPursuingRadius );
 	DEFINE_VAR( Monster, fr::Vector2i, m_exitDestination );
+	DEFINE_VAR( Monster, ClassWeights, m_dropItemWeights );
+	DEFINE_DVAR( Monster, size_t, m_maxItemsToDrop );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Monster )
 	
 	bool Monster::canPickup( const ldActor& other ) const
@@ -35,7 +37,9 @@ namespace ld
 		//
 		if( heldActor() && world().tileAt( position() ).isMonsterSpawner() )
 		{
+			heldActor()->die();
 			heldActor()->markForDeletion();
+			die();
 			markForDeletion();
 		}
 	}
@@ -56,7 +60,7 @@ namespace ld
 								{
 									if( tile.isMonsterSpawner() )
 									{
-										return pos == m_exitDestination ? 0.75f : 1.0f;
+										return pos == m_exitDestination ? 0.25f : 1.0f;
 									}
 									else
 									{
@@ -66,8 +70,12 @@ namespace ld
 			
 			ASSERT( !tilePos.isZero() );
 			
-			m_exitDestination = tilePos;
-			destination = tileGrid().tileCenter( m_exitDestination );
+			if( m_exitDestination != tilePos )
+			{
+				m_exitDestination = tilePos;
+				destination = tileGrid().tileCenter( m_exitDestination );
+			}
+			// Else no change in destination, therefore no new travel command.
 		}
 		else
 		{
@@ -133,10 +141,23 @@ namespace ld
 		{
 			travelTo( destination );
 		}
-		else
+	}
+	
+	void Monster::die()
+	{
+		// Drop treasure.
+		//
+		const size_t nItemsToDrop = randInRange( 1UL, m_maxItemsToDrop );
+		
+		for( size_t i = 0; i < nItemsToDrop; ++i )
 		{
-			stopTravel();
+			if( auto itemClass = randomClass( m_dropItemWeights ))
+			{
+				world().createItemNear( *itemClass, position() );
+			}
 		}
+		
+		Super::die();
 	}
 }
 

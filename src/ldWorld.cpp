@@ -203,5 +203,30 @@ namespace ld
 			}
 		}
 	}
+	
+	SmartPtr< Item > ldWorld::createItemNear( const ClassInfo& itemClass, const vec2& pos )
+	{
+		const auto& myTileGrid = tileGrid();
+		
+		const size_t afterTileGrid = getChildIndex( &myTileGrid ) + 1;
+		
+		vec2 offset( 0, -WORLD_PER_TILE );
+		
+		for( int i = 0; i < 4; ++i )
+		{
+			const auto spawnPos = pos + offset;
+			const auto& nearTile = tileAt( spawnPos );
+			if( nearTile.mayReceiveItem() )
+			{
+				auto item = createObject< Item >( itemClass );
+				item->position( snapToGrid( spawnPos ));
+				addChildAt( item, afterTileGrid );
+				return item;
+			}
+			offset.quickRot90();
+		}
+		
+		return nullptr;
+	}
 }
 
