@@ -60,6 +60,10 @@ namespace ld
 					myHost->dropHeldActor();
 					break;
 					
+				case Keyboard::C:
+					myHost->placeHeldActor();
+					break;
+					
 				default:
 					break;
 			}

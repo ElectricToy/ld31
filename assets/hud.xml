@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- ld31 HUD -->
+
+<objects>
+	
+	<class name="HUDButton" extends="SimpleButton">
+		<isDragEnabled>false</isDragEnabled>
+		<scale>0.25</scale>
+		<passthrough>
+			<keyframe label="out"><child name="$1"></child></keyframe>
+			<keyframe label="disabled"><child name="$1"><color>80808080</color></child></keyframe>
+			<keyframe label="down"><child name="$1"><colorAdditive>00333333</colorAdditive></child></keyframe>
+			<keyframe label="up"><child name="$1"></child></keyframe>
+		</passthrough>
+	</class>
+
+	<class name="KeyHints" extends="Sprite">
+		<position>-26,50</position>
+		<scale>0.25</scale>
+		<texture>Texture'ui_button_hints'</texture>
+	</class>
+
+	<class name="HUDConfigured" extends="HUD">
+		<inheritParentFrame>true</inheritParentFrame>
+		<children>
+			
+			<!-- Control buttons -->
+			
+			<object class="DisplayObjectContainer" name="$^_controls">
+				<ignoreFrameAttachment>false</ignoreFrameAttachment>
+				<parentFrameAttachPoint>1,1</parentFrameAttachPoint>
+				<position>-45,-150</position>
+				<children>
+					
+					<object class="HUDButton" name="$^_take">
+						<position>0</position>
+						<onTapCallee>HUDConfigured'theHud'</onTapCallee>
+						<onTapCalleeMethodExpression>onButtonTake</onTapCalleeMethodExpression>
+						<children>
+							<object class="Sprite">
+								<texture>Texture'ui_button_take'</texture>
+							</object>
+						</children>
+					</object>
+					
+					<object class="HUDButton" name="$^_drop">
+						<position>0,38</position>
+						<onTapCallee>HUDConfigured'theHud'</onTapCallee>
+						<onTapCalleeMethodExpression>onButtonDrop</onTapCalleeMethodExpression>
+						<children>
+							<object class="Sprite">
+								<texture>Texture'ui_button_drop'</texture>
+							</object>
+						</children>
+					</object>
+					
+					<object class="HUDButton" name="$^_use">
+						<position>0,76</position>
+						<onTapCallee>HUDConfigured'theHud'</onTapCallee>
+						<onTapCalleeMethodExpression>onButtonUse</onTapCalleeMethodExpression>
+						<children>
+							<object class="Sprite">
+								<texture>Texture'ui_button_use'</texture>
+							</object>
+						</children>
+					</object>
+					
+					<object class="KeyHints" name="$^_keyHints">
+					</object>
+					
+					
+				</children>
+			</object>
+			
+		</children>
+	</class>
+
+</objects>
+

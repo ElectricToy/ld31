@@ -139,7 +139,6 @@
 				<maskStencilReadMode>MaskExclusive</maskStencilReadMode>
 				<mask>
 					<object class="LightMask" name="$^_light_mask">
-						<owner>LightSourceConfigured'$^^^'</owner>
 						<shaderProgram>ShaderProgram'SP_Pos2Only'</shaderProgram>
 						<mesh><object class="SimpleMesh" /></mesh>
 					</object>
@@ -326,7 +325,7 @@
 			</object>
 			
 			<object class="Lighting" name="$^_lighting">
-				<ambientColor>DarkBlue</ambientColor>
+				<ambientColor>Black</ambientColor>
 				<tileGrid>TileGridDefault'$^^_tileGrid'</tileGrid>
 				<children>
 					<object class="LightSourceConfigured" name="$^_light_home">
@@ -338,6 +337,8 @@
 			</object>
 		</children>
 	</class>
+
+	<include url="assets/hud.xml" subsume-root="true"></include>
 
 </objects>
 

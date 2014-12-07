@@ -8,6 +8,10 @@
 		<stageDimensions>960,0</stageDimensions>
 		<worldClass>WorldDefault</worldClass>
 
+		<children>
+			<object class="HUDConfigured" name="theHud">
+			</object>
+		</children>
 
 	</object>
 	

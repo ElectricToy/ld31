@@ -27,6 +27,13 @@ namespace ld
 
 		virtual bool canStep( const vec2& dir ) const override;
 		
+		virtual bool canPickupTouchingActor() const override;
+		virtual bool canDropHeldActor() const override;
+		virtual bool canUseHeldActor() const;
+		
+		virtual void dropHeldActor() override;
+		virtual void placeHeldActor();
+		
 	protected:
 		
 		virtual void updateAI() override;

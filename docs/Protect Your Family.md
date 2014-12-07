@@ -80,6 +80,8 @@ SFX
 
 Waves
 
+CHOOSE GAME NAME
+
 Game Start/Over
 
 Emscripten bugfixing (lighting), deployment

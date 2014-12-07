@@ -33,6 +33,7 @@
 		1F8BF25818C6746A007C5E7F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8BF25718C6746A007C5E7F /* libz.dylib */; };
 		1F8BF25A18C6746E007C5E7F /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8BF25918C6746E007C5E7F /* Carbon.framework */; };
 		1F8BF26718C674E3007C5E7F /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 1F8BF26618C674E3007C5E7F /* assets */; };
+		1F9137C41A34D1940029EA39 /* HUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F9137C21A34D1940029EA39 /* HUD.cpp */; };
 		1FB348F01A2D0D0300536EC8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1FB348EC1A2D0D0300536EC8 /* InfoPlist.strings */; };
 		1FB348F11A2D0D0300536EC8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FB348EE1A2D0D0300536EC8 /* MainMenu.xib */; };
 		1FE0FE61192EFADD00B86F2F /* libFreshCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE0FE45192EFA9700B86F2F /* libFreshCore.a */; };
@@ -181,6 +182,8 @@
 		1F8BF25718C6746A007C5E7F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		1F8BF25918C6746E007C5E7F /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		1F8BF26618C674E3007C5E7F /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../assets; sourceTree = "<group>"; };
+		1F9137C21A34D1940029EA39 /* HUD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HUD.cpp; sourceTree = "<group>"; };
+		1F9137C31A34D1940029EA39 /* HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUD.h; sourceTree = "<group>"; };
 		1FB348ED1A2D0D0300536EC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = FreshApp/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		1FB348EF1A2D0D0300536EC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = FreshApp/en.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
 		1FE0FE3B192EFA9700B86F2F /* Fresh.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Fresh.xcodeproj; path = ../../../Fresh/Platforms/MacOSX/Fresh.xcodeproj; sourceTree = "<group>"; };
@@ -302,6 +305,8 @@
 				1F4821C91A340844006E4360 /* ldTileTemplate.h */,
 				1F4821CB1A342586006E4360 /* Mine.cpp */,
 				1F4821CC1A342586006E4360 /* Mine.h */,
+				1F9137C21A34D1940029EA39 /* HUD.cpp */,
+				1F9137C31A34D1940029EA39 /* HUD.h */,
 			);
 			name = src;
 			path = ../../src;
@@ -477,6 +482,7 @@
 				1F4821B81A33B695006E4360 /* Item.cpp in Sources */,
 				1F4821B51A33923A006E4360 /* Monster.cpp in Sources */,
 				1F4821AF1A338BCC006E4360 /* Human.cpp in Sources */,
+				1F9137C41A34D1940029EA39 /* HUD.cpp in Sources */,
 				1F4821CD1A342586006E4360 /* Mine.cpp in Sources */,
 				1F4821CA1A340844006E4360 /* ldTileTemplate.cpp in Sources */,
 				1F4821C51A3405E5006E4360 /* Torch.cpp in Sources */,

@@ -28,7 +28,10 @@ namespace ld
 		virtual bool canPickup( const ldActor& other ) const;
 		virtual void pickup( ldActor& other );
 		
+		virtual bool canPickupTouchingActor() const;
 		virtual void pickupTouchingActor();
+		
+		virtual bool canDropHeldActor() const;
 		virtual void dropHeldActor();
 		
 		virtual vec2 bePickedUpBy( Creature& other ) override;
@@ -54,6 +57,8 @@ namespace ld
 	protected:
 		
 		SYNTHESIZE_GET( ldActor::ptr, heldActor );
+		
+		virtual ldActor::ptr pickupableTouchingActor() const;
 		
 		virtual real currentStepSpeed() const;
 

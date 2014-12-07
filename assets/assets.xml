@@ -34,6 +34,14 @@
 		<filterMode>Bilinear</filterMode>
 	</object>
 	
+	<object class="TextureLoaderConfigured" name="ui_button_drop"><filterMode>Trilinear</filterMode></object>
+	<object class="TextureLoaderConfigured" name="ui_button_take"><filterMode>Trilinear</filterMode></object>
+	<object class="TextureLoaderConfigured" name="ui_button_use"><filterMode>Trilinear</filterMode></object>
+	<object class="TextureLoaderConfigured" name="ui_button_hints"><filterMode>Trilinear</filterMode></object>
+	<object class="TextureLoaderConfigured" name="ui_hint_goal"><filterMode>Trilinear</filterMode></object>
+	<object class="TextureLoaderConfigured" name="ui_hint_movement"><filterMode>Trilinear</filterMode></object>
+	<object class="TextureLoaderConfigured" name="ui_survived"><filterMode>Trilinear</filterMode></object>
+
 	<object class="TextureLoaderConfigured" name="level001">
 		<basePath>assets/lvl/</basePath>
 		<extension>png</extension>

@@ -84,8 +84,8 @@ namespace ld
 		world().attach( other, *this, desiredCarryOffset );
 		m_heldActor = &other;
 	}
-	
-	void Creature::pickupTouchingActor()
+
+	ldActor::ptr Creature::pickupableTouchingActor() const
 	{
 		// Any actors touching me?
 		//
@@ -97,8 +97,20 @@ namespace ld
 									   touchingActor = &actor;
 								   }
 							   } );
-		
-		if( touchingActor )
+
+		return touchingActor;
+	}
+	
+	bool Creature::canPickupTouchingActor() const
+	{
+		return pickupableTouchingActor() != nullptr;
+	}
+	
+	void Creature::pickupTouchingActor()
+	{
+		// Any actors touching me?
+		//
+		if( ldActor::ptr touchingActor = pickupableTouchingActor() )
 		{
 			// Yes.
 			
@@ -107,8 +119,8 @@ namespace ld
 			pickup( *touchingActor );
 		}
 	}
-	
-	void Creature::dropHeldActor()
+
+	bool Creature::canDropHeldActor() const
 	{
 		if( m_heldActor )
 		{
@@ -118,12 +130,22 @@ namespace ld
 			
 			if( !tile.isSolid() && ( !m_heldActor->isItem() || tile.mayReceiveItem() ))
 			{
-				world().detach( *m_heldActor, *this );
-				m_heldActor->position( proposedDestination );
-				m_heldActor->beDroppedBy( *this );
-				m_heldActor->recordPreviousState();
-				m_heldActor = nullptr;
+				return true;
 			}
+		}
+		return false;
+	}
+	
+	void Creature::dropHeldActor()
+	{
+		if( canDropHeldActor() )
+		{
+			const vec2 proposedDestination = snapToGrid( position() + facingDirection() * WORLD_PER_TILE );
+			world().detach( *m_heldActor, *this );
+			m_heldActor->position( proposedDestination );
+			m_heldActor->beDroppedBy( *this );
+			m_heldActor->recordPreviousState();
+			m_heldActor = nullptr;
 		}
 	}
 	
