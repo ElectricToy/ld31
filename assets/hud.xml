@@ -15,10 +15,8 @@
 		</passthrough>
 	</class>
 
-	<class name="KeyHints" extends="Sprite">
-		<position>-26,50</position>
-		<scale>0.25</scale>
-		<texture>Texture'ui_button_hints'</texture>
+	<class name="KeyHint" extends="Sprite">
+		<position>-104,50</position>
 	</class>
 
 	<class name="HUDConfigured" extends="HUD">
@@ -40,6 +38,11 @@
 						<children>
 							<object class="Sprite">
 								<texture>Texture'ui_button_take'</texture>
+								<children>
+									<object class="KeyHint">
+										<texture>Texture'ui_button_keyhint_z'</texture>
+									</object>
+								</children>
 							</object>
 						</children>
 					</object>
@@ -51,6 +54,11 @@
 						<children>
 							<object class="Sprite">
 								<texture>Texture'ui_button_drop'</texture>
+								<children>
+									<object class="KeyHint">
+										<texture>Texture'ui_button_keyhint_x'</texture>
+									</object>
+								</children>
 							</object>
 						</children>
 					</object>
@@ -62,11 +70,13 @@
 						<children>
 							<object class="Sprite">
 								<texture>Texture'ui_button_use'</texture>
+								<children>
+									<object class="KeyHint">
+										<texture>Texture'ui_button_keyhint_c'</texture>
+									</object>
+								</children>
 							</object>
 						</children>
-					</object>
-					
-					<object class="KeyHints" name="$^_keyHints">
 					</object>
 					
 					

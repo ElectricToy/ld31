@@ -5,7 +5,7 @@
 <objects>
 	
 	<class name="MonsterDefault" extends="Monster">
-		<stepSpeed>10</stepSpeed>
+		<stepSpeed>1</stepSpeed>
 		<grindDamage>1</grindDamage>
 		<dimensions>15</dimensions>
 		
