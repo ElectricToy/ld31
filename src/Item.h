@@ -20,7 +20,7 @@ namespace ld
 		FRESH_DECLARE_CLASS( Item, ldActor );
 	public:
 		
-		SYNTHESIZE_GET( real, navDistanceScalar );
+		real navDistanceScalar() const;
 		
 		virtual bool isItem() const override { return true; }
 		
@@ -40,7 +40,8 @@ namespace ld
 		void removeFromTile();
 		
 		virtual void die() override;
-		
+
+		void showAsPlaced( bool placed );
 		void updateCracks();
 		
 	private:

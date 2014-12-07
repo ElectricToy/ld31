@@ -23,11 +23,16 @@ namespace ld
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Item )
 	
+	real Item::navDistanceScalar() const
+	{
+		return m_placed ? m_navDistanceScalar : 1.0f;
+	}
+	
 	bool Item::doesBlock( const Creature& creature ) const
 	{
-		return
-			( creature.isHuman() && m_blocksHumans ) ||
-			( creature.isMonster() && m_blocksMonsters );
+		return m_placed &&
+			(( creature.isHuman() && m_blocksHumans ) ||
+			 ( creature.isMonster() && m_blocksMonsters ));
 	}
 	
 	void Item::onAddedToStage()
@@ -43,6 +48,8 @@ namespace ld
 			}
 			m_cracksHost->addChild( m_cracks );
 		}
+		
+		showAsPlaced( m_placed );
 		
 		updateCracks();
 		
@@ -74,13 +81,16 @@ namespace ld
 	{
 		removeFromTile();
 		m_placed = false;
+		showAsPlaced( m_placed );
 		return Super::bePickedUpBy( other );
 	}
 	
 	void Item::beDroppedBy( Creature& other )
 	{
 		Super::beDroppedBy( other );
-		m_placed = true;		
+		m_placed = true;
+		showAsPlaced( m_placed );
+		
 		addToTile();
 	}
 
@@ -101,6 +111,20 @@ namespace ld
 		Super::receiveDamage( amount );
 		
 		updateCracks();
+	}
+	
+	void Item::showAsPlaced( bool placed )
+	{
+		if( !placed )
+		{
+			scale( 0.75f );
+			rotation( 30 );
+		}
+		else
+		{
+			scale( 1 );
+			rotation( 0 );
+		}
 	}
 	
 	void Item::updateCracks()
