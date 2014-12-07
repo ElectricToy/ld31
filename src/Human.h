@@ -24,6 +24,8 @@ namespace ld
 		
 		virtual bool isHuman() const override { return true; }
 		virtual bool isPlayer() const override;
+
+		virtual bool canStep( const vec2& dir ) const override;
 		
 	private:
 		

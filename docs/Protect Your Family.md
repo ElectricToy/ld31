@@ -31,20 +31,22 @@ Art
     Player
     Family
     Monsters
-    Tools
+XXX Tools
     Logo
 
 Tools
 XXX Doors
 XXX     Wood
 XXX     Iron
-    Walls
-        Gravel
-        Brick
-        Stone
+XXX Walls
+XXX     Gravel
+XXX     Brick
+XXX     Stone
     Torch
     Mine
     Turret
+
+Player can grind
 
 HUD
     Inventory Display

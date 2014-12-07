@@ -51,6 +51,7 @@ namespace ld
 		DVAR( bool, m_blocksHumans, false );
 		DVAR( bool, m_blocksMonsters, false );
 		VAR( fr::DisplayObjectContainer::ptr, m_cracksHost );
+		DVAR( bool, m_mayBePlaced, true );
 		
 		fr::MovieClip::ptr m_cracks;
 	};

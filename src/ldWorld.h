@@ -44,14 +44,12 @@ namespace ld
 		
 		SmartPtr< Item > itemInTile( const vec2& pos ) const;
 		
-		virtual void onAddedToStage() override;
+		virtual void onBeginPlay() override;
 		
 	protected:
 		
 		void updateActorCollisions();
 		void checkCollision( ldActor& a, ldActor& b );
-		
-	private:
 		
 	};
 	

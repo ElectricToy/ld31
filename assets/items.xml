@@ -80,5 +80,22 @@
 		<maxHealth>100</maxHealth>
 		<health>100</health>
 	</class>
+	
+	<class name="TorchConfigured" extends="Torch">
+		<blocksHumans>false</blocksHumans>
+		<blocksMonsters>false</blocksMonsters>
+		<mayBePlaced>false</mayBePlaced>
+		<dieEmitterClass>ItemBreakParticles</dieEmitterClass>
+		
+		<lightClass>LightTorch</lightClass>
+		<lightRadius>100</lightRadius>
+		<lightColor>Red</lightColor>
+		<lightWobble>16</lightWobble>
+		
+		<children>
+			<object class="TorchGraphic"></object>
+		</children>
+		
+	</class>
 
 </objects>

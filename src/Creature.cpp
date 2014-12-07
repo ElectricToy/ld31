@@ -101,7 +101,9 @@ namespace ld
 		{
 			const vec2 proposedDestination = snapToGrid( position() + facingDirection() * WORLD_PER_TILE );
 			
-			if( !tileGrid().getTile( proposedDestination ).isSolid())
+			const auto& tile = static_cast< const ldTile& >( tileGrid().getTile( proposedDestination ));
+			
+			if( !tile.isSolid() && tile.mayReceiveItem() )
 			{
 				world().detach( *m_heldActor, *this );
 				m_heldActor->position( proposedDestination );

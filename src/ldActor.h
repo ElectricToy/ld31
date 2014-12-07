@@ -54,6 +54,9 @@ namespace ld
 		
 	protected:
 
+		DVAR( real, m_lightRadius, 0 );
+		DVAR( Color, m_lightColor, Color::White );
+
 		ldWorld& world() const;
 		fr::TileGrid& tileGrid() const;
 		
@@ -78,8 +81,9 @@ namespace ld
 		// Glow light.
 		//
 		VAR( ClassInfo::cptr, m_lightClass );
-		DVAR( real, m_lightRadius, 0 );
-		DVAR( Color, m_lightColor, Color::White );
+		DVAR( real, m_lightWobble, 16 );
+		DVAR( real, m_lightWobbleLerp, 0.1f );
+
 
 		fr::LightSource::ptr m_lightSource;
 	};

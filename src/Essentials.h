@@ -71,6 +71,32 @@ namespace ld
 			fr::roundToNearest( pos.x - HALF_WORLD_PER_TILE, WORLD_PER_TILE ) + HALF_WORLD_PER_TILE,
 			fr::roundToNearest( pos.y - HALF_WORLD_PER_TILE, WORLD_PER_TILE ) + HALF_WORLD_PER_TILE};
 	}
+	
+	typedef std::pair< ClassInfo::cptr, size_t > ClassWeight;
+	typedef std::vector< ClassWeight > ClassWeights;
+
+	inline ClassInfo::cptr randomClass( const ClassWeights& classWeights )
+	{
+		std::vector< ClassInfo::cptr > expanded;
+		
+		for( const auto& classWeight : classWeights )
+		{
+			for( size_t i = 0; i < classWeight.second; ++i )
+			{
+				expanded.push_back( classWeight.first );
+			}
+		}
+		
+		if( !expanded.empty() )
+		{
+			return fr::randomElement( expanded );
+		}
+		else
+		{
+			return nullptr;
+		}
+	}
+	
 }
 
 #endif

@@ -20,6 +20,7 @@ namespace ld
 	DEFINE_DVAR( Item, bool, m_blocksHumans );
 	DEFINE_DVAR( Item, bool, m_blocksMonsters );
 	DEFINE_VAR( Item, fr::DisplayObjectContainer::ptr, m_cracksHost );
+	DEFINE_DVAR( Item, bool, m_mayBePlaced );
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Item )
 	
@@ -88,7 +89,7 @@ namespace ld
 	void Item::beDroppedBy( Creature& other )
 	{
 		Super::beDroppedBy( other );
-		m_placed = true;
+		m_placed = m_mayBePlaced;
 		showAsPlaced( m_placed );
 		
 		addToTile();

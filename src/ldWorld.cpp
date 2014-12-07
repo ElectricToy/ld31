@@ -21,13 +21,37 @@ namespace ld
 	
 	SmartPtr< Item > ldWorld::itemInTile( const vec2& pos ) const
 	{
-		auto tile = tileGrid().getTile( pos ).as< ldTile >();
-		return tile->containedItem();
+		const auto& tile = static_cast< const ldTile& >( tileGrid().getTile( pos ));
+		return tile.containedItem();
 	}
 	
-	void ldWorld::onAddedToStage()
+	void ldWorld::onBeginPlay()
 	{
-		Super::onAddedToStage();
+		Super::onBeginPlay();
+		
+		// Visit all tiles in the tilegrid that area capable of holding treasures,
+		// and spawn them.
+		//
+		const auto& myTileGrid = tileGrid();
+		
+		const size_t afterTileGrid = getChildIndex( &myTileGrid ) + 1;
+		
+		const auto& dims = myTileGrid.extents();
+		
+		for( Vector2i pos( 0, 0 ); pos.y < dims.y; ++pos.y )
+		{
+			for( pos.x = 0; pos.x < dims.x; ++pos.x )
+			{
+				const auto& tile = static_cast< const ldTile& >( myTileGrid.getTile( pos ));
+				auto item = tile.createRandomItem();
+				
+				if( item )
+				{
+					item->position( myTileGrid.tileCenter( pos ));
+					addChildAt( item, afterTileGrid );
+				}
+			}
+		}
 	}
 	
 	TileGrid& ldWorld::tileGrid() const

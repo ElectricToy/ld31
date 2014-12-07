@@ -21,7 +21,7 @@
 
 					</object>
 					
-					<object class="Human" name="player">
+					<object class="HumanDefault" name="player">
 						<texture>Texture'white_simple'</texture>
 						<color>ff000030</color>
 						<position>448,320</position>
@@ -54,21 +54,6 @@
 						<controllerImpulseScale>4000</controllerImpulseScale>
 						<jumpImpulseScale>0</jumpImpulseScale>
 
-						<lightClass>LightTorch</lightClass>
-						<lightRadius>100</lightRadius>
-						<lightColor>Red</lightColor>
-					</object>
-					
-					<object class="DoorWood" name="$^_door">
-						<position>448,240</position>
-					</object>
-
-					<object class="DoorIron">
-						<position>432,240</position>
-					</object>
-
-					<object class="BlockGravel">
-						<position>432,272</position>
 					</object>
 
 					<object class="Lighting" name="$^_lighting">
@@ -80,19 +65,9 @@
 								<color>ffffdd80</color>
 								<radius>400</radius>
 							</object>
-							<object class="LightTorch" name="starting_torch">
-								<position>448,320</position>
-							</object>
 						</children>
 					</object>
 				</children>
-				
-				<attachments>
-					<object class="Attachment">
-						<attached>LightTorch'starting_torch'</attached>
-						<to>Actor'player'</to>
-					</object>
-				</attachments>
 			</object>
 
 		</children>

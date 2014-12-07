@@ -17,6 +17,8 @@
 		1F4821B81A33B695006E4360 /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4821B61A33B695006E4360 /* Item.cpp */; };
 		1F4821BD1A33C3BF006E4360 /* Door.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4821BB1A33C3BF006E4360 /* Door.cpp */; };
 		1F4821C01A33C823006E4360 /* ldTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4821BE1A33C823006E4360 /* ldTile.cpp */; };
+		1F4821C51A3405E5006E4360 /* Torch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4821C31A3405E5006E4360 /* Torch.cpp */; };
+		1F4821CA1A340844006E4360 /* ldTileTemplate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4821C81A340844006E4360 /* ldTileTemplate.cpp */; };
 		1F51FBE71A3244E6008EEAA1 /* libFreshGame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F51FBE61A3244E1008EEAA1 /* libFreshGame.a */; };
 		1F51FBEB1A324548008EEAA1 /* AppStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F51FBE81A324548008EEAA1 /* AppStage.cpp */; };
 		1F8BF02E18C6725E007C5E7F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8BF02D18C6725E007C5E7F /* Cocoa.framework */; };
@@ -154,6 +156,10 @@
 		1F4821BC1A33C3BF006E4360 /* Door.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Door.h; sourceTree = "<group>"; };
 		1F4821BE1A33C823006E4360 /* ldTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ldTile.cpp; sourceTree = "<group>"; };
 		1F4821BF1A33C823006E4360 /* ldTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ldTile.h; sourceTree = "<group>"; };
+		1F4821C31A3405E5006E4360 /* Torch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Torch.cpp; sourceTree = "<group>"; };
+		1F4821C41A3405E5006E4360 /* Torch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Torch.h; sourceTree = "<group>"; };
+		1F4821C81A340844006E4360 /* ldTileTemplate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ldTileTemplate.cpp; sourceTree = "<group>"; };
+		1F4821C91A340844006E4360 /* ldTileTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ldTileTemplate.h; sourceTree = "<group>"; };
 		1F51FBE81A324548008EEAA1 /* AppStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppStage.cpp; sourceTree = "<group>"; };
 		1F51FBE91A324548008EEAA1 /* AppStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStage.h; sourceTree = "<group>"; };
 		1F51FBEA1A324548008EEAA1 /* Essentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Essentials.h; sourceTree = "<group>"; };
@@ -287,6 +293,10 @@
 				1F4821BC1A33C3BF006E4360 /* Door.h */,
 				1F4821BE1A33C823006E4360 /* ldTile.cpp */,
 				1F4821BF1A33C823006E4360 /* ldTile.h */,
+				1F4821C31A3405E5006E4360 /* Torch.cpp */,
+				1F4821C41A3405E5006E4360 /* Torch.h */,
+				1F4821C81A340844006E4360 /* ldTileTemplate.cpp */,
+				1F4821C91A340844006E4360 /* ldTileTemplate.h */,
 			);
 			name = src;
 			path = ../../src;
@@ -462,6 +472,8 @@
 				1F4821B81A33B695006E4360 /* Item.cpp in Sources */,
 				1F4821B51A33923A006E4360 /* Monster.cpp in Sources */,
 				1F4821AF1A338BCC006E4360 /* Human.cpp in Sources */,
+				1F4821CA1A340844006E4360 /* ldTileTemplate.cpp in Sources */,
+				1F4821C51A3405E5006E4360 /* Torch.cpp in Sources */,
 				1F8BF06618C67355007C5E7F /* main.cpp in Sources */,
 				1F4821AC1A3389FF006E4360 /* Inventory.cpp in Sources */,
 				1F4821A91A337B92006E4360 /* ldActor.cpp in Sources */,

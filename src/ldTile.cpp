@@ -7,6 +7,7 @@
 //
 
 #include "ldTile.h"
+#include "ldTileTemplate.h"
 using namespace fr;
 
 namespace ld
@@ -14,6 +15,12 @@ namespace ld
 	FRESH_DEFINE_CLASS( ldTile )
 	DEFINE_VAR( ldTile, Item::wptr, m_containedItem );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldTile )
+
+	bool ldTile::mayReceiveItem() const
+	{
+		auto ldTemplate = static_cast< const ldTileTemplate* >( tileTemplate().get() );
+		return !m_containedItem && !isSolid() && ldTemplate->mayReceiveItem();
+	}
 	
 	void ldTile::addItem( Item::ptr item )
 	{
@@ -28,6 +35,19 @@ namespace ld
 		ASSERT( m_containedItem == item );
 		m_containedItem = nullptr;
 	}
-	
+
+	Item::ptr ldTile::createRandomItem() const
+	{
+		auto ldTemplate = static_cast< const ldTileTemplate* >( tileTemplate().get() );
+		
+		if( auto tileClass = ldTemplate->randomTileClass())
+		{
+			return createObject< Item >( *tileClass );
+		}
+		else
+		{
+			return nullptr;
+		}
+	}
 }
 

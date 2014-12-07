@@ -6,11 +6,13 @@
 //
 
 #include "ApplicationStaged.h"
-#include "FreshFile.h"
+#include "FreshRandom.h"
 using namespace fr;
 
 int main( int argc, char* argv[] )
 {
+	pushRandomGeneratorRandomized();
+	
 	ApplicationStaged app( "assets/config.xml" );
 	int retVal = app.runMainLoop( argc, argv );
 	

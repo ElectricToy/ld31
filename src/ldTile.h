@@ -22,7 +22,8 @@ namespace ld
 	public:
 		
 		SYNTHESIZE_GET( Item::wptr, containedItem );
-		
+
+		bool mayReceiveItem() const;
 		void addItem( Item::ptr item );
 		void removeItem( Item::ptr item );
 		
@@ -30,11 +31,13 @@ namespace ld
 		{
 			return Super::navDistanceScalar() * ( m_containedItem ? m_containedItem->navDistanceScalar() : 1.0f );
 		}
-		
+	
+		Item::ptr createRandomItem() const;
+	
 	private:
 		
 		VAR( Item::wptr, m_containedItem );
-		
+	
 	};
 	
 }

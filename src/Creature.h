@@ -39,9 +39,9 @@ namespace ld
 		virtual void onBumpedWall( const vec2& hitNormal ) override;
 		
 		SYNTHESIZE_GET( vec2, stepDirection );
-		bool canStep( const vec2& dir ) const;
+		virtual bool canStep( const vec2& dir ) const;
 		
-		void applyControllerImpulse( const vec2& i ) override;
+		virtual void applyControllerImpulse( const vec2& i ) override;
 		
 		vec2 facingDirection() const;
 		
