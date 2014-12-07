@@ -41,6 +41,8 @@
 
 					<object class="Monster" name="monster">
 						<stepSpeed>4</stepSpeed>
+						<grindDamage>1</grindDamage>
+						
 						<texture>Texture'white_simple'</texture>
 						<color>Red</color>
 						<position>264,120</position>

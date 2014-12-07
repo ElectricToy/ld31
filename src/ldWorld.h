@@ -17,6 +17,7 @@
 namespace ld
 {
 	class Human;
+	class Item;
 	
 	class ldWorld : public fr::World
 	{
@@ -40,6 +41,8 @@ namespace ld
 									 }
 								 } );
 		}
+		
+		SmartPtr< Item > itemInTile( const vec2& pos ) const;
 		
 		virtual void onAddedToStage() override;
 		

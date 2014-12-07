@@ -24,6 +24,8 @@ namespace ld
 		FRESH_DECLARE_CLASS( ldActor, Actor );
 	public:
 		
+		SYNTHESIZE_GET( bool, alive );
+		
 		virtual void update() override;
 
 		virtual bool isPlayer() const { return false; }
@@ -44,11 +46,15 @@ namespace ld
 		
 		virtual vec2 bePickedUpBy( Creature& other );
 		virtual void beDroppedBy( Creature& other );
+
+		virtual void receiveDamage( real amount );
 		
 	protected:
 
 		ldWorld& world() const;
 		fr::TileGrid& tileGrid() const;
+		
+		virtual void die();
 	
 	private:
 
@@ -56,6 +62,10 @@ namespace ld
 		DVAR( vec2, m_carryScale, vec2( 0.75f ));
 		DVAR( angle, m_carryRotation, 30 );
 		DVAR( vec2, m_precarryScale, vec2( 1 ));
+
+		DVAR( real, m_health, 1 );
+		
+		DVAR( bool, m_alive, true );
 		
 		VAR( WeakPtr< Creature >, m_holder );
 		

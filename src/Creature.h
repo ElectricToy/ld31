@@ -21,16 +21,10 @@ namespace ld
 		FRESH_DECLARE_CLASS( Creature, ldActor );
 	public:
 		
-		SYNTHESIZE_GET( bool, alive );
-		
 		virtual bool isCreature() const override { return true; }
-		
-		virtual bool mayCollide() const override;
 		
 		virtual void onTouched( ldActor& other ) override;
 
-		virtual bool canBePickedUp() const;
-		
 		virtual bool canPickup( const ldActor& other ) const;
 		virtual void pickup( ldActor& other );
 		
@@ -61,17 +55,18 @@ namespace ld
 		void stopStepping();
 		bool isStepping() const;
 		virtual void updateStepping();
-		
+
+		virtual void grind( const vec2& dir );
 		
 	private:
 
 		VAR( ldActor::ptr, m_heldActor );
 		VAR( Inventory::ptr, m_inventory );
-		DVAR( bool, m_alive, true );
 		VAR( vec2, m_stepDirection );
 		VAR( vec2, m_stepStart );
 		DVAR( real, m_stepSpeed, 6.0f );
 		DVAR( TimeType, m_thoughtSpeedHz, 1 );
+		DVAR( real, m_grindDamage, 0 );
 		
 		vec2 m_facingDirection = vec2( 1, 0 );
 		

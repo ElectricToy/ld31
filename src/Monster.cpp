@@ -43,7 +43,6 @@ namespace ld
 		}
 		
 		Super::update();
-		
 	}
 	
 	void Monster::updateAI()

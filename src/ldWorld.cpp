@@ -9,6 +9,8 @@
 #include "ldWorld.h"
 #include "Camera.h"
 #include "Human.h"
+#include "Item.h"
+#include "ldTile.h"
 using namespace fr;
 
 namespace ld
@@ -16,6 +18,12 @@ namespace ld
 	FRESH_DEFINE_CLASS( ldWorld )
 	
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldWorld )
+	
+	SmartPtr< Item > ldWorld::itemInTile( const vec2& pos ) const
+	{
+		auto tile = tileGrid().getTile( pos ).as< ldTile >();
+		return tile->containedItem();
+	}
 	
 	void ldWorld::onAddedToStage()
 	{

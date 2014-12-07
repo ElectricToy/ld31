@@ -21,13 +21,15 @@ namespace ld
 	DEFINE_DVAR( ldActor, vec2, m_carryScale );
 	DEFINE_DVAR( ldActor, angle, m_carryRotation );
 	DEFINE_DVAR( ldActor, vec2, m_precarryScale );
+	DEFINE_DVAR( ldActor, real, m_health );
+	DEFINE_DVAR( ldActor, bool, m_alive );
 	DEFINE_VAR( ldActor, WeakPtr< Creature >, m_holder );
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldActor )
 
 	bool ldActor::mayCollide() const
 	{
-		return !isMarkedForDeletion() && !isPickedUp();
+		return !isMarkedForDeletion() && !isPickedUp() && alive();
 	}
 	
 	void ldActor::onAddedToStage()
@@ -48,7 +50,7 @@ namespace ld
 	
 	bool ldActor::canBePickedUp() const
 	{
-		return !isPickedUp();
+		return !isPickedUp() && alive();
 	}
 	
 	bool ldActor::canBePickedUpByTouch() const
@@ -93,5 +95,24 @@ namespace ld
 		Super::update();
 	}
 
+	void ldActor::receiveDamage( real amount )
+	{
+		ASSERT( amount >= 0 );
+		
+		if( alive() )
+		{
+			m_health -= amount;
+			
+			if( m_health <= 0 )
+			{
+				die();
+			}
+		}
+	}
+	
+	void ldActor::die()
+	{
+		m_alive = false;
+	}
 }
 

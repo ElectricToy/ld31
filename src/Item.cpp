@@ -69,6 +69,17 @@ namespace ld
 		m_placed = true;		
 		addToTile();
 	}
-	
+
+	void Item::die()
+	{
+		if( !isPickedUp() )
+		{
+			removeFromTile();
+		}
+		
+		Super::die();
+		
+		markForDeletion();		// TODO!!!
+	}
 }
 

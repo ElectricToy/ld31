@@ -37,6 +37,8 @@ namespace ld
 		void addToTile();
 		void removeFromTile();
 		
+		virtual void die() override;
+		
 	private:
 		
 		DVAR( bool, m_placed, false );

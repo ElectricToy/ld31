@@ -20,9 +20,9 @@ namespace ld
 	DEFINE_VAR( Creature, vec2, m_stepStart );
 	DEFINE_DVAR( Creature, real, m_stepSpeed );
 	DEFINE_VAR( Creature, Inventory::ptr, m_inventory );
-	DEFINE_DVAR( Creature, bool, m_alive );
 	DEFINE_VAR( Creature, ldActor::ptr, m_heldActor );
 	DEFINE_DVAR( Creature, TimeType, m_thoughtSpeedHz );
+	DEFINE_DVAR( Creature, real, m_grindDamage );
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Creature )
 
@@ -30,12 +30,9 @@ namespace ld
 	{
 		Super::onBeginPlay();
 		ASSERT( m_thoughtSpeedHz > 0 );
-		stage().scheduleCallback( FRESH_CALLBACK( onTimeToThink ), 1.0 / m_thoughtSpeedHz );
-	}
-	
-	bool Creature::mayCollide() const
-	{
-		return alive() && Super::mayCollide();
+		
+		// Randomize to deter Creatures from thinking on the same frames.
+		stage().scheduleCallback( FRESH_CALLBACK( onTimeToThink ), 1.0 / m_thoughtSpeedHz + randInRange( 0.0, 1.0 ));
 	}
 	
 	void Creature::onTouched( ldActor& other )
@@ -51,11 +48,6 @@ namespace ld
 		ASSERT( !isPickedUp() );
 		stopStepping();
 		return Super::bePickedUpBy( other );
-	}
-	
-	bool Creature::canBePickedUp() const
-	{
-		return Super::canBePickedUp() && alive();
 	}
 	
 	bool Creature::canPickup( const ldActor& other ) const
@@ -161,11 +153,25 @@ namespace ld
 					}
 				}
 			}
-			
-			if( !stepToPursue.isZero() )
+
+			// Found nothing? Well just pick one then.
+			//
+			if( stepToPursue.isZero() )
 			{
-				beginStepping( stepToPursue );
+				for( int i = 0; i < 2; ++i )
+				{
+					const auto& potentialStep = steps[ i ];
+					if( !potentialStep.isZero() )
+					{
+						stepToPursue = potentialStep;
+						break;
+					}
+				}
 			}
+			
+			stepToPursue.normalize();
+			ASSERT( !stepToPursue.isZero() );
+			beginStepping( stepToPursue );
 		}
 	}
 	
@@ -198,6 +204,7 @@ namespace ld
 		ASSERT( !isPickedUp() );
 		ASSERT( !isStepping() );
 		ASSERT( dir.x == 0 || dir.y == 0 );
+		ASSERT( dir.lengthSquared() == 1 );
 		
 		// Refuse if there's a wall there.
 		//
@@ -206,6 +213,10 @@ namespace ld
 			m_stepStart = snapToGrid( position() );
 			m_stepDirection = dir.normal();
 			m_facingDirection = m_stepDirection;
+		}
+		else
+		{
+			grind( dir );
 		}
 	}
 	
@@ -256,6 +267,22 @@ namespace ld
 	vec2 Creature::facingDirection() const
 	{
 		return m_facingDirection;
+	}
+
+	void Creature::grind( const vec2& dir )
+	{
+		ASSERT( dir.x == 0 || dir.y == 0 );
+		ASSERT( dir.lengthSquared() == 1.0f );
+		
+		m_facingDirection = dir;
+		
+		// Is there an item in the tile in front of us?
+		//
+		if( auto item = world().itemInTile( snapToGrid( position() + dir * WORLD_PER_TILE )))
+		{
+			ASSERT( item->alive() );
+			item->receiveDamage( m_grindDamage * stage().secondsPerFrame() );
+		}
 	}
 	
 	FRESH_DEFINE_CALLBACK( Creature, onTimeToThink, fr::Event )
