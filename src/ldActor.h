@@ -28,6 +28,7 @@ namespace ld
 		SYNTHESIZE_GET( bool, alive );
 		SYNTHESIZE_GET( real, health );
 		SYNTHESIZE_GET( real, maxHealth );
+		SYNTHESIZE_GET( bool, suppressesHolderLight );
 		
 		virtual void update() override;
 
@@ -73,6 +74,8 @@ namespace ld
 		DVAR( real, m_maxHealth, 1 );
 		
 		DVAR( bool, m_alive, true );
+		
+		DVAR( bool, m_suppressesHolderLight, false );
 		
 		VAR( WeakPtr< Creature >, m_holder );
 

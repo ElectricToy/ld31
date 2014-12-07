@@ -159,6 +159,7 @@
 		
 		<lightClass>LightTorch</lightClass>
 		<lightColor>TorchLight</lightColor>
+		<normalLightRadius>200</normalLightRadius>
 		<lightRadius>200</lightRadius>
 		<lightWobble>32</lightWobble>
 		<lightWobbleLerp>0.1</lightWobbleLerp>

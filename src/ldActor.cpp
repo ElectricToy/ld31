@@ -25,6 +25,7 @@ namespace ld
 	DEFINE_DVAR( ldActor, real, m_health );
 	DEFINE_DVAR( ldActor, real, m_maxHealth );
 	DEFINE_DVAR( ldActor, bool, m_alive );
+	DEFINE_DVAR( ldActor, bool, m_suppressesHolderLight );
 	DEFINE_VAR( ldActor, WeakPtr< Creature >, m_holder );
 	DEFINE_VAR( ldActor, ClassInfo::cptr, m_lightClass );
 	DEFINE_DVAR( ldActor, real, m_lightWobble );
@@ -114,7 +115,9 @@ namespace ld
 				world().attach( *m_lightSource, *this );
 			}
 			
-			m_lightSource->radius( lerp( m_lightSource->radius(), m_lightRadius + randInRange( 0.0f, m_lightWobble ), m_lightWobbleLerp ));
+			const auto desiredLightRadius = suppressesHolderLight() && isPickedUp() ? 240.0f : m_lightRadius;
+			
+			m_lightSource->radius( lerp( m_lightSource->radius(), desiredLightRadius + randInRange( 0.0f, m_lightWobble ), m_lightWobbleLerp ));
 			m_lightSource->color( m_lightColor );
 		}
 		else

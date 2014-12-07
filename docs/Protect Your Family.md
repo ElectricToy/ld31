@@ -16,7 +16,7 @@ XXX Gridwise movement
 XXX Inventory/Object pickup/drop/usage
 
 Initial setup
-    Initial tools
+XXX Initial tools
     Family
 
 Monsters
@@ -24,14 +24,14 @@ Monsters
 XXX Pathfinding
     AI
 XXX Breaking
-    Stealing
-    Item drop
+    Stealing people
+    Item drop on death
 
 Art
     Player
     Family
     Monsters
-XXX Tools
+    Tools
     Logo
 
 Tools
@@ -42,7 +42,7 @@ XXX Walls
 XXX     Gravel
 XXX     Brick
 XXX     Stone
-    Torch
+XXX Torch
     Mine
     Turret
 

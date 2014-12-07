@@ -23,6 +23,7 @@ namespace ld
 	DEFINE_VAR( Creature, ldActor::ptr, m_heldActor );
 	DEFINE_DVAR( Creature, TimeType, m_thoughtSpeedHz );
 	DEFINE_DVAR( Creature, real, m_grindDamage );
+	DEFINE_DVAR( Creature, real, m_normalLightRadius );
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Creature )
 
@@ -120,6 +121,15 @@ namespace ld
 		{
 			updateStepping();
 			Super::update();
+		}
+		
+		if( m_heldActor && m_heldActor->suppressesHolderLight() )
+		{
+			m_lightRadius = 0;
+		}
+		else
+		{
+			m_lightRadius = lerp( m_lightRadius, m_normalLightRadius, 0.05f );;
 		}
 	}
 

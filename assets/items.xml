@@ -86,6 +86,7 @@
 		<blocksMonsters>false</blocksMonsters>
 		<mayBePlaced>false</mayBePlaced>
 		<dieEmitterClass>ItemBreakParticles</dieEmitterClass>
+		<suppressesHolderLight>true</suppressesHolderLight>
 		
 		<lightClass>LightTorch</lightClass>
 		<lightRadius>100</lightRadius>
