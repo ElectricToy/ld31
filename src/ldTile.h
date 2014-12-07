@@ -21,6 +21,8 @@ namespace ld
 		FRESH_DECLARE_CLASS( ldTile, Tile );
 	public:
 		
+		SYNTHESIZE_GET( Item::wptr, containedItem );
+		
 		void addItem( Item::ptr item );
 		void removeItem( Item::ptr item );
 		

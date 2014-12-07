@@ -23,6 +23,8 @@ namespace ld
 		SYNTHESIZE_GET( real, navDistanceScalar );
 		
 		virtual bool isItem() const override { return true; }
+		
+		virtual bool doesBlock( const Creature& creature ) const;
 
 		virtual bool canBePickedUpByTouch() const override;
 		virtual vec2 bePickedUpBy( Creature& other ) override;
@@ -39,7 +41,8 @@ namespace ld
 		
 		DVAR( bool, m_placed, false );
 		DVAR( real, m_navDistanceScalar, 1.0f );
-		
+		DVAR( bool, m_blocksHumans, false );
+		DVAR( bool, m_blocksMonsters, false );
 	};
 	
 }

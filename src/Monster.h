@@ -24,12 +24,15 @@ namespace ld
 		
 		virtual bool canPickup( const ldActor& other ) const override;
 
+		virtual void update() override;
+		
 	protected:
 		
 		virtual void updateAI() override;
 
 	private:
 		
+		fr::TileGrid::WorldSpacePath m_worldSpacePath;
 	};
 	
 }

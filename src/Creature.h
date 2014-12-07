@@ -37,17 +37,45 @@ namespace ld
 		virtual void pickupTouchingActor();
 		virtual void dropHeldActor();
 		
+		virtual vec2 bePickedUpBy( Creature& other ) override;
+		
 		virtual void update() override;
+		
+		virtual void onLanded( const vec2& hitNormal ) override;
+		virtual void onBumpedWall( const vec2& hitNormal ) override;
+		
+		SYNTHESIZE_GET( vec2, stepDirection );
+		bool canStep( const vec2& dir ) const;
+		
+		void applyControllerImpulse( const vec2& i ) override;
+		
+		vec2 facingDirection() const;
+		
+		virtual void onBeginPlay() override;
 		
 	protected:
 		
 		virtual void updateAI() {}
+		
+		void beginStepping( const vec2& dir );
+		void stopStepping();
+		bool isStepping() const;
+		virtual void updateStepping();
+		
 		
 	private:
 
 		VAR( ldActor::ptr, m_heldActor );
 		VAR( Inventory::ptr, m_inventory );
 		DVAR( bool, m_alive, true );
+		VAR( vec2, m_stepDirection );
+		VAR( vec2, m_stepStart );
+		DVAR( real, m_stepSpeed, 6.0f );
+		DVAR( TimeType, m_thoughtSpeedHz, 1 );
+		
+		vec2 m_facingDirection = vec2( 1, 0 );
+		
+		FRESH_DECLARE_CALLBACK( Creature, onTimeToThink, fr::Event )
 	};
 	
 }

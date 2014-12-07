@@ -6,10 +6,12 @@
 	
 	<class name="DoorBase" extends="Door">
 		<isPlaying>false</isPlaying>
+		<blocksHumans>false</blocksHumans>
+		<blocksMonsters>true</blocksMonsters>
 	</class>
 	
 	<class name="DoorWood" extends="DoorBase">
-		<navDistanceScalar>200</navDistanceScalar>
+		<navDistanceScalar>0</navDistanceScalar>
 		<passthrough>
 			<keyframe label="closed">
 				<texture>Texture'door'</texture>

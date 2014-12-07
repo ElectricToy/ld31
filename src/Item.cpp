@@ -8,6 +8,7 @@
 
 #include "Item.h"
 #include "ldTile.h"
+#include "Creature.h"
 using namespace fr;
 
 namespace ld
@@ -16,8 +17,17 @@ namespace ld
 	
 	DEFINE_DVAR( Item, bool, m_placed );
 	DEFINE_DVAR( Item, real, m_navDistanceScalar );
+	DEFINE_DVAR( Item, bool, m_blocksHumans );
+	DEFINE_DVAR( Item, bool, m_blocksMonsters );
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Item )
+	
+	bool Item::doesBlock( const Creature& creature ) const
+	{
+		return
+			( creature.isHuman() && m_blocksHumans ) ||
+			( creature.isMonster() && m_blocksMonsters );
+	}
 	
 	void Item::onAddedToStage()
 	{
