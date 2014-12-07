@@ -169,7 +169,6 @@
 	<include url="assets/monsters.xml" subsume-root="true"></include>
 
 	<class name="HumanDefault" extends="Human">
-
 		<children>
 			<object class="Sprite">
 				<texture>Texture'white_simple'</texture>
@@ -177,6 +176,8 @@
 			</object>
 		</children>
 
+		<carryOffset>3,-3</carryOffset>		<!-- when being carried -->
+		
 		<dimensions>15</dimensions>
 		<grindDamage>8</grindDamage>
 		
@@ -329,7 +330,7 @@
 				<children>
 					<object class="LightSourceConfigured" name="$^_light_home">
 						<position>448,320</position>
-						<color>ffffdd80</color>
+						<color>ffff9060</color>
 						<radius>400</radius>
 					</object>
 				</children>

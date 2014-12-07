@@ -33,6 +33,11 @@ namespace ld
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Creature )
 
+	real Creature::normalLightRadius() const
+	{
+		return m_normalLightRadius;
+	}
+	
 	real Creature::currentStepSpeed() const
 	{
 		return m_stepSpeed;
@@ -206,7 +211,6 @@ namespace ld
 			}
 
 			updateStepping();
-			Super::update();
 		}
 		
 		if( m_heldActor && m_heldActor->suppressesHolderLight() )
@@ -215,8 +219,10 @@ namespace ld
 		}
 		else
 		{
-			m_lightRadius = lerp( m_lightRadius, m_normalLightRadius, 0.05f );;
+			m_lightRadius = lerp( m_lightRadius, normalLightRadius(), 0.05f );;
 		}
+		
+		Super::update();
 	}
 
 	

@@ -37,6 +37,11 @@ namespace ld
 	DEFINE_VAR( ldActor, std::string, m_friendlyName );
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldActor )
+
+	real ldActor::lightWobble() const
+	{
+		return m_lightWobble;
+	}
 	
 	bool ldActor::mayCollide() const
 	{
@@ -114,19 +119,19 @@ namespace ld
 		
 		if( m_lightClass && m_lightRadius > 0 && m_lightColor != Color::Invisible )
 		{
+			const auto desiredLightRadius = ( suppressesHolderLight() && isPickedUp() ) ? 240.0f : m_lightRadius;
+			
 			if( !m_lightSource )
 			{
 				m_lightSource = createObject< LightSource >( *m_lightClass );
 			
-				m_lightSource->radius( m_lightRadius );
+				m_lightSource->radius( desiredLightRadius );
 				
 				world().lighting()->addChild( m_lightSource );
 				world().attach( *m_lightSource, *this );
 			}
 			
-			const auto desiredLightRadius = suppressesHolderLight() && isPickedUp() ? 240.0f : m_lightRadius;
-			
-			m_lightSource->radius( lerp( m_lightSource->radius(), desiredLightRadius + randInRange( 0.0f, m_lightWobble ), m_lightWobbleLerp ));
+			m_lightSource->radius( lerp( m_lightSource->radius(), desiredLightRadius + randInRange( 0.0f, lightWobble() ), m_lightWobbleLerp ));
 			m_lightSource->color( m_lightColor );
 		}
 		else

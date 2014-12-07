@@ -33,6 +33,9 @@ namespace ld
 		SYNTHESIZE_GET( std::string, friendlyName );
 		
 		
+		virtual real lightWobble() const;
+		
+		
 		virtual void update() override;
 
 		virtual bool isPlayer() const { return false; }

@@ -22,6 +22,7 @@ namespace ld
 	public:
 		
 		SYNTHESIZE_GET( ldActor::ptr, heldActor );
+		virtual real normalLightRadius() const;
 		
 		virtual bool isCreature() const override { return true; }
 		

@@ -16,6 +16,30 @@ namespace ld
 	FRESH_DEFINE_CLASS( Human )
 	
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Human )
+
+	real Human::lightWobble() const
+	{
+		if( !isPlayer() )
+		{
+			return 0;
+		}
+		else
+		{
+			return Super::lightWobble();
+		}
+	}
+	
+	real Human::normalLightRadius() const
+	{
+		if( !isPlayer() )
+		{
+			return 0;
+		}
+		else
+		{
+			return Super::normalLightRadius();
+		}
+	}
 	
 	bool Human::canPickup( const ldActor& other ) const
 	{

@@ -20,6 +20,9 @@ namespace ld
 		FRESH_DECLARE_CLASS( Human, Creature );
 	public:
 		
+		virtual real lightWobble() const override;
+		virtual real normalLightRadius() const override;
+		
 		virtual bool canPickup( const ldActor& other ) const override;
 		
 		virtual bool isHuman() const override { return true; }

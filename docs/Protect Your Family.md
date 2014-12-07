@@ -96,9 +96,9 @@ Emscripten bugfixing (lighting), deployment
 BUG
     Ordering of objects is all wacky.
         Held object should sit on top of holder.
-    Human lights flicker when they're being moved.
-    Human lights still glow in exit after departure
-    Remove or reduce human non-player lights.
+XXX Human lights flicker when they're being moved.
+XXX Human lights still glow in exit after departure
+XXX Remove or reduce human non-player lights.
 XXX Monster will dither when holding a human, unsure of which exit to take.
 XXX Monsters take humans to far portal.
 

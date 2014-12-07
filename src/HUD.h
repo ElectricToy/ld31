@@ -10,6 +10,7 @@
 #define FreshApp_HUD_h
 
 #include "Essentials.h"
+#include "EventKeyboard.h"
 
 namespace ld
 {
@@ -54,6 +55,7 @@ namespace ld
 		
 		bool m_wasGameOver = false;
 		
+		FRESH_DECLARE_CALLBACK( HUD, onStageKeyUp, fr::EventKeyboard )
 	};
 	
 }

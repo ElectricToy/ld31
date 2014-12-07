@@ -217,6 +217,8 @@ namespace ld
 
 	void HUD::onGameBeginning()
 	{
+		stage().removeEventListener( EventKeyboard::KEY_UP, FRESH_CALLBACK( onStageKeyUp ));
+		
 		m_wasGameOver = false;
 		
 		populateMessages();
@@ -261,7 +263,22 @@ namespace ld
 			clockText->text( text.str() );
 		}
 		
+		stage().addEventListener( EventKeyboard::KEY_UP, FRESH_CALLBACK( onStageKeyUp ));
+		
 		gotoAndPlay( "gameover" );
+	}
+	
+	FRESH_DEFINE_CALLBACK( HUD, onStageKeyUp, EventKeyboard )
+	{
+		switch( event.key() )
+		{
+			case Keyboard::Z:
+				onButtonPlay();
+				break;
+				
+			default:
+				break;
+		}
 	}
 }
 
