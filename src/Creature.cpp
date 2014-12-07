@@ -54,6 +54,7 @@ namespace ld
 	{
 		ASSERT( !isPickedUp() );
 		stopStepping();
+		dropHeldActor();
 		return Super::bePickedUpBy( other );
 	}
 	
@@ -63,7 +64,7 @@ namespace ld
 		
 		// TODO held vs inventory.
 		
-		return !m_heldActor && other.canBePickedUp();
+		return alive() && !m_heldActor && other.canBePickedUp();
 	}
 	
 	void Creature::pickup( ldActor& other )
@@ -108,7 +109,7 @@ namespace ld
 		{
 			const vec2 proposedDestination = snapToGrid( position() + facingDirection() * WORLD_PER_TILE );
 			
-			const auto& tile = static_cast< const ldTile& >( tileGrid().getTile( proposedDestination ));
+			const auto& tile = world().tileAt( proposedDestination );
 			
 			if( !tile.isSolid() && tile.mayReceiveItem() )
 			{
@@ -213,13 +214,12 @@ namespace ld
 		const auto proposedDest = proposedStart + dir.normal() * WORLD_PER_TILE;
 		const fr::Direction fromDirection( -dir );
 		
-		auto tile = tileGrid().getTile( proposedDest ).as< ldTile >();
-		ASSERT( tile );
-		if( !tile->isNavigable( fromDirection ))
+		const auto& tile = world().tileAt( proposedDest );
+		if( !tile.isNavigable( fromDirection ))
 		{
 			return false;
 		}
-		else if( auto item = tile->containedItem())
+		else if( auto item = tile.containedItem())
 		{
 			return !item->doesBlock( *this );
 		}
@@ -341,14 +341,23 @@ namespace ld
 		
 	}
 
+	void Creature::die()
+	{
+		stopTravel();
+		
+		dropHeldActor();
+		
+		Super::die();
+	}
+	
 	FRESH_DEFINE_CALLBACK( Creature, onTimeToThink, fr::Event )
 	{
-		if( alive() && !isPickedUp() )
+		if( doUpdate() && alive() && !isPickedUp() )
 		{
 			updateAI();
 		}
 		
-		if( alive() )
+		if( doUpdate() && alive() )
 		{
 			ASSERT( m_thoughtSpeedHz > 0 );
 			stage().scheduleCallback( FRESH_CALLBACK( onTimeToThink ), 1.0 / m_thoughtSpeedHz );

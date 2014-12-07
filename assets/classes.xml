@@ -194,7 +194,7 @@
 		<doesBlockLight>false</doesBlockLight>
 		<pctChanceToSpawn>0</pctChanceToSpawn>
 		<itemClassWeights>[
-			{ TorchConfigured, 7 },
+			{ TorchConfigured, 6 },
 			{ DoorWood, 5 },
 			{ DoorIron, 1 },
 			{ BlockGravel, 6 },
@@ -218,11 +218,11 @@
 			</object>
 			<object class="FloorTileTemplate" name="floor_tool_spawn_1">
 				<creationColor>ff079000</creationColor>
-				<pctChanceToSpawn>5</pctChanceToSpawn>
+				<pctChanceToSpawn>7</pctChanceToSpawn>
 			</object>
 			<object class="FloorTileTemplate" name="floor_tool_spawn_2">
 				<creationColor>ff42ff00</creationColor>
-				<pctChanceToSpawn>15</pctChanceToSpawn>
+				<pctChanceToSpawn>10</pctChanceToSpawn>
 			</object>
 			<object class="FloorTileTemplate" name="floor_tool_spawn_home">
 				<creationColor>ffccff00</creationColor>

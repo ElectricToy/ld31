@@ -8,6 +8,7 @@
 
 #include "Item.h"
 #include "ldTile.h"
+#include "ldWorld.h"
 #include "Creature.h"
 using namespace fr;
 
@@ -59,18 +60,12 @@ namespace ld
 	
 	void Item::addToTile()
 	{
-		if( auto tile = tileGrid().getTile( position() ).as< ldTile >())
-		{
-			tile->addItem( this );
-		}
+		world().tileAt( position() ).addItem( this );
 	}
 	
 	void Item::removeFromTile()
 	{
-		if( auto tile = tileGrid().getTile( position() ).as< ldTile >())
-		{
-			tile->removeItem( this );
-		}
+		world().tileAt( position() ).removeItem( this );
 	}
 	
 	bool Item::canBePickedUpByTouch() const

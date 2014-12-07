@@ -8,6 +8,7 @@
 
 #include "Monster.h"
 #include "ldWorld.h"
+#include "ldTile.h"
 #include "Human.h"
 using namespace fr;
 
@@ -18,17 +19,25 @@ namespace ld
 	DEFINE_VAR( Monster, ldActor::wptr, m_pursueee );
 	DEFINE_DVAR( Monster, real, m_beginPursuingRadius );
 	DEFINE_DVAR( Monster, real, m_giveUpPursuingRadius );
+	DEFINE_VAR( Monster, fr::Vector2i, m_exitDestination );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Monster )
 	
 	bool Monster::canPickup( const ldActor& other ) const
 	{
-		return false;		// TODO!!!
-//		return alive() && other.isHuman() && Super::canPickup( other ) && other.as< Creature >()->alive();
+		return other.isHuman() && !other.isPlayer() && Super::canPickup( other );
 	}
 	
 	void Monster::update()
 	{
 		Super::update();
+		
+		// Reached a spawn tile while holding something?
+		//
+		if( heldActor() && world().tileAt( position() ).isMonsterSpawner() )
+		{
+			heldActor()->markForDeletion();
+			markForDeletion();
+		}
 	}
 	
 	void Monster::updateAI()
@@ -37,59 +46,87 @@ namespace ld
 		
 		vec2 destination;
 		
-		// Look in my awareness area.
-		//
-		real nearestHumanDistanceSquared = Infinity;
-		ldActor::ptr nearestHuman;
-		
-		world().touchingActors( rect{ position() - m_awarenessRadius * 0.5f, position() + m_awarenessRadius * 0.5f },
-							   [&]( ldActor& actor )
-							   {
-								   if( actor.isHuman() )
+		if( heldActor() )
+		{
+			m_pursueee = nullptr;
+			
+			// Head back to the nearest exit.
+			//
+			auto tilePos = world().nearestTile( position(), [&]( const ldTile& tile, const Vector2i& pos )
+								{
+									if( tile.isMonsterSpawner() )
+									{
+										return pos == m_exitDestination ? 0.75f : 1.0f;
+									}
+									else
+									{
+										return 0.0f;
+									}
+								} );
+			
+			ASSERT( !tilePos.isZero() );
+			
+			m_exitDestination = tilePos;
+			destination = tileGrid().tileCenter( m_exitDestination );
+		}
+		else
+		{
+			m_exitDestination.setToZero();
+			
+			// Look in my awareness area.
+			//
+			real nearestHumanDistanceSquared = Infinity;
+			ldActor::ptr nearestHuman;
+			
+			world().touchingActors( rect{ position() - m_awarenessRadius * 0.5f, position() + m_awarenessRadius * 0.5f },
+								   [&]( ldActor& actor )
 								   {
-									   real distSquared = distanceSquared( actor.position(), position() );
-									   
-									   // Worth pursuing?
-									   //
-									   if( distSquared < m_beginPursuingRadius * m_beginPursuingRadius )
+									   if( actor.isHuman() )
 									   {
+										   real distSquared = distanceSquared( actor.position(), position() );
+										   
 										   // Already pursuing this one?
 										   //
 										   if( m_pursueee == &actor )
 										   {
-											   distSquared *= 0.75f;		// Shorter. Histeresis.
+											   distSquared *= 0.5f;		// Shorter. Histeresis.
 										   }
 										   
-										   if( distSquared < nearestHumanDistanceSquared )
+										   // Worth pursuing?
+										   //
+										   if( distSquared < m_beginPursuingRadius * m_beginPursuingRadius )
 										   {
-											   nearestHumanDistanceSquared = distSquared;
-											   nearestHuman = &actor;
+											   if( distSquared < nearestHumanDistanceSquared )
+											   {
+												   nearestHumanDistanceSquared = distSquared;
+												   nearestHuman = &actor;
+											   }
 										   }
 									   }
-								   }
-							   } );
-		
-		if( nearestHuman )
-		{
-			m_pursueee = nearestHuman;
-		}
-		else
-		{
-			// Has the pursuee gotten too far away?
-			//
-			if( m_pursueee && distanceSquared( m_pursueee->position(), position() ) > m_giveUpPursuingRadius )
+								   } );
+			
+			if( nearestHuman )
 			{
-				m_pursueee = nullptr;
+				m_pursueee = nearestHuman;
 			}
-		}
-		
-		if( m_pursueee )
-		{
-			destination = m_pursueee->position();
-		}
-		else
-		{
-			destination = WORLD_CENTER;
+			else
+			{
+				// Has the pursuee gotten too far away?
+				//
+				if( m_pursueee && distanceSquared( m_pursueee->position(), position() ) > m_giveUpPursuingRadius )
+				{
+					m_pursueee = nullptr;
+				}
+			}
+			
+			if( m_pursueee )
+			{
+				destination = m_pursueee->position();
+			}
+			else
+			{
+				destination = WORLD_CENTER;
+			}
 		}
 		
 		if( !destination.isZero() )

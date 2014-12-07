@@ -18,6 +18,7 @@ namespace ld
 {
 	class Human;
 	class Item;
+	class ldTile;
 	
 	class ldWorld : public fr::World
 	{
@@ -41,8 +42,11 @@ namespace ld
 									 }
 								 } );
 		}
-		
+
+		ldTile& tileAt( const vec2& pos ) const;
 		SmartPtr< Item > itemInTile( const vec2& pos ) const;
+		
+		fr::Vector2i nearestTile( const vec2& pos, std::function< real( const ldTile&, const fr::Vector2i& ) >&& filter ) const;
 		
 		virtual void onBeginPlay() override;
 		

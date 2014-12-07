@@ -51,6 +51,7 @@ namespace ld
 		void stopTravel();
 		
 	protected:
+		SYNTHESIZE_GET( ldActor::ptr, heldActor );
 
 		void pursueTilePath( const fr::TileGrid::Path& path );
 		
@@ -62,6 +63,8 @@ namespace ld
 		virtual void updateStepping();
 
 		virtual void grind( const vec2& dir );
+		
+		virtual void die() override;
 		
 	private:
 

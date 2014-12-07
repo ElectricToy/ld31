@@ -32,6 +32,8 @@ XXX Breaking
     Item drop on death
 
 Art
+    GO FOR HEAVIER OUTLINES
+
     Player
     Family
     Monsters
@@ -82,3 +84,4 @@ Bonus
     Family Wander AI
     Pause
     Explosive Barrel
+    Mine waits before exploding

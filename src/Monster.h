@@ -36,6 +36,7 @@ namespace ld
 		DVAR( real, m_beginPursuingRadius, WORLD_PER_TILE * 16 );
 		DVAR( real, m_giveUpPursuingRadius, WORLD_PER_TILE * 18 );
 		VAR( ldActor::wptr, m_pursueee );
+		VAR( fr::Vector2i, m_exitDestination );
 	};
 	
 }

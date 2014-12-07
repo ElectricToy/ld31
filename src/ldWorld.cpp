@@ -21,12 +21,49 @@ namespace ld
 	DEFINE_VAR( ldWorld, ClassWeights, m_monsterClassWeights );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldWorld )
 	
-	SmartPtr< Item > ldWorld::itemInTile( const vec2& pos ) const
+	ldTile& ldWorld::tileAt( const vec2& pos ) const
 	{
-		const auto& tile = static_cast< const ldTile& >( tileGrid().getTile( pos ));
-		return tile.containedItem();
+		return static_cast< ldTile& >( tileGrid().getTile( pos ));
 	}
 	
+	SmartPtr< Item > ldWorld::itemInTile( const vec2& pos ) const
+	{
+		return tileAt( pos ).containedItem();
+	}
+	
+	fr::Vector2i ldWorld::nearestTile( const vec2& pos, std::function< real( const ldTile&, const Vector2i& ) >&& filter ) const
+	{
+		const auto& myTileGrid = tileGrid();
+		
+		const auto& dims = myTileGrid.extents();
+		
+		real nearestDistSquared = Infinity;
+		fr::Vector2i nearest;
+		
+		for( fr::Vector2i tilePos( 0, 0 ); tilePos.y < dims.y; ++tilePos.y )
+		{
+			for( tilePos.x = 0; tilePos.x < dims.x; ++tilePos.x )
+			{
+				const auto& tile = static_cast< const ldTile& >( myTileGrid.getTile( tilePos ));
+				
+				const real distanceScalar = filter( tile, tilePos );
+				
+				if( distanceScalar > 0 )
+				{
+					const real distSquared = distanceScalar * distanceSquared( vector_cast< real >( tilePos ), pos );
+					
+					if( distSquared < nearestDistSquared )
+					{
+						nearest = tilePos;
+						nearestDistSquared = distSquared;
+					}
+				}
+			}
+		}
+		
+		return nearest;
+	}
+
 	void ldWorld::onBeginPlay()
 	{
 		Super::onBeginPlay();
@@ -128,7 +165,7 @@ namespace ld
 	{
 		// TODO Waves and so forth.
 		
-		if( pctChance( stage().secondsPerFrame() * 1 ))
+		if( pctChance( stage().secondsPerFrame() * 8 ))
 		{
 			auto monsterClass = randomClass( m_monsterClassWeights );
 			if( monsterClass )
