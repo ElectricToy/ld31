@@ -26,6 +26,7 @@ namespace ld
 	DEFINE_DVAR( ldActor, real, m_maxHealth );
 	DEFINE_DVAR( ldActor, bool, m_alive );
 	DEFINE_DVAR( ldActor, bool, m_suppressesHolderLight );
+	DEFINE_DVAR( ldActor, bool, m_dropsWhenUsed );
 	DEFINE_VAR( ldActor, WeakPtr< Creature >, m_holder );
 	DEFINE_VAR( ldActor, ClassInfo::cptr, m_lightClass );
 	DEFINE_DVAR( ldActor, real, m_lightWobble );
@@ -35,7 +36,7 @@ namespace ld
 	DEFINE_VAR( ldActor, ClassInfo::cptr, m_dieEmitterClass );
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldActor )
-
+	
 	bool ldActor::mayCollide() const
 	{
 		return !isMarkedForDeletion() && !isPickedUp() && alive();
@@ -74,7 +75,6 @@ namespace ld
 		m_holder = &other;
 		
 		rotation( m_carryRotation );
-		m_precarryScale = scale();
 		scale( m_carryScale );
 		
 		return m_carryOffset;
@@ -83,8 +83,16 @@ namespace ld
 	void ldActor::beDroppedBy( Creature& other )
 	{
 		rotation( 0 );
-		scale( m_precarryScale );
+		scale( 1 );
 		m_holder = nullptr;
+	}
+	
+	void ldActor::beUsedBy( Creature& other )
+	{
+		if( m_dropsWhenUsed )
+		{
+			beDroppedBy( other );
+		}
 	}
 	
 	ldWorld& ldActor::world() const

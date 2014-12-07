@@ -65,7 +65,8 @@ HUD
 XXX        Take
 XXX        Drop
         Place ("Use?")
-    Messages
+XXX Messages
+XXX Startup
     Electric toy logo (UL corner)
     Game logo (UL corner)
 
@@ -78,7 +79,9 @@ SFX
     Place things
     Thing destroyed by grinding
 
+Prevent initial spawn for 2-3 minutes
 Waves
+
 
 CHOOSE GAME NAME
 
@@ -87,6 +90,8 @@ Game Start/Over
 Emscripten bugfixing (lighting), deployment
 
 BUG
+    Ordering of objects is all wacky.
+        Held object should sit on top of holder.
     Human lights flicker when they're being moved.
     Human lights still glow in exit after departure
     Remove or reduce non-player human lights.

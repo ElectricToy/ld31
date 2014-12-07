@@ -29,6 +29,8 @@ namespace ld
 		SYNTHESIZE_GET( real, health );
 		SYNTHESIZE_GET( real, maxHealth );
 		SYNTHESIZE_GET( bool, suppressesHolderLight );
+		SYNTHESIZE_GET( bool, dropsWhenUsed )
+		
 		
 		virtual void update() override;
 
@@ -48,9 +50,11 @@ namespace ld
 		virtual bool canBePickedUpByTouch() const;
 		bool isPickedUp() const;
 		
+		
 		virtual vec2 bePickedUpBy( Creature& other );
 		virtual void beDroppedBy( Creature& other );
-
+		virtual void beUsedBy( Creature& other );
+		
 		virtual void receiveDamage( real amount );
 		
 		virtual void die();
@@ -78,6 +82,7 @@ namespace ld
 		DVAR( bool, m_alive, true );
 		
 		DVAR( bool, m_suppressesHolderLight, false );
+		DVAR( bool, m_dropsWhenUsed, true );
 		
 		VAR( WeakPtr< Creature >, m_holder );
 
@@ -88,7 +93,6 @@ namespace ld
 		VAR( ClassInfo::cptr, m_lightClass );
 		DVAR( real, m_lightWobble, 16 );
 		DVAR( real, m_lightWobbleLerp, 0.1f );
-
 
 		fr::LightSource::ptr m_lightSource;
 	};

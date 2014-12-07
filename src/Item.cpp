@@ -84,10 +84,18 @@ namespace ld
 	void Item::beDroppedBy( Creature& other )
 	{
 		Super::beDroppedBy( other );
-		m_placed = m_mayBePlaced;
+		m_placed = false;
 		showAsPlaced( m_placed );
 		
 		addToTile();
+	}
+	
+	void Item::beUsedBy( Creature& other )
+	{
+		Super::beUsedBy( other );
+
+		m_placed = m_mayBePlaced;
+		showAsPlaced( m_placed );
 	}
 
 	void Item::die()

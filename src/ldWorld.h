@@ -90,6 +90,7 @@ namespace ld
 		VAR( ClassWeights, m_monsterClassWeights );
 		VAR( ClassInfo::cptr, m_playerControllerClass );
 		DVAR( int, m_lastActiveUpdate, 0 );
+		DVAR( bool, m_playerHasMoved, false );
 	};
 	
 }

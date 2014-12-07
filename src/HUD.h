@@ -43,7 +43,7 @@ namespace ld
 	private:
 		
 		std::map< ClassName, std::string > m_heldClassMessages;
-		
+				
 	};
 	
 }

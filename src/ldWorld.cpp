@@ -22,6 +22,7 @@ namespace ld
 	DEFINE_VAR( ldWorld, ClassWeights, m_monsterClassWeights );
 	DEFINE_VAR( ldWorld, ClassInfo::cptr, m_playerControllerClass );
 	DEFINE_DVAR( ldWorld, int, m_lastActiveUpdate );
+	DEFINE_DVAR( ldWorld, bool, m_playerHasMoved );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldWorld )
 
 	size_t ldWorld::numFreeHumans() const
@@ -185,6 +186,8 @@ namespace ld
 
 		if( isGameActive() )
 		{
+			m_playerHasMoved = m_playerHasMoved || ( player() && !player()->stepDirection().isZero() );
+			
 			++m_lastActiveUpdate;
 		}
 	}
@@ -230,6 +233,7 @@ namespace ld
 	void ldWorld::maybeSpawnMonsters()
 	{
 		// TODO Waves and so forth.
+		
 		
 		if( pctChance( stage().secondsPerFrame() * 1 ))
 		{

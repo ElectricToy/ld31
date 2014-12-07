@@ -19,6 +19,7 @@ namespace ld
 {	
 	FRESH_DEFINE_CLASS( HUD )
 	
+	
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( HUD )
 	
 	DEFINE_METHOD( HUD, onButtonPause )
@@ -56,7 +57,7 @@ namespace ld
 	{
 		if( auto player = world().player())
 		{
-			player->placeHeldActor();
+			player->useHeldActor();
 		}
 	}
 	
@@ -65,6 +66,25 @@ namespace ld
 		updateButtonEnablement();
 		
 		lookForMessagesToShow();
+		
+		// Hide startup if necessary.
+		//
+		if( auto startup = getDescendantByName< UIPopup >( "_startup" ))
+		{
+			// Player moving?
+			//
+			if( !startup->isBecomingHidden() && !startup->isFullyHidden() )
+			{
+				if( auto player = world().player())
+				{
+					if( !player->stepDirection().isZero() )
+					{
+						startup->hide();
+					}
+				}
+			}
+		}
+
 		
 		// Update clock.
 		//
@@ -87,7 +107,6 @@ namespace ld
 			
 			clockText->color( colorLerp( clockText->color(), world().isGameActive() ? 0xff9bfe00 : 0xffffed8c, 0.1f ));
 		}
-		
 		
 		Super::update();
 	}
@@ -160,6 +179,11 @@ namespace ld
 	void HUD::onGameBeginning()
 	{
 		populateMessages();
+		
+		if( auto startup = getDescendantByName< UIPopup >( "_startup" ))
+		{
+			startup->show();
+		}
 	}
 	
 	void HUD::populateMessages()

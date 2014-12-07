@@ -35,7 +35,10 @@ namespace ld
 		
 		virtual bool canDropHeldActor() const;
 		virtual void dropHeldActor();
-		
+
+		virtual bool canUseHeldActor() const;
+		virtual void useHeldActor();
+
 		virtual vec2 bePickedUpBy( Creature& other ) override;
 		
 		virtual void update() override;

@@ -61,7 +61,7 @@ namespace ld
 					break;
 					
 				case Keyboard::C:
-					myHost->placeHeldActor();
+					myHost->useHeldActor();
 					break;
 					
 				default:

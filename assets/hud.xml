@@ -131,7 +131,70 @@
 			<object class="DisplayObjectContainer" name="$^_messagehost">
 				<ignoreFrameAttachment>false</ignoreFrameAttachment>
 				<parentFrameAttachPoint>0,1</parentFrameAttachPoint>
-				<position>-48,-24</position>
+				<position>-32,-24</position>
+			</object>
+			
+			<!-- GAME START -->
+			
+			<object class="UIPopup" name="$^_startup">
+				<position>-32,0</position>
+				<isTouchEnabled>false</isTouchEnabled>
+				<defaultShowDuration>0</defaultShowDuration>
+				<defaultHideDuration>2</defaultHideDuration>
+				<startHidden>false</startHidden>
+				<children>
+					<object class="MovieClip" name="$^_movement">
+						<position>0,-100</position>
+						<scale>0.25</scale>
+						<children>
+							<object class="Sprite">
+								<texture>Texture'ui_hint_movement'</texture>
+							</object>
+						</children>
+						
+						<passthrough>
+							<keyframe>
+								<child name="$1"><color>Yellow</color></child>
+								<tween type="SinEaseIn" />
+							</keyframe>
+							<keyframe rel-s="2">
+								<child name="$1"><color>Red</color></child>
+								<tween type="SinEaseOut" />
+							</keyframe>
+							<keyframe rel-s="2">
+								<child name="$1"><color>Yellow</color></child>
+							</keyframe>
+						</passthrough>
+					</object>
+					
+					<object class="MovieClip" name="$^_goal">
+						<position>0,104</position>
+						<scale>0.25</scale>
+						<children>
+							<object class="Sprite">
+								<texture>Texture'ui_hint_goal'</texture>
+							</object>
+						</children>
+						
+						<passthrough>
+							<keyframe>
+								<child name="$1"><color>Red</color></child>
+								<tween type="Linear" />
+							</keyframe>
+							<keyframe rel-s="1.3">
+								<child name="$1"><color>Blue</color></child>
+								<tween type="Linear" />
+							</keyframe>
+							<keyframe rel-s="1.3">
+								<child name="$1"><color>Green</color></child>
+								<tween type="Linear" />
+							</keyframe>
+							<keyframe rel-s="1.3">
+								<child name="$1"><color>Red</color></child>
+							</keyframe>
+						</passthrough>
+					</object>
+				</children>
 			</object>
 			
 		</children>

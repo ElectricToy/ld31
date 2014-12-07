@@ -143,9 +143,48 @@ namespace ld
 			const vec2 proposedDestination = snapToGrid( position() + facingDirection() * WORLD_PER_TILE );
 			world().detach( *m_heldActor, *this );
 			m_heldActor->position( proposedDestination );
-			m_heldActor->beDroppedBy( *this );
 			m_heldActor->recordPreviousState();
+			m_heldActor->beDroppedBy( *this );
 			m_heldActor = nullptr;
+		}
+	}
+	
+	bool Creature::canUseHeldActor() const
+	{
+		if( isHuman() && m_heldActor )		// Only humans can "use" actors.
+		{
+			if( m_heldActor->dropsWhenUsed() )
+			{
+				return canDropHeldActor();
+			}
+			else
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	void Creature::useHeldActor()
+	{
+		if( canUseHeldActor() )
+		{
+			const bool dropsWhenUsed = m_heldActor->dropsWhenUsed();
+			
+			if( dropsWhenUsed )
+			{
+				const vec2 proposedDestination = snapToGrid( position() + facingDirection() * WORLD_PER_TILE );
+				world().detach( *m_heldActor, *this );
+				m_heldActor->position( proposedDestination );
+				m_heldActor->recordPreviousState();
+			}
+			
+			m_heldActor->beUsedBy( *this );
+			
+			if( dropsWhenUsed )
+			{
+				m_heldActor = nullptr;
+			}
 		}
 	}
 	

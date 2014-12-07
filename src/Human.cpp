@@ -14,33 +14,6 @@ namespace ld
 	FRESH_DEFINE_CLASS( Human )
 	
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Human )
-
-	bool Human::canPickupTouchingActor() const
-	{
-		return Super::canPickupTouchingActor();
-	}
-
-	bool Human::canDropHeldActor() const
-	{
-		return Super::canDropHeldActor();
-	}
-	
-	bool Human::canUseHeldActor() const
-	{
-		// TODO!!! distinguish
-		return canDropHeldActor();
-	}
-	
-	void Human::dropHeldActor()
-	{
-		Super::dropHeldActor();
-	}
-	
-	void Human::placeHeldActor()
-	{
-		// TODO!!! distinguish
-		dropHeldActor();
-	}
 	
 	bool Human::canPickup( const ldActor& other ) const
 	{

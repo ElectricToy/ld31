@@ -25,14 +25,7 @@ namespace ld
 		virtual bool isHuman() const override { return true; }
 		virtual bool isPlayer() const override;
 
-		virtual bool canStep( const vec2& dir ) const override;
-		
-		virtual bool canPickupTouchingActor() const override;
-		virtual bool canDropHeldActor() const override;
-		virtual bool canUseHeldActor() const;
-		
-		virtual void dropHeldActor() override;
-		virtual void placeHeldActor();
+		virtual bool canStep( const vec2& dir ) const override;		
 		
 	protected:
 		

@@ -30,7 +30,8 @@ namespace ld
 		
 		virtual bool canBePickedUpByTouch() const override;
 		virtual vec2 bePickedUpBy( Creature& other ) override;
-		virtual void beDroppedBy( Creature& other );
+		virtual void beDroppedBy( Creature& other ) override;
+		virtual void beUsedBy( Creature& other ) override;
 		
 		virtual void onAddedToStage() override;
 
