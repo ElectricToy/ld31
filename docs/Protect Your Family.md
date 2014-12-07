@@ -66,8 +66,10 @@ XXX        Drop
 XXX       Place ("Use?")
 XXX Messages
 XXX Startup
+    Game over/Restart
     Electric toy logo (UL corner)
     Game logo (UL corner)
+
 
 SFX
     Monster steps, grunts
@@ -80,13 +82,14 @@ SFX
 
 Music
 
-Prevent initial spawn for 2-3 minutes
-Waves
+
+XXX Prevent initial spawn for 2-3 minutes
+XXX Waves
 
 
 CHOOSE GAME NAME
 
-Game Start/Over
+XXX Game Start
 
 Emscripten bugfixing (lighting), deployment
 

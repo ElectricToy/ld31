@@ -26,6 +26,8 @@ namespace ld
 	DEFINE_METHOD( HUD, onButtonTake )
 	DEFINE_METHOD( HUD, onButtonDrop )
 	DEFINE_METHOD( HUD, onButtonUse )
+	DEFINE_METHOD( HUD, onButtonPlay )
+	
 	
 	ldWorld& HUD::world() const
 	{
@@ -61,8 +63,26 @@ namespace ld
 		}
 	}
 	
+	void HUD::onButtonPlay()
+	{
+	}
+	
 	void HUD::update()
 	{
+		// Game over?
+		//
+		if( !world().isGameActive() )
+		{
+			if( !m_wasGameOver )
+			{
+				// Just finished.
+				//
+				onGameOver();
+			}
+			m_wasGameOver = true;
+		}
+		
+		
 		updateButtonEnablement();
 		
 		lookForMessagesToShow();
@@ -84,11 +104,10 @@ namespace ld
 				}
 			}
 		}
-
 		
 		// Update clock.
 		//
-		if( auto clockText = getDescendantByName< TextField >( "_clocktext" ))
+		if( auto clockText = getDescendantByName< TextField >( "_clock_clocktext" ))
 		{
 			int hours, mins, seconds;
 			
@@ -178,6 +197,8 @@ namespace ld
 
 	void HUD::onGameBeginning()
 	{
+		m_wasGameOver = false;
+		
 		populateMessages();
 		
 		if( auto startup = getDescendantByName< UIPopup >( "_startup" ))
@@ -198,6 +219,29 @@ namespace ld
 		m_heldClassMessages[ "BlockStone" ] = "STONE BLOCK: Once placed, it stays put. Really tough to break.";
 		m_heldClassMessages[ "MineConfigured" ] = "MINE: Only monsters trigger it. But when it blows, run!";
 		m_heldClassMessages[ "TurretConfigured" ] = "CROSSBOW: Fire by hand, or drop for automatic defense. Limited ammo.";
+	}
+	
+	void HUD::onGameOver()
+	{
+		if( auto clockText = getDescendantByName< TextField >( "_finalclock_clocktext" ))
+		{
+			int hours, mins, seconds;
+			
+			const int timePlayedSeconds = world().timePlayedSeconds();
+			
+			hours = timePlayedSeconds / ( 60 * 60 );
+			mins = ( timePlayedSeconds / 60 ) % 60;
+			seconds = timePlayedSeconds % 60;
+			
+			std::ostringstream text;
+			text << std::setfill( '0' ) << std::setw( 2 ) << hours << ":"
+			<< std::setfill( '0' ) << std::setw( 2 ) << mins << ":"
+			<< std::setfill( '0' ) << std::setw( 2 ) << seconds;
+			
+			clockText->text( text.str() );
+		}
+		
+		gotoAndPlay( "gameover" );
 	}
 }
 

@@ -18,7 +18,30 @@
 	<class name="KeyHint" extends="Sprite">
 		<position>-104,50</position>
 	</class>
-	
+
+	<class name="Clock" extends="DisplayObjectContainer">
+		<children>
+			<object class="Sprite" name="$^_survived">
+				<position>0</position>
+				<scale>0.25</scale>
+				<texture>Texture'ui_survived'</texture>
+			</object>
+			
+			<object class="TextField" name="$^_clocktext">
+				<position>0,16</position>
+				
+				<text>00:00:00</text>
+				
+				<font>Font'pixelberry8'</font>
+				<fontSize>28</fontSize>
+				<alignment>Centered</alignment>
+				<verticalAlignment>Middle</verticalAlignment>
+				<isTouchEnabled>false</isTouchEnabled>
+			</object>
+			
+		</children>
+	</class>
+
 	<class name="MessagePopup" extends="UIPopup">
 		<isTouchEnabled>false</isTouchEnabled>
 		<defaultShowDuration>0.25</defaultShowDuration>
@@ -105,7 +128,6 @@
 			<object class="DisplayObjectContainer" name="$^_controls">
 				<ignoreFrameAttachment>false</ignoreFrameAttachment>
 				<parentFrameAttachPoint>1,1</parentFrameAttachPoint>
-				<position>-48,-150</position>
 				<children>
 					
 					<object class="HUDButton" name="$^_take">
@@ -160,43 +182,20 @@
 			
 			<!-- CLOCK -->
 			
-			<object class="DisplayObjectContainer" name="$^_clock">
+			<object class="Clock" name="$^_clock">
 				<ignoreFrameAttachment>false</ignoreFrameAttachment>
 				<parentFrameAttachPoint>1,1</parentFrameAttachPoint>
-				<position>-48,-35</position>
-				
-				<children>
-					<object class="Sprite" name="$^_survived">
-						<position>0</position>
-						<scale>0.25</scale>
-						<texture>Texture'ui_survived'</texture>
-					</object>
-					
-					<object class="TextField" name="$^_clocktext">
-						<position>0,16</position>
-						
-						<text>00:00:00</text>
-						
-						<font>Font'pixelberry8'</font>
-						<fontSize>28</fontSize>
-						<alignment>Centered</alignment>
-						<verticalAlignment>Middle</verticalAlignment>
-						<isTouchEnabled>false</isTouchEnabled>
-					</object>
-					
-				</children>
 			</object>
 			
 			<object class="DisplayObjectContainer" name="$^_messagehost">
 				<ignoreFrameAttachment>false</ignoreFrameAttachment>
 				<parentFrameAttachPoint>0,1</parentFrameAttachPoint>
-				<position>-32,-24</position>
 			</object>
 			
 			<!-- GAME START -->
 			
 			<object class="UIPopup" name="$^_startup">
-				<position>-32,0</position>
+				
 				<isTouchEnabled>false</isTouchEnabled>
 				<defaultShowDuration>0</defaultShowDuration>
 				<defaultHideDuration>2</defaultHideDuration>
@@ -256,7 +255,81 @@
 				</children>
 			</object>
 			
+			<object class="DisplayObjectContainer" name="$^_gameover">
+				<children>
+					
+					<object class="TextField" name="$^_messagetext">
+						<position>4,-280</position>
+						<color>ff8fe100</color>
+						<font>Font'uni05_53_8'</font>
+						<fontSize>80</fontSize>
+						<alignment>Centered</alignment>
+						<verticalAlignment>Middle</verticalAlignment>
+						<isTouchEnabled>false</isTouchEnabled>
+						<text>Well done.</text>
+					</object>
+					
+					<object class="Clock" name="$^_finalclock">
+						<scale>3</scale>
+						<position>0,-200</position>
+					</object>
+					
+					<object class="HUDButton" name="$^_again">
+						<position>0,150</position>
+						<onTapCallee>HUDConfigured'theHud'</onTapCallee>
+						<onTapCalleeMethodExpression>onButtonPlay</onTapCalleeMethodExpression>
+						<children>
+							<object class="Sprite">
+								<texture>Texture'ui_button_again'</texture>
+								<children>
+									<object class="KeyHint" name="$^_hint">
+										<texture>Texture'ui_button_keyhint_z'</texture>
+										<position>-350,150</position>
+									</object>
+								</children>
+							</object>
+						</children>
+					</object>
+					
+				</children>
+			</object>
+			
 		</children>
+		
+		<isPlaying>false</isPlaying>
+		<isLooping>false</isLooping>
+		
+		<passthrough>
+			<keyframe label="playing">
+				<child name="$^_controls"><position>-48,-150</position></child>
+				<child name="$^_clock"><position>-48,-35</position></child>
+				<child name="$^_startup"><position>-32,0</position></child>
+				<child name="$^_messagehost"><position>-32,-24</position></child>
+				
+			</keyframe>
+			<keyframe label="gameover">
+				<child name="$^_controls"><position>-48,-150</position></child>
+				<child name="$^_clock"><position>-48,-35</position></child>
+				<child name="$^_startup"><position>-32,0</position></child>
+				<child name="$^_messagehost"><position>-32,-24</position></child>
+				<child name="$^_gameover"><position>-32,0</position><scale>0.75</scale><color>Invisible</color></child>
+				<tween type="QuadEaseInOut" />
+			</keyframe>
+			<keyframe rel-s="2.0">
+				<child name="$^_controls"><color>Black</color><scale>0.75</scale><position>120,-150</position></child>
+				<child name="$^_clock"><color>Black</color><scale>0.75</scale><position>120,60</position></child>
+				<child name="$^_startup"><position>-32,0</position><color>Invisible</color></child>
+				<child name="$^_messagehost"><position>-32,24</position><color>Black</color></child>
+				<child name="$^_gameover"><position>-32,0</position></child>
+
+			</keyframe>
+				
+			<keyframe rel-s="0.5">
+				<child name="$^_gameover"><position>-32,0</position></child>
+			</keyframe>
+				
+		</passthrough>
+		
 	</class>
 
 </objects>

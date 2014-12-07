@@ -27,6 +27,8 @@ namespace ld
 		void onButtonDrop();
 		void onButtonUse();
 		
+		void onButtonPlay();
+		
 		void showMessage( const std::string& message, fr::ClassNameRef messageClass );
 		
 		virtual void update() override;
@@ -40,9 +42,13 @@ namespace ld
 		
 		void populateMessages();
 		
+		void onGameOver();
+		
 	private:
 		
 		std::map< ClassName, std::string > m_heldClassMessages;
+		
+		bool m_wasGameOver = false;
 		
 	};
 	
