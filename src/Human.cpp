@@ -9,11 +9,6 @@
 #include "Human.h"
 using namespace fr;
 
-namespace
-{
-	const rect LEGAL_BOUNDS( 16, 16, 54*16, 39*16 );
-}
-
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( Human )

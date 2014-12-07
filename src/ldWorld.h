@@ -50,7 +50,11 @@ namespace ld
 		
 		void updateActorCollisions();
 		void checkCollision( ldActor& a, ldActor& b );
+		virtual void maybeSpawnMonsters();
+
+	private:
 		
+		VAR( ClassWeights, m_monsterClassWeights );
 	};
 	
 }

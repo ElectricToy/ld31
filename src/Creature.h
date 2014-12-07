@@ -47,7 +47,12 @@ namespace ld
 		
 		virtual void onBeginPlay() override;
 		
+		void travelTo( const vec2& pos );
+		void stopTravel();
+		
 	protected:
+
+		void pursueTilePath( const fr::TileGrid::Path& path );
 		
 		virtual void updateAI() {}
 		
@@ -70,6 +75,8 @@ namespace ld
 		DVAR( real, m_normalLightRadius, 0 );
 		
 		vec2 m_facingDirection = vec2( 1, 0 );
+		
+		fr::TileGrid::WorldSpacePath m_worldSpacePath;
 		
 		FRESH_DECLARE_CALLBACK( Creature, onTimeToThink, fr::Event )
 	};

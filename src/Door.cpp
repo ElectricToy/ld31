@@ -19,7 +19,7 @@ namespace ld
 	{
 		Super::onTouched( other );
 		
-		if( !isPickedUp() && other.isHuman() )
+		if( placed() && !isPickedUp() && other.isHuman() )
 		{
 			gotoAndStop( "open" );
 		}

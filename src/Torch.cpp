@@ -75,7 +75,7 @@ namespace ld
 		
 		// Randomize lifespan.
 		//
-		m_deathTime = stage().time() + randInRange( 60 * 2, 60 * 10 );
+		m_deathTime = stage().time() + randInRange( 60 * 5, 60 * 15 );
 	}
 	
 }

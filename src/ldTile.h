@@ -23,6 +23,7 @@ namespace ld
 		
 		SYNTHESIZE_GET( Item::wptr, containedItem );
 
+		bool isMonsterSpawner() const;
 		bool mayReceiveItem() const;
 		void addItem( Item::ptr item );
 		void removeItem( Item::ptr item );

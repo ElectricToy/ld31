@@ -167,6 +167,7 @@
 	</class>
 	
 	<include url="assets/items.xml" subsume-root="true"></include>
+	<include url="assets/monsters.xml" subsume-root="true"></include>
 
 	<class name="HumanDefault" extends="Human">
 		<dimensions>15</dimensions>
@@ -234,6 +235,11 @@
 					{ BlockStone, 1 },
 					{ MineConfigured, 1 },
 					]</itemClassWeights>
+			</object>
+			<object class="FloorTileTemplate" name="floor_monster_spawn">
+				<creationColor>ff7e00f3</creationColor>
+				<isMonsterSpawner>true</isMonsterSpawner>
+				<mayReceiveItem>false</mayReceiveItem>
 			</object>
 			<object class="FloorTileTemplate" name="floor_immutable">
 				<creationColor>fff17c3d</creationColor>

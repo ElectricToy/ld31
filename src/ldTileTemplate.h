@@ -20,6 +20,7 @@ namespace ld
 	public:
 		
 		SYNTHESIZE_GET( bool, mayReceiveItem );
+		SYNTHESIZE_GET( bool, isMonsterSpawner );
 		
 		ClassInfo::cptr randomTileClass() const;		// May return null.
 		
@@ -28,6 +29,8 @@ namespace ld
 		VAR( ClassWeights, m_itemClassWeights );
 		DVAR( real, m_pctChanceToSpawn, 5 );
 		DVAR( bool, m_mayReceiveItem, true );
+		DVAR( bool, m_isMonsterSpawner, false );
+		
 		
 	};
 	

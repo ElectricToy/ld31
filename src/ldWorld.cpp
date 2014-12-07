@@ -7,16 +7,18 @@
 //
 
 #include "ldWorld.h"
+#include "AppStage.h"
 #include "Camera.h"
 #include "Human.h"
 #include "Item.h"
 #include "ldTile.h"
+#include "Monster.h"
 using namespace fr;
 
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( ldWorld )
-	
+	DEFINE_VAR( ldWorld, ClassWeights, m_monsterClassWeights );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldWorld )
 	
 	SmartPtr< Item > ldWorld::itemInTile( const vec2& pos ) const
@@ -77,6 +79,8 @@ namespace ld
 
 	void ldWorld::update()
 	{
+		maybeSpawnMonsters();
+		
 		Super::update();
 		
 		updateActorCollisions();
@@ -117,6 +121,49 @@ namespace ld
 		{
 			a.onTouched( b );
 			b.onTouched( a );
+		}
+	}
+	
+	void ldWorld::maybeSpawnMonsters()
+	{
+		// TODO Waves and so forth.
+		
+		if( pctChance( stage().secondsPerFrame() * 1 ))
+		{
+			auto monsterClass = randomClass( m_monsterClassWeights );
+			if( monsterClass )
+			{
+				dev_trace( "Spawning monster of class " << monsterClass->className() );
+				
+				const auto& myTileGrid = tileGrid();
+				
+				const size_t afterTileGrid = getChildIndex( &myTileGrid ) + 1;
+				
+				const auto& dims = myTileGrid.extents();
+				
+				std::vector< Vector2i > potentialSpawnPoints;
+				
+				for( Vector2i pos( 0, 0 ); pos.y < dims.y; ++pos.y )
+				{
+					for( pos.x = 0; pos.x < dims.x; ++pos.x )
+					{
+						const auto& tile = static_cast< const ldTile& >( myTileGrid.getTile( pos ));
+						if( tile.isMonsterSpawner() )
+						{
+							potentialSpawnPoints.push_back( pos );
+						}
+					}
+				}
+			
+				if( !potentialSpawnPoints.empty() )
+				{
+					auto spawnTile = randomElement( potentialSpawnPoints );
+					
+					auto monster = createObject< Monster >( *monsterClass );
+					monster->position( myTileGrid.tileCenter( spawnTile ));
+					addChildAt( monster, afterTileGrid );
+				}
+			}
 		}
 	}
 }

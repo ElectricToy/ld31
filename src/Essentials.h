@@ -65,6 +65,9 @@ namespace ld
 	const real WORLD_PER_TILE = 16;
 	const real HALF_WORLD_PER_TILE = WORLD_PER_TILE * 0.5f;
 	
+	const rect LEGAL_BOUNDS( 2 * 16, 2 * 16, 55*16, 40*16 );		// Legal for the player to be in.
+	const vec2 WORLD_CENTER( LEGAL_BOUNDS.midpoint() );
+	
 	inline vec2 snapToGrid( const vec2& pos )
 	{
 		return vec2{

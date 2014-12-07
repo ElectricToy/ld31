@@ -16,6 +16,12 @@ namespace ld
 	DEFINE_VAR( ldTile, Item::wptr, m_containedItem );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldTile )
 
+	bool ldTile::isMonsterSpawner() const
+	{
+		auto ldTemplate = static_cast< const ldTileTemplate* >( tileTemplate().get() );
+		return ldTemplate->isMonsterSpawner();
+	}
+	
 	bool ldTile::mayReceiveItem() const
 	{
 		auto ldTemplate = static_cast< const ldTileTemplate* >( tileTemplate().get() );

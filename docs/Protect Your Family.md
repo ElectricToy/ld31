@@ -20,12 +20,12 @@ XXX Initial tools
     Family
 
 Monsters
-    Spawning
+XXX Spawning
 XXX Pathfinding
     AI
-        Move toward center area
-        If within X units of a live human, pursue, capture or kill that human
-        If pursuing, but > X + histeresis that human, stop pursuing.
+XXX     Move toward center area
+XXX     If within X units of a live human, pursue, capture or kill that human
+XXX     If pursuing, but > X + histeresis that human, stop pursuing.
         If within Y units of a turret, destroy the turret.
 XXX Breaking
     Stealing people
@@ -68,10 +68,15 @@ SFX
     Grind sounds
     Human screams when picked up
     Explosions
+    Door open/close
+    Place things
+    Thing destroyed by grinding
 
-Game Over
+Waves
 
-Emscripten
+Game Start/Over
+
+Emscripten bugfixing (lighting), deployment
 
 Bonus
     Family Wander AI

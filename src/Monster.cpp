@@ -11,15 +11,13 @@
 #include "Human.h"
 using namespace fr;
 
-namespace
-{
-	const real MIN_DIST_TO_TOUCH_NODE = 2.0f;
-	const real MIN_DIST_TO_TOUCH_NODE_SQUARED = MIN_DIST_TO_TOUCH_NODE * MIN_DIST_TO_TOUCH_NODE;
-}
-
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( Monster )
+	DEFINE_DVAR( Monster, real, m_awarenessRadius );
+	DEFINE_VAR( Monster, ldActor::wptr, m_pursueee );
+	DEFINE_DVAR( Monster, real, m_beginPursuingRadius );
+	DEFINE_DVAR( Monster, real, m_giveUpPursuingRadius );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Monster )
 	
 	bool Monster::canPickup( const ldActor& other ) const
@@ -30,18 +28,6 @@ namespace ld
 	
 	void Monster::update()
 	{
-		if( alive() && !isPickedUp() && !m_worldSpacePath.empty() )
-		{
-			applyControllerImpulse( snapToGrid( m_worldSpacePath.front() ) - position() );
-			
-			// Have we reached the next path node?
-			//
-			if( distanceSquared( position(), m_worldSpacePath.front() ) < MIN_DIST_TO_TOUCH_NODE_SQUARED )
-			{
-				m_worldSpacePath.erase( m_worldSpacePath.begin() );
-			}
-		}
-		
 		Super::update();
 	}
 	
@@ -49,18 +35,70 @@ namespace ld
 	{
 		Super::updateAI();
 		
-		if( auto player = world().player() )
+		vec2 destination;
+		
+		// Look in my awareness area.
+		//
+		real nearestHumanDistanceSquared = Infinity;
+		ldActor::ptr nearestHuman;
+		
+		world().touchingActors( rect{ position() - m_awarenessRadius * 0.5f, position() + m_awarenessRadius * 0.5f },
+							   [&]( ldActor& actor )
+							   {
+								   if( actor.isHuman() )
+								   {
+									   real distSquared = distanceSquared( actor.position(), position() );
+									   
+									   // Worth pursuing?
+									   //
+									   if( distSquared < m_beginPursuingRadius * m_beginPursuingRadius )
+									   {
+										   // Already pursuing this one?
+										   //
+										   if( m_pursueee == &actor )
+										   {
+											   distSquared *= 0.75f;		// Shorter. Histeresis.
+										   }
+										   
+										   if( distSquared < nearestHumanDistanceSquared )
+										   {
+											   nearestHumanDistanceSquared = distSquared;
+											   nearestHuman = &actor;
+										   }
+									   }
+								   }
+							   } );
+		
+		if( nearestHuman )
 		{
-			TileGrid::Path path;
-			tileGrid().findClosestPath( position(), player->position(), path, WORLD_PER_TILE * 0.4f );
-			
-			m_worldSpacePath.clear();
-			tileGrid().convertToWorldSpacePath( path.begin(), path.end(), std::back_inserter( m_worldSpacePath ));
-			
-			if( !m_worldSpacePath.empty() )
+			m_pursueee = nearestHuman;
+		}
+		else
+		{
+			// Has the pursuee gotten too far away?
+			//
+			if( m_pursueee && distanceSquared( m_pursueee->position(), position() ) > m_giveUpPursuingRadius )
 			{
-				m_worldSpacePath.erase( m_worldSpacePath.begin() );
+				m_pursueee = nullptr;
 			}
+		}
+		
+		if( m_pursueee )
+		{
+			destination = m_pursueee->position();
+		}
+		else
+		{
+			destination = WORLD_CENTER;
+		}
+		
+		if( !destination.isZero() )
+		{
+			travelTo( destination );
+		}
+		else
+		{
+			stopTravel();
 		}
 	}
 }

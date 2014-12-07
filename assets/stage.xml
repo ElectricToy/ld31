@@ -10,14 +10,18 @@
 		<children>
 
 			<object class="ldWorld" name="world">
-				<position>-480,-320</position>
+				<position>-496,-336</position>
 				<gravity>0</gravity>
+				
+				<monsterClassWeights>[
+					{ Troll, 1 },
+				]</monsterClassWeights>
 				
 				<children>
 
 					<object class="TileGridDefault" name="$^_tileGrid">
 						
-						<creationGridImage>Texture'lvl001'</creationGridImage>
+						<creationGridImage>Texture'level001'</creationGridImage>
 
 					</object>
 					
@@ -38,26 +42,8 @@
 					</object>
 
 
-					<object class="Monster" name="monster">
-						<stepSpeed>4</stepSpeed>
-						<grindDamage>1</grindDamage>
-						
-						<texture>Texture'white_simple'</texture>
-						<color>Red</color>
-						<position>264,120</position>
-						<scale>8</scale>
-						<dimensions>15</dimensions>
-						
-						<groundedDrag>32</groundedDrag>
-						<airDrag>32</airDrag>
-						<airControl>1</airControl>
-						<controllerImpulseScale>4000</controllerImpulseScale>
-						<jumpImpulseScale>0</jumpImpulseScale>
-
-					</object>
-
 					<object class="Lighting" name="$^_lighting">
-						<ambientColor>Black</ambientColor>
+						<ambientColor>DarkBlue</ambientColor>
 						<tileGrid>TileGridDefault'$^^_tileGrid'</tileGrid>
 						<children>
 							<object class="LightSourceConfigured" name="light_home">

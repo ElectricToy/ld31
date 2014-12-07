@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- ld31 monsters -->
+
+<objects>
+	
+	<class name="MonsterDefault" extends="Monster">
+		<stepSpeed>1</stepSpeed>
+		<grindDamage>1</grindDamage>
+		<dimensions>15</dimensions>
+		
+		<texture>Texture'white_simple'</texture>
+		<color>Red</color>
+		<scale>8</scale>
+
+		<groundedDrag>32</groundedDrag>
+		<airDrag>32</airDrag>
+		<airControl>1</airControl>
+		<controllerImpulseScale>4000</controllerImpulseScale>
+		<jumpImpulseScale>0</jumpImpulseScale>
+		
+	</class>
+
+	<class name="Troll" extends="MonsterDefault">
+	</class>
+
+
+</objects>

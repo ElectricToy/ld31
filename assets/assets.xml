@@ -34,7 +34,7 @@
 		<filterMode>Bilinear</filterMode>
 	</object>
 	
-	<object class="TextureLoaderConfigured" name="lvl001">
+	<object class="TextureLoaderConfigured" name="level001">
 		<basePath>assets/lvl/</basePath>
 		<extension>png</extension>
 		<doMipMap>false</doMipMap>

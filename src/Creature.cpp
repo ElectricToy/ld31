@@ -12,6 +12,12 @@
 #include "AppStage.h"
 using namespace fr;
 
+namespace
+{
+	const real MIN_DIST_TO_TOUCH_NODE = 2.0f;
+	const real MIN_DIST_TO_TOUCH_NODE_SQUARED = MIN_DIST_TO_TOUCH_NODE * MIN_DIST_TO_TOUCH_NODE;
+}
+
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( Creature )
@@ -119,6 +125,18 @@ namespace ld
 	{
 		if( alive() && !isPickedUp() )
 		{
+			if( !m_worldSpacePath.empty() )
+			{
+				applyControllerImpulse( snapToGrid( m_worldSpacePath.front() ) - position() );
+				
+				// Have we reached the next path node?
+				//
+				if( distanceSquared( position(), m_worldSpacePath.front() ) < MIN_DIST_TO_TOUCH_NODE_SQUARED )
+				{
+					m_worldSpacePath.erase( m_worldSpacePath.begin() );
+				}
+			}
+
 			updateStepping();
 			Super::update();
 		}
@@ -296,7 +314,33 @@ namespace ld
 			item->receiveDamage( m_grindDamage * stage().secondsPerFrame() );
 		}
 	}
+
+	void Creature::travelTo( const vec2& pos )
+	{
+		TileGrid::Path path;
+		tileGrid().findClosestPath( position(), pos, path, WORLD_PER_TILE * 0.4f );
+		
+		// The first element, if any, is where I am already.
+		if( !path.empty() )
+		{
+			path.erase( path.begin() );
+		}
+		
+		pursueTilePath( path );
+	}
 	
+	void Creature::stopTravel()
+	{
+		m_worldSpacePath.clear();
+	}
+	
+	void Creature::pursueTilePath( const fr::TileGrid::Path& path )
+	{
+		m_worldSpacePath.clear();
+		tileGrid().convertToWorldSpacePath( path.begin(), path.end(), std::back_inserter( m_worldSpacePath ));
+		
+	}
+
 	FRESH_DEFINE_CALLBACK( Creature, onTimeToThink, fr::Event )
 	{
 		if( alive() && !isPickedUp() )

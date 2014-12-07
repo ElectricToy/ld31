@@ -31,8 +31,11 @@ namespace ld
 		virtual void updateAI() override;
 
 	private:
-		
-		fr::TileGrid::WorldSpacePath m_worldSpacePath;
+				
+		DVAR( real, m_awarenessRadius, WORLD_PER_TILE * 16 );
+		DVAR( real, m_beginPursuingRadius, WORLD_PER_TILE * 16 );
+		DVAR( real, m_giveUpPursuingRadius, WORLD_PER_TILE * 18 );
+		VAR( ldActor::wptr, m_pursueee );
 	};
 	
 }

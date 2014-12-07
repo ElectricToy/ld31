@@ -15,6 +15,8 @@ namespace ld
 	DEFINE_VAR( ldTileTemplate, ClassWeights, m_itemClassWeights );
 	DEFINE_DVAR( ldTileTemplate, real, m_pctChanceToSpawn );
 	DEFINE_DVAR( ldTileTemplate, bool, m_mayReceiveItem );
+	DEFINE_DVAR( ldTileTemplate, bool, m_isMonsterSpawner );
+
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldTileTemplate )
 	
 	ClassInfo::cptr ldTileTemplate::randomTileClass() const
