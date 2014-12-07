@@ -13,6 +13,7 @@
 #include "World.h"
 #include "TileGrid.h"
 #include "ldActor.h"
+#include "TimeServer.h"
 
 namespace ld
 {
@@ -20,10 +21,13 @@ namespace ld
 	class Item;
 	class ldTile;
 	
-	class ldWorld : public fr::World
+	class ldWorld : public fr::World, public fr::TimeServer
 	{
 		FRESH_DECLARE_CLASS( ldWorld, World );
 	public:
+		
+		// From TimeServer
+		virtual TimeType time() const override;
 		
 		fr::TileGrid& tileGrid() const;
 		
@@ -103,6 +107,8 @@ namespace ld
 		}
 		
 		vec2 findOpenItemSpawnPosition() const;
+		
+		size_t currentSpawnPhase() const;
 
 	protected:
 		
@@ -110,16 +116,26 @@ namespace ld
 		void checkCollision( ldActor& a, ldActor& b );
 		virtual void maybeSpawnMonsters();
 		
+		void spawnMonster();
+		
 		void pickActiveHuman();
+		
+		void provideEssentials( size_t minMines, size_t minTorches );
 
 	private:
 		
-		VAR( ClassWeights, m_monsterClassWeights );
 		VAR( ClassInfo::cptr, m_playerControllerClass );
 		DVAR( int, m_lastActiveUpdate, 0 );
 		DVAR( bool, m_playerHasMoved, false );
 		DVAR( size_t, m_minInitialTorches, 3 );
 		DVAR( size_t, m_minInitialMines, 3 );
+		DVAR( int, m_nextSpawnTime, -1 );
+		
+		size_t m_lastSpawnPhase = -1;
+		
+		FRESH_DECLARE_CALLBACK( ldWorld, onTimeToProvide, fr::Event )
+		FRESH_DECLARE_CALLBACK( ldWorld, onTimeForPreparationWarning, fr::Event )
+		
 	};
 	
 }

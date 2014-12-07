@@ -60,8 +60,7 @@ XXX     Explosion emitter
 XXX Player can grind
 
 HUD
-    Inventory Display
-    Action buttons with enablement and hotkey hints
+XXX Action buttons with enablement and hotkey hints
 XXX        Take
 XXX        Drop
 XXX       Place ("Use?")
@@ -96,13 +95,14 @@ BUG
         Held object should sit on top of holder.
     Human lights flicker when they're being moved.
     Human lights still glow in exit after departure
-    Remove or reduce non-player human lights.
+    Remove or reduce human non-player lights.
 XXX Monster will dither when holding a human, unsure of which exit to take.
 XXX Monsters take humans to far portal.
 
 Bonus
-    Flash human when it becomes player
     Turrets
+    Inventory Display
+    Flash human when it becomes player
     Clock font monospace to avoid shifting
 XXX Family Wander AI
     Flash anything that receives damage

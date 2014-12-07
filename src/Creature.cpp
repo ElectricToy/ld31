@@ -44,7 +44,7 @@ namespace ld
 		ASSERT( m_thoughtSpeedHz > 0 );
 		
 		// Randomize to deter Creatures from thinking on the same frames.
-		stage().scheduleCallback( FRESH_CALLBACK( onTimeToThink ), 1.0 / m_thoughtSpeedHz + randInRange( 0.0, 1.0 ));
+		world().scheduleCallback( FRESH_CALLBACK( onTimeToThink ), 1.0 / m_thoughtSpeedHz + randInRange( 0.0, 1.0 ));
 	}
 	
 	void Creature::onTouched( ldActor& other )
@@ -439,7 +439,7 @@ namespace ld
 		if( doUpdate() && alive() )
 		{
 			ASSERT( m_thoughtSpeedHz > 0 );
-			stage().scheduleCallback( FRESH_CALLBACK( onTimeToThink ), 1.0 / m_thoughtSpeedHz );
+			world().scheduleCallback( FRESH_CALLBACK( onTimeToThink ), 1.0 / m_thoughtSpeedHz );
 		}
 	}
 }

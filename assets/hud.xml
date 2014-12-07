@@ -38,13 +38,13 @@
 	</class>
 
 	<class name="MonsterMessagePopup" extends="MessagePopup">
-		<hiddenTranslation>0,100</hiddenTranslation>
 		<defaultShowDuration>1</defaultShowDuration>
 		<position>0,-16</position>
 		<color>ffff1800</color>
 		<children>
 			<object class="TextField" name="$^_messagetext">
 				<font>Font'uni05_53_8'</font>
+				<lineHeight>0.6</lineHeight>
 				<fontSize>48</fontSize>
 				<alignment>Centered</alignment>
 				<verticalAlignment>Middle</verticalAlignment>
@@ -53,8 +53,47 @@
 		</children>
 	</class>
 
+	<class name="PreparationWarning" extends="MonsterMessagePopup">
+		<defaultShowDuration>3</defaultShowDuration>
+		<position>0,-80</position>
+	</class>
+
 	<class name="NewHumanMessagePopup" extends="MonsterMessagePopup">
 		<color>Green</color>
+	</class>
+
+	<class name="NewWaveMessagePopup" extends="MonsterMessagePopup">
+		<defaultShowDuration>4</defaultShowDuration>
+		<hiddenTranslation>0,100</hiddenTranslation>
+		<position>0,-32</position>
+		<color>ff9106d9</color>
+		<children>
+			<object class="MovieClip" name="$^_pulsar">
+				<children>
+					<object class="TextField" name="$^_messagetext">
+						<font>Font'uni05_53_8'</font>
+						<fontSize>80</fontSize>
+						<alignment>Centered</alignment>
+						<verticalAlignment>Middle</verticalAlignment>
+						<isTouchEnabled>false</isTouchEnabled>
+					</object>
+				</children>
+				
+				<passthrough>
+					<keyframe>
+						<child name="$1"><colorAdditive>Black</colorAdditive></child>
+						<tween type="SinEaseIn" />
+					</keyframe>
+					<keyframe rel-s="1">
+						<child name="$1"><colorAdditive>White</colorAdditive></child>
+						<tween type="SinEaseOut" />
+					</keyframe>
+					<keyframe rel-s="1">
+						<child name="$1"><colorAdditive>Black</colorAdditive></child>
+					</keyframe>
+				</passthrough>
+			</object>
+		</children>
 	</class>
 
 	<class name="HUDConfigured" extends="HUD">
@@ -198,10 +237,6 @@
 						
 						<passthrough>
 							<keyframe>
-								<child name="$1"><color>Red</color></child>
-								<tween type="Linear" />
-							</keyframe>
-							<keyframe rel-s="1.3">
 								<child name="$1"><color>Blue</color></child>
 								<tween type="Linear" />
 							</keyframe>
@@ -210,7 +245,11 @@
 								<tween type="Linear" />
 							</keyframe>
 							<keyframe rel-s="1.3">
-								<child name="$1"><color>Red</color></child>
+								<child name="$1"><color>ff004020</color></child>
+								<tween type="Linear" />
+							</keyframe>
+							<keyframe rel-s="1.3">
+								<child name="$1"><color>Blue</color></child>
 							</keyframe>
 						</passthrough>
 					</object>

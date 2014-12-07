@@ -19,17 +19,43 @@
 #include "Torch.h"
 using namespace fr;
 
+namespace
+{
+	using namespace ld;
+	
+	const int INITIAL_SETUP_TIME_SECONDS = 60 * 2;
+	const int SECONDS_PER_PHASE = 60 * 3;
+	
+	const std::vector< std::pair< int, int >> PHASE_SPAWN_DELAY_RANGE =
+	{
+		{ 120, 20 },		// seconds, delta
+		{ 100, 20 },
+		{ 80, 20 },
+		{ 60, 20 },
+		{ 45, 20 },
+	};
+}
+
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( ldWorld )
-	DEFINE_VAR( ldWorld, ClassWeights, m_monsterClassWeights );
 	DEFINE_VAR( ldWorld, ClassInfo::cptr, m_playerControllerClass );
 	DEFINE_DVAR( ldWorld, int, m_lastActiveUpdate );
 	DEFINE_DVAR( ldWorld, bool, m_playerHasMoved );
 	DEFINE_DVAR( ldWorld, size_t, m_minInitialTorches );
 	DEFINE_DVAR( ldWorld, size_t, m_minInitialMines );
-	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldWorld )
+	DEFINE_DVAR( ldWorld, int, m_nextSpawnTime );
+	FRESH_IMPLEMENT_STANDARD_CONSTRUCTOR_INERT( ldWorld )
+	
+	FRESH_CUSTOM_STANDARD_CONSTRUCTOR_NAMING( ldWorld )
+	,	TimeServer( createObject< CallbackScheduler >() )
+	{}
 
+	TimeType ldWorld::time() const
+	{
+		return nUpdates() / stage().frameRate();
+	}
+	
 	size_t ldWorld::numFreeHumans() const
 	{
 		// Humans that are alive and not captured.
@@ -152,26 +178,9 @@ namespace ld
 			}
 		}
 		
-		// Ensure that at least a minimum number of weapons have been spawned.
-		//
-		size_t numMines = countActors< Mine >();
-		
-		while( numMines < m_minInitialMines )
-		{
-			auto item = createObject< Mine >( *getClass( "MineConfigured" ));
-			item->position( findOpenItemSpawnPosition() );
-			addChildAt( item, afterTileGrid );
-			++numMines;
-		}
-		
-		size_t numTorches = countActors< Torch >();
-		while( numTorches < m_minInitialTorches )
-		{
-			auto item = createObject< Torch >( *getClass( "TorchConfigured" ));
-			item->position( findOpenItemSpawnPosition() );
-			addChildAt( item, afterTileGrid );
-			++numTorches;
-		}
+		scheduleCallback( FRESH_CALLBACK( onTimeForPreparationWarning ), 20 );
+
+		provideEssentials( m_minInitialMines, m_minInitialTorches );
 	}
 	
 	vec2 ldWorld::findOpenItemSpawnPosition() const
@@ -220,6 +229,9 @@ namespace ld
 		
 		Super::update();
 		
+		// TimeServer:
+		updateScheduledCallbacks();
+
 		updateActorCollisions();
 		
 		pickActiveHuman();
@@ -267,49 +279,6 @@ namespace ld
 		{
 			a.onTouched( b );
 			b.onTouched( a );
-		}
-	}
-	
-	void ldWorld::maybeSpawnMonsters()
-	{
-		// TODO Waves and so forth.
-				
-		if( pctChance( stage().secondsPerFrame()  ))
-		{
-			auto monsterClass = randomClass( m_monsterClassWeights );
-			if( monsterClass )
-			{
-				stage().as< AppStage >()->hud().showMessage( "A Monster approaches.", "MonsterMessagePopup" );
-								  
-				const auto& myTileGrid = tileGrid();
-				
-				const size_t afterTileGrid = getChildIndex( &myTileGrid ) + 1;
-				
-				const auto& dims = myTileGrid.extents();
-				
-				std::vector< Vector2i > potentialSpawnPoints;
-				
-				for( Vector2i pos( 0, 0 ); pos.y < dims.y; ++pos.y )
-				{
-					for( pos.x = 0; pos.x < dims.x; ++pos.x )
-					{
-						const auto& tile = static_cast< const ldTile& >( myTileGrid.getTile( pos ));
-						if( tile.isMonsterSpawner() )
-						{
-							potentialSpawnPoints.push_back( pos );
-						}
-					}
-				}
-			
-				if( !potentialSpawnPoints.empty() )
-				{
-					auto spawnTile = randomElement( potentialSpawnPoints );
-					
-					auto monster = createObject< Monster >( *monsterClass );
-					monster->position( myTileGrid.tileCenter( spawnTile ));
-					addChildAt( monster, afterTileGrid );
-				}
-			}
 		}
 	}
 	
@@ -380,5 +349,162 @@ namespace ld
 			}
 		}
 	}
+
+	size_t ldWorld::currentSpawnPhase() const
+	{
+		return std::min( PHASE_SPAWN_DELAY_RANGE.size() - 1, static_cast< size_t >(( timePlayedSeconds() - INITIAL_SETUP_TIME_SECONDS ) / SECONDS_PER_PHASE ));
+	}
+	
+	void ldWorld::maybeSpawnMonsters()
+	{
+		// Don't spawn for the first few minutes.
+		//
+		if( timePlayedSeconds() < INITIAL_SETUP_TIME_SECONDS )
+		{
+			return;
+		}
+		
+		const auto phase = currentSpawnPhase();
+	
+		if( !hasScheduledCallback( FRESH_CALLBACK( onTimeToProvide )))
+		{
+			scheduleCallback( FRESH_CALLBACK( onTimeToProvide ), 30 );
+		}
+
+		// Maybe announce new phase.
+		//
+		if( phase != m_lastSpawnPhase )
+		{
+			// Movin' on up.
+			//
+			stage().as< AppStage >()->hud().showMessage( createString( "Wave " << ( phase + 1 )), "NewWaveMessagePopup" );
+			
+			// Schedule the first spawn of the new phase.
+			//
+			m_nextSpawnTime = timePlayedSeconds() + 10;
+		}
+		m_lastSpawnPhase = phase;
+		
+		// So should we spawn now?
+		//
+		if( m_nextSpawnTime >= 0 && timePlayedSeconds() >= m_nextSpawnTime )
+		{
+			// Yes.
+			//
+			spawnMonster();
+			
+			const auto& range = PHASE_SPAWN_DELAY_RANGE.at( phase );
+			m_nextSpawnTime = timePlayedSeconds() + range.first + randInRange( -range.second, range.second );
+		}
+	}
+	
+	void ldWorld::spawnMonster()
+	{
+		static const std::vector< ClassWeights > PHASE_CLASS_WEIGHTS =
+		{
+			// 0
+			{
+				{ getClass( "Troll" ), 1 },
+			},
+			// 1
+			{
+				{ getClass( "Troll" ), 1 },
+			},
+			// 2
+			{
+				{ getClass( "Troll" ), 1 },
+			},
+			// 3
+			{
+				{ getClass( "Troll" ), 1 },
+			},
+			// 4
+			{
+				{ getClass( "Troll" ), 1 },
+			},
+		};
+		ASSERT( PHASE_CLASS_WEIGHTS.size() == PHASE_SPAWN_DELAY_RANGE.size() );
+
+		// Maybe spawn monsters.
+		//
+		const auto& classWeights = PHASE_CLASS_WEIGHTS.at( currentSpawnPhase() );
+		if( !classWeights.empty() )
+		{
+			auto monsterClass = randomClass( classWeights );
+			if( monsterClass )
+			{
+				stage().as< AppStage >()->hud().showMessage( "A Monster approaches.", "MonsterMessagePopup" );
+				
+				const auto& myTileGrid = tileGrid();
+				
+				const size_t afterTileGrid = getChildIndex( &myTileGrid ) + 1;
+				
+				const auto& dims = myTileGrid.extents();
+				
+				std::vector< Vector2i > potentialSpawnPoints;
+				
+				for( Vector2i pos( 0, 0 ); pos.y < dims.y; ++pos.y )
+				{
+					for( pos.x = 0; pos.x < dims.x; ++pos.x )
+					{
+						const auto& tile = static_cast< const ldTile& >( myTileGrid.getTile( pos ));
+						if( tile.isMonsterSpawner() )
+						{
+							potentialSpawnPoints.push_back( pos );
+						}
+					}
+				}
+				
+				if( !potentialSpawnPoints.empty() )
+				{
+					auto spawnTile = randomElement( potentialSpawnPoints );
+					
+					auto monster = createObject< Monster >( *monsterClass );
+					monster->position( myTileGrid.tileCenter( spawnTile ));
+					addChildAt( monster, afterTileGrid );
+				}
+			}
+		}
+	}
+
+	FRESH_DEFINE_CALLBACK( ldWorld, onTimeToProvide, fr::Event )
+	{
+		provideEssentials( 1, 1 );
+		
+		scheduleCallback( FRESH_CALLBACK( onTimeToProvide ), 30 );
+	}
+	
+	void ldWorld::provideEssentials( size_t minMines, size_t minTorches )
+	{
+		const auto& myTileGrid = tileGrid();
+		const size_t afterTileGrid = getChildIndex( &myTileGrid ) + 1;
+		
+		// Ensure that at least a minimum number of weapons have been spawned.
+		//
+		size_t numMines = countActors< Mine >();
+		
+		while( numMines < minMines )
+		{
+			auto item = createObject< Mine >( *getClass( "MineConfigured" ));
+			item->position( findOpenItemSpawnPosition() );
+			addChildAt( item, afterTileGrid );
+			++numMines;
+		}
+		
+		size_t numTorches = countActors< Torch >();
+		while( numTorches < minTorches )
+		{
+			auto item = createObject< Torch >( *getClass( "TorchConfigured" ));
+			item->position( findOpenItemSpawnPosition() );
+			addChildAt( item, afterTileGrid );
+			++numTorches;
+		}
+	}
+	
+	FRESH_DEFINE_CALLBACK( ldWorld, onTimeForPreparationWarning, fr::Event )
+	{
+		stage().as< AppStage >()->hud().showMessage( "Monsters will come.\nPrepare your defenses.", "PreparationWarning" );
+	}
+
 }
 

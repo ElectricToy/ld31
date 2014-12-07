@@ -273,10 +273,6 @@
 		
 		<playerControllerClass>ldPlayerController</playerControllerClass>
 		
-		<monsterClassWeights>[
-			{ Troll, 1 },
-			]</monsterClassWeights>
-		
 		<children>
 			
 			<object class="TileGridDefault" name="$^_tileGrid">
