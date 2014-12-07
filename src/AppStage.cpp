@@ -24,11 +24,28 @@ namespace ld
 		return *hud;
 	}
 	
-	void AppStage::onBeginPlay()
+	void AppStage::update()
 	{
-		Super::onBeginPlay();
+		Super::update();
 		
-		createWorld();
+		// Have a world?
+		//
+		if( !getDescendantByName< World >(""))
+		{
+			// Nope. Make one.
+			//
+			createWorld();
+		}
+	}
+	
+	void AppStage::restartGame()
+	{
+		// Destroy any existing world.
+		//
+		if( auto world = getDescendantByName< World >(""))
+		{
+			removeChild( world );
+		}		
 	}
 	
 	void AppStage::createWorld()
@@ -37,8 +54,6 @@ namespace ld
 		auto world = createObject< ldWorld >( *m_worldClass );
 		
 		addChildAt( world, 0 );
-		
-		world->onBeginPlay();
 		
 		hud().onGameBeginning();
 	}

@@ -14,6 +14,7 @@
 namespace ld
 {
 	class ldWorld;
+	class Human;
 	
 	class HUD : public fr::MovieClip
 	{
@@ -37,8 +38,11 @@ namespace ld
 		
 		void lookForMessagesToShow();
 		void updateButtonEnablement();
-		
+
+		bool hasWorld() const;
 		ldWorld& world() const;
+		
+		SmartPtr< Human > thePlayer() const;
 		
 		void populateMessages();
 		

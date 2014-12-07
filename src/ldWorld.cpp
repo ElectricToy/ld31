@@ -172,6 +172,7 @@ namespace ld
 				
 				if( item )
 				{
+					ASSERT( tile.mayReceiveItem() );
 					item->position( myTileGrid.tileCenter( pos ));
 					addChildAt( item, afterTileGrid );
 				}

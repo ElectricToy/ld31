@@ -28,6 +28,10 @@ namespace ld
 	DEFINE_METHOD( HUD, onButtonUse )
 	DEFINE_METHOD( HUD, onButtonPlay )
 	
+	bool HUD::hasWorld() const
+	{
+		return nullptr != stage().getDescendantByName< ldWorld >( "" );
+	}
 	
 	ldWorld& HUD::world() const
 	{
@@ -36,12 +40,24 @@ namespace ld
 		return *theWorld;
 	}
 	
+	Human::ptr HUD::thePlayer() const
+	{
+		if( hasWorld() )
+		{
+			return world().player();
+		}
+		else
+		{
+			return nullptr;
+		}
+	}
+	
 	void HUD::onButtonPause()
 	{}
 	
 	void HUD::onButtonTake()
 	{
-		if( auto player = world().player())
+		if( auto player = thePlayer())
 		{
 			player->pickupTouchingActor();
 		}
@@ -49,7 +65,7 @@ namespace ld
 	
 	void HUD::onButtonDrop()
 	{
-		if( auto player = world().player())
+		if( auto player = thePlayer())
 		{
 			player->dropHeldActor();
 		}
@@ -57,7 +73,7 @@ namespace ld
 	
 	void HUD::onButtonUse()
 	{
-		if( auto player = world().player())
+		if( auto player = thePlayer())
 		{
 			player->useHeldActor();
 		}
@@ -65,66 +81,70 @@ namespace ld
 	
 	void HUD::onButtonPlay()
 	{
+		stage().as< AppStage >()->restartGame();
 	}
 	
 	void HUD::update()
 	{
-		// Game over?
-		//
-		if( !world().isGameActive() )
+		if( hasWorld() )
 		{
-			if( !m_wasGameOver )
-			{
-				// Just finished.
-				//
-				onGameOver();
-			}
-			m_wasGameOver = true;
-		}
-		
-		
-		updateButtonEnablement();
-		
-		lookForMessagesToShow();
-		
-		// Hide startup if necessary.
-		//
-		if( auto startup = getDescendantByName< UIPopup >( "_startup" ))
-		{
-			// Player moving?
+			// Game over?
 			//
-			if( !startup->isBecomingHidden() && !startup->isFullyHidden() )
+			if( !world().isGameActive() )
 			{
-				if( auto player = world().player())
+				if( !m_wasGameOver )
 				{
-					if( !player->stepDirection().isZero() )
+					// Just finished.
+					//
+					onGameOver();
+				}
+				m_wasGameOver = true;
+			}
+			
+			
+			updateButtonEnablement();
+			
+			lookForMessagesToShow();
+			
+			// Hide startup if necessary.
+			//
+			if( auto startup = getDescendantByName< UIPopup >( "_startup" ))
+			{
+				// Player moving?
+				//
+				if( !startup->isBecomingHidden() && !startup->isFullyHidden() )
+				{
+					if( auto player = thePlayer() )
 					{
-						startup->hide();
+						if( !player->stepDirection().isZero() )
+						{
+							startup->hide();
+						}
 					}
 				}
 			}
-		}
-		
-		// Update clock.
-		//
-		if( auto clockText = getDescendantByName< TextField >( "_clock_clocktext" ))
-		{
-			int hours, mins, seconds;
 			
-			const int timePlayedSeconds = world().timePlayedSeconds();
-			
-			hours = timePlayedSeconds / ( 60 * 60 );
-			mins = ( timePlayedSeconds / 60 ) % 60;
-			seconds = timePlayedSeconds % 60;
-			
-			std::ostringstream text;
-			text << std::setfill( '0' ) << std::setw( 2 ) << hours << ":"
-				<< std::setfill( '0' ) << std::setw( 2 ) << mins << ":"
-				<< std::setfill( '0' ) << std::setw( 2 ) << seconds;
-			
-			clockText->text( text.str() );
-			
-			clockText->color( colorLerp( clockText->color(), world().isGameActive() ? 0xff9bfe00 : 0xffffed8c, 0.1f ));
+			// Update clock.
+			//
+			if( auto clockText = getDescendantByName< TextField >( "_clock_clocktext" ))
+			{
+				int hours, mins, seconds;
+				
+				const int timePlayedSeconds = world().timePlayedSeconds();
+				
+				hours = timePlayedSeconds / ( 60 * 60 );
+				mins = ( timePlayedSeconds / 60 ) % 60;
+				seconds = timePlayedSeconds % 60;
+				
+				std::ostringstream text;
+				text << std::setfill( '0' ) << std::setw( 2 ) << hours << ":"
+					<< std::setfill( '0' ) << std::setw( 2 ) << mins << ":"
+					<< std::setfill( '0' ) << std::setw( 2 ) << seconds;
+				
+				clockText->text( text.str() );
+				
+				clockText->color( colorLerp( clockText->color(), world().isGameActive() ? 0xff9bfe00 : 0xffffed8c, 0.1f ));
+			}
 		}
 		
 		Super::update();
@@ -132,7 +152,7 @@ namespace ld
 	
 	void HUD::updateButtonEnablement()
 	{
-		auto player = world().player();
+		auto player = thePlayer();
 
 		if( auto button = getDescendantByName< SimpleButton >( "_take" ))
 		{

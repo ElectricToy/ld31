@@ -21,9 +21,11 @@ namespace ld
 		FRESH_DECLARE_CLASS( AppStage, Stage );
 	public:
 		
-		virtual void onBeginPlay() override;
+		virtual void update() override;
 		
 		HUD& hud() const;
+		
+		void restartGame();
 		
 	protected:
 		

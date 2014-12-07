@@ -276,9 +276,7 @@
 		<children>
 			
 			<object class="TileGridDefault" name="$^_tileGrid">
-				
 				<creationGridImage>Texture'level001'</creationGridImage>
-				
 			</object>
 			
 			<object class="HumanDefault" name="$^_kid3">
