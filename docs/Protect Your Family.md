@@ -64,7 +64,7 @@ HUD
     Action buttons with enablement and hotkey hints
 XXX        Take
 XXX        Drop
-        Place ("Use?")
+XXX       Place ("Use?")
 XXX Messages
 XXX Startup
     Electric toy logo (UL corner)
@@ -78,6 +78,8 @@ SFX
     Door open/close
     Place things
     Thing destroyed by grinding
+
+Music
 
 Prevent initial spawn for 2-3 minutes
 Waves

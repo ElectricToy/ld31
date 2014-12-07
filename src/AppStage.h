@@ -14,6 +14,7 @@
 
 namespace ld
 {
+	class HUD;
 	
 	class AppStage : public fr::Stage
 	{
@@ -21,6 +22,8 @@ namespace ld
 	public:
 		
 		virtual void onBeginPlay() override;
+		
+		HUD& hud() const;
 		
 	protected:
 		

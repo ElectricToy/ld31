@@ -16,6 +16,13 @@ namespace ld
 	FRESH_DEFINE_CLASS( AppStage )
 	DEFINE_VAR( AppStage, ClassInfo::cptr, m_worldClass );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( AppStage )
+
+	HUD& AppStage::hud() const
+	{
+		auto hud = getDescendantByName< HUD >("");
+		ASSERT( hud );
+		return *hud;
+	}
 	
 	void AppStage::onBeginPlay()
 	{
@@ -33,10 +40,7 @@ namespace ld
 		
 		world->onBeginPlay();
 		
-		if( auto hud = getDescendantByName< HUD >(""))
-		{
-			hud->onGameBeginning();
-		}
+		hud().onGameBeginning();
 	}
 	
 }

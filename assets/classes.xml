@@ -286,6 +286,7 @@
 			</object>
 			
 			<object class="HumanDefault" name="$^_kid3">
+				<friendlyName>Alice</friendlyName>
 				<color>ffffff00</color>
 				<position>520,360</position>
 				
@@ -294,6 +295,7 @@
 			</object>
 			
 			<object class="HumanDefault" name="$^_kid2">
+				<friendlyName>Buddy</friendlyName>
 				<color>ff00ff00</color>
 				<position>488,360</position>
 				
@@ -301,6 +303,7 @@
 				<grindDamage>10</grindDamage>
 			</object>
 			<object class="HumanDefault" name="$^_kid1">
+				<friendlyName>Myra</friendlyName>
 				<color>ff0000ff</color>
 				<position>456,360</position>
 				
@@ -309,6 +312,7 @@
 			</object>
 			
 			<object class="HumanDefault" name="$^_mom">
+				<friendlyName>Claire</friendlyName>
 				<color>ffff00ff</color>
 				<position>424,360</position>
 				
@@ -317,6 +321,7 @@
 			</object>
 			
 			<object class="HumanDefault" name="$^_dad">
+				<friendlyName>John</friendlyName>
 				<color>ff000030</color>
 				<position>448,320</position>
 				

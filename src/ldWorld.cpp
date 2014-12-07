@@ -14,6 +14,9 @@
 #include "ldTile.h"
 #include "Monster.h"
 #include "PlayerController.h"
+#include "HUD.h"
+#include "Mine.h"
+#include "Torch.h"
 using namespace fr;
 
 namespace ld
@@ -23,6 +26,8 @@ namespace ld
 	DEFINE_VAR( ldWorld, ClassInfo::cptr, m_playerControllerClass );
 	DEFINE_DVAR( ldWorld, int, m_lastActiveUpdate );
 	DEFINE_DVAR( ldWorld, bool, m_playerHasMoved );
+	DEFINE_DVAR( ldWorld, size_t, m_minInitialTorches );
+	DEFINE_DVAR( ldWorld, size_t, m_minInitialMines );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldWorld )
 
 	size_t ldWorld::numFreeHumans() const
@@ -123,7 +128,7 @@ namespace ld
 	{
 		Super::onBeginPlay();
 		
-		// Visit all tiles in the tilegrid that area capable of holding treasures,
+		// Visit all tiles in the tilegrid that are capable of holding treasures,
 		// and spawn them.
 		//
 		const auto& myTileGrid = tileGrid();
@@ -146,6 +151,41 @@ namespace ld
 				}
 			}
 		}
+		
+		// Ensure that at least a minimum number of weapons have been spawned.
+		//
+		size_t numMines = countActors< Mine >();
+		
+		while( numMines < m_minInitialMines )
+		{
+			auto item = createObject< Mine >( *getClass( "MineConfigured" ));
+			item->position( findOpenItemSpawnPosition() );
+			addChildAt( item, afterTileGrid );
+			++numMines;
+		}
+		
+		size_t numTorches = countActors< Torch >();
+		while( numTorches < m_minInitialTorches )
+		{
+			auto item = createObject< Torch >( *getClass( "TorchConfigured" ));
+			item->position( findOpenItemSpawnPosition() );
+			addChildAt( item, afterTileGrid );
+			++numTorches;
+		}
+	}
+	
+	vec2 ldWorld::findOpenItemSpawnPosition() const
+	{
+		while( true )
+		{
+			const vec2 destination = randInRange( LEGAL_BOUNDS.ulCorner(), LEGAL_BOUNDS.brCorner() );
+			if( tileAt( destination ).mayReceiveItem() )
+			{
+				return destination;
+			}
+		}
+		ASSERT( false );
+		return vec2::ZERO;
 	}
 	
 	TileGrid& ldWorld::tileGrid() const
@@ -233,15 +273,14 @@ namespace ld
 	void ldWorld::maybeSpawnMonsters()
 	{
 		// TODO Waves and so forth.
-		
-		
-		if( pctChance( stage().secondsPerFrame() * 1 ))
+				
+		if( pctChance( stage().secondsPerFrame()  ))
 		{
 			auto monsterClass = randomClass( m_monsterClassWeights );
 			if( monsterClass )
 			{
-				dev_trace( "Spawning monster of class " << monsterClass->className() );
-				
+				stage().as< AppStage >()->hud().showMessage( "A Monster approaches.", "MonsterMessagePopup" );
+								  
 				const auto& myTileGrid = tileGrid();
 				
 				const size_t afterTileGrid = getChildIndex( &myTileGrid ) + 1;

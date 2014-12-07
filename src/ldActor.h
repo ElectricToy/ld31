@@ -29,7 +29,8 @@ namespace ld
 		SYNTHESIZE_GET( real, health );
 		SYNTHESIZE_GET( real, maxHealth );
 		SYNTHESIZE_GET( bool, suppressesHolderLight );
-		SYNTHESIZE_GET( bool, dropsWhenUsed )
+		SYNTHESIZE_GET( bool, dropsWhenUsed );
+		SYNTHESIZE_GET( std::string, friendlyName );
 		
 		
 		virtual void update() override;
@@ -87,6 +88,7 @@ namespace ld
 		VAR( WeakPtr< Creature >, m_holder );
 
 		VAR( ClassInfo::cptr, m_dieEmitterClass );
+		VAR( std::string, m_friendlyName );
 		
 		// Glow light.
 		//

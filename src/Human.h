@@ -27,6 +27,8 @@ namespace ld
 
 		virtual bool canStep( const vec2& dir ) const override;		
 		
+		virtual void die() override;
+		
 	protected:
 		
 		virtual void updateAI() override;

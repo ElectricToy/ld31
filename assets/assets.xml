@@ -15,7 +15,6 @@
 	<object class="TextureLoaderConfigured" name="pixelberry8">
 		<basePath>assets/font</basePath>
 		<filePath>pixelberry8</filePath>
-		<filterMode>Trilinear</filterMode>
 	</object>
 
 	<object class="FontLoaderConfigured" name="uni05_53_8">
@@ -24,7 +23,6 @@
 	<object class="TextureLoaderConfigured" name="uni05_53_8">
 		<basePath>assets/font</basePath>
 		<filePath>uni05_53_8</filePath>
-		<filterMode>Trilinear</filterMode>
 	</object>
 	
 	<object class="TextureLoaderConfigured" name="tile_atlas">

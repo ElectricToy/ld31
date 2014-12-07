@@ -77,6 +77,33 @@ namespace ld
 								   } );
 		}
 		
+		template< typename ActorT, typename FunctionT >
+		size_t countActors( FunctionT&& fn ) const
+		{
+			size_t count = 0;
+			forEachChild< ActorT >( [&]( const ldActor& actor )
+								   {
+									   if( fn( actor ))
+									   {
+										   ++count;
+									   }
+								   } );
+			return count;
+		}
+
+		template< typename ActorT >
+		size_t countActors() const
+		{
+			size_t count = 0;
+			forEachChild< ActorT >( [&]( const ldActor& actor )
+								   {
+									   ++count;
+								   } );
+			return count;
+		}
+		
+		vec2 findOpenItemSpawnPosition() const;
+
 	protected:
 		
 		void updateActorCollisions();
@@ -91,6 +118,8 @@ namespace ld
 		VAR( ClassInfo::cptr, m_playerControllerClass );
 		DVAR( int, m_lastActiveUpdate, 0 );
 		DVAR( bool, m_playerHasMoved, false );
+		DVAR( size_t, m_minInitialTorches, 3 );
+		DVAR( size_t, m_minInitialMines, 3 );
 	};
 	
 }

@@ -24,6 +24,7 @@ namespace ld
 		
 		virtual bool canPickup( const ldActor& other ) const override;
 
+		virtual void onTouched( ldActor& other ) override;
 		virtual void update() override;
 		
 	protected:
@@ -40,7 +41,7 @@ namespace ld
 		VAR( ldActor::wptr, m_pursueee );
 		VAR( fr::Vector2i, m_exitDestination );
 		VAR( ClassWeights, m_dropItemWeights );
-		DVAR( size_t, m_maxItemsToDrop, 2 );
+		DVAR( Range< size_t >, m_numDropItemsRange, Range< size_t >( 2, 4 ));
 	};
 	
 }

@@ -34,6 +34,7 @@ namespace ld
 	DEFINE_DVAR( ldActor, real, m_lightRadius );
 	DEFINE_DVAR( ldActor, Color, m_lightColor );
 	DEFINE_VAR( ldActor, ClassInfo::cptr, m_dieEmitterClass );
+	DEFINE_VAR( ldActor, std::string, m_friendlyName );
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldActor )
 	

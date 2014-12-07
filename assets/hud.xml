@@ -37,6 +37,26 @@
 		</children>
 	</class>
 
+	<class name="MonsterMessagePopup" extends="MessagePopup">
+		<hiddenTranslation>0,100</hiddenTranslation>
+		<defaultShowDuration>1</defaultShowDuration>
+		<position>0,-16</position>
+		<color>ffff1800</color>
+		<children>
+			<object class="TextField" name="$^_messagetext">
+				<font>Font'uni05_53_8'</font>
+				<fontSize>48</fontSize>
+				<alignment>Centered</alignment>
+				<verticalAlignment>Middle</verticalAlignment>
+				<isTouchEnabled>false</isTouchEnabled>
+			</object>
+		</children>
+	</class>
+
+	<class name="NewHumanMessagePopup" extends="MonsterMessagePopup">
+		<color>Green</color>
+	</class>
+
 	<class name="HUDConfigured" extends="HUD">
 		<inheritParentFrame>true</inheritParentFrame>
 		<children>

@@ -49,10 +49,11 @@ namespace ld
 	
 	void Creature::onTouched( ldActor& other )
 	{
-		if( canPickup( other ) && other.canBePickedUpByTouch() )
-		{
-			pickup( other );
-		}
+		// TODO Automatic pickup disabled.
+//		if( canPickup( other ) && other.canBePickedUpByTouch() )
+//		{
+//			pickup( other );
+//		}
 	}
 
 	vec2 Creature::bePickedUpBy( Creature& other )

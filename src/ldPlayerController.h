@@ -20,6 +20,8 @@ namespace ld
 		FRESH_DECLARE_CLASS( ldPlayerController, PlayerController );
 	public:
 		
+		virtual void possess( fr::Actor& actor ) override;
+
 		virtual void update() override;
 		
 	private:

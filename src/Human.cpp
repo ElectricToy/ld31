@@ -7,6 +7,8 @@
 //
 
 #include "Human.h"
+#include "AppStage.h"
+#include "HUD.h"
 using namespace fr;
 
 namespace ld
@@ -62,6 +64,16 @@ namespace ld
 				travelTo( destination );
 			}
 		}
+	}
+	
+	void Human::die()
+	{
+		if( hasStage() )
+		{
+			stage().as< AppStage >()->hud().showMessage( createString( friendlyName() << " has perished." ), "MonsterMessagePopup" );
+		}
+		
+		Super::die();
 	}
 }
 

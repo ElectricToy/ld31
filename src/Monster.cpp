@@ -10,6 +10,7 @@
 #include "ldWorld.h"
 #include "ldTile.h"
 #include "Human.h"
+#include "Mine.h"
 using namespace fr;
 
 namespace ld
@@ -21,12 +22,20 @@ namespace ld
 	DEFINE_DVAR( Monster, real, m_giveUpPursuingRadius );
 	DEFINE_VAR( Monster, fr::Vector2i, m_exitDestination );
 	DEFINE_VAR( Monster, ClassWeights, m_dropItemWeights );
-	DEFINE_DVAR( Monster, size_t, m_maxItemsToDrop );
+	DEFINE_DVAR( Monster, Range< size_t >, m_numDropItemsRange );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Monster )
 	
 	bool Monster::canPickup( const ldActor& other ) const
 	{
 		return other.isHuman() && Super::canPickup( other );
+	}
+	
+	void Monster::onTouched( ldActor& other )
+	{
+		if( canPickup( other ) && other.canBePickedUpByTouch() )
+		{
+			pickup( other );
+		}
 	}
 	
 	void Monster::update()
@@ -167,14 +176,24 @@ namespace ld
 	{
 		// Drop treasure.
 		//
-		const size_t nItemsToDrop = randInRange( 1UL, m_maxItemsToDrop );
+		const size_t nItemsToDrop = randInRange( m_numDropItemsRange );
 		
 		for( size_t i = 0; i < nItemsToDrop; ++i )
 		{
-			if( auto itemClass = randomClass( m_dropItemWeights ))
+			ClassInfo::cptr itemClass = randomClass( m_dropItemWeights );
+			
+			// Are there enough weapons out there?
+			//
+			if( world().countActors< Mine >() < 1 )		// TODO count turrets too
+			{
+				itemClass = randomWeaponClass();
+			}
+
+			if( itemClass )
 			{
 				world().createItemNear( *itemClass, position() );
 			}
+			
 		}
 		
 		Super::die();

@@ -8,6 +8,8 @@
 
 #include "ldPlayerController.h"
 #include "Human.h"
+#include "AppStage.h"
+#include "HUD.h"
 using namespace fr;
 
 namespace ld
@@ -15,6 +17,19 @@ namespace ld
 	FRESH_DEFINE_CLASS( ldPlayerController )
 	
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldPlayerController )
+
+	void ldPlayerController::possess( Actor& host_ )
+	{
+		Super::possess( host_ );
+		
+		if( const auto myHost = host()->as< Human >() )
+		{
+			if( myHost->hasStage() )
+			{
+				myHost->stage().as< AppStage >()->hud().showMessage( createString( "You are " << myHost->friendlyName() << "." ), "NewHumanMessagePopup" );
+			}
+		}
+	}
 	
 	void ldPlayerController::update()
 	{

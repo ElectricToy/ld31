@@ -101,7 +101,16 @@ namespace ld
 			return nullptr;
 		}
 	}
-	
+
+	inline ClassInfo::cptr randomWeaponClass()
+	{
+		return randomClass(
+						   {
+							   { fr::getClass( "MineConfigured" ), 1 },
+						   }
+		);
+		
+	}
 }
 
 #endif
