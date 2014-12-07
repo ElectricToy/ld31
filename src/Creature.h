@@ -21,6 +21,8 @@ namespace ld
 		FRESH_DECLARE_CLASS( Creature, ldActor );
 	public:
 		
+		SYNTHESIZE_GET( ldActor::ptr, heldActor );
+		
 		virtual bool isCreature() const override { return true; }
 		
 		virtual void onTouched( ldActor& other ) override;
@@ -55,8 +57,6 @@ namespace ld
 		vec2 travelDestination() const;
 		
 	protected:
-		
-		SYNTHESIZE_GET( ldActor::ptr, heldActor );
 		
 		virtual ldActor::ptr pickupableTouchingActor() const;
 		

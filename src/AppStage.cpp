@@ -8,6 +8,7 @@
 
 #include "AppStage.h"
 #include "ldWorld.h"
+#include "HUD.h"
 using namespace fr;
 
 namespace ld
@@ -31,6 +32,11 @@ namespace ld
 		addChildAt( world, 0 );
 		
 		world->onBeginPlay();
+		
+		if( auto hud = getDescendantByName< HUD >(""))
+		{
+			hud->onGameBeginning();
+		}
 	}
 	
 }

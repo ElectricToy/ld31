@@ -12,6 +12,7 @@
 #include "AppStage.h"
 #include "SimpleButton.h"
 #include "TextField.h"
+#include "UIPopup.h"
 using namespace fr;
 
 namespace ld
@@ -63,6 +64,8 @@ namespace ld
 	{
 		updateButtonEnablement();
 		
+		lookForMessagesToShow();
+		
 		// Update clock.
 		//
 		if( auto clockText = getDescendantByName< TextField >( "_clocktext" ))
@@ -81,6 +84,8 @@ namespace ld
 				<< std::setfill( '0' ) << std::setw( 2 ) << seconds;
 			
 			clockText->text( text.str() );
+			
+			clockText->color( colorLerp( clockText->color(), world().isGameActive() ? 0xff9bfe00 : 0xffffed8c, 0.1f ));
 		}
 		
 		
@@ -103,6 +108,72 @@ namespace ld
 		{
 			button->enabled( player && player->canUseHeldActor() );
 		}
+	}
+	
+	void HUD::showMessage( const std::string& message, ClassNameRef messageClassName )
+	{
+		const auto messageClass = getClass( messageClassName );
+		ASSERT( messageClass );
+		
+		if( auto messageHost = getDescendantByName< DisplayObjectContainer >( "_messagehost" ))
+		{
+			// Hide any prior popup.
+			//
+			if( messageHost->numChildren() > 0 )
+			{
+				messageHost->getChildAt( messageHost->numChildren() - 1 )->as< UIPopup >()->hideWithDuration( 0.25, true, 0 );
+			}
+			
+			// Make a new popup.
+			//
+			auto messagePopup = createObject< UIPopup >( *messageClass );
+			
+			if( auto text = messagePopup->getDescendantByName< TextField >( "_messagetext" ))
+			{
+				messageHost->addChild( messagePopup );
+			
+				text->text( message );
+				messagePopup->show();
+				messagePopup->hideWithDuration( 4.0, true, 4.0 );
+			}
+		}
+	}
+	
+	void HUD::lookForMessagesToShow()
+	{
+		if( auto player = world().player())
+		{
+			if( auto playerHeld = player->heldActor())
+			{
+				const auto heldClass = playerHeld->className();
+				
+				auto iter = m_heldClassMessages.find( heldClass );
+				if( iter != m_heldClassMessages.end() )
+				{
+					showMessage( iter->second, "MessagePopup" );
+					m_heldClassMessages.erase( iter );
+				}
+			}
+		}
+	}
+
+	void HUD::onGameBeginning()
+	{
+		populateMessages();
+	}
+	
+	void HUD::populateMessages()
+	{
+		m_heldClassMessages.clear();
+		
+		m_heldClassMessages[ "TorchConfigured" ] = "TORCH: Struggles against the darkness.";
+		m_heldClassMessages[ "DoorWood" ] = "WOOD DOOR: You can pass through. Monsters tear it down.";
+		m_heldClassMessages[ "DoorIron" ] = "IRON DOOR: You can pass through. Monsters struggle to tear it down.";
+		m_heldClassMessages[ "BlockGravel" ] = "GRAVEL BLOCK: Once placed, it stays put. Easy to break through.";
+		m_heldClassMessages[ "BlockBrick" ] = "BRICK BLOCK: Once placed, it stays put. Tough to break through.";
+		m_heldClassMessages[ "BlockStone" ] = "STONE BLOCK: Once placed, it stays put. Really tough to break.";
+		m_heldClassMessages[ "MineConfigured" ] = "MINE: Only monsters trigger it. But when it blows, run!";
+		m_heldClassMessages[ "TurretConfigured" ] = "CROSSBOW: Fire by hand, or drop for automatic defense. Limited ammo.";
 	}
 }
 

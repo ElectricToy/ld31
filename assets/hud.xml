@@ -18,6 +18,24 @@
 	<class name="KeyHint" extends="Sprite">
 		<position>-104,50</position>
 	</class>
+	
+	<class name="MessagePopup" extends="UIPopup">
+		<isTouchEnabled>false</isTouchEnabled>
+		<defaultShowDuration>0.25</defaultShowDuration>
+		<defaultHideDuration>6</defaultHideDuration>
+		<startHidden>true</startHidden>
+		<startBecomeShown>true</startBecomeShown>
+		<children>
+			<object class="TextField" name="$^_messagetext">
+				<font>Font'uni05_53_8'</font>
+				<color>ff37b1ff</color>
+				<fontSize>28</fontSize>
+				<alignment>Centered</alignment>
+				<verticalAlignment>Middle</verticalAlignment>
+				<isTouchEnabled>false</isTouchEnabled>
+			</object>
+		</children>
+	</class>
 
 	<class name="HUDConfigured" extends="HUD">
 		<inheritParentFrame>true</inheritParentFrame>
@@ -97,7 +115,6 @@
 					
 					<object class="TextField" name="$^_clocktext">
 						<position>0,16</position>
-						<color>fffe3c00</color>
 						
 						<text>00:00:00</text>
 						
@@ -109,6 +126,12 @@
 					</object>
 					
 				</children>
+			</object>
+			
+			<object class="DisplayObjectContainer" name="$^_messagehost">
+				<ignoreFrameAttachment>false</ignoreFrameAttachment>
+				<parentFrameAttachPoint>0,1</parentFrameAttachPoint>
+				<position>-48,-24</position>
 			</object>
 			
 		</children>

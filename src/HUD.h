@@ -20,20 +20,29 @@ namespace ld
 		FRESH_DECLARE_CLASS( HUD, MovieClip );
 	public:
 		
+		void onGameBeginning();
+		
 		void onButtonPause();
 		void onButtonTake();
 		void onButtonDrop();
 		void onButtonUse();
 		
+		void showMessage( const std::string& message, fr::ClassNameRef messageClass );
+		
 		virtual void update() override;
-
+		
 	protected:
 		
+		void lookForMessagesToShow();
 		void updateButtonEnablement();
 		
 		ldWorld& world() const;
 		
+		void populateMessages();
+		
 	private:
+		
+		std::map< ClassName, std::string > m_heldClassMessages;
 		
 	};
 	

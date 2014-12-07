@@ -62,11 +62,11 @@ XXX Player can grind
 HUD
     Inventory Display
     Action buttons with enablement and hotkey hints
-        Take
-        Drop
+XXX        Take
+XXX        Drop
         Place ("Use?")
     Messages
-    Electric toy logo
+    Electric toy logo (UL corner)
     Game logo (UL corner)
 
 SFX
@@ -89,6 +89,7 @@ Emscripten bugfixing (lighting), deployment
 BUG
     Human lights flicker when they're being moved.
     Human lights still glow in exit after departure
+    Remove or reduce non-player human lights.
 XXX Monster will dither when holding a human, unsure of which exit to take.
 XXX Monsters take humans to far portal.
 
