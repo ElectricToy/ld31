@@ -54,6 +54,8 @@ namespace ld
 		virtual void receiveDamage( real amount );
 		
 	protected:
+		
+		SYNTHESIZE_GET( fr::LightSource::ptr, lightSource );
 
 		DVAR( real, m_lightRadius, 0 );
 		DVAR( Color, m_lightColor, Color::White );

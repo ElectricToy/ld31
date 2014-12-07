@@ -22,7 +22,16 @@ namespace ld
 		
 		virtual void update() override;
 		
+		virtual void explode();
+		
+		rect dangerArea() const;
+		
 	private:
+		
+		DVAR( real, m_dangerRadius, 256.0f );
+		DVAR( real, m_explodeRadius, 32.0f );
+		DVAR( real, m_maxDamage, 16 * 16 * 8 );
+		DVAR( bool, m_harmsHumans, false );
 		
 	};
 	

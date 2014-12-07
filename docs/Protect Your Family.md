@@ -44,6 +44,7 @@ XXX     Brick
 XXX     Stone
 XXX Torch
     Mine
+        Explosion emitter
     Turret
 
 XXX Player can grind
