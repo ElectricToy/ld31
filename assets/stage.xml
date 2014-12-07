@@ -54,13 +54,14 @@
 						<airControl>1</airControl>
 						<controllerImpulseScale>4000</controllerImpulseScale>
 						<jumpImpulseScale>0</jumpImpulseScale>
+
+<lightClass>LightTorch</lightClass>
+<lightRadius>100</lightRadius>
+<lightColor>Red</lightColor>
 					</object>
 
 					<object class="DoorWood">
 						<position>448,240</position>
-						<lightClass>LightTorch</lightClass>
-						<lightRadius>100</lightRadius>
-						<lightColor>Red</lightColor>
 					</object>
 
 					<object class="Lighting" name="$^_lighting">

@@ -26,6 +26,8 @@ namespace ld
 	public:
 		
 		SYNTHESIZE_GET( bool, alive );
+		SYNTHESIZE_GET( real, health );
+		SYNTHESIZE_GET( real, maxHealth );
 		
 		virtual void update() override;
 
@@ -65,10 +67,13 @@ namespace ld
 		DVAR( vec2, m_precarryScale, vec2( 1 ));
 
 		DVAR( real, m_health, 1 );
+		DVAR( real, m_maxHealth, 1 );
 		
 		DVAR( bool, m_alive, true );
 		
 		VAR( WeakPtr< Creature >, m_holder );
+
+		VAR( ClassInfo::cptr, m_dieEmitterClass );
 		
 		// Glow light.
 		//

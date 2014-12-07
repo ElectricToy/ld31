@@ -8,14 +8,26 @@
 		<isPlaying>false</isPlaying>
 		<blocksHumans>false</blocksHumans>
 		<blocksMonsters>true</blocksMonsters>
+		<dieEmitterClass>ItemBreakParticles</dieEmitterClass>
+
+		<cracksHost>DisplayObjectContainer'$^_cracksHost'</cracksHost>
+
+		<children>
+			<object class="DisplayObjectContainer" name="$^_cracksHost">
+			</object>
+		</children>
 	</class>
 	
 	<class name="DoorWood" extends="DoorBase">
-		<navDistanceScalar>0</navDistanceScalar>
+		<navDistanceScalar>20</navDistanceScalar>
+		<maxHealth>20</maxHealth>
+		<health>20</health>
+		
 		<passthrough>
 			<keyframe label="closed">
 				<texture>Texture'door'</texture>
 				<textureWindow>0,0,0.5,1</textureWindow>
+				<child name="$1" />
 			</keyframe>
 			<keyframe label="open">
 				<texture>Texture'door'</texture>
@@ -23,5 +35,22 @@
 			</keyframe>
 		</passthrough>
 	</class>
-	
+
+	<class name="DoorIron" extends="DoorBase">
+		<navDistanceScalar>20</navDistanceScalar>
+		<maxHealth>50</maxHealth>
+		<health>50</health>
+		<passthrough>
+			<keyframe label="closed">
+				<texture>Texture'door_iron'</texture>
+				<textureWindow>0,0,0.5,1</textureWindow>
+				<child name="$1" />
+			</keyframe>
+			<keyframe label="open">
+				<texture>Texture'door_iron'</texture>
+				<textureWindow>0.5,0,1,1</textureWindow>
+			</keyframe>
+		</passthrough>
+	</class>
+
 </objects>

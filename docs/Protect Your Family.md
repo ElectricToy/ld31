@@ -11,9 +11,9 @@ Toughness (amount of damage required to kill)
 
 # Tasks
 
-DONE Gridwise movement
+XXX Gridwise movement
 
-Inventory/Object pickup/drop/usage
+XXX Inventory/Object pickup/drop/usage
 
 Initial setup
     Initial tools
@@ -21,20 +21,46 @@ Initial setup
 
 Monsters
     Spawning
-    Pathfinding
+XXX Pathfinding
     AI
     Breaking
     Stealing
+    Item drop
 
 Art
     Player
     Family
     Monsters
     Tools
-    HUD
     Logo
+
+Tools
+    Doors
+XXX     Wood
+        Iron
+    Walls
+        Gravel
+        Brick
+        Stone
+    Torch
+    Mine
+    Turret
+
+HUD
+    Inventory Display
+    Action buttons with enablement and hotkey hints
+    Messages
+    Electric toy logo
+    Game logo (UL corner)
+
+SFX
+    Monster steps, grunts
+    Grind sounds
+    Human screams when picked up
+
 
 Game Over
 
 Bonus
     Family Wander AI
+    Pause

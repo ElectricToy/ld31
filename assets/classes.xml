@@ -6,7 +6,54 @@
 	
 	<const type="color" name="TorchLight">ffff9900</const>
 	
-	<include url="assets/items.xml" subsume-root="true" />
+	<class name="Cracks" extends="MovieClip">
+		<isPlaying>false</isPlaying>
+		<isLooping>false</isLooping>
+		<color>ff808080</color>
+		<passthrough>
+			<keyframe>
+				<texture>Texture'cracks'</texture>
+				<textureWindow>0,0,0.125,1</textureWindow>
+			</keyframe>
+			<keyframe>
+				<texture>Texture'cracks'</texture>
+				<textureWindow>0.125,0,0.25,1</textureWindow>
+			</keyframe>
+			<keyframe>
+				<texture>Texture'cracks'</texture>
+				<textureWindow>0.25,0,0.375,1</textureWindow>
+			</keyframe>
+			<keyframe>
+				<texture>Texture'cracks'</texture>
+				<textureWindow>0.375,0,0.5,1</textureWindow>
+			</keyframe>
+			<keyframe>
+				<texture>Texture'cracks'</texture>
+				<textureWindow>0.5,0,0.625,1</textureWindow>
+			</keyframe>
+		</passthrough>
+	</class>
+	
+	<class name="ItemBreakParticles" extends="ParticleEmitter">
+		<particleTexture>Texture'debris'</particleTexture>
+		<cycleDuration>1.5</cycleDuration>
+		<destroyWhenAllDead>true</destroyWhenAllDead>
+		<rectSpawnArea>(-4,-6,4,6)</rectSpawnArea>
+		<baseScale>8</baseScale>
+		<particleForce>0,-30.0</particleForce>
+		<spawnScaleRange>((0.25),(1.0))</spawnScaleRange>
+		<spawnSpeedRange>(0,1)</spawnSpeedRange>
+		<velocityDamping>0.1</velocityDamping>
+		<startingParticles>40</startingParticles>
+		<creationSpawnBurst>true</creationSpawnBurst>
+		<creationPauseAfterBurst>true</creationPauseAfterBurst>
+		<vecKeyframesScale>[
+			{0, (0)},
+			{0.15, (1)},
+			{1, (0)},
+			]</vecKeyframesScale>
+		<perParticleColorRange>(Gray,White)</perParticleColorRange>
+	</class>
 	
 	<class name="FloorTileTemplate" extends="TileTemplate">
 		<atlasSubTexture>0,0</atlasSubTexture>
@@ -88,6 +135,8 @@
 			
 		</templates>
 	</class>
+
+	<include url="assets/items.xml" subsume-root="true" />
 
 </objects>
 

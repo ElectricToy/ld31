@@ -12,6 +12,7 @@
 #include "Stage.h"
 #include "TileGrid.h"
 #include "Creature.h"
+#include "ParticleEmitter.h"
 using namespace fr;
 
 namespace ld
@@ -22,11 +23,13 @@ namespace ld
 	DEFINE_DVAR( ldActor, angle, m_carryRotation );
 	DEFINE_DVAR( ldActor, vec2, m_precarryScale );
 	DEFINE_DVAR( ldActor, real, m_health );
+	DEFINE_DVAR( ldActor, real, m_maxHealth );
 	DEFINE_DVAR( ldActor, bool, m_alive );
 	DEFINE_VAR( ldActor, WeakPtr< Creature >, m_holder );
 	DEFINE_VAR( ldActor, ClassInfo::cptr, m_lightClass );
 	DEFINE_DVAR( ldActor, real, m_lightRadius );
 	DEFINE_DVAR( ldActor, Color, m_lightColor );
+	DEFINE_VAR( ldActor, ClassInfo::cptr, m_dieEmitterClass );
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldActor )
 
@@ -138,6 +141,13 @@ namespace ld
 	void ldActor::die()
 	{
 		m_alive = false;
+		
+		if( m_dieEmitterClass )
+		{
+			auto particles = createObject< ParticleEmitter >( *m_dieEmitterClass );
+			particles->position( position() );
+			parent()->addChild( particles );
+		}
 	}
 }
 

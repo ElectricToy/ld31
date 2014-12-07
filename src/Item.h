@@ -31,6 +31,8 @@ namespace ld
 		virtual void beDroppedBy( Creature& other );
 		
 		virtual void onAddedToStage() override;
+
+		virtual void receiveDamage( real amount ) override;
 		
 	protected:
 		
@@ -39,12 +41,17 @@ namespace ld
 		
 		virtual void die() override;
 		
+		void updateCracks();
+		
 	private:
 		
 		DVAR( bool, m_placed, false );
 		DVAR( real, m_navDistanceScalar, 1.0f );
 		DVAR( bool, m_blocksHumans, false );
 		DVAR( bool, m_blocksMonsters, false );
+		VAR( fr::DisplayObjectContainer::ptr, m_cracksHost );
+		
+		fr::MovieClip::ptr m_cracks;
 	};
 	
 }

@@ -19,6 +19,7 @@ namespace ld
 	DEFINE_DVAR( Item, real, m_navDistanceScalar );
 	DEFINE_DVAR( Item, bool, m_blocksHumans );
 	DEFINE_DVAR( Item, bool, m_blocksMonsters );
+	DEFINE_VAR( Item, fr::DisplayObjectContainer::ptr, m_cracksHost );
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Item )
 	
@@ -32,6 +33,19 @@ namespace ld
 	void Item::onAddedToStage()
 	{
 		Super::onAddedToStage();
+		
+		if( !m_cracks )
+		{
+			m_cracks = createObject< MovieClip >( *getClass( "Cracks" ));
+			if( !m_cracksHost )
+			{
+				m_cracksHost = this;
+			}
+			m_cracksHost->addChild( m_cracks );
+		}
+		
+		updateCracks();
+		
 		addToTile();
 	}
 	
@@ -80,6 +94,31 @@ namespace ld
 		Super::die();
 		
 		markForDeletion();		// TODO!!!
+	}
+	
+	void Item::receiveDamage( real amount )
+	{
+		Super::receiveDamage( amount );
+		
+		updateCracks();
+	}
+	
+	void Item::updateCracks()
+	{
+		if( m_cracks )
+		{
+			if( alive() )
+			{
+				const auto healthiness = clamp( health() / maxHealth(), 0.0f, 1.0f );
+				const int frame = 4 - std::round( healthiness * 4 );
+				
+				m_cracks->gotoAndStop( frame );
+			}
+			else
+			{
+				m_cracks->visible( false );
+			}
+		}
 	}
 }
 
