@@ -31,6 +31,8 @@ namespace ld
 		virtual bool isMonster() const { return false; }
 		virtual bool isCreature() const { return false; }
 		virtual bool isItem() const { return false; }
+		
+		virtual bool mayCollide() const;
 	
 		SYNTHESIZE_GET( vec2, stepDirection );
 		bool canStep( const vec2& dir ) const;		
@@ -42,9 +44,10 @@ namespace ld
 		virtual void onTouched( ldActor& other );
 		
 		virtual bool canBePickedUp() const;
+		virtual bool canBePickedUpByTouch() const;
 		bool isPickedUp() const;
 		
-		virtual void bePickedUpBy( Creature& other );
+		virtual vec2 bePickedUpBy( Creature& other );
 		virtual void beDroppedBy( Creature& other );
 		
 		vec2 facingDirection() const;
@@ -67,10 +70,15 @@ namespace ld
 		VAR( vec2, m_stepDirection );
 		VAR( vec2, m_stepStart );
 		DVAR( real, m_stepSpeed, 6.0f );
+		DVAR( vec2, m_carryOffset, vec2( 5, -5 ));
+		DVAR( vec2, m_carryScale, vec2( 0.75f ));
+		DVAR( angle, m_carryRotation, 30 );
+		DVAR( vec2, m_precarryScale, vec2( 1 ));
 		
 		VAR( WeakPtr< Creature >, m_holder );
 		
 		vec2 m_facingDirection = vec2( 1, 0 );
+		
 	};
 	
 }

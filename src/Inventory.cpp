@@ -36,7 +36,8 @@ namespace ld
 		m_items.erase( iter );
 		
 		item->position( snapToGrid( pos ));
-		
+		item->recordPreviousState();
+
 		ASSERT( !has( item ));
 	}
 }

@@ -15,7 +15,8 @@
 		1F4821B21A338E3B006E4360 /* Creature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4821B01A338E3B006E4360 /* Creature.cpp */; };
 		1F4821B51A33923A006E4360 /* Monster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4821B31A33923A006E4360 /* Monster.cpp */; };
 		1F4821B81A33B695006E4360 /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4821B61A33B695006E4360 /* Item.cpp */; };
-		1F4821BA1A33B7D8006E4360 /* items.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1F4821B91A33B7D8006E4360 /* items.xml */; };
+		1F4821BD1A33C3BF006E4360 /* Door.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4821BB1A33C3BF006E4360 /* Door.cpp */; };
+		1F4821C01A33C823006E4360 /* ldTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F4821BE1A33C823006E4360 /* ldTile.cpp */; };
 		1F51FBE71A3244E6008EEAA1 /* libFreshGame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F51FBE61A3244E1008EEAA1 /* libFreshGame.a */; };
 		1F51FBEB1A324548008EEAA1 /* AppStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F51FBE81A324548008EEAA1 /* AppStage.cpp */; };
 		1F8BF02E18C6725E007C5E7F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8BF02D18C6725E007C5E7F /* Cocoa.framework */; };
@@ -149,7 +150,10 @@
 		1F4821B41A33923A006E4360 /* Monster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Monster.h; sourceTree = "<group>"; };
 		1F4821B61A33B695006E4360 /* Item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Item.cpp; sourceTree = "<group>"; };
 		1F4821B71A33B695006E4360 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
-		1F4821B91A33B7D8006E4360 /* items.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = items.xml; path = ../../assets/items.xml; sourceTree = "<group>"; };
+		1F4821BB1A33C3BF006E4360 /* Door.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Door.cpp; sourceTree = "<group>"; };
+		1F4821BC1A33C3BF006E4360 /* Door.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Door.h; sourceTree = "<group>"; };
+		1F4821BE1A33C823006E4360 /* ldTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ldTile.cpp; sourceTree = "<group>"; };
+		1F4821BF1A33C823006E4360 /* ldTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ldTile.h; sourceTree = "<group>"; };
 		1F51FBE81A324548008EEAA1 /* AppStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppStage.cpp; sourceTree = "<group>"; };
 		1F51FBE91A324548008EEAA1 /* AppStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStage.h; sourceTree = "<group>"; };
 		1F51FBEA1A324548008EEAA1 /* Essentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Essentials.h; sourceTree = "<group>"; };
@@ -202,7 +206,6 @@
 		1F8BF02118C6725E007C5E7F = {
 			isa = PBXGroup;
 			children = (
-				1F4821B91A33B7D8006E4360 /* items.xml */,
 				1FE0FE3B192EFA9700B86F2F /* Fresh.xcodeproj */,
 				1F8BF26618C674E3007C5E7F /* assets */,
 				1F8BF06118C67355007C5E7F /* src */,
@@ -280,6 +283,10 @@
 				1F4821B41A33923A006E4360 /* Monster.h */,
 				1F4821B61A33B695006E4360 /* Item.cpp */,
 				1F4821B71A33B695006E4360 /* Item.h */,
+				1F4821BB1A33C3BF006E4360 /* Door.cpp */,
+				1F4821BC1A33C3BF006E4360 /* Door.h */,
+				1F4821BE1A33C823006E4360 /* ldTile.cpp */,
+				1F4821BF1A33C823006E4360 /* ldTile.h */,
 			);
 			name = src;
 			path = ../../src;
@@ -419,7 +426,6 @@
 			files = (
 				1F8BF26718C674E3007C5E7F /* assets in Resources */,
 				1FB348F01A2D0D0300536EC8 /* InfoPlist.strings in Resources */,
-				1F4821BA1A33B7D8006E4360 /* items.xml in Resources */,
 				1FB348F11A2D0D0300536EC8 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -448,9 +454,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F4821B21A338E3B006E4360 /* Creature.cpp in Sources */,
+				1F4821C01A33C823006E4360 /* ldTile.cpp in Sources */,
 				1F4821A31A337109006E4360 /* ldWorld.cpp in Sources */,
 				1F51FBEB1A324548008EEAA1 /* AppStage.cpp in Sources */,
 				1F48219F1A33706D006E4360 /* ldPlayerController.cpp in Sources */,
+				1F4821BD1A33C3BF006E4360 /* Door.cpp in Sources */,
 				1F4821B81A33B695006E4360 /* Item.cpp in Sources */,
 				1F4821B51A33923A006E4360 /* Monster.cpp in Sources */,
 				1F4821AF1A338BCC006E4360 /* Human.cpp in Sources */,

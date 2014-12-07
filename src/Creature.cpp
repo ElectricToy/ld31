@@ -19,10 +19,15 @@ namespace ld
 	DEFINE_VAR( Creature, ldActor::ptr, m_heldActor );
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Creature )
+
+	bool Creature::mayCollide() const
+	{
+		return alive() && Super::mayCollide();
+	}
 	
 	void Creature::onTouched( ldActor& other )
 	{
-		if( canPickup( other ))
+		if( canPickup( other ) && other.canBePickedUpByTouch() )
 		{
 			pickup( other );
 		}
@@ -47,11 +52,11 @@ namespace ld
 		ASSERT( canPickup( other ));
 		ASSERT( other.canBePickedUp() );
 		
-		other.bePickedUpBy( *this );
+		const vec2 desiredCarryOffset = other.bePickedUpBy( *this );
 		
 		// TODO held vs. inventory.
 		
-		world().attach( other, *this );
+		world().attach( other, *this, desiredCarryOffset );
 		m_heldActor = &other;
 	}
 	
@@ -87,11 +92,22 @@ namespace ld
 			if( !tileGrid().getTile( proposedDestination ).isSolid())
 			{
 				world().detach( *m_heldActor, *this );
-				m_heldActor->beDroppedBy( *this );
 				m_heldActor->position( proposedDestination );
+				m_heldActor->beDroppedBy( *this );
+				m_heldActor->recordPreviousState();
 				m_heldActor = nullptr;
 			}
 		}
+	}
+	
+	void Creature::update()
+	{
+		if( alive() )
+		{
+			updateAI();
+		}
+		
+		Super::update();
 	}
 }
 

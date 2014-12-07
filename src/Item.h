@@ -20,11 +20,25 @@ namespace ld
 		FRESH_DECLARE_CLASS( Item, ldActor );
 	public:
 		
+		SYNTHESIZE_GET( real, navDistanceScalar );
+		
 		virtual bool isItem() const override { return true; }
 
-		virtual bool canPickup( const ldActor& other ) const { return false; };
-
+		virtual bool canBePickedUpByTouch() const override;
+		virtual vec2 bePickedUpBy( Creature& other ) override;
+		virtual void beDroppedBy( Creature& other );
+		
+		virtual void onAddedToStage() override;
+		
+	protected:
+		
+		void addToTile();
+		void removeFromTile();
+		
 	private:
+		
+		DVAR( bool, m_placed, false );
+		DVAR( real, m_navDistanceScalar, 1.0f );
 		
 	};
 	

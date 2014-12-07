@@ -16,12 +16,16 @@
 
 namespace ld
 {
+	class Human;
+	
 	class ldWorld : public fr::World
 	{
 		FRESH_DECLARE_CLASS( ldWorld, World );
 	public:
 		
 		fr::TileGrid& tileGrid() const;
+		
+		SmartPtr< Human > player();
 
 		virtual void update() override;
 		
@@ -30,12 +34,14 @@ namespace ld
 		{
 			forEachChild< ldActor >( [&]( ldActor& actor )
 								 {
-									 if( !actor.isMarkedForDeletion() && actor.collisionBounds().doesOverlap( bounds ))
+									 if( actor.mayCollide() && actor.collisionBounds().doesOverlap( bounds ))
 									 {
 										 fn( actor );
 									 }
 								 } );
 		}
+		
+		virtual void onAddedToStage() override;
 		
 	protected:
 		

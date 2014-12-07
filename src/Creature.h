@@ -25,6 +25,8 @@ namespace ld
 		
 		virtual bool isCreature() const override { return true; }
 		
+		virtual bool mayCollide() const override;
+		
 		virtual void onTouched( ldActor& other ) override;
 
 		virtual bool canBePickedUp() const;
@@ -34,6 +36,12 @@ namespace ld
 		
 		virtual void pickupTouchingActor();
 		virtual void dropHeldActor();
+		
+		virtual void update() override;
+		
+	protected:
+		
+		virtual void updateAI() {}
 		
 	private:
 

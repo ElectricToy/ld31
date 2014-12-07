@@ -23,7 +23,11 @@ namespace ld
 		virtual bool isMonster() const override { return true; }
 		
 		virtual bool canPickup( const ldActor& other ) const override;
+
+	protected:
 		
+		virtual void updateAI() override;
+
 	private:
 		
 	};

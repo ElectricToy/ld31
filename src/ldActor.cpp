@@ -19,15 +19,25 @@ namespace ld
 	DEFINE_VAR( ldActor, vec2, m_stepDirection );
 	DEFINE_VAR( ldActor, vec2, m_stepStart );
 	DEFINE_DVAR( ldActor, real, m_stepSpeed );
+	DEFINE_DVAR( ldActor, vec2, m_carryOffset );
+	DEFINE_DVAR( ldActor, vec2, m_carryScale );
+	DEFINE_DVAR( ldActor, angle, m_carryRotation );
+	DEFINE_DVAR( ldActor, vec2, m_precarryScale );
 	DEFINE_VAR( ldActor, WeakPtr< Creature >, m_holder );
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldActor )
 
+	bool ldActor::mayCollide() const
+	{
+		return !isMarkedForDeletion() && !isPickedUp();
+	}
+	
 	void ldActor::onAddedToStage()
 	{
 		Super::onAddedToStage();
 		
 		position( snapToGrid( position() ));
+		recordPreviousState();
 	}
 	
 	void ldActor::onTouched( ldActor& other )
@@ -43,16 +53,29 @@ namespace ld
 		return !isPickedUp();
 	}
 	
-	void ldActor::bePickedUpBy( Creature& other )
+	bool ldActor::canBePickedUpByTouch() const
+	{
+		return canBePickedUp();
+	}
+	
+	vec2 ldActor::bePickedUpBy( Creature& other )
 	{
 		ASSERT( !isPickedUp() );
 		stopStepping();
 		
 		m_holder = &other;
+		
+		rotation( m_carryRotation );
+		m_precarryScale = scale();
+		scale( m_carryScale );
+		
+		return m_carryOffset;
 	}
 	
 	void ldActor::beDroppedBy( Creature& other )
-	{		
+	{
+		rotation( 0 );
+		scale( m_precarryScale );
 		m_holder = nullptr;
 	}
 	

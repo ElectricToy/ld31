@@ -4,8 +4,12 @@
 
 <objects>
 	
-	<class name="Door" extends="Item">
+	<class name="DoorBase" extends="Door">
 		<isPlaying>false</isPlaying>
+	</class>
+	
+	<class name="DoorWood" extends="DoorBase">
+		<navDistanceScalar>200</navDistanceScalar>
 		<passthrough>
 			<keyframe label="closed">
 				<texture>Texture'door'</texture>

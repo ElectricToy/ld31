@@ -54,6 +54,7 @@
 	</class>
 
 	<class name="TileGridDefault" extends="TileGrid">
+		<tileClass>ldTile</tileClass>
 		<texture>Texture'tile_atlas'</texture>
 		<atlasSubdivisions>2,1</atlasSubdivisions>
 		<texturesSubdivisionsPerTile>1</texturesSubdivisionsPerTile>

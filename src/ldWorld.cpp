@@ -8,6 +8,7 @@
 
 #include "ldWorld.h"
 #include "Camera.h"
+#include "Human.h"
 using namespace fr;
 
 namespace ld
@@ -16,11 +17,30 @@ namespace ld
 	
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldWorld )
 	
+	void ldWorld::onAddedToStage()
+	{
+		Super::onAddedToStage();
+	}
+	
 	TileGrid& ldWorld::tileGrid() const
 	{
 		const auto child = getChildByName< TileGrid >( "" );
 		ASSERT( child );
 		return *child;
+	}
+	
+	SmartPtr< Human > ldWorld::player()
+	{
+		Human::ptr thePlayer;
+		forEachChild< Human >( [&]( Human& human )
+							  {
+								  if( human.isPlayer() )
+								  {
+									  thePlayer = &human;
+								  }
+							  } );
+		
+		return thePlayer;
 	}
 
 	void ldWorld::update()
@@ -37,7 +57,7 @@ namespace ld
 		std::vector< ldActor::ptr > actors;
 		forEachChild< ldActor >( [&]( ldActor& actor )
 								 {
-									 if( !actor.isMarkedForDeletion() )
+									 if( actor.mayCollide() )
 									 {
 										 actors.push_back( &actor );
 									 }

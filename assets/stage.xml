@@ -39,10 +39,11 @@
 						</controller>
 					</object>
 
-					<object class="Human" name="other">
+					<object class="Monster" name="monster">
+						<stepSpeed>4</stepSpeed>
 						<texture>Texture'white_simple'</texture>
 						<color>Red</color>
-						<position>448,320</position>
+						<position>264,120</position>
 						<scale>8</scale>
 						<dimensions>15</dimensions>
 						
@@ -53,7 +54,7 @@
 						<jumpImpulseScale>0</jumpImpulseScale>
 					</object>
 
-					<object class="Door">
+					<object class="DoorWood">
 						<position>448,240</position>
 					</object>
 

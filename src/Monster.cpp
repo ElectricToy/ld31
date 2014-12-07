@@ -7,6 +7,8 @@
 //
 
 #include "Monster.h"
+#include "ldWorld.h"
+#include "Human.h"
 using namespace fr;
 
 namespace ld
@@ -17,7 +19,33 @@ namespace ld
 	
 	bool Monster::canPickup( const ldActor& other ) const
 	{
-		return alive() && other.isHuman() && Super::canPickup( other ) && other.as< Creature >()->alive();
+		return false;		// TODO!!!
+//		return alive() && other.isHuman() && Super::canPickup( other ) && other.as< Creature >()->alive();
+	}
+	
+	void Monster::updateAI()
+	{
+		Super::updateAI();
+		
+		if( auto player = world().player() )
+		{
+			TileGrid::Path path;
+			tileGrid().findClosestPath( position(), player->position(), path, WORLD_PER_TILE * 0.4f );
+			
+			TileGrid::WorldSpacePath worldSpacePath;
+			worldSpacePath.clear();
+			tileGrid().convertToWorldSpacePath( path.begin(), path.end(), std::back_inserter( worldSpacePath ));
+			
+			if( !worldSpacePath.empty() )
+			{
+				worldSpacePath.erase( worldSpacePath.begin() );
+				
+				if( !worldSpacePath.empty() )
+				{
+					applyControllerImpulse( snapToGrid( worldSpacePath.front() ) - position() );
+				}
+			}
+		}
 	}
 }
 
