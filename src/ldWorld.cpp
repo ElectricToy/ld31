@@ -13,13 +13,20 @@
 #include "Item.h"
 #include "ldTile.h"
 #include "Monster.h"
+#include "PlayerController.h"
 using namespace fr;
 
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( ldWorld )
 	DEFINE_VAR( ldWorld, ClassWeights, m_monsterClassWeights );
+	DEFINE_VAR( ldWorld, ClassInfo::cptr, m_playerControllerClass );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldWorld )
+
+	bool ldWorld::isGameActive() const
+	{
+		return player() != nullptr;
+	}
 	
 	ldTile& ldWorld::tileAt( const vec2& pos ) const
 	{
@@ -114,6 +121,11 @@ namespace ld
 		return thePlayer;
 	}
 
+	SmartPtr< const Human > ldWorld::player() const
+	{
+		return const_cast< ldWorld* >( this )->player();
+	}
+
 	void ldWorld::update()
 	{
 		maybeSpawnMonsters();
@@ -121,6 +133,8 @@ namespace ld
 		Super::update();
 		
 		updateActorCollisions();
+		
+		pickActiveHuman();
 	}
 	
 	void ldWorld::updateActorCollisions()
@@ -227,6 +241,49 @@ namespace ld
 		}
 		
 		return nullptr;
+	}
+	
+	void ldWorld::pickActiveHuman()
+	{
+		if( m_playerControllerClass )
+		{
+			Human::ptr currentPlayer = player();
+			
+			if( currentPlayer )
+			{
+				if( !currentPlayer->alive() || currentPlayer->isPickedUp() )
+				{
+					// Can't use this one anymore.
+					//
+					currentPlayer->controller( nullptr );
+					ASSERT( !currentPlayer->isPlayer() );
+					ASSERT( !player() );
+					currentPlayer = nullptr;
+				}
+			}
+			
+			// Do we need a new player?
+			//
+			if( !currentPlayer )
+			{
+				// Pick one.
+				//
+				forEachChild< Human >( [&]( Human& human )
+									  {
+										  if( human.alive() && !human.isPickedUp() )
+										  {
+											  currentPlayer = &human;
+										  }
+									  } );
+				
+				if( currentPlayer )
+				{
+					currentPlayer->controller( createObject< PlayerController >( *m_playerControllerClass ));
+					ASSERT( currentPlayer->isPlayer() );
+					ASSERT( player() == currentPlayer );
+				}
+			}
+		}
 	}
 }
 

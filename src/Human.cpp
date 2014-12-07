@@ -30,5 +30,38 @@ namespace ld
 		return Super::canStep( dir ) && LEGAL_BOUNDS.doesEnclose( snapToGrid( position() + dir * WORLD_PER_TILE ));
 	}
 	
+	real Human::currentStepSpeed() const
+	{
+		// Non-player humans are slower at home.
+		return ( !isPlayer() && HOME_INNER_BOUNDS.doesEnclose( position() ) )
+			? 1.0f
+			: Super::currentStepSpeed();
+	}
+
+	void Human::updateAI()
+	{
+		if( alive() && !isPlayer() && !isPickedUp() )
+		{
+			real pctChanceToMove = 1;
+			
+			// At home?
+			//
+			if( !HOME_INNER_BOUNDS.doesEnclose( position() ) &&
+			    !HOME_INNER_BOUNDS.doesEnclose( travelDestination() ))
+			{
+				// Nope. Definitely move.
+				//
+				pctChanceToMove = 100;
+			}
+			
+			if( pctChance( pctChanceToMove ))
+			{
+				// Go to a random location at home.
+				//
+				auto destination = randInRange( HOME_INNER_BOUNDS.ulCorner(), HOME_INNER_BOUNDS.brCorner() );
+				travelTo( destination );
+			}
+		}
+	}
 }
 

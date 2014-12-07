@@ -13,6 +13,8 @@
 				<position>-496,-336</position>
 				<gravity>0</gravity>
 				
+				<playerControllerClass>ldPlayerController</playerControllerClass>
+				
 				<monsterClassWeights>[
 					{ Troll, 1 },
 				]</monsterClassWeights>
@@ -62,8 +64,6 @@
 						
 						<stepSpeed>6</stepSpeed>
 						<grindDamage>8</grindDamage>
-						
-						<controller><object class="ldPlayerController"></object></controller>
 					</object>
 
 					<object class="Lighting" name="$^_lighting">

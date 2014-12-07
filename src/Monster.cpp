@@ -26,7 +26,7 @@ namespace ld
 	
 	bool Monster::canPickup( const ldActor& other ) const
 	{
-		return other.isHuman() && !other.isPlayer() && Super::canPickup( other );
+		return other.isHuman() && Super::canPickup( other );
 	}
 	
 	void Monster::update()

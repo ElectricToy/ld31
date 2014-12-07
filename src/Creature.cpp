@@ -33,6 +33,11 @@ namespace ld
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Creature )
 
+	real Creature::currentStepSpeed() const
+	{
+		return m_stepSpeed;
+	}
+	
 	void Creature::onBeginPlay()
 	{
 		Super::onBeginPlay();
@@ -64,7 +69,7 @@ namespace ld
 		
 		// TODO held vs inventory.
 		
-		return alive() && !m_heldActor && other.canBePickedUp();
+		return alive() && !isPickedUp() && other.canBePickedUp() && !m_heldActor;
 	}
 	
 	void Creature::pickup( ldActor& other )
@@ -111,7 +116,7 @@ namespace ld
 			
 			const auto& tile = world().tileAt( proposedDestination );
 			
-			if( tile.mayReceiveItem() )
+			if( !tile.isSolid() && ( !m_heldActor->isItem() || tile.mayReceiveItem() ))
 			{
 				world().detach( *m_heldActor, *this );
 				m_heldActor->position( proposedDestination );
@@ -267,7 +272,7 @@ namespace ld
 		{
 			// Move.
 			//
-			const auto newPos = position() + m_stepDirection * WORLD_PER_TILE * m_stepSpeed * stage().secondsPerFrame();
+			const auto newPos = position() + m_stepDirection * WORLD_PER_TILE * currentStepSpeed() * stage().secondsPerFrame();
 			position( newPos );
 			
 			// Done yet?
@@ -332,6 +337,18 @@ namespace ld
 	void Creature::stopTravel()
 	{
 		m_worldSpacePath.clear();
+	}
+	
+	vec2 Creature::travelDestination() const
+	{
+		if( m_worldSpacePath.empty() )
+		{
+			return vec2::ZERO;
+		}
+		else
+		{
+			return m_worldSpacePath.back();
+		}
 	}
 	
 	void Creature::pursueTilePath( const fr::TileGrid::Path& path )

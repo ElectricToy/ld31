@@ -31,7 +31,7 @@ namespace ld
 		DVAR( real, m_dangerRadius, 64 );
 		DVAR( real, m_explodeRadius, 32 );
 		DVAR( real, m_maxDamage, 16 * 16 * 8 );
-		DVAR( bool, m_harmsHumans, false );
+		DVAR( bool, m_harmsHumans, true );
 		
 	};
 	

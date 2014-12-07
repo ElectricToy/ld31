@@ -15,14 +15,14 @@ XXX Gridwise movement
 
 XXX Inventory/Object pickup/drop/usage
 
-Initial setup
+XXX Initial setup
 XXX Initial tools
 XXX Family
 
 Monsters
 XXX Spawning
 XXX Pathfinding
-    AI
+XXX AI
 XXX     Move toward center area
 XXX     If within X units of a live human, pursue, capture or kill that human
 XXX     If pursuing, but > X + histeresis that human, stop pursuing.
@@ -30,6 +30,11 @@ XXX     If pursuing, but > X + histeresis that human, stop pursuing.
 XXX Breaking
 XXX Stealing people
 XXX Item drop on death
+    Should kill active player.
+
+Humans
+    Should return home if released
+    If player dies, possess next available human
 
 Art
     GO FOR HEAVIER OUTLINES
@@ -53,10 +58,6 @@ XXX     Explosion emitter
     Turret
 
 XXX Player can grind
-
-Humans
-    Should return home if released
-    If player dies, possess next available human
 
 HUD
     Inventory Display
@@ -88,6 +89,7 @@ BUG
     Monster will dither when holding a human, unsure of which exit to take.
 
 Bonus
+    Turrets
     Family Wander AI
     Pause
     Explosive Barrel

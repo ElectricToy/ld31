@@ -89,7 +89,7 @@ namespace ld
 		//
 		world().touchingActors( dangerArea(), [&]( ldActor& actor )
 							   {
-								   if( actor.alive() && actor.isCreature() )
+								   if( actor.alive() && actor.isCreature() && !actor.isPickedUp() )
 								   {
 									   if( !actor.isHuman() || m_harmsHumans )
 									   {

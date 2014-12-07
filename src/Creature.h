@@ -49,9 +49,13 @@ namespace ld
 		
 		void travelTo( const vec2& pos );
 		void stopTravel();
+		vec2 travelDestination() const;
 		
 	protected:
+		
 		SYNTHESIZE_GET( ldActor::ptr, heldActor );
+		
+		virtual real currentStepSpeed() const;
 
 		void pursueTilePath( const fr::TileGrid::Path& path );
 		

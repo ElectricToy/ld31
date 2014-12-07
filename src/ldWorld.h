@@ -28,7 +28,10 @@ namespace ld
 		fr::TileGrid& tileGrid() const;
 		
 		SmartPtr< Human > player();
+		SmartPtr< const Human > player() const;
 
+		bool isGameActive() const;				// I.e. some humans still alive.
+		
 		virtual void update() override;
 		
 		template< typename FunctionT >
@@ -57,10 +60,13 @@ namespace ld
 		void updateActorCollisions();
 		void checkCollision( ldActor& a, ldActor& b );
 		virtual void maybeSpawnMonsters();
+		
+		void pickActiveHuman();
 
 	private:
 		
 		VAR( ClassWeights, m_monsterClassWeights );
+		VAR( ClassInfo::cptr, m_playerControllerClass );
 	};
 	
 }

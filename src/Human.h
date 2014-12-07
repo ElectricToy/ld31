@@ -27,6 +27,11 @@ namespace ld
 
 		virtual bool canStep( const vec2& dir ) const override;
 		
+	protected:
+		
+		virtual void updateAI() override;
+		virtual real currentStepSpeed() const override;
+	
 	private:
 		
 	};
