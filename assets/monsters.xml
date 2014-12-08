@@ -28,7 +28,7 @@
 	</class>
 
 	<class name="Troll" extends="MonsterDefault">
-		<stepSpeed>1</stepSpeed>
+		<stepSpeed>5</stepSpeed>
 		<grindDamage>1</grindDamage>
 		<health>1</health>
 	</class>

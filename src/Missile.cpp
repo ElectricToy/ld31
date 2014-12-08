@@ -28,7 +28,7 @@ namespace ld
 	
 	void Missile::onTouched( ldActor& other )
 	{
-		if( other.isMonster() )
+		if( other.isMonster() && other.alive() )
 		{
 			other.receiveDamage( 1.0f );
 			die();

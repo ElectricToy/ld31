@@ -104,6 +104,10 @@ namespace ld
 		{
 			removeFromTile();
 		}
+		else
+		{
+			m_holder->dropHeldActor();
+		}
 		
 		Super::die();
 		

@@ -30,8 +30,9 @@ namespace ld
 
 	private:
 		
-		DVAR( size_t, m_ammo, 8 );
+		DVAR( size_t, m_ammo, 5 );
 		DVAR( vec2, m_facingDirection, vec2( 1, 0 ));
+		DVAR( TimeType, m_nextEarliestShootTime, 0 );
 	};
 	
 }

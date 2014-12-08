@@ -17,6 +17,7 @@ namespace ld
 	FRESH_DEFINE_CLASS( Turret )
 	DEFINE_DVAR( Turret, size_t, m_ammo );
 	DEFINE_DVAR( Turret, vec2, m_facingDirection );
+	DEFINE_DVAR( Turret, TimeType, m_nextEarliestShootTime );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Turret )
 
 	vec2 Turret::bePickedUpBy( Creature& other )
@@ -49,35 +50,56 @@ namespace ld
 	
 	void Turret::update()
 	{
+		Super::update();
+
 		if( !isPickedUp() )
 		{
 			// Shoot automatically.
 			//
-			// TODO
+			const real range = 6;
+			
+			ldActor::ptr target;
+			world().touchingActors( rect{ position() - WORLD_PER_TILE * range, position() + WORLD_PER_TILE * range }, [&]( ldActor& actor )
+								   {
+									   if( actor.alive() && actor.isMonster() )
+									   {
+										   target = &actor;
+									   }
+								   } );
+			
+			if( target )
+			{
+				shoot();
+			}
 		}
 		else
 		{
 			m_facingDirection = m_holder->facingDirection();
 			rotation( m_facingDirection.angle() );
 		}
-		
-		Super::update();
 	}
 	
 	void Turret::shoot()
 	{
-		auto missile = createObject< Missile >( *getClass( "TurretArrow" ));
-		ASSERT( missile );
-		missile->position( position() );
-		missile->facingDirection( m_facingDirection );
-		
-		world().addChild( missile );
-		
-		--m_ammo;
-		
-		if( m_ammo == 0 )
+		if( world().time() > m_nextEarliestShootTime )
 		{
-			die();
+			auto missile = createObject< Missile >( *getClass( "TurretArrow" ));
+			ASSERT( missile );
+			missile->position( position() );
+			missile->facingDirection( m_facingDirection );
+			
+			world().addChild( missile );
+			
+			--m_ammo;
+			
+			const TimeType SHOT_DELAY = 1;
+			
+			m_nextEarliestShootTime = world().time() + SHOT_DELAY;
+
+			if( m_ammo == 0 )
+			{
+				die();
+			}
 		}
 	}
 	

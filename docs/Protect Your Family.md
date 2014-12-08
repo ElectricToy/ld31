@@ -11,6 +11,13 @@ Toughness (amount of damage required to kill)
 
 # Tasks
 
+XXX Get rid of bodies (darken them)
+XXX Too easy - reduce missile/weapon count - tighter waves
+XXX Bug: turrets bug when spent
+XXX Turret text
+
+
+
 Art
     Monsters
     Variety -- at least fast+weak/slow+strong
@@ -21,9 +28,6 @@ CHOOSE GAME NAME
 HUD
     Electric toy logo (UL corner)
     Game logo (UL corner)
-
-Tools
-    Turret
 
 SFX
     Monster steps, grunts
@@ -42,16 +46,14 @@ BUG
     Ordering of objects is all wacky.
         Held object should sit on top of holder.
 Bonus
-    Turrets
-    Inventory Display
-    Flash human when it becomes player
-    Clock font monospace to avoid shifting
-    Flash anything that receives damage
+    Auto-firing turret
+    Mine waits before exploding
     Pause
     Explosive Barrel
-    Mine waits before exploding
-
-
+    Clock font monospace to avoid shifting
+    Flash anything that receives damage
+    Inventory Display
+    Flash human when it becomes player
 
 DONE
 
@@ -110,5 +112,6 @@ XXX    Player
 XXX    Family
 XXX    Tools
 XXX Placement (blocks esp)
-
+XXX Tools
+XXX    Turret
 
