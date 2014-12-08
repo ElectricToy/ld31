@@ -112,5 +112,13 @@
 		<lightColor>Red</lightColor>
 		<lightWobble>0</lightWobble>
 	</class>
+	
+	<class name="TurretConfigured" extends="Turret">
+		<texture>Texture'turret'</texture>
+		<blocksHumans>false</blocksHumans>
+		<blocksMonsters>false</blocksMonsters>
+
+		<dieEmitterClass>ItemBreakParticles</dieEmitterClass>
+	</class>
 
 </objects>

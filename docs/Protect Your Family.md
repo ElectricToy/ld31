@@ -11,10 +11,9 @@ Toughness (amount of damage required to kill)
 
 # Tasks
 
-Placement (blocks esp)
-
 Art
     Monsters
+    Variety -- at least fast+weak/slow+strong
     Logo
 
 CHOOSE GAME NAME
@@ -22,9 +21,6 @@ CHOOSE GAME NAME
 HUD
     Electric toy logo (UL corner)
     Game logo (UL corner)
-
-Monsters
-    Variety -- at least fast+weak/slow+strong
 
 Tools
     Turret
@@ -113,4 +109,6 @@ XXX Player can grind
 XXX    Player
 XXX    Family
 XXX    Tools
+XXX Placement (blocks esp)
+
 
