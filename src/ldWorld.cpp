@@ -34,15 +34,15 @@ namespace
 	}
 
 	const int INITIAL_SETUP_TIME_SECONDS = 100;
-	const int SECONDS_PER_PHASE = 240;
+	const int SECONDS_PER_PHASE = 120;
 	
 	const std::vector< std::pair< int, int >> PHASE_SPAWN_DELAY_RANGE =
 	{
-		{ 60, 20 },		// seconds, delta
-		{ 50, 20 },
-		{ 40, 20 },
-		{ 30, 20 },
-		{ 15, 20 },
+		{ 60, 10 },		// seconds, delta
+		{ 45, 10 },
+		{ 30, 10 },
+		{ 16, 5 },
+		{ 8, 2 },
 	};
 }
 
@@ -53,6 +53,7 @@ namespace ld
 	DEFINE_DVAR( ldWorld, int, m_lastActiveUpdate );
 	DEFINE_DVAR( ldWorld, bool, m_playerHasMoved );
 	DEFINE_DVAR( ldWorld, size_t, m_minInitialTorches );
+	DEFINE_DVAR( ldWorld, size_t, m_minInitialTurrets );
 	DEFINE_DVAR( ldWorld, size_t, m_minInitialMines );
 	DEFINE_DVAR( ldWorld, int, m_nextSpawnTime );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTOR_INERT( ldWorld )
@@ -205,7 +206,7 @@ namespace ld
 		
 		scheduleCallback( FRESH_CALLBACK( onTimeForPreparationWarning ), 20 );
 
-		provideEssentials( m_minInitialMines, m_minInitialTorches );
+		provideEssentials( m_minInitialMines, m_minInitialTorches, m_minInitialTurrets );
 	}
 	
 	vec2 ldWorld::findOpenItemSpawnPosition() const
@@ -494,36 +495,18 @@ namespace ld
 
 	FRESH_DEFINE_CALLBACK( ldWorld, onTimeToProvide, fr::Event )
 	{
-		provideEssentials( 1, 1 );
+		provideEssentials( 1, 2, 1 );
 		
 		scheduleCallback( FRESH_CALLBACK( onTimeToProvide ), 30 );
 	}
-	
-	void ldWorld::provideEssentials( size_t minMines, size_t minTorches )
+
+	void ldWorld::provideEssentials( size_t minMines, size_t minTorches, size_t minTurrets )
 	{
-		const auto& myTileGrid = tileGrid();
-		const size_t afterTileGrid = getChildIndex( &myTileGrid ) + 1;
-		
 		// Ensure that at least a minimum number of weapons have been spawned.
 		//
-		size_t numMines = countActors< Mine >();
-		
-		while( numMines < minMines )
-		{
-			auto item = createObject< Mine >( *getClass( "MineConfigured" ));
-			item->position( findOpenItemSpawnPosition() );
-			addChildAt( item, afterTileGrid );
-			++numMines;
-		}
-		
-		size_t numTorches = countActors< Torch >();
-		while( numTorches < minTorches )
-		{
-			auto item = createObject< Torch >( *getClass( "TorchConfigured" ));
-			item->position( findOpenItemSpawnPosition() );
-			addChildAt( item, afterTileGrid );
-			++numTorches;
-		}
+		ensureAtLeast< Mine >( minMines, "MineConfigured" );
+		ensureAtLeast< Torch >( minTorches, "TorchConfigured" );
+		ensureAtLeast< Turret >( minTurrets, "TurretConfigured" );
 	}
 	
 	FRESH_DEFINE_CALLBACK( ldWorld, onTimeForPreparationWarning, fr::Event )

@@ -63,7 +63,7 @@ namespace ld
 			
 			if( nearestMonsterDistanceSquared < m_explodeRadius * m_explodeRadius )
 			{
-				explode();
+				startFuse();
 			}
 			else if( nearestMonsterDistanceSquared < m_dangerRadius * m_dangerRadius )
 			{
@@ -82,9 +82,19 @@ namespace ld
 		m_lightRadius = lerp( m_lightRadius, desiredRadius, 0.06f );
 		m_lightColor = colorLerp( m_lightColor, desiredColor, 0.06f );
 	}
+
+	void Mine::startFuse()
+	{
+		world().scheduleCallback( FRESH_CALLBACK( onTimeToExplode ), 2 );
+	}
 	
 	void Mine::explode()
 	{
+		if( !alive() || !doUpdate() )
+		{
+			return;
+		}
+		
 		// Deal damage.
 		//
 		world().dealExplosionDamage( dangerArea(), position(), m_maxDamage, [&]( ldActor& actor )
@@ -113,6 +123,11 @@ namespace ld
 		}
 		
 		die();
+	}
+	
+	FRESH_DEFINE_CALLBACK( Mine, onTimeToExplode, fr::Event )
+	{
+		explode();
 	}
 }
 

@@ -33,8 +33,8 @@ namespace ld
 	bool Item::doesBlock( const Creature& creature ) const
 	{
 		return m_placed &&
-			(( creature.isHuman() && m_blocksHumans ) ||
-			 ( creature.isMonster() && m_blocksMonsters ));
+			(( creature.isHuman() && blocksHumans() ) ||
+			 ( creature.isMonster() && blocksMonsters() ));
 	}
 	
 	void Item::onAddedToStage()

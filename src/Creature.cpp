@@ -404,7 +404,7 @@ namespace ld
 		if( auto item = world().itemInTile( snapToGrid( position() + dir * WORLD_PER_TILE )))
 		{
 			ASSERT( item->alive() );
-			item->receiveDamage( m_grindDamage * stage().secondsPerFrame() );
+			item->receiveDamage( grindDamage() * stage().secondsPerFrame() );
 		}
 	}
 
@@ -469,6 +469,11 @@ namespace ld
 			ASSERT( m_thoughtSpeedHz > 0 );
 			world().scheduleCallback( FRESH_CALLBACK( onTimeToThink ), 1.0 / m_thoughtSpeedHz );
 		}
+	}
+	
+	real Creature::grindDamage() const
+	{
+		return m_grindDamage;
 	}
 }
 

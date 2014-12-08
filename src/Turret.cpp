@@ -23,7 +23,7 @@ namespace ld
 	vec2 Turret::bePickedUpBy( Creature& other )
 	{
 		Super::bePickedUpBy( other );
-
+		
 		m_facingDirection = other.facingDirection();
 		rotation( m_facingDirection.angle() );
 		
@@ -54,54 +54,58 @@ namespace ld
 
 		if( !isPickedUp() )
 		{
-			// Shoot automatically.
-			//
-			const real range = 6;
-			real closestDistSquared = Infinity;
-			ldActor::ptr target;
-			
-			world().touchingActors( rect{ position() - WORLD_PER_TILE * range, position() + WORLD_PER_TILE * range }, [&]( ldActor& actor )
-								   {
-									   // Relevant for my missile collision?
-									   //
-									   bool relevant = actor.isMonster() && actor.alive();
-									   
-									   if( !relevant )
-									   {
-										   if( auto item = actor.as< Item >() )
-										   {
-											   if( item->m_blocksMonsters && item->placed() )
-											   {
-												   relevant = true;
-											   }
-										   }
-									   }
-									   
-									   if( relevant )
-									   {
-										   // In line with my shot?
-										   //
-										   const auto delta = actor.position() - position();
-										   if( m_facingDirection.dot( delta.normal() ) > 0.99f )
-										   {
-											   const auto distSquared = delta.lengthSquared();
-											   
-											   if( distSquared < closestDistSquared )
-											   {
-												   closestDistSquared = distSquared;
-												   target = &actor;
-											   }
-										   }
-									   }
-								   } );
-			
-			if( target && target->isMonster() )
+			if( !m_facingDirection.isZero() )
 			{
-				shoot();
+				// Shoot automatically.
+				//
+				const real range = 6;
+				real closestDistSquared = Infinity;
+				ldActor::ptr target;
+				
+				world().touchingActors( rect{ position() - WORLD_PER_TILE * range, position() + WORLD_PER_TILE * range }, [&]( ldActor& actor )
+									   {
+										   // Relevant for my missile collision?
+										   //
+										   bool relevant = actor.isMonster() && actor.alive();
+										   
+										   if( !relevant )
+										   {
+											   if( auto item = actor.as< Item >() )
+											   {
+												   if( item->blocksMonsters() && item->placed() )
+												   {
+													   relevant = true;
+												   }
+											   }
+										   }
+										   
+										   if( relevant )
+										   {
+											   // In line with my shot?
+											   //
+											   const auto delta = actor.position() - position();
+											   if( m_facingDirection.dot( delta.normal() ) > 0.99f )
+											   {
+												   const auto distSquared = delta.lengthSquared();
+												   
+												   if( distSquared < closestDistSquared )
+												   {
+													   closestDistSquared = distSquared;
+													   target = &actor;
+												   }
+											   }
+										   }
+									   } );
+				
+				if( target && target->isMonster() )
+				{
+					shoot();
+				}
 			}
 		}
 		else
 		{
+			ASSERT( m_holder );
 			m_facingDirection = m_holder->facingDirection();
 			rotation( m_facingDirection.angle() );
 		}
@@ -109,7 +113,7 @@ namespace ld
 	
 	void Turret::shoot()
 	{
-		if( world().time() > m_nextEarliestShootTime )
+		if( !m_facingDirection.isZero() && world().time() > m_nextEarliestShootTime )
 		{
 			auto missile = createObject< Missile >( *getClass( "TurretArrow" ));
 			ASSERT( missile );

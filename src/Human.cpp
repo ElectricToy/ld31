@@ -9,6 +9,8 @@
 #include "Human.h"
 #include "AppStage.h"
 #include "HUD.h"
+#include "ldWorld.h"
+#include "ldTile.h"
 using namespace fr;
 
 namespace ld
@@ -59,11 +61,26 @@ namespace ld
 	real Human::currentStepSpeed() const
 	{
 		// Non-player humans are slower at home.
-		return ( !isPlayer() && HOME_INNER_BOUNDS.doesEnclose( position() ) )
-			? 1.0f
-			: Super::currentStepSpeed();
+		//
+		if( isPlayer() )
+		{
+			return Super::currentStepSpeed();
+		}
+		else if( HOME_INNER_BOUNDS.doesEnclose( position() ))
+		{
+			return 1.0f;
+		}
+		else
+		{
+			return 3.0f;
+		}
 	}
 
+	real Human::grindDamage() const
+	{
+		return isPlayer() ? Super::grindDamage() : 0;
+	}
+	
 	void Human::updateAI()
 	{
 		if( alive() && !isPlayer() && !isPickedUp() )
@@ -85,7 +102,14 @@ namespace ld
 				// Go to a random location at home.
 				//
 				auto destination = randInRange( HOME_INNER_BOUNDS.ulCorner(), HOME_INNER_BOUNDS.brCorner() );
-				travelTo( destination );
+				if( !world().tileAt( destination ).isSolid() )
+				{
+					auto item = world().itemInTile( destination );
+					if( !item || !item->blocksHumans())
+					{
+						travelTo( destination );
+					}
+				}
 			}
 		}
 	}
@@ -99,5 +123,26 @@ namespace ld
 		
 		Super::die();
 	}
+	
+	vec2 Human::bePickedUpBy( Creature& other )
+	{
+		if( hasStage() )
+		{
+			stage().as< AppStage >()->hud().showMessage( createString( friendlyName() << " has been captured." ), "MonsterMessagePopup" );
+		}
+		
+		return Super::bePickedUpBy( other );
+	}
+	
+	void Human::beDroppedBy( Creature& other )
+	{
+		if( hasStage() && alive() )
+		{
+			stage().as< AppStage >()->hud().showMessage( createString( friendlyName() << " has been rescued." ), "MonsterMessagePopup" );
+		}
+		
+		Super::beDroppedBy( other );
+	}
+
 }
 

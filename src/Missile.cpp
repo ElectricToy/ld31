@@ -35,7 +35,7 @@ namespace ld
 		}
 		else if( auto item = other.as< Item >() )
 		{
-			if( item->m_blocksMonsters && item->placed() )
+			if( item->placed() && item->blocksMonsters() )
 			{
 				other.receiveDamage( 1.0f );
 				die();

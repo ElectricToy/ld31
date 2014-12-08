@@ -11,8 +11,15 @@ Toughness (amount of damage required to kill)
 
 # Tasks
 
+Countdown to first wave.
+
+Monsters should disappear after a while.
+
+XXX Announcement for family member taken, rescued.
+
 Fix computeStageDimensions. Will need fairly drastic fix, I think.
 
+XXX Turrets shouldn't fire until placed at least once. Their weird initial angle communicates it pretty well.
 
 XXX Get rid of bodies (darken them)
 XXX Too easy - reduce missile/weapon count - tighter waves
@@ -49,7 +56,6 @@ BUG
     Ordering of objects is all wacky.
         Held object should sit on top of holder.
 Bonus
-    Auto-firing turret
     Mine waits before exploding
     Pause
     Explosive Barrel
@@ -57,10 +63,12 @@ Bonus
     Flash anything that receives damage
     Inventory Display
     Flash human when it becomes player
+    Newly placed items should block light (update static blockers in TileGrid in that area).
+
 
 DONE
 
-
+XXX    Auto-firing turret
 XXX Human lights flicker when they're being moved.
 XXX Human lights still glow in exit after departure
 XXX Remove or reduce human non-player lights.

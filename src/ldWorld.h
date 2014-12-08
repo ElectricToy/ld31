@@ -120,15 +120,34 @@ namespace ld
 		
 		void pickActiveHuman();
 		
-		void provideEssentials( size_t minMines, size_t minTorches );
+		void provideEssentials( size_t minMines, size_t minTorches, size_t minTurrets );
+		
+		template< typename ItemT >
+		void ensureAtLeast( size_t desired, fr::ClassNameRef className )
+		{
+			const auto& myTileGrid = tileGrid();
+			const size_t afterTileGrid = getChildIndex( &myTileGrid ) + 1;
+			
+			size_t current = countActors< ItemT >();
+			
+			while( current < desired )
+			{
+				auto item = fr::createObject< ItemT >( *getClass( className ));
+				item->position( findOpenItemSpawnPosition() );
+				addChildAt( item, afterTileGrid );
+				++current;
+			}
+		}
+		
 
 	private:
 		
 		VAR( ClassInfo::cptr, m_playerControllerClass );
 		DVAR( int, m_lastActiveUpdate, 0 );
 		DVAR( bool, m_playerHasMoved, false );
-		DVAR( size_t, m_minInitialTorches, 3 );
-		DVAR( size_t, m_minInitialMines, 3 );
+		DVAR( size_t, m_minInitialTorches, 4 );
+		DVAR( size_t, m_minInitialTurrets, 1 );
+		DVAR( size_t, m_minInitialMines, 2 );
 		DVAR( int, m_nextSpawnTime, -1 );
 		
 		size_t m_lastSpawnPhase = -1;

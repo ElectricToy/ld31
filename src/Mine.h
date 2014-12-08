@@ -22,6 +22,7 @@ namespace ld
 		
 		virtual void update() override;
 		
+		virtual void startFuse();
 		virtual void explode();
 		
 		rect dangerArea() const;
@@ -32,7 +33,8 @@ namespace ld
 		DVAR( real, m_explodeRadius, 32 );
 		DVAR( real, m_maxDamage, 16 * 16 * 8 );
 		DVAR( bool, m_harmsHumans, true );
-		
+
+		FRESH_DECLARE_CALLBACK( Mine, onTimeToExplode, fr::Event )
 	};
 	
 }

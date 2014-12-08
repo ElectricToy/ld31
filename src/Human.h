@@ -32,8 +32,13 @@ namespace ld
 		
 		virtual void die() override;
 		
+		virtual vec2 bePickedUpBy( Creature& other ) override;
+		virtual void beDroppedBy( Creature& other ) override;
+
 	protected:
-		
+
+		virtual real grindDamage() const override;
+
 		virtual void updateAI() override;
 		virtual real currentStepSpeed() const override;
 	

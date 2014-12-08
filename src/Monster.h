@@ -41,7 +41,7 @@ namespace ld
 		VAR( ldActor::wptr, m_pursueee );
 		VAR( fr::Vector2i, m_exitDestination );
 		VAR( ClassWeights, m_dropItemWeights );
-		DVAR( Range< size_t >, m_numDropItemsRange, Range< size_t >( 1, 3 ));
+		DVAR( Range< size_t >, m_numDropItemsRange, Range< size_t >( 0, 2 ));
 	};
 	
 }

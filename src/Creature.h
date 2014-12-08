@@ -62,6 +62,8 @@ namespace ld
 		
 	protected:
 		
+		virtual real grindDamage() const;
+		
 		virtual ldActor::ptr pickupableTouchingActor() const;
 		
 		virtual real currentStepSpeed() const;
