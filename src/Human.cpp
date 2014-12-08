@@ -16,9 +16,14 @@ using namespace fr;
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( Human )
-	
+	DEFINE_DVAR( Human, int, m_controlPriority );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Human )
 
+	int Human::desiredDepth() const
+	{
+		return Super::desiredDepth() + ( isPlayer() ? 10 : 0 );
+	}
+	
 	real Human::lightWobble() const
 	{
 		if( !isPlayer() )

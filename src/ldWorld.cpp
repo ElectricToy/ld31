@@ -36,6 +36,10 @@ namespace
 	const int INITIAL_SETUP_TIME_SECONDS = 100;
 	const int SECONDS_PER_PHASE = 120;
 	
+	const TimeType SECONDS_PER_COUNT = 2.5;
+	const int NUM_COUNTS = 5;
+	const TimeType COUNTDOWN_INITIAL_DELAY = 4;
+	
 	const std::vector< std::pair< int, int >> PHASE_SPAWN_DELAY_RANGE =
 	{
 		{ 60, 10 },		// seconds, delta
@@ -56,6 +60,7 @@ namespace ld
 	DEFINE_DVAR( ldWorld, size_t, m_minInitialTurrets );
 	DEFINE_DVAR( ldWorld, size_t, m_minInitialMines );
 	DEFINE_DVAR( ldWorld, int, m_nextSpawnTime );
+	DEFINE_DVAR( ldWorld, int, m_countdown );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTOR_INERT( ldWorld )
 	
 	FRESH_CUSTOM_STANDARD_CONSTRUCTOR_NAMING( ldWorld )
@@ -205,6 +210,8 @@ namespace ld
 		}
 		
 		scheduleCallback( FRESH_CALLBACK( onTimeForPreparationWarning ), 20 );
+
+		scheduleCallback( FRESH_CALLBACK( onTimeForCountdown ), INITIAL_SETUP_TIME_SECONDS - ( SECONDS_PER_COUNT * NUM_COUNTS + COUNTDOWN_INITIAL_DELAY ));
 
 		provideEssentials( m_minInitialMines, m_minInitialTorches, m_minInitialTurrets );
 	}
@@ -399,6 +406,8 @@ namespace ld
 		{
 			Human::ptr currentPlayer = player();
 			
+			const bool hadPlayer = currentPlayer != nullptr;
+			
 			if( currentPlayer )
 			{
 				if( !currentPlayer->alive() || currentPlayer->isPickedUp() )
@@ -422,7 +431,10 @@ namespace ld
 									  {
 										  if( human.alive() && !human.isPickedUp() )
 										  {
-											  currentPlayer = &human;
+											  if( !currentPlayer || human.controlPriority() > currentPlayer->controlPriority() )
+											  {
+												  currentPlayer = &human;
+											  }
 										  }
 									  } );
 				
@@ -431,6 +443,13 @@ namespace ld
 					currentPlayer->controller( createObject< PlayerController >( *m_playerControllerClass ));
 					ASSERT( currentPlayer->isPlayer() );
 					ASSERT( player() == currentPlayer );
+					
+					// We only do this on later characters because otherwise it's too noisy at the beginning.
+					//
+					if( hadPlayer )
+					{
+						stage().as< AppStage >()->hud().showMessage( createString( "You are " << currentPlayer->friendlyName() << "." ), "NewHumanMessagePopup" );
+					}
 				}
 			}
 		}
@@ -572,6 +591,26 @@ namespace ld
 	FRESH_DEFINE_CALLBACK( ldWorld, onTimeForPreparationWarning, fr::Event )
 	{
 		stage().as< AppStage >()->hud().showMessage( "Monsters will come.\nPrepare your defenses.", "PreparationWarning" );
+	}
+
+	FRESH_DEFINE_CALLBACK( ldWorld, onTimeForCountdown, fr::Event )
+	{
+		stage().as< AppStage >()->hud().showMessage( "Get Ready!", "PreparationWarning" );
+		
+		scheduleCallback( FRESH_CALLBACK( onTimeToShowCount ), COUNTDOWN_INITIAL_DELAY );
+	}
+	
+	FRESH_DEFINE_CALLBACK( ldWorld, onTimeToShowCount, fr::Event )
+	{
+		const int count = NUM_COUNTS - m_countdown;
+		
+		stage().as< AppStage >()->hud().showMessage( createString( count << "..." ), "PreparationWarning" );
+		
+		++m_countdown;
+		if( m_countdown < NUM_COUNTS )
+		{
+			scheduleCallback( FRESH_CALLBACK( onTimeToShowCount ), SECONDS_PER_COUNT );
+		}
 	}
 
 }

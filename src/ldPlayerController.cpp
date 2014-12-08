@@ -20,15 +20,7 @@ namespace ld
 
 	void ldPlayerController::possess( Actor& host_ )
 	{
-		Super::possess( host_ );
-		
-		if( const auto myHost = host()->as< Human >() )
-		{
-			if( myHost->hasStage() )
-			{
-				myHost->stage().as< AppStage >()->hud().showMessage( createString( "You are " << myHost->friendlyName() << "." ), "NewHumanMessagePopup" );
-			}
-		}
+		Super::possess( host_ );		
 	}
 	
 	void ldPlayerController::update()

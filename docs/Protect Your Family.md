@@ -13,11 +13,9 @@ Toughness (amount of damage required to kill)
 
 Make nice map area more useful -- good for treasure, e.g.
 
-Countdown to first wave.
-
 Fix computeStageDimensions. Will need fairly drastic fix, I think.
 
-More monsters
+More monster types
 
 Art
     Monsters
@@ -37,27 +35,26 @@ SFX
     Place things
     Thing destroyed by grinding
     Monster grunts when changing destination significantly
+    New wave
+    Countdown
 
 Music
 
-Emscripten bugfixing (lighting), deployment
-
-BUG
-    Ordering of objects is all wacky.
-        Held object should sit on top of holder.
 Bonus
-    Mine waits before exploding
-    Pause
+    Pause button/options/restart
+    Difficulty selection
     Explosive Barrel
     Clock font monospace to avoid shifting
-    Flash anything that receives damage
-    Inventory Display
     Flash human when it becomes player
     Newly placed items should block light (update static blockers in TileGrid in that area).
+    Inventory Display
 
 
 DONE
 
+XXX Countdown to first wave.
+XXX    Mine waits before exploding
+XXX Emscripten bugfixing (lighting), deployment
 XXX    Auto-firing turret
 XXX Human lights flicker when they're being moved.
 XXX Human lights still glow in exit after departure

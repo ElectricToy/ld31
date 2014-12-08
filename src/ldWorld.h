@@ -150,11 +150,15 @@ namespace ld
 		DVAR( size_t, m_minInitialTurrets, 1 );
 		DVAR( size_t, m_minInitialMines, 2 );
 		DVAR( int, m_nextSpawnTime, -1 );
-		
+
+		DVAR( int, m_countdown, 0 );
+
 		size_t m_lastSpawnPhase = -1;
 		
 		FRESH_DECLARE_CALLBACK( ldWorld, onTimeToProvide, fr::Event )
 		FRESH_DECLARE_CALLBACK( ldWorld, onTimeForPreparationWarning, fr::Event )
+		FRESH_DECLARE_CALLBACK( ldWorld, onTimeForCountdown, fr::Event )
+		FRESH_DECLARE_CALLBACK( ldWorld, onTimeToShowCount, fr::Event )
 		
 	};
 	

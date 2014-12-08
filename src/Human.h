@@ -19,6 +19,11 @@ namespace ld
 	{
 		FRESH_DECLARE_CLASS( Human, Creature );
 	public:
+
+		SYNTHESIZE_GET( int, controlPriority );
+		
+		virtual int desiredDepth() const override;
+
 		
 		virtual real lightWobble() const override;
 		virtual real normalLightRadius() const override;
@@ -43,6 +48,8 @@ namespace ld
 		virtual real currentStepSpeed() const override;
 	
 	private:
+		
+		DVAR( int, m_controlPriority, 0 );
 		
 	};
 	

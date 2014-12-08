@@ -276,23 +276,26 @@
 			</object>
 			
 			<object class="HumanDefault" name="$^_kid3">
+				<controlPriority>0</controlPriority>
 				<friendlyName>Alice</friendlyName>
 				<texture>Texture'kid3'</texture>
 				<position>520,360</position>
 				
-				<stepSpeed>11</stepSpeed>
+				<stepSpeed>10</stepSpeed>
 				<grindDamage>4</grindDamage>
 			</object>
 			
 			<object class="HumanDefault" name="$^_kid2">
+				<controlPriority>1</controlPriority>
 				<friendlyName>Buddy</friendlyName>
 				<texture>Texture'kid2'</texture>
 				<position>488,360</position>
 				
-				<stepSpeed>10</stepSpeed>
+				<stepSpeed>6</stepSpeed>
 				<grindDamage>10</grindDamage>
 			</object>
 			<object class="HumanDefault" name="$^_kid1">
+				<controlPriority>2</controlPriority>
 				<friendlyName>Myra</friendlyName>
 				<texture>Texture'kid1'</texture>
 				<position>456,360</position>
@@ -302,6 +305,7 @@
 			</object>
 			
 			<object class="HumanDefault" name="$^_mom">
+				<controlPriority>3</controlPriority>
 				<friendlyName>Claire</friendlyName>
 				<texture>Texture'mom'</texture>
 				<position>424,360</position>
@@ -311,10 +315,10 @@
 			</object>
 			
 			<object class="HumanDefault" name="$^_dad">
+				<controlPriority>4</controlPriority>
 				<friendlyName>John</friendlyName>
 				<texture>Texture'dad'</texture>
 				<position>448,320</position>
-				
 				
 				<stepSpeed>6</stepSpeed>
 				<grindDamage>8</grindDamage>

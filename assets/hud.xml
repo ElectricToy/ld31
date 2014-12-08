@@ -87,8 +87,8 @@
 
 	<class name="NewWaveMessagePopup" extends="MonsterMessagePopup">
 		<defaultShowDuration>4</defaultShowDuration>
-		<hiddenTranslation>0,100</hiddenTranslation>
-		<position>0,-32</position>
+		<hiddenTranslation>0,120</hiddenTranslation>
+		<position>0,-80</position>
 		<color>ff9106d9</color>
 		<children>
 			<object class="MovieClip" name="$^_pulsar">
@@ -205,22 +205,39 @@
 						<position>0,-100</position>
 						<scale>0.25</scale>
 						<children>
-							<object class="Sprite">
-								<texture>Texture'ui_hint_movement'</texture>
+							<object class="MovieClip" name="$^_pulsar">
+								<children>
+									<object class="Sprite">
+										<texture>Texture'ui_hint_movement'</texture>
+									</object>
+								</children>
+								
+								<passthrough>
+									<keyframe>
+										<child name="$1"><color>Yellow</color></child>
+										<tween type="SinEaseIn" />
+									</keyframe>
+									<keyframe rel-s="2">
+										<child name="$1"><color>Red</color></child>
+										<tween type="SinEaseOut" />
+									</keyframe>
+									<keyframe rel-s="2">
+										<child name="$1"><color>Yellow</color></child>
+									</keyframe>
+								</passthrough>
 							</object>
 						</children>
 						
+						<isLooping>false</isLooping>
 						<passthrough>
 							<keyframe>
-								<child name="$1"><color>Yellow</color></child>
-								<tween type="SinEaseIn" />
 							</keyframe>
-							<keyframe rel-s="2">
-								<child name="$1"><color>Red</color></child>
-								<tween type="SinEaseOut" />
+							<keyframe rel-s="4.5">
+								<child name="$1"><color>Invisible</color></child>
+								<tween type="QuadEaseOut" />
 							</keyframe>
-							<keyframe rel-s="2">
-								<child name="$1"><color>Yellow</color></child>
+							<keyframe rel-s="6">
+								<child name="$1"></child>
 							</keyframe>
 						</passthrough>
 					</object>

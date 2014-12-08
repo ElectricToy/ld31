@@ -329,6 +329,18 @@ namespace ld
 		ASSERT( dir.x == 0 || dir.y == 0 );
 		ASSERT( dir.lengthSquared() == 1 );
 		
+		// Flip to face step direction.
+		//
+		if( dir.x > 0 )
+		{
+			scale( 1 );		// TODO!!! presumes that nothing else is monkeying with scale.
+		}
+		else
+		{
+			scale( -1, 1 );
+		}
+		recordPreviousState();
+		
 		// Refuse if there's a wall there.
 		//
 		if( canStep( dir ))
