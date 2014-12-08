@@ -8,6 +8,8 @@
 
 #include "Turret.h"
 #include "Creature.h"
+#include "Missile.h"
+#include "ldWorld.h"
 using namespace fr;
 
 namespace ld
@@ -64,8 +66,10 @@ namespace ld
 	
 	void Turret::shoot()
 	{
-		auto missile = createObject< ldActor >( *getClass( "TurretArrow" ));
-		missile->applyImpulse( m_facingDirection * 10 );
+		auto missile = createObject< Missile >( *getClass( "TurretArrow" ));
+		ASSERT( missile );
+		missile->position( position() );
+		missile->facingDirection( m_facingDirection );
 		
 		world().addChild( missile );
 		

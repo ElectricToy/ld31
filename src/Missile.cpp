@@ -7,22 +7,29 @@
 //
 
 #include "Missile.h"
+#include "Item.h"
 using namespace fr;
 
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( Missile )
-	
+	DEFINE_DVAR( Missile, vec2, m_facingDirection );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Missile )
 
 	void Missile::onTouched( ldActor& other )
 	{
-		Super::onTouched( other );
-		
 		if( other.isMonster() )
 		{
 			other.receiveDamage( 1.0f );
 			die();
+		}
+		else if( auto item = other.as< Item >() )
+		{
+			if( item->m_blocksMonsters )
+			{
+				other.receiveDamage( 1.0f );
+				die();
+			}
 		}
 	}
 	
@@ -30,9 +37,13 @@ namespace ld
 	{
 		Super::update();
 		
+		rotation( m_facingDirection.angle() );
+		position( position() + m_facingDirection * 4 );
+		
 		if( nUpdates() > 40 )
 		{
 			die();
+			markForDeletion();
 		}
 	}
 	

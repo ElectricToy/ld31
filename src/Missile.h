@@ -20,11 +20,15 @@ namespace ld
 		FRESH_DECLARE_CLASS( Missile, ldActor );
 	public:
 		
+		SYNTHESIZE( vec2, facingDirection )
+		
 		virtual void onTouched( ldActor& other ) override;
 		
 		virtual void update() override;
 		
 	private:
+		
+		DVAR( vec2, m_facingDirection, vec2( 1, 0 ));
 		
 	};
 	

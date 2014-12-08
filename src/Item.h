@@ -19,6 +19,10 @@ namespace ld
 	{
 		FRESH_DECLARE_CLASS( Item, ldActor );
 	public:
+
+		// TODO privatize
+		DVAR( bool, m_blocksHumans, false );
+		DVAR( bool, m_blocksMonsters, false );
 		
 		SYNTHESIZE_GET( bool, placed );
 		
@@ -51,8 +55,6 @@ namespace ld
 		
 		DVAR( bool, m_placed, false );
 		DVAR( real, m_navDistanceScalar, 1.0f );
-		DVAR( bool, m_blocksHumans, false );
-		DVAR( bool, m_blocksMonsters, false );
 		VAR( fr::DisplayObjectContainer::ptr, m_cracksHost );
 		DVAR( bool, m_mayBePlaced, true );
 		
