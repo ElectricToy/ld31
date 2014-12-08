@@ -57,13 +57,41 @@ namespace ld
 			// Shoot automatically.
 			//
 			const real range = 6;
-			
+			real closestDistSquared = Infinity;
 			ldActor::ptr target;
+			
 			world().touchingActors( rect{ position() - WORLD_PER_TILE * range, position() + WORLD_PER_TILE * range }, [&]( ldActor& actor )
 								   {
-									   if( actor.alive() && actor.isMonster() )
+									   // Relevant for my missile collision?
+									   //
+									   bool relevant = actor.isMonster() && actor.alive();
+									   
+									   if( !relevant )
 									   {
-										   target = &actor;
+										   if( auto item = actor.as< Item >() )
+										   {
+											   if( item->m_blocksMonsters && item->placed() )
+											   {
+												   relevant = true;
+											   }
+										   }
+									   }
+									   
+									   if( relevant )
+									   {
+										   // In line with my shot?
+										   //
+										   const auto delta = actor.position() - position();
+										   if( m_facingDirection.dot( delta ) > 0.99f )
+										   {
+											   const auto distSquared = delta.lengthSquared();
+											   
+											   if( distSquared < closestDistSquared )
+											   {
+												   closestDistSquared = distSquared;
+												   target = &actor;
+											   }
+										   }
 									   }
 								   } );
 			

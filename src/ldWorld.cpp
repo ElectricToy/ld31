@@ -23,14 +23,14 @@ namespace
 {
 	using namespace ld;
 	
-	const int INITIAL_SETUP_TIME_SECONDS = 5;//100;
+	const int INITIAL_SETUP_TIME_SECONDS = 100;
 	const int SECONDS_PER_PHASE = 240;
 	
 	const std::vector< std::pair< int, int >> PHASE_SPAWN_DELAY_RANGE =
 	{
-		{ 20, 20 },		// seconds, delta
-		{ 75, 20 },
-		{ 60, 20 },
+		{ 60, 20 },		// seconds, delta
+		{ 50, 20 },
+		{ 40, 20 },
 		{ 30, 20 },
 		{ 15, 20 },
 	};
