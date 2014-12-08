@@ -25,7 +25,10 @@ namespace ld
 		virtual void onTouched( ldActor& other ) override;
 		
 		virtual void update() override;
-		
+		virtual void onLanded( const vec2& hitNormal ) override;
+		virtual void onBumpedWall( const vec2& hitNormal ) override;
+
+		virtual void die() override;
 	private:
 		
 		DVAR( vec2, m_facingDirection, vec2( 1, 0 ));

@@ -16,6 +16,16 @@ namespace ld
 	DEFINE_DVAR( Missile, vec2, m_facingDirection );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Missile )
 
+	void Missile::onLanded( const vec2& hitNormal )
+	{
+		onBumpedWall( hitNormal );
+	}
+	
+	void Missile::onBumpedWall( const vec2& hitNormal )
+	{
+		die();
+	}
+	
 	void Missile::onTouched( ldActor& other )
 	{
 		if( other.isMonster() )
@@ -25,7 +35,7 @@ namespace ld
 		}
 		else if( auto item = other.as< Item >() )
 		{
-			if( item->m_blocksMonsters )
+			if( item->m_blocksMonsters && item->placed() )
 			{
 				other.receiveDamage( 1.0f );
 				die();
@@ -43,9 +53,14 @@ namespace ld
 		if( nUpdates() > 40 )
 		{
 			die();
-			markForDeletion();
 		}
 	}
-	
+
+	void Missile::die()
+	{
+		Super::die();
+		
+		markForDeletion();
+	}
 }
 

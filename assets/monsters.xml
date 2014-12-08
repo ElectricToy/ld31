@@ -5,8 +5,6 @@
 <objects>
 	
 	<class name="MonsterDefault" extends="Monster">
-		<stepSpeed>1</stepSpeed>
-		<grindDamage>1</grindDamage>
 		<dimensions>15</dimensions>
 		
 		<texture>Texture'troll'</texture>
