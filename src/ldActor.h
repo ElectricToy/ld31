@@ -30,6 +30,7 @@ namespace ld
 		SYNTHESIZE_GET( real, maxHealth );
 		SYNTHESIZE_GET( bool, suppressesHolderLight );
 		SYNTHESIZE_GET( bool, dropsWhenUsed );
+		SYNTHESIZE_GET( bool, pushesHolderWhenUsed );
 		SYNTHESIZE_GET( std::string, friendlyName );
 		
 		
@@ -87,6 +88,7 @@ namespace ld
 		
 		DVAR( bool, m_suppressesHolderLight, false );
 		DVAR( bool, m_dropsWhenUsed, true );
+		DVAR( bool, m_pushesHolderWhenUsed, false );
 		
 		VAR( WeakPtr< Creature >, m_holder );
 

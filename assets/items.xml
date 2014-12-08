@@ -56,6 +56,7 @@
 	<class name="BlockBase" extends="Item">
 		<blocksHumans>true</blocksHumans>
 		<blocksMonsters>true</blocksMonsters>
+		<pushesHolderWhenUsed>true</pushesHolderWhenUsed>
 		<dieEmitterClass>ItemBreakParticles</dieEmitterClass>
 
 		<navDistanceScalar>30</navDistanceScalar>

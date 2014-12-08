@@ -11,12 +11,10 @@ Toughness (amount of damage required to kill)
 
 # Tasks
 
+Placement (blocks esp)
+
 Art
-    GO FOR HEAVIER OUTLINES
-    Player
-    Family
     Monsters
-    Tools
     Logo
 
 CHOOSE GAME NAME
@@ -27,7 +25,7 @@ HUD
 
 Monsters
     Variety -- at least fast+weak/slow+strong
-    
+
 Tools
     Turret
 
@@ -88,15 +86,12 @@ XXX Should kill active player.
 XXX Gridwise movement
 
 XXX Inventory/Object pickup/drop/usage
-
 XXX Initial setup
 XXX Initial tools
 XXX Family
-
-Humans
+XXX Humans
 XXX Should return home if released
 XXX If player dies, possess next available human
-
 XXX Doors
 XXX     Wood
 XXX     Iron
@@ -115,4 +110,7 @@ XXX Messages
 XXX Startup
 XXX Game over/Restart
 XXX Player can grind
+XXX    Player
+XXX    Family
+XXX    Tools
 

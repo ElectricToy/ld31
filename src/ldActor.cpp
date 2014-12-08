@@ -27,6 +27,7 @@ namespace ld
 	DEFINE_DVAR( ldActor, bool, m_alive );
 	DEFINE_DVAR( ldActor, bool, m_suppressesHolderLight );
 	DEFINE_DVAR( ldActor, bool, m_dropsWhenUsed );
+	DEFINE_DVAR( ldActor, bool, m_pushesHolderWhenUsed );
 	DEFINE_VAR( ldActor, WeakPtr< Creature >, m_holder );
 	DEFINE_VAR( ldActor, ClassInfo::cptr, m_lightClass );
 	DEFINE_DVAR( ldActor, real, m_lightWobble );

@@ -221,7 +221,7 @@ namespace ld
 		
 		m_wasGameOver = false;
 		
-		gotoAndPlay( "playing" );
+		gotoAndStop( "playing" );
 
 		populateMessages();
 		

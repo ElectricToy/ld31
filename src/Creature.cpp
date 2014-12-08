@@ -130,13 +130,16 @@ namespace ld
 	{
 		if( m_heldActor )
 		{
-			const vec2 proposedDestination = snapToGrid( position() + facingDirection() * WORLD_PER_TILE );
+			const vec2 proposedDestination = snapToGrid( position() );
 			
 			const auto& tile = world().tileAt( proposedDestination );
 			
 			if( !tile.isSolid() && ( !m_heldActor->isItem() || tile.mayReceiveItem() ))
 			{
-				return true;
+				const vec2& proposedDestinationForMe = snapToGrid( position() );
+				const auto& myTile = world().tileAt( proposedDestinationForMe );
+				
+				return !myTile.isSolid();
 			}
 		}
 		return false;
@@ -146,12 +149,15 @@ namespace ld
 	{
 		if( canDropHeldActor() )
 		{
-			const vec2 proposedDestination = snapToGrid( position() + facingDirection() * WORLD_PER_TILE );
+			const vec2 proposedDestination = snapToGrid( position() );
 			world().detach( *m_heldActor, *this );
 			m_heldActor->position( proposedDestination );
 			m_heldActor->recordPreviousState();
 			m_heldActor->beDroppedBy( *this );
 			m_heldActor = nullptr;
+			
+			const vec2& proposedDestinationForMe = snapToGrid( position() );
+			position( proposedDestinationForMe );
 		}
 	}
 	
@@ -161,7 +167,18 @@ namespace ld
 		{
 			if( m_heldActor->dropsWhenUsed() )
 			{
-				return canDropHeldActor();
+				const vec2 proposedDestination = snapToGrid( position() );
+				
+				const auto& tile = world().tileAt( proposedDestination );
+				
+				if( !tile.isSolid() && ( !m_heldActor->isItem() || tile.mayReceiveItem() ))
+				{
+					const vec2& proposedDestinationForMe = snapToGrid( position() - ( m_heldActor->pushesHolderWhenUsed() ? facingDirection() * WORLD_PER_TILE : vec2::ZERO ));
+					const auto& myTile = world().tileAt( proposedDestinationForMe );
+					
+					return !myTile.isSolid();
+				}
+				return false;
 			}
 			else
 			{
@@ -179,10 +196,13 @@ namespace ld
 			
 			if( dropsWhenUsed )
 			{
-				const vec2 proposedDestination = snapToGrid( position() + facingDirection() * WORLD_PER_TILE );
+				const vec2 proposedDestination = snapToGrid( position() );
 				world().detach( *m_heldActor, *this );
 				m_heldActor->position( proposedDestination );
 				m_heldActor->recordPreviousState();
+
+				const vec2& proposedDestinationForMe = snapToGrid( position() - ( m_heldActor->pushesHolderWhenUsed() ? facingDirection() * WORLD_PER_TILE : vec2::ZERO ));
+				position( proposedDestinationForMe );
 			}
 			
 			m_heldActor->beUsedBy( *this );
