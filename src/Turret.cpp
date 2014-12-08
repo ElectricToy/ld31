@@ -82,7 +82,7 @@ namespace ld
 										   // In line with my shot?
 										   //
 										   const auto delta = actor.position() - position();
-										   if( m_facingDirection.dot( delta ) > 0.99f )
+										   if( m_facingDirection.dot( delta.normal() ) > 0.99f )
 										   {
 											   const auto distSquared = delta.lengthSquared();
 											   

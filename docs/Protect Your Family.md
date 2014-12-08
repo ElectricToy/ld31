@@ -11,6 +11,9 @@ Toughness (amount of damage required to kill)
 
 # Tasks
 
+Fix computeStageDimensions. Will need fairly drastic fix, I think.
+
+
 XXX Get rid of bodies (darken them)
 XXX Too easy - reduce missile/weapon count - tighter waves
 XXX Bug: turrets bug when spent
