@@ -66,6 +66,7 @@ namespace ld
 		
 	protected:
 		
+		VAR( WeakPtr< Creature >, m_holder );
 		SYNTHESIZE_GET( fr::LightSource::ptr, lightSource );
 
 		DVAR( real, m_lightRadius, 0 );
@@ -90,7 +91,6 @@ namespace ld
 		DVAR( bool, m_dropsWhenUsed, true );
 		DVAR( bool, m_pushesHolderWhenUsed, false );
 		
-		VAR( WeakPtr< Creature >, m_holder );
 
 		VAR( ClassInfo::cptr, m_dieEmitterClass );
 		VAR( std::string, m_friendlyName );

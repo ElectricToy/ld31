@@ -25,10 +25,14 @@
 			{ BlockBrick, 3 },
 			{ BlockStone, 4 },
 			{ MineConfigured, 2 },
+			{ TurretConfigured, 3 },
 		]</dropItemWeights>
 	</class>
 
 	<class name="Troll" extends="MonsterDefault">
+		<stepSpeed>1</stepSpeed>
+		<grindDamage>1</grindDamage>
+		<health>1</health>
 	</class>
 
 

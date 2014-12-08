@@ -22,8 +22,16 @@ namespace ld
 		
 		virtual void update() override;
 		
+		virtual void shoot();
+		
+		virtual vec2 bePickedUpBy( Creature& other ) override;
+		virtual void beDroppedBy( Creature& other ) override;
+		virtual void beUsedBy( Creature& other ) override;
+
 	private:
 		
+		DVAR( size_t, m_ammo, 8 );
+		DVAR( vec2, m_facingDirection, vec2( 1, 0 ));
 	};
 	
 }

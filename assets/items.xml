@@ -113,10 +113,15 @@
 		<lightWobble>0</lightWobble>
 	</class>
 	
+	<class name="TurretArrow" extends="Missile">
+		<texture>Texture'missile'</texture>
+	</class>
+	
 	<class name="TurretConfigured" extends="Turret">
 		<texture>Texture'turret'</texture>
 		<blocksHumans>false</blocksHumans>
 		<blocksMonsters>false</blocksMonsters>
+		<dropsWhenUsed>false</dropsWhenUsed>
 
 		<dieEmitterClass>ItemBreakParticles</dieEmitterClass>
 	</class>

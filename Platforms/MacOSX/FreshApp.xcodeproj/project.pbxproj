@@ -35,6 +35,7 @@
 		1F8BF26718C674E3007C5E7F /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 1F8BF26618C674E3007C5E7F /* assets */; };
 		1F9137C41A34D1940029EA39 /* HUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F9137C21A34D1940029EA39 /* HUD.cpp */; };
 		1F9137CA1A3536490029EA39 /* Turret.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F9137C81A3536490029EA39 /* Turret.cpp */; };
+		1F9137CD1A3538020029EA39 /* Missile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F9137CB1A3538020029EA39 /* Missile.cpp */; };
 		1FB348F01A2D0D0300536EC8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1FB348EC1A2D0D0300536EC8 /* InfoPlist.strings */; };
 		1FB348F11A2D0D0300536EC8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FB348EE1A2D0D0300536EC8 /* MainMenu.xib */; };
 		1FE0FE61192EFADD00B86F2F /* libFreshCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE0FE45192EFA9700B86F2F /* libFreshCore.a */; };
@@ -187,6 +188,8 @@
 		1F9137C31A34D1940029EA39 /* HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUD.h; sourceTree = "<group>"; };
 		1F9137C81A3536490029EA39 /* Turret.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Turret.cpp; sourceTree = "<group>"; };
 		1F9137C91A3536490029EA39 /* Turret.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Turret.h; sourceTree = "<group>"; };
+		1F9137CB1A3538020029EA39 /* Missile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Missile.cpp; sourceTree = "<group>"; };
+		1F9137CC1A3538020029EA39 /* Missile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Missile.h; sourceTree = "<group>"; };
 		1FB348ED1A2D0D0300536EC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = FreshApp/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		1FB348EF1A2D0D0300536EC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = FreshApp/en.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
 		1FE0FE3B192EFA9700B86F2F /* Fresh.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Fresh.xcodeproj; path = ../../../Fresh/Platforms/MacOSX/Fresh.xcodeproj; sourceTree = "<group>"; };
@@ -312,6 +315,8 @@
 				1F4821C41A3405E5006E4360 /* Torch.h */,
 				1F9137C81A3536490029EA39 /* Turret.cpp */,
 				1F9137C91A3536490029EA39 /* Turret.h */,
+				1F9137CB1A3538020029EA39 /* Missile.cpp */,
+				1F9137CC1A3538020029EA39 /* Missile.h */,
 			);
 			name = src;
 			path = ../../src;
@@ -490,6 +495,7 @@
 				1F9137C41A34D1940029EA39 /* HUD.cpp in Sources */,
 				1F4821CD1A342586006E4360 /* Mine.cpp in Sources */,
 				1F4821CA1A340844006E4360 /* ldTileTemplate.cpp in Sources */,
+				1F9137CD1A3538020029EA39 /* Missile.cpp in Sources */,
 				1F4821C51A3405E5006E4360 /* Torch.cpp in Sources */,
 				1F8BF06618C67355007C5E7F /* main.cpp in Sources */,
 				1F4821AC1A3389FF006E4360 /* Inventory.cpp in Sources */,

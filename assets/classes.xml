@@ -202,6 +202,7 @@
 			{ BlockBrick, 4 },
 			{ BlockStone, 2 },
 			{ MineConfigured, 1 },
+			{ TurretConfigured, 2 },
 			]</itemClassWeights>
 	</class>
 
@@ -235,6 +236,7 @@
 					{ BlockBrick, 3 },
 					{ BlockStone, 1 },
 					{ MineConfigured, 1 },
+					{ TurretConfigured, 2 },
 					]</itemClassWeights>
 			</object>
 			<object class="FloorTileTemplate" name="floor_monster_spawn">
