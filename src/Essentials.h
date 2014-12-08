@@ -70,6 +70,8 @@ namespace ld
 	
 	const rect HOME_INNER_BOUNDS( vec2( 25, 18 ) * 16, vec2( 33, 24 ) * 16 );
 	
+	const Color DEAD_COLOR = 0xff404040;
+	
 	inline vec2 snapToGrid( const vec2& pos )
 	{
 		return vec2{
@@ -107,6 +109,7 @@ namespace ld
 		return randomClass(
 						   {
 							   { fr::getClass( "MineConfigured" ), 1 },
+							   { fr::getClass( "TurretConfigured" ), 2 },
 						   }
 		);
 		

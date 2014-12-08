@@ -452,7 +452,7 @@ namespace ld
 		
 		dropHeldActor();
 		
-		color( 0xff404040 );
+		color( DEAD_COLOR );
 		
 		Super::die();
 	}

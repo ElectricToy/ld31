@@ -42,6 +42,9 @@ namespace ld
 		VAR( fr::Vector2i, m_exitDestination );
 		VAR( ClassWeights, m_dropItemWeights );
 		DVAR( Range< size_t >, m_numDropItemsRange, Range< size_t >( 0, 2 ));
+		
+		FRESH_DECLARE_CALLBACK( Monster, onTimeToDisappear, fr::Event )
+
 	};
 	
 }

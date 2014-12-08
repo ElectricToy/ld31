@@ -105,8 +105,8 @@ namespace ld
 		}
 		else
 		{
-			ASSERT( m_holder );
-			m_facingDirection = m_holder->facingDirection();
+			ASSERT( holder() );
+			m_facingDirection = holder()->facingDirection();
 			rotation( m_facingDirection.angle() );
 		}
 	}

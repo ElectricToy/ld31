@@ -138,7 +138,8 @@ namespace ld
 				++current;
 			}
 		}
-		
+
+		void updateChildDepths();
 
 	private:
 		

@@ -5,6 +5,7 @@
 <objects>
 	
 	<class name="DoorBase" extends="Door">
+		<desiredDepth>-100</desiredDepth>
 		<isPlaying>false</isPlaying>
 		<blocksHumans>false</blocksHumans>
 		<blocksMonsters>true</blocksMonsters>
@@ -54,6 +55,7 @@
 	</class>
 
 	<class name="BlockBase" extends="Item">
+		<desiredDepth>-1000</desiredDepth>
 		<blocksHumans>true</blocksHumans>
 		<blocksMonsters>true</blocksMonsters>
 		<pushesHolderWhenUsed>true</pushesHolderWhenUsed>
@@ -86,6 +88,8 @@
 	</class>
 	
 	<class name="TorchConfigured" extends="Torch">
+		<desiredDepth>-50</desiredDepth>
+		
 		<blocksHumans>false</blocksHumans>
 		<blocksMonsters>false</blocksMonsters>
 		<mayBePlaced>false</mayBePlaced>
@@ -103,6 +107,7 @@
 	</class>
 	
 	<class name="MineConfigured" extends="Mine">
+		<desiredDepth>-75</desiredDepth>
 		<texture>Texture'mine'</texture>
 		<blocksHumans>false</blocksHumans>
 		<blocksMonsters>false</blocksMonsters>
@@ -114,12 +119,14 @@
 	</class>
 	
 	<class name="TurretArrow" extends="Missile">
+		<desiredDepth>1000</desiredDepth>
 		<texture>Texture'missile'</texture>
 		<dieEmitterClass>ItemBreakParticles</dieEmitterClass>
 		<dimensions>14,2</dimensions>
 	</class>
 	
 	<class name="TurretConfigured" extends="Turret">
+		<desiredDepth>-25</desiredDepth>
 		<texture>Texture'turret'</texture>
 		<blocksHumans>false</blocksHumans>
 		<blocksMonsters>false</blocksMonsters>

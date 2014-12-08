@@ -106,12 +106,12 @@ namespace ld
 		}
 		else
 		{
-			m_holder->dropHeldActor();
+			holder()->dropHeldActor();
 		}
 		
 		Super::die();
 		
-		markForDeletion();		// TODO!!!
+		markForDeletion();
 	}
 	
 	void Item::receiveDamage( real amount )

@@ -5,6 +5,7 @@
 <objects>
 	
 	<class name="MonsterDefault" extends="Monster">
+		<desiredDepth>100</desiredDepth>
 		<dimensions>15</dimensions>
 		
 		<texture>Texture'troll'</texture>
@@ -16,7 +17,7 @@
 		<jumpImpulseScale>0</jumpImpulseScale>
 
 		<dropItemWeights>[
-			{ TorchConfigured, 5 },
+			{ TorchConfigured, 4 },
 			{ DoorWood, 2 },
 			{ DoorIron, 1 },
 			{ BlockGravel, 3 },

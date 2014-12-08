@@ -32,6 +32,7 @@ namespace ld
 		SYNTHESIZE_GET( bool, dropsWhenUsed );
 		SYNTHESIZE_GET( bool, pushesHolderWhenUsed );
 		SYNTHESIZE_GET( std::string, friendlyName );
+		virtual int desiredDepth() const;
 		
 		
 		virtual real lightWobble() const;
@@ -66,7 +67,9 @@ namespace ld
 		
 	protected:
 		
-		VAR( WeakPtr< Creature >, m_holder );
+		SYNTHESIZE_GET( WeakPtr< Creature >, holder );
+		SYNTHESIZE_GET( TimeType, diedTime );
+
 		SYNTHESIZE_GET( fr::LightSource::ptr, lightSource );
 
 		DVAR( real, m_lightRadius, 0 );
@@ -90,10 +93,14 @@ namespace ld
 		DVAR( bool, m_suppressesHolderLight, false );
 		DVAR( bool, m_dropsWhenUsed, true );
 		DVAR( bool, m_pushesHolderWhenUsed, false );
-		
+
+		DVAR( int, m_desiredDepth, 0 );
 
 		VAR( ClassInfo::cptr, m_dieEmitterClass );
 		VAR( std::string, m_friendlyName );
+
+		DVAR( TimeType, m_diedTime, -1 );
+		VAR( WeakPtr< Creature >, m_holder );
 		
 		// Glow light.
 		//

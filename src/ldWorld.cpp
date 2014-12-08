@@ -268,6 +268,66 @@ namespace ld
 			
 			++m_lastActiveUpdate;
 		}
+		
+		updateChildDepths();
+	}
+	
+	void ldWorld::updateChildDepths()
+	{
+		// We have three kinds of children:
+		// 1. the tile grid, always child #0.
+		// 2. the lighting, always the top child.
+		// 3. ldActors, which go between, and are sorted by their desiredDepth().
+		// We use swapChildren to achieve ordering, since it avoids the callbacks associated with add/removeChild().
+		//
+		
+		ASSERT( numChildren() > 0 );
+		
+		TileGrid::ptr myTileGrid = &tileGrid();
+		Lighting::ptr myLighting = lighting();
+
+		sortChildren( [&]( DisplayObject::ptr a, DisplayObject::ptr b )
+					 {
+						 if( a == myTileGrid || b == myLighting )
+						 {
+							 return true;
+						 }
+						 else if( b == myTileGrid || a == myLighting )
+						 {
+							 return false;
+						 }
+						 else
+						 {
+							 auto actorA = a->as< ldActor >();
+							 auto actorB = b->as< ldActor >();
+							 
+							 if( !actorA && !actorB )
+							 {
+								 // We can't use their current depth. Just use the object address.
+								 //
+								 return a < b;
+							 }
+							 else if( !actorA )
+							 {
+								 return false;
+							 }
+							 else if( !actorB )
+							 {
+								 return true;
+							 }
+							 else
+							 {
+								 if( actorA->desiredDepth() == actorB->desiredDepth() )
+								 {
+									 return a < b;
+								 }
+								 else
+								 {
+									 return actorA->desiredDepth() < actorB->desiredDepth();
+								 }
+							 }
+						 }
+					 } );
 	}
 	
 	void ldWorld::updateActorCollisions()

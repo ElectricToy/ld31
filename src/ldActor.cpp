@@ -28,7 +28,9 @@ namespace ld
 	DEFINE_DVAR( ldActor, bool, m_suppressesHolderLight );
 	DEFINE_DVAR( ldActor, bool, m_dropsWhenUsed );
 	DEFINE_DVAR( ldActor, bool, m_pushesHolderWhenUsed );
+	DEFINE_DVAR( ldActor, int, m_desiredDepth );
 	DEFINE_VAR( ldActor, WeakPtr< Creature >, m_holder );
+	DEFINE_DVAR( ldActor, TimeType, m_diedTime );
 	DEFINE_VAR( ldActor, ClassInfo::cptr, m_lightClass );
 	DEFINE_DVAR( ldActor, real, m_lightWobble );
 	DEFINE_DVAR( ldActor, real, m_lightWobbleLerp );
@@ -168,6 +170,8 @@ namespace ld
 	{
 		m_alive = false;
 		
+		m_diedTime = world().time();
+		
 		if( m_lightSource )
 		{
 			m_lightSource->destroyWithAnimation();
@@ -179,6 +183,22 @@ namespace ld
 			auto particles = createObject< ParticleEmitter >( *m_dieEmitterClass );
 			particles->position( position() );
 			parent()->addChild( particles );
+		}
+	}
+	
+	int ldActor::desiredDepth() const
+	{
+		if( m_holder )
+		{
+			return m_holder->desiredDepth() + 1;
+		}
+		else if( alive() )
+		{
+			return m_desiredDepth;
+		}
+		else
+		{
+			return -2000;
 		}
 	}
 }

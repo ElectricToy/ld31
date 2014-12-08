@@ -11,29 +11,18 @@ Toughness (amount of damage required to kill)
 
 # Tasks
 
+Make nice map area more useful -- good for treasure, e.g.
+
 Countdown to first wave.
-
-Monsters should disappear after a while.
-
-XXX Announcement for family member taken, rescued.
 
 Fix computeStageDimensions. Will need fairly drastic fix, I think.
 
-XXX Turrets shouldn't fire until placed at least once. Their weird initial angle communicates it pretty well.
-
-XXX Get rid of bodies (darken them)
-XXX Too easy - reduce missile/weapon count - tighter waves
-XXX Bug: turrets bug when spent
-XXX Turret text
-
-
+More monsters
 
 Art
     Monsters
     Variety -- at least fast+weak/slow+strong
     Logo
-
-CHOOSE GAME NAME
 
 HUD
     Electric toy logo (UL corner)
@@ -47,6 +36,7 @@ SFX
     Door open/close
     Place things
     Thing destroyed by grinding
+    Monster grunts when changing destination significantly
 
 Music
 
@@ -125,4 +115,37 @@ XXX    Tools
 XXX Placement (blocks esp)
 XXX Tools
 XXX    Turret
+
+
+Object ordering
+
+Lighting
+
+Turret Arrow         1000
+
+HeldHuman
+Monster             100
+
+HeldItem
+
+Human               0
+Turret
+Torch
+Mine
+Door
+Block
+TileGrid
+
+XXX TEST Monsters should disappear after a while.
+
+XXX Actor sort
+XXX Announcement for family member taken, rescued.
+
+XXX Turrets shouldn't fire until placed at least once. Their weird initial angle communicates it pretty well.
+
+XXX Get rid of bodies (darken them)
+XXX Too easy - reduce missile/weapon count - tighter waves
+XXX Bug: turrets bug when spent
+XXX Turret text
+XXX CHOOSE GAME NAME
 

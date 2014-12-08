@@ -11,7 +11,13 @@
 #include "ldTile.h"
 #include "Human.h"
 #include "Mine.h"
+#include "Turret.h"
 using namespace fr;
+
+namespace
+{
+	const TimeType TIME_TO_DISAPPEAR = 40;
+}
 
 namespace ld
 {	
@@ -41,6 +47,12 @@ namespace ld
 	void Monster::update()
 	{
 		Super::update();
+		
+		if( !alive() )
+		{
+			const auto timeDead = world().time() - diedTime();
+			color( colorLerp( DEAD_COLOR, Color::Invisible, std::pow( clamp( timeDead / TIME_TO_DISAPPEAR, 0.0, 1.0 ), 8.0 )));
+		}
 		
 		// Reached a spawn tile while holding something?
 		//
@@ -184,7 +196,7 @@ namespace ld
 			
 			// Are there enough weapons out there?
 			//
-			if( world().countActors< Mine >() < 1 )		// TODO count turrets too
+			if( world().countActors< Mine >() + world().countActors< Turret >() < 2 )
 			{
 				itemClass = randomWeaponClass();
 			}
@@ -195,8 +207,18 @@ namespace ld
 			}
 			
 		}
-		
+
+		if( doUpdate() )
+		{
+			world().scheduleCallback( FRESH_CALLBACK( onTimeToDisappear ), TIME_TO_DISAPPEAR );
+		}
+
 		Super::die();
+	}
+	
+	FRESH_DEFINE_CALLBACK( Monster, onTimeToDisappear, fr::Event )
+	{
+		markForDeletion();
 	}
 }
 
