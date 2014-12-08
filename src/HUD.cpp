@@ -221,6 +221,8 @@ namespace ld
 		
 		m_wasGameOver = false;
 		
+		gotoAndPlay( "playing" );
+
 		populateMessages();
 		
 		if( auto startup = getDescendantByName< UIPopup >( "_startup" ))

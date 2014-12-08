@@ -127,7 +127,11 @@ namespace ld
 			
 				m_lightSource->radius( desiredLightRadius );
 				
-				world().lighting()->addChild( m_lightSource );
+				if( world().lighting() )
+				{
+					world().lighting()->addChild( m_lightSource );
+				}
+
 				world().attach( *m_lightSource, *this );
 			}
 			

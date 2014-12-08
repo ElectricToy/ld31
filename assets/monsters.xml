@@ -5,13 +5,11 @@
 <objects>
 	
 	<class name="MonsterDefault" extends="Monster">
-		<stepSpeed>10</stepSpeed>
+		<stepSpeed>1</stepSpeed>
 		<grindDamage>1</grindDamage>
 		<dimensions>15</dimensions>
 		
-		<texture>Texture'white_simple'</texture>
-		<color>Red</color>
-		<scale>8</scale>
+		<texture>Texture'troll'</texture>
 
 		<groundedDrag>32</groundedDrag>
 		<airDrag>32</airDrag>

@@ -169,13 +169,6 @@
 	<include url="assets/monsters.xml" subsume-root="true"></include>
 
 	<class name="HumanDefault" extends="Human">
-		<children>
-			<object class="Sprite">
-				<texture>Texture'white_simple'</texture>
-				<scale>8</scale>
-			</object>
-		</children>
-
 		<carryOffset>3,-3</carryOffset>		<!-- when being carried -->
 		
 		<dimensions>15</dimensions>
@@ -282,7 +275,7 @@
 			
 			<object class="HumanDefault" name="$^_kid3">
 				<friendlyName>Alice</friendlyName>
-				<color>ffffff00</color>
+				<texture>Texture'kid3'</texture>
 				<position>520,360</position>
 				
 				<stepSpeed>11</stepSpeed>
@@ -291,7 +284,7 @@
 			
 			<object class="HumanDefault" name="$^_kid2">
 				<friendlyName>Buddy</friendlyName>
-				<color>ff00ff00</color>
+				<texture>Texture'kid2'</texture>
 				<position>488,360</position>
 				
 				<stepSpeed>10</stepSpeed>
@@ -299,7 +292,7 @@
 			</object>
 			<object class="HumanDefault" name="$^_kid1">
 				<friendlyName>Myra</friendlyName>
-				<color>ff0000ff</color>
+				<texture>Texture'kid1'</texture>
 				<position>456,360</position>
 				
 				<stepSpeed>9</stepSpeed>
@@ -308,7 +301,7 @@
 			
 			<object class="HumanDefault" name="$^_mom">
 				<friendlyName>Claire</friendlyName>
-				<color>ffff00ff</color>
+				<texture>Texture'mom'</texture>
 				<position>424,360</position>
 				
 				<stepSpeed>8</stepSpeed>
@@ -317,8 +310,9 @@
 			
 			<object class="HumanDefault" name="$^_dad">
 				<friendlyName>John</friendlyName>
-				<color>ff000030</color>
+				<texture>Texture'dad'</texture>
 				<position>448,320</position>
+				
 				
 				<stepSpeed>6</stepSpeed>
 				<grindDamage>8</grindDamage>
