@@ -17,12 +17,22 @@
 #include "HUD.h"
 #include "Mine.h"
 #include "Torch.h"
+#include "Missile.h"
+#include "Turret.h"
+#include "SimpleButton.h"
+#include "UIPopup.h"
 using namespace fr;
 
 namespace
 {
 	using namespace ld;
 	
+	template< typename T >
+	void use()
+	{
+		auto object = createObject< T >();		// TODO
+	}
+
 	const int INITIAL_SETUP_TIME_SECONDS = 100;
 	const int SECONDS_PER_PHASE = 240;
 	
@@ -152,6 +162,20 @@ namespace ld
 
 	void ldWorld::onBeginPlay()
 	{
+		// Reference classes (for Emscripten)
+		//
+		if( name() == "Can't be this name" )		// TODO insane.
+		{
+			use< Mine >();
+			use< Torch >();
+			use< Missile >();
+			use< Turret >();
+			use< SimpleButton >();
+			use< UIPopup >();
+			use< HUD >();
+		}
+		
+		
 		Super::onBeginPlay();
 		
 		// Visit all tiles in the tilegrid that are capable of holding treasures,

@@ -95,7 +95,7 @@ namespace ld
 									   }
 								   } );
 			
-			if( target )
+			if( target && target->isMonster() )
 			{
 				shoot();
 			}
