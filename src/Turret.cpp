@@ -15,8 +15,9 @@ using namespace fr;
 namespace
 {
 	using namespace ld;
-	const real MIN_TURRET_SHOT_RANGE = 1;
+	const real MIN_TURRET_SHOT_RANGE = WORLD_PER_TILE;
 	const real MIN_TURRET_SHOT_RANGE_SQUARED = MIN_TURRET_SHOT_RANGE * MIN_TURRET_SHOT_RANGE;
+	const int TURRET_RANGE_TILES = 6;
 }
 
 namespace ld
@@ -65,8 +66,8 @@ namespace ld
 			{
 				// Shoot automatically.
 				//
-				const real range = 6;
-				real closestDistSquared = range;
+				const real range = TURRET_RANGE_TILES;
+				real closestDistSquared = Infinity;
 				ldActor::ptr target;
 				
 				world().touchingActors( rect{ position() - WORLD_PER_TILE * range, position() + WORLD_PER_TILE * range }, [&]( ldActor& actor )
@@ -82,7 +83,7 @@ namespace ld
 											   {
 												   const auto distSquared = delta.lengthSquared();
 												   
-												   if( distSquared > MIN_TURRET_SHOT_RANGE_SQUARED && distSquared < closestDistSquared )
+												   if( distSquared < closestDistSquared )
 												   {
 													   closestDistSquared = distSquared;
 													   target = &actor;
@@ -91,9 +92,30 @@ namespace ld
 										   }
 									   } );
 				
-				if( target && target->isMonster() )
+				if( target && target->isMonster() && distanceSquared( position(), target->position() ) > MIN_TURRET_SHOT_RANGE_SQUARED )
 				{
-					shoot();
+					const Vector2i step = vector_cast< int >( m_facingDirection );
+					ASSERT( !step.isZero() );
+					
+					Vector2i tilePos = tileGrid().worldToTileSpace( position() );
+					
+					bool clear = true;
+					for( int i = 0; i < TURRET_RANGE_TILES; ++i )
+					{
+						const auto& tile = tileGrid().getTile( tilePos );
+						if( tile.isSolid() )
+						{
+							clear = false;
+							break;
+						}
+						
+						tilePos += step;
+					}
+					
+					if( clear )
+					{
+						shoot();
+					}
 				}
 			}
 		}

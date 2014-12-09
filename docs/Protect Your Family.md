@@ -11,14 +11,14 @@ Toughness (amount of damage required to kill)
 
 # Tasks
 
-BUG: Repeatedly mashing the fire key on a turret makes it jump around silly.
-
-Make flash of some kind when a new object is "provided."
-
-Humans shouldn't wander over other humans, or items if they can help it.
+BUG: Repeatedly mashing the fire key while pointing any direction but right with a turret makes it jump around silly.
 
 
 Post Mortem
+    Xcode/clang has gotten far more unstable
+    Restart of idea
+    Statistics: changes over the weekend.
+
 
 Add embedded version. This almost works, but keyboard doesn't. DEBUG preventDefault() in an iFrame.
 
@@ -112,7 +112,6 @@ XXX Stealing people
 XXX Item drop on death
 XXX Should kill active player.
 
-
 XXX Gridwise movement
 
 XXX Inventory/Object pickup/drop/usage
@@ -189,4 +188,5 @@ Fix scaling problem
 
 XXX Mines no longer hurt carried humans.
 XXX Mines go green when about to explode. Oops.
-
+XXX Make flash of some kind when a new object is "provided."
+XXX Humans shouldn't wander over other humans, or items if they can help it.
