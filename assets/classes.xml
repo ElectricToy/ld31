@@ -108,7 +108,7 @@
 	
 	<class name="ExplosionParticles" extends="ParticleEmitter">
 		<particleTexture>Texture'white_simple'</particleTexture>
-		<cycleDuration>1</cycleDuration>
+		<cycleDuration>1.5</cycleDuration>
 		<destroyWhenAllDead>true</destroyWhenAllDead>
 		<baseScale>4</baseScale>
 		<spawnScaleRange>((0.25),(1.0))</spawnScaleRange>

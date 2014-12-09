@@ -23,7 +23,7 @@
 			{ BlockGravel, 3 },
 			{ BlockBrick, 2 },
 			{ BlockStone, 1 },
-			{ MineConfigured, 3 },
+			{ MineConfigured, 2 },
 			{ TurretConfigured, 5 },
 		]</dropItemWeights>
 	</class>

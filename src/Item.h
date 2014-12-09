@@ -39,6 +39,8 @@ namespace ld
 
 		virtual void receiveDamage( real amount ) override;
 		
+		virtual void showProvisionFlash();
+		
 	protected:
 		
 		void addToTile();
@@ -57,6 +59,7 @@ namespace ld
 		DVAR( real, m_navDistanceScalar, 1.0f );
 		VAR( fr::DisplayObjectContainer::ptr, m_cracksHost );
 		DVAR( bool, m_mayBePlaced, true );
+		VAR( ClassInfo::cptr, m_provisionFlashLightSourceClass );
 		
 		fr::MovieClip::ptr m_cracks;
 	};

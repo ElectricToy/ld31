@@ -29,9 +29,13 @@ namespace ld
 		virtual void onBumpedWall( const vec2& hitNormal ) override;
 
 		virtual void die() override;
+		
+		static bool wouldCollideWith( const ldActor& other );
+		
 	private:
 		
 		DVAR( vec2, m_facingDirection, vec2( 1, 0 ));
+		DVAR( real, m_damage, 1.0f );
 		
 	};
 	

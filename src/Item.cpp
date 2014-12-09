@@ -22,6 +22,7 @@ namespace ld
 	DEFINE_DVAR( Item, bool, m_blocksMonsters );
 	DEFINE_VAR( Item, fr::DisplayObjectContainer::ptr, m_cracksHost );
 	DEFINE_DVAR( Item, bool, m_mayBePlaced );
+	DEFINE_VAR( Item, ClassInfo::cptr, m_provisionFlashLightSourceClass );
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Item )
 	
@@ -150,6 +151,19 @@ namespace ld
 			{
 				m_cracks->visible( false );
 			}
+		}
+	}
+	
+	void Item::showProvisionFlash()
+	{
+		if( m_provisionFlashLightSourceClass && world().lighting() )
+		{
+			auto light = createObject< LightSource >( *m_provisionFlashLightSourceClass );
+			light->position( position() );			
+			world().lighting()->addChild( light );
+			
+			light->setDestroyStyle( 0.75, 0 );
+			light->destroyWithAnimation();
 		}
 	}
 }

@@ -92,6 +92,8 @@ namespace ld
 		{
 			real pctChanceToMove = 1;
 			
+			// Wander.
+			
 			// At home?
 			//
 			if( !HOME_INNER_BOUNDS.doesEnclose( position() ) &&
@@ -107,12 +109,27 @@ namespace ld
 				// Go to a random location at home.
 				//
 				auto destination = randInRange( HOME_INNER_BOUNDS.ulCorner(), HOME_INNER_BOUNDS.brCorner() );
-				if( !world().tileAt( destination ).isSolid() )
+				const auto& proposedTile = world().tileAt( destination );
+				if( !proposedTile.isSolid() )
 				{
 					auto item = world().itemInTile( destination );
-					if( !item || !item->blocksHumans())
+					if( !item )
 					{
-						travelTo( destination );
+						const vec2 tileUL = tileGrid().tileUL( tileGrid().worldToTileSpace( destination ));
+						rect tileRect( tileUL, tileUL + WORLD_PER_TILE );
+						
+						// Another other actors here?
+						//
+						bool actorsHere = false;
+						world().touchingActors( tileRect, [&]( const ldActor& actor )
+															  {
+																  actorsHere = actorsHere || ( actor.alive() );
+															  } );
+						
+						if( !actorsHere )
+						{
+							travelTo( destination );
+						}
 					}
 				}
 			}

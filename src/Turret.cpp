@@ -12,6 +12,13 @@
 #include "ldWorld.h"
 using namespace fr;
 
+namespace
+{
+	using namespace ld;
+	const real MIN_TURRET_SHOT_RANGE = WORLD_PER_TILE;
+	const real MIN_TURRET_SHOT_RANGE_SQUARED = MIN_TURRET_SHOT_RANGE * MIN_TURRET_SHOT_RANGE;
+}
+
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( Turret )
@@ -59,27 +66,14 @@ namespace ld
 				// Shoot automatically.
 				//
 				const real range = 6;
-				real closestDistSquared = Infinity;
+				real closestDistSquared = range;
 				ldActor::ptr target;
 				
 				world().touchingActors( rect{ position() - WORLD_PER_TILE * range, position() + WORLD_PER_TILE * range }, [&]( ldActor& actor )
 									   {
 										   // Relevant for my missile collision?
 										   //
-										   bool relevant = actor.isMonster() && actor.alive();
-										   
-										   if( !relevant )
-										   {
-											   if( auto item = actor.as< Item >() )
-											   {
-												   if( item->blocksMonsters() && item->placed() )
-												   {
-													   relevant = true;
-												   }
-											   }
-										   }
-										   
-										   if( relevant )
+										   if( Missile::wouldCollideWith( actor ))
 										   {
 											   // In line with my shot?
 											   //
@@ -88,7 +82,7 @@ namespace ld
 											   {
 												   const auto distSquared = delta.lengthSquared();
 												   
-												   if( distSquared < closestDistSquared )
+												   if( distSquared > MIN_TURRET_SHOT_RANGE_SQUARED && distSquared < closestDistSquared )
 												   {
 													   closestDistSquared = distSquared;
 													   target = &actor;

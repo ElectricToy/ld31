@@ -68,17 +68,22 @@ namespace ld
 		template< typename FunctionT >
 		void dealExplosionDamage( const rect& damageBounds, const vec2& center, real power, FunctionT&& actorFilter )
 		{
+			std::vector< ldActor::ptr > candidateActors;
+			
 			touchingActors( damageBounds, [&]( ldActor& actor )
 								   {
 									   if( actor.alive() && actorFilter( actor ))
 									   {
-										   const real distSquared = distanceSquared( actor.position(), center );
-										   
-										   const real damage = distSquared > 0 ? power / distSquared : power;
-										   
-										   actor.receiveDamage( damage );
+										   candidateActors.push_back( &actor );
 									   }
 								   } );
+			
+			for( auto actor : candidateActors )
+			{
+				const real distSquared = distanceSquared( actor->position(), center );
+				const real damage = distSquared > 0 ? power / distSquared : power;
+				actor->receiveDamage( damage );
+			}
 		}
 		
 		template< typename ActorT, typename FunctionT >
@@ -123,7 +128,7 @@ namespace ld
 		void provideEssentials( size_t minMines, size_t minTorches, size_t minTurrets );
 		
 		template< typename ItemT >
-		void ensureAtLeast( size_t desired, fr::ClassNameRef className )
+		void provideAtLeast( size_t desired, fr::ClassNameRef className )
 		{
 			const auto& myTileGrid = tileGrid();
 			const size_t afterTileGrid = getChildIndex( &myTileGrid ) + 1;
@@ -135,6 +140,11 @@ namespace ld
 				auto item = fr::createObject< ItemT >( *getClass( className ));
 				item->position( findOpenItemSpawnPosition() );
 				addChildAt( item, afterTileGrid );
+				dev_trace( "Provided a " << item->className() << " at " << item->position() );
+				
+				item->showProvisionFlash();
+
+
 				++current;
 			}
 		}
@@ -152,7 +162,7 @@ namespace ld
 		DVAR( int, m_nextSpawnTime, -1 );
 
 		DVAR( int, m_countdown, 0 );
-
+		
 		size_t m_lastSpawnPhase = -1;
 		
 		FRESH_DECLARE_CALLBACK( ldWorld, onTimeToProvide, fr::Event )

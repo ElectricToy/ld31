@@ -176,7 +176,10 @@ namespace ld
 			
 			if( m_lightSource )
 			{
-				m_lightSource->destroyWithAnimation();
+				if( !m_lightSource->isDestroying() && !m_lightSource->isMarkedForDeletion() )
+				{
+					m_lightSource->destroyWithAnimation();
+				}
 				m_lightSource = nullptr;
 			}
 

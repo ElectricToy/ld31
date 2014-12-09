@@ -40,6 +40,8 @@ namespace
 	const int NUM_COUNTS = 5;
 	const TimeType COUNTDOWN_INITIAL_DELAY = 4;
 	
+	const TimeType PROVISIONING_INTERVAL = 20;
+	
 	const std::vector< std::pair< int, int >> PHASE_SPAWN_DELAY_RANGE =
 	{
 		{ 40, 10 },		// seconds, delta
@@ -220,7 +222,7 @@ namespace ld
 	{
 		while( true )
 		{
-			const vec2 destination = randInRange( LEGAL_BOUNDS.ulCorner(), LEGAL_BOUNDS.brCorner() );
+			const vec2 destination = randInRange( ITEM_SPAWN_BOUNDS.ulCorner(), ITEM_SPAWN_BOUNDS.brCorner() );
 			if( tileAt( destination ).mayReceiveItem() )
 			{
 				return destination;
@@ -462,6 +464,11 @@ namespace ld
 	
 	void ldWorld::maybeSpawnMonsters()
 	{
+		if( !hasScheduledCallback( FRESH_CALLBACK( onTimeToProvide )))
+		{
+			scheduleCallback( FRESH_CALLBACK( onTimeToProvide ), PROVISIONING_INTERVAL );
+		}
+		
 		// Don't spawn for the first few minutes.
 		//
 		if( timePlayedSeconds() < INITIAL_SETUP_TIME_SECONDS )
@@ -471,11 +478,6 @@ namespace ld
 		
 		const auto phase = currentSpawnPhase();
 	
-		if( !hasScheduledCallback( FRESH_CALLBACK( onTimeToProvide )))
-		{
-			scheduleCallback( FRESH_CALLBACK( onTimeToProvide ), 30 );
-		}
-
 		// Maybe announce new phase.
 		//
 		if( phase != m_lastSpawnPhase )
@@ -574,18 +576,18 @@ namespace ld
 
 	FRESH_DEFINE_CALLBACK( ldWorld, onTimeToProvide, fr::Event )
 	{
-		provideEssentials( 1, 2, 1 );
+		provideEssentials( 1, 3, 2 );
 		
-		scheduleCallback( FRESH_CALLBACK( onTimeToProvide ), 30 );
+		scheduleCallback( FRESH_CALLBACK( onTimeToProvide ), PROVISIONING_INTERVAL );
 	}
 
 	void ldWorld::provideEssentials( size_t minMines, size_t minTorches, size_t minTurrets )
 	{
 		// Ensure that at least a minimum number of weapons have been spawned.
 		//
-		ensureAtLeast< Mine >( minMines, "MineConfigured" );
-		ensureAtLeast< Torch >( minTorches, "TorchConfigured" );
-		ensureAtLeast< Turret >( minTurrets, "TurretConfigured" );
+		provideAtLeast< Mine >( minMines, "MineConfigured" );
+		provideAtLeast< Torch >( minTorches, "TorchConfigured" );
+		provideAtLeast< Turret >( minTurrets, "TurretConfigured" );
 	}
 	
 	FRESH_DEFINE_CALLBACK( ldWorld, onTimeForPreparationWarning, fr::Event )

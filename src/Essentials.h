@@ -65,8 +65,9 @@ namespace ld
 	const real WORLD_PER_TILE = 16;
 	const real HALF_WORLD_PER_TILE = WORLD_PER_TILE * 0.5f;
 	
-	const rect LEGAL_BOUNDS( 2 * 16, 2 * 16, 55*16, 40*16 );		// Legal for the player to be in.
+	const rect LEGAL_BOUNDS( 2.5 * 16, 2.5 * 16, 55*16, 40*16 );		// Legal for the player to be in.
 	const vec2 WORLD_CENTER( LEGAL_BOUNDS.midpoint() );
+	const rect ITEM_SPAWN_BOUNDS = LEGAL_BOUNDS;
 	
 	const rect HOME_INNER_BOUNDS( vec2( 25, 18 ) * 16, vec2( 33, 24 ) * 16 );
 	

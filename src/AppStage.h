@@ -35,6 +35,7 @@ namespace ld
 		
 		VAR( ClassInfo::cptr, m_worldClass );
 		
+		fr::DisplayPackage::ptr m_worldPackage;
 	};
 	
 }

@@ -24,6 +24,7 @@ namespace ld
 	DEFINE_DVAR( Mine, real, m_explodeRadius );
 	DEFINE_DVAR( Mine, real, m_maxDamage );
 	DEFINE_DVAR( Mine, bool, m_harmsHumans );
+	DEFINE_DVAR( Mine, TimeType, m_fuseDuration );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Mine )
 	
 	rect Mine::dangerArea() const
@@ -36,7 +37,7 @@ namespace ld
 		Super::update();
 		
 		auto desiredRadius = lerp( 2.0f, 16.0f, scaleSinToNormal( std::sin( stage().time() * PI * 0.5f )));
-		const auto desiredColor = PLACID_COLOR;
+		auto desiredColor = PLACID_COLOR;
 										
 		// Update light.
 		//
@@ -61,21 +62,21 @@ namespace ld
 									   }
 								   } );
 			
-			if( nearestMonsterDistanceSquared < m_explodeRadius * m_explodeRadius )
+			if( !isFuseStarted() && nearestMonsterDistanceSquared < m_explodeRadius * m_explodeRadius )
 			{
 				startFuse();
 			}
-			else if( nearestMonsterDistanceSquared < m_dangerRadius * m_dangerRadius )
+			else if( nearestMonsterDistanceSquared < m_dangerRadius * m_dangerRadius || isFuseStarted() )
 			{
-				m_lightColor = Color::Red;
+				desiredColor = Color::Red;
 			}
 			else if( nearestHumanDistanceSquared < m_dangerRadius * m_dangerRadius )
 			{
-				m_lightColor = PLACID_COLOR;
+				desiredColor = PLACID_COLOR;
 			}
 			else
 			{
-				m_lightColor = Color::Orange;
+				desiredColor = Color::Orange;
 			}
 		}
 
@@ -83,9 +84,14 @@ namespace ld
 		m_lightColor = colorLerp( m_lightColor, desiredColor, 0.06f );
 	}
 
+	bool Mine::isFuseStarted() const
+	{
+		return alive() && world().hasScheduledCallback( FRESH_CALLBACK( onTimeToExplode ));
+	}
+	
 	void Mine::startFuse()
 	{
-		world().scheduleCallback( FRESH_CALLBACK( onTimeToExplode ), 2 );
+		world().scheduleCallback( FRESH_CALLBACK( onTimeToExplode ), m_fuseDuration );
 	}
 	
 	void Mine::explode()

@@ -11,12 +11,12 @@ Toughness (amount of damage required to kill)
 
 # Tasks
 
-Fix scaling problem
+BUG: Repeatedly mashing the fire key on a turret makes it jump around silly.
 
-    Desired behavior:
-        When stage aspect is < desired, we scale up stage height while keeping width constant. (the current behavior)
-        When it is > desired (window too wide) we scale down stage width while keeping height constant.
-        If stage aspect is 0, we do the current behavior, for legacy.
+Make flash of some kind when a new object is "provided."
+
+Humans shouldn't wander over other humans, or items if they can help it.
+
 
 Post Mortem
 
@@ -29,8 +29,6 @@ Upload Windows version
 Maybe Android version
 Fix scaling problem
 Play LD games
-
-Humans shouldn't wander over other humans, or items if they can help it.
 
 Reduce the initial number of at-home items to make a more adaptive situation.
 
@@ -67,6 +65,7 @@ SFX
     Monster grunts when changing destination significantly
     New wave
     Countdown
+    New item provided
 
 Music
     Clock or drum like
@@ -180,4 +179,14 @@ XXX Too easy - reduce missile/weapon count - tighter waves
 XXX Bug: turrets bug when spent
 XXX Turret text
 XXX CHOOSE GAME NAME
+
+Fix scaling problem
+
+    Desired behavior:
+        When stage aspect is < desired, we scale up stage height while keeping width constant. (the current behavior)
+        When it is > desired (window too wide) we scale down stage width while keeping height constant.
+        If stage aspect is 0, we do the current behavior, for legacy.
+
+XXX Mines no longer hurt carried humans.
+XXX Mines go green when about to explode. Oops.
 

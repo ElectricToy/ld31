@@ -14,8 +14,30 @@ namespace ld
 {	
 	FRESH_DEFINE_CLASS( Missile )
 	DEFINE_DVAR( Missile, vec2, m_facingDirection );
+	DEFINE_DVAR( Missile, real, m_damage );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Missile )
 
+	bool Missile::wouldCollideWith( const ldActor& other )
+	{
+		// Missiles collide with living monsters.
+		//
+		if( other.isMonster() && other.alive())
+		{
+			return true;
+		}
+		else if( auto item = other.as< Item >() )
+		{
+			// And with placed items that block monsters
+			// (such as doors and blocks).
+			//
+			if( item->placed() && item->blocksMonsters() )
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	void Missile::onLanded( const vec2& hitNormal )
 	{
 		onBumpedWall( hitNormal );
@@ -30,18 +52,10 @@ namespace ld
 	{
 		if( alive() )
 		{
-			if( other.isMonster() && other.alive() )
+			if( wouldCollideWith( other ))
 			{
-				other.receiveDamage( 1.0f );
+				other.receiveDamage( m_damage );
 				die();
-			}
-			else if( auto item = other.as< Item >() )
-			{
-				if( item->placed() && item->blocksMonsters() )
-				{
-					other.receiveDamage( 1.0f );
-					die();
-				}
 			}
 		}
 	}

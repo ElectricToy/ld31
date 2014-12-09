@@ -21,7 +21,8 @@ namespace ld
 	public:
 		
 		virtual void update() override;
-		
+
+		bool isFuseStarted() const;
 		virtual void startFuse();
 		virtual void explode();
 		
@@ -33,6 +34,7 @@ namespace ld
 		DVAR( real, m_explodeRadius, 32 );
 		DVAR( real, m_maxDamage, 16 * 16 * 8 );
 		DVAR( bool, m_harmsHumans, true );
+		DVAR( TimeType, m_fuseDuration, 1.35 );
 
 		FRESH_DECLARE_CALLBACK( Mine, onTimeToExplode, fr::Event )
 	};

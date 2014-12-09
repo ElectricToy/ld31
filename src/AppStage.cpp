@@ -45,11 +45,15 @@ namespace ld
 		if( auto world = getDescendantByName< World >(""))
 		{
 			removeChild( world );
+			m_worldPackage = nullptr;
 		}		
 	}
 	
 	void AppStage::createWorld()
 	{
+		m_worldPackage = createPackage< DisplayPackage >();
+		pushActivePackage( m_worldPackage );
+		
 		ASSERT( m_worldClass );
 		auto world = createObject< ldWorld >( *m_worldClass );
 		

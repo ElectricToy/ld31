@@ -3,12 +3,20 @@
 <!-- ld31 items -->
 
 <objects>
-	
+
+	<class name="ProvisionFlashLightSource" extends="LightSourceConfigured">
+		<color>ff0040e0</color>
+		<radius>32</radius>
+	</class>
+
 	<class name="DoorBase" extends="Door">
+		
 		<desiredDepth>-100</desiredDepth>
 		<isPlaying>false</isPlaying>
 		<blocksHumans>false</blocksHumans>
 		<blocksMonsters>true</blocksMonsters>
+		
+		<provisionFlashLightSourceClass>ProvisionFlashLightSource</provisionFlashLightSourceClass>
 		<dieEmitterClass>ItemBreakParticles</dieEmitterClass>
 
 		<cracksHost>DisplayObjectContainer'$^_cracksHost'</cracksHost>
@@ -20,7 +28,7 @@
 	</class>
 	
 	<class name="DoorWood" extends="DoorBase">
-		<navDistanceScalar>10</navDistanceScalar>
+		<navDistanceScalar>5</navDistanceScalar>
 		<maxHealth>20</maxHealth>
 		<health>20</health>
 		
@@ -38,7 +46,7 @@
 	</class>
 
 	<class name="DoorIron" extends="DoorBase">
-		<navDistanceScalar>25</navDistanceScalar>
+		<navDistanceScalar>10</navDistanceScalar>
 		<maxHealth>50</maxHealth>
 		<health>50</health>
 		<passthrough>
@@ -59,6 +67,8 @@
 		<blocksHumans>true</blocksHumans>
 		<blocksMonsters>true</blocksMonsters>
 		<pushesHolderWhenUsed>true</pushesHolderWhenUsed>
+
+		<provisionFlashLightSourceClass>ProvisionFlashLightSource</provisionFlashLightSourceClass>
 		<dieEmitterClass>ItemBreakParticles</dieEmitterClass>
 
 		<navDistanceScalar>30</navDistanceScalar>
@@ -67,24 +77,24 @@
 	</class>
 	
 	<class name="BlockGravel" extends="BlockBase">
+		<navDistanceScalar>6</navDistanceScalar>
 		<textureWindow>0,0,0.25,1</textureWindow>
 		<maxHealth>30</maxHealth>
 		<health>30</health>
-		<navDistanceScalar>25</navDistanceScalar>
 	</class>
 
 	<class name="BlockBrick" extends="BlockBase">
+		<navDistanceScalar>15</navDistanceScalar>
 		<textureWindow>0.25,0,0.5,1</textureWindow>
 		<maxHealth>60</maxHealth>
 		<health>60</health>
-		<navDistanceScalar>30</navDistanceScalar>
 	</class>
 
 	<class name="BlockStone" extends="BlockBase">
+		<navDistanceScalar>25</navDistanceScalar>
 		<textureWindow>0.5,0,0.75,1</textureWindow>
 		<maxHealth>100</maxHealth>
 		<health>100</health>
-		<navDistanceScalar>35</navDistanceScalar>
 	</class>
 	
 	<class name="TorchConfigured" extends="Torch">
@@ -93,6 +103,7 @@
 		<blocksHumans>false</blocksHumans>
 		<blocksMonsters>false</blocksMonsters>
 		<mayBePlaced>false</mayBePlaced>
+
 		<dieEmitterClass>ItemBreakParticles</dieEmitterClass>
 		<suppressesHolderLight>true</suppressesHolderLight>
 		
@@ -111,6 +122,8 @@
 		<texture>Texture'mine'</texture>
 		<blocksHumans>false</blocksHumans>
 		<blocksMonsters>false</blocksMonsters>
+
+		<provisionFlashLightSourceClass>ProvisionFlashLightSource</provisionFlashLightSourceClass>
 		<dieEmitterClass>ExplosionParticles</dieEmitterClass>
 
 		<lightClass>LightTorch</lightClass>
@@ -132,6 +145,7 @@
 		<blocksMonsters>false</blocksMonsters>
 		<dropsWhenUsed>false</dropsWhenUsed>
 
+		<provisionFlashLightSourceClass>ProvisionFlashLightSource</provisionFlashLightSourceClass>
 		<dieEmitterClass>ItemBreakParticles</dieEmitterClass>
 	</class>
 
