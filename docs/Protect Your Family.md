@@ -23,22 +23,17 @@ Post Mortem
 Add embedded version. This almost works, but keyboard doesn't. DEBUG preventDefault() in an iFrame.
 
 Port to iOS
+    Controls
+    Remove key hints
 
-Fork "original" web version.
-Upload Windows version
 Maybe Android version
-Fix scaling problem
 Play LD games
-
-Reduce the initial number of at-home items to make a more adaptive situation.
 
 Distribute X number of items randomly in suitable tiles, rather than asking each tile, to keep things more consistent.
 
 BUG: Turrets should stop working after game over. (Else they kill the last human's attacker and you have a live human after the end.)
 
 Make "raked" map area more useful -- good for treasure, e.g.
-
-Fix computeStageDimensions. Will need fairly drastic fix, I think.
 
 More monster types -- at least fast+weak/slow+strong
 
@@ -190,3 +185,9 @@ XXX Mines no longer hurt carried humans.
 XXX Mines go green when about to explode. Oops.
 XXX Make flash of some kind when a new object is "provided."
 XXX Humans shouldn't wander over other humans, or items if they can help it.
+XXX Fork "original" web version.
+XXX Fix scaling problem
+XXX Reduce the initial number of at-home items to make a more adaptive situation.
+
+XXX Fix computeStageDimensions. Will need fairly drastic fix, I think.
+

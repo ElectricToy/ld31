@@ -19,7 +19,7 @@
         android:configChanges="orientation|keyboardHidden">
         
         <activity android:name="co.electrictoy.fr.GameNativeActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:label="@string/app_name">
             <meta-data android:name="android.app.lib_name"
                 android:value="ld31" />
