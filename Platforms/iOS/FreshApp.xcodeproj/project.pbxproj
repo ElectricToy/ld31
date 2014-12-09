@@ -43,6 +43,7 @@
 		1FBDC4631A37878700B10ACC /* Monster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC4501A37878700B10ACC /* Monster.cpp */; };
 		1FBDC4641A37878700B10ACC /* Torch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC4521A37878700B10ACC /* Torch.cpp */; };
 		1FBDC4651A37878700B10ACC /* Turret.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC4541A37878700B10ACC /* Turret.cpp */; };
+		1FBDC4681A37940500B10ACC /* libFreshGame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F51FC221A3245EE008EEAA1 /* libFreshGame.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,13 @@
 			remoteGlobalIDString = 3ED43862263D4474A623B742;
 			remoteInfo = tinyxml;
 		};
+		1FBDC4691A37940900B10ACC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1FE0FE67192EFC2C00B86F2F /* Fresh.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F51FBF11A3245AA008EEAA1;
+			remoteInfo = FreshGame;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -185,6 +193,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FBDC4681A37940500B10ACC /* libFreshGame.a in Frameworks */,
 				1FB8F8491A2D16F400DC1B59 /* libFreshCore.a in Frameworks */,
 				1FB8F84A1A2D16F400DC1B59 /* libFreshPlatform.a in Frameworks */,
 				1FB8F84B1A2D16F400DC1B59 /* libFreshScene2D.a in Frameworks */,
@@ -307,9 +316,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1F9E824F18C92E3000BF7B00 /* LudumDare31 */ = {
+		1F9E824F18C92E3000BF7B00 /* Claustrophobia */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1F9E828D18C92E3100BF7B00 /* Build configuration list for PBXNativeTarget "LudumDare31" */;
+			buildConfigurationList = 1F9E828D18C92E3100BF7B00 /* Build configuration list for PBXNativeTarget "Claustrophobia" */;
 			buildPhases = (
 				1F9E849F18C932F500BF7B00 /* ShellScript */,
 				1F9E824C18C92E3000BF7B00 /* Sources */,
@@ -319,13 +328,14 @@
 			buildRules = (
 			);
 			dependencies = (
+				1FBDC46A1A37940900B10ACC /* PBXTargetDependency */,
 				1FB8F8401A2D16ED00DC1B59 /* PBXTargetDependency */,
 				1FB8F8421A2D16ED00DC1B59 /* PBXTargetDependency */,
 				1FB8F8441A2D16ED00DC1B59 /* PBXTargetDependency */,
 				1FB8F8461A2D16ED00DC1B59 /* PBXTargetDependency */,
 				1FB8F8481A2D16ED00DC1B59 /* PBXTargetDependency */,
 			);
-			name = LudumDare31;
+			name = Claustrophobia;
 			productName = ld31;
 			productReference = 1F9E825018C92E3000BF7B00 /* LudumDare31.app */;
 			productType = "com.apple.product-type.application";
@@ -339,6 +349,11 @@
 				CLASSPREFIX = ld;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "The Electric Toy Co";
+				TargetAttributes = {
+					1F9E824F18C92E3000BF7B00 = {
+						DevelopmentTeam = YRJU8RJCN6;
+					};
+				};
 			};
 			buildConfigurationList = 1F9E824B18C92E3000BF7B00 /* Build configuration list for PBXProject "FreshApp" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -359,7 +374,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				1F9E824F18C92E3000BF7B00 /* LudumDare31 */,
+				1F9E824F18C92E3000BF7B00 /* Claustrophobia */,
 			);
 		};
 /* End PBXProject section */
@@ -490,6 +505,11 @@
 			name = tinyxml;
 			targetProxy = 1FB8F8471A2D16ED00DC1B59 /* PBXContainerItemProxy */;
 		};
+		1FBDC46A1A37940900B10ACC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FreshGame;
+			targetProxy = 1FBDC4691A37940900B10ACC /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -578,6 +598,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FreshApp/FreshApp-Prefix.pch";
@@ -589,6 +610,7 @@
 					"/Users/jeff/Development/electrictoy/Fresh/lib/curl/ios-appstore/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -599,6 +621,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FreshApp/FreshApp-Prefix.pch";
@@ -610,6 +633,7 @@
 					"/Users/jeff/Development/electrictoy/Fresh/lib/curl/ios-appstore/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -626,7 +650,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1F9E828D18C92E3100BF7B00 /* Build configuration list for PBXNativeTarget "LudumDare31" */ = {
+		1F9E828D18C92E3100BF7B00 /* Build configuration list for PBXNativeTarget "Claustrophobia" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1F9E828E18C92E3100BF7B00 /* Debug */,
