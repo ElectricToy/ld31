@@ -5,7 +5,7 @@
 <objects root="AppStage'theStage'">
 		
 	<object class="AppStage" name="theStage">
-		<stageDimensions>960,0</stageDimensions>
+		<stageDimensions>960,640</stageDimensions>
 		<worldClass>WorldDefault</worldClass>
 
 		<children>

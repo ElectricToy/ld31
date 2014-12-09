@@ -11,6 +11,31 @@ Toughness (amount of damage required to kill)
 
 # Tasks
 
+Fix scaling problem
+
+    Desired behavior:
+        When stage aspect is < desired, we scale up stage height while keeping width constant. (the current behavior)
+        When it is > desired (window too wide) we scale down stage width while keeping height constant.
+        If stage aspect is 0, we do the current behavior, for legacy.
+
+Post Mortem
+
+Add embedded version. This almost works, but keyboard doesn't. DEBUG preventDefault() in an iFrame.
+
+Port to iOS
+
+Fork "original" web version.
+Upload Windows version
+Maybe Android version
+Fix scaling problem
+Play LD games
+
+Humans shouldn't wander over other humans, or items if they can help it.
+
+Reduce the initial number of at-home items to make a more adaptive situation.
+
+Distribute X number of items randomly in suitable tiles, rather than asking each tile, to keep things more consistent.
+
 BUG: Turrets should stop working after game over. (Else they kill the last human's attacker and you have a live human after the end.)
 
 Make "raked" map area more useful -- good for treasure, e.g.
