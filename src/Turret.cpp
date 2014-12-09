@@ -15,7 +15,7 @@ using namespace fr;
 namespace
 {
 	using namespace ld;
-	const real MIN_TURRET_SHOT_RANGE = WORLD_PER_TILE;
+	const real MIN_TURRET_SHOT_RANGE = 1;
 	const real MIN_TURRET_SHOT_RANGE_SQUARED = MIN_TURRET_SHOT_RANGE * MIN_TURRET_SHOT_RANGE;
 }
 

@@ -27,6 +27,22 @@
 		1FB8F84D1A2D16F400DC1B59 /* libtinyxml.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FB8F83E1A2D16B200DC1B59 /* libtinyxml.a */; };
 		1FB8F8501A2D177900DC1B59 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8F84F1A2D177900DC1B59 /* main.cpp */; };
 		1FB8F8521A2D179800DC1B59 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 1FB8F8511A2D179800DC1B59 /* assets */; };
+		1FBDC4561A37878700B10ACC /* Creature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC4361A37878700B10ACC /* Creature.cpp */; };
+		1FBDC4571A37878700B10ACC /* Door.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC4381A37878700B10ACC /* Door.cpp */; };
+		1FBDC4581A37878700B10ACC /* HUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC43A1A37878700B10ACC /* HUD.cpp */; };
+		1FBDC4591A37878700B10ACC /* Human.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC43C1A37878700B10ACC /* Human.cpp */; };
+		1FBDC45A1A37878700B10ACC /* Inventory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC43E1A37878700B10ACC /* Inventory.cpp */; };
+		1FBDC45B1A37878700B10ACC /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC4401A37878700B10ACC /* Item.cpp */; };
+		1FBDC45C1A37878700B10ACC /* ldActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC4421A37878700B10ACC /* ldActor.cpp */; };
+		1FBDC45D1A37878700B10ACC /* ldPlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC4441A37878700B10ACC /* ldPlayerController.cpp */; };
+		1FBDC45E1A37878700B10ACC /* ldTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC4461A37878700B10ACC /* ldTile.cpp */; };
+		1FBDC45F1A37878700B10ACC /* ldTileTemplate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC4481A37878700B10ACC /* ldTileTemplate.cpp */; };
+		1FBDC4601A37878700B10ACC /* ldWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC44A1A37878700B10ACC /* ldWorld.cpp */; };
+		1FBDC4611A37878700B10ACC /* Mine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC44C1A37878700B10ACC /* Mine.cpp */; };
+		1FBDC4621A37878700B10ACC /* Missile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC44E1A37878700B10ACC /* Missile.cpp */; };
+		1FBDC4631A37878700B10ACC /* Monster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC4501A37878700B10ACC /* Monster.cpp */; };
+		1FBDC4641A37878700B10ACC /* Torch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC4521A37878700B10ACC /* Torch.cpp */; };
+		1FBDC4651A37878700B10ACC /* Turret.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDC4541A37878700B10ACC /* Turret.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,7 +129,7 @@
 		1F51FC1C1A3245EE008EEAA1 /* AppStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppStage.cpp; sourceTree = "<group>"; };
 		1F51FC1D1A3245EE008EEAA1 /* AppStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStage.h; sourceTree = "<group>"; };
 		1F51FC1E1A3245EE008EEAA1 /* Essentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Essentials.h; sourceTree = "<group>"; };
-		1F9E825018C92E3000BF7B00 /* LudumDare31.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LudumDare31.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F9E825018C92E3000BF7B00 /* LudumDare31.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LudumDare31.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F9E825318C92E3000BF7B00 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1F9E825518C92E3000BF7B00 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		1F9E825718C92E3000BF7B00 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -128,6 +144,38 @@
 		1F9E84D918C937AA00BF7B00 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1FB8F84F1A2D177900DC1B59 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		1FB8F8511A2D179800DC1B59 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../assets; sourceTree = SOURCE_ROOT; };
+		1FBDC4361A37878700B10ACC /* Creature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Creature.cpp; sourceTree = "<group>"; };
+		1FBDC4371A37878700B10ACC /* Creature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Creature.h; sourceTree = "<group>"; };
+		1FBDC4381A37878700B10ACC /* Door.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Door.cpp; sourceTree = "<group>"; };
+		1FBDC4391A37878700B10ACC /* Door.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Door.h; sourceTree = "<group>"; };
+		1FBDC43A1A37878700B10ACC /* HUD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HUD.cpp; sourceTree = "<group>"; };
+		1FBDC43B1A37878700B10ACC /* HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUD.h; sourceTree = "<group>"; };
+		1FBDC43C1A37878700B10ACC /* Human.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Human.cpp; sourceTree = "<group>"; };
+		1FBDC43D1A37878700B10ACC /* Human.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Human.h; sourceTree = "<group>"; };
+		1FBDC43E1A37878700B10ACC /* Inventory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Inventory.cpp; sourceTree = "<group>"; };
+		1FBDC43F1A37878700B10ACC /* Inventory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inventory.h; sourceTree = "<group>"; };
+		1FBDC4401A37878700B10ACC /* Item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Item.cpp; sourceTree = "<group>"; };
+		1FBDC4411A37878700B10ACC /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		1FBDC4421A37878700B10ACC /* ldActor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ldActor.cpp; sourceTree = "<group>"; };
+		1FBDC4431A37878700B10ACC /* ldActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ldActor.h; sourceTree = "<group>"; };
+		1FBDC4441A37878700B10ACC /* ldPlayerController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ldPlayerController.cpp; sourceTree = "<group>"; };
+		1FBDC4451A37878700B10ACC /* ldPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ldPlayerController.h; sourceTree = "<group>"; };
+		1FBDC4461A37878700B10ACC /* ldTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ldTile.cpp; sourceTree = "<group>"; };
+		1FBDC4471A37878700B10ACC /* ldTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ldTile.h; sourceTree = "<group>"; };
+		1FBDC4481A37878700B10ACC /* ldTileTemplate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ldTileTemplate.cpp; sourceTree = "<group>"; };
+		1FBDC4491A37878700B10ACC /* ldTileTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ldTileTemplate.h; sourceTree = "<group>"; };
+		1FBDC44A1A37878700B10ACC /* ldWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ldWorld.cpp; sourceTree = "<group>"; };
+		1FBDC44B1A37878700B10ACC /* ldWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ldWorld.h; sourceTree = "<group>"; };
+		1FBDC44C1A37878700B10ACC /* Mine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mine.cpp; sourceTree = "<group>"; };
+		1FBDC44D1A37878700B10ACC /* Mine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mine.h; sourceTree = "<group>"; };
+		1FBDC44E1A37878700B10ACC /* Missile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Missile.cpp; sourceTree = "<group>"; };
+		1FBDC44F1A37878700B10ACC /* Missile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Missile.h; sourceTree = "<group>"; };
+		1FBDC4501A37878700B10ACC /* Monster.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Monster.cpp; sourceTree = "<group>"; };
+		1FBDC4511A37878700B10ACC /* Monster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Monster.h; sourceTree = "<group>"; };
+		1FBDC4521A37878700B10ACC /* Torch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Torch.cpp; sourceTree = "<group>"; };
+		1FBDC4531A37878700B10ACC /* Torch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Torch.h; sourceTree = "<group>"; };
+		1FBDC4541A37878700B10ACC /* Turret.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Turret.cpp; sourceTree = "<group>"; };
+		1FBDC4551A37878700B10ACC /* Turret.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Turret.h; sourceTree = "<group>"; };
 		1FE0FE67192EFC2C00B86F2F /* Fresh.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Fresh.xcodeproj; path = ../../../Fresh/Platforms/iOS/Fresh.xcodeproj; sourceTree = SOURCE_ROOT; };
 		1FE0FE88192EFC7E00B86F2F /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = "../../../Fresh/lib/curl/ios-appstore/lib/libcurl.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -215,6 +263,38 @@
 		1FB8F84E1A2D177900DC1B59 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				1FBDC4361A37878700B10ACC /* Creature.cpp */,
+				1FBDC4371A37878700B10ACC /* Creature.h */,
+				1FBDC4381A37878700B10ACC /* Door.cpp */,
+				1FBDC4391A37878700B10ACC /* Door.h */,
+				1FBDC43A1A37878700B10ACC /* HUD.cpp */,
+				1FBDC43B1A37878700B10ACC /* HUD.h */,
+				1FBDC43C1A37878700B10ACC /* Human.cpp */,
+				1FBDC43D1A37878700B10ACC /* Human.h */,
+				1FBDC43E1A37878700B10ACC /* Inventory.cpp */,
+				1FBDC43F1A37878700B10ACC /* Inventory.h */,
+				1FBDC4401A37878700B10ACC /* Item.cpp */,
+				1FBDC4411A37878700B10ACC /* Item.h */,
+				1FBDC4421A37878700B10ACC /* ldActor.cpp */,
+				1FBDC4431A37878700B10ACC /* ldActor.h */,
+				1FBDC4441A37878700B10ACC /* ldPlayerController.cpp */,
+				1FBDC4451A37878700B10ACC /* ldPlayerController.h */,
+				1FBDC4461A37878700B10ACC /* ldTile.cpp */,
+				1FBDC4471A37878700B10ACC /* ldTile.h */,
+				1FBDC4481A37878700B10ACC /* ldTileTemplate.cpp */,
+				1FBDC4491A37878700B10ACC /* ldTileTemplate.h */,
+				1FBDC44A1A37878700B10ACC /* ldWorld.cpp */,
+				1FBDC44B1A37878700B10ACC /* ldWorld.h */,
+				1FBDC44C1A37878700B10ACC /* Mine.cpp */,
+				1FBDC44D1A37878700B10ACC /* Mine.h */,
+				1FBDC44E1A37878700B10ACC /* Missile.cpp */,
+				1FBDC44F1A37878700B10ACC /* Missile.h */,
+				1FBDC4501A37878700B10ACC /* Monster.cpp */,
+				1FBDC4511A37878700B10ACC /* Monster.h */,
+				1FBDC4521A37878700B10ACC /* Torch.cpp */,
+				1FBDC4531A37878700B10ACC /* Torch.h */,
+				1FBDC4541A37878700B10ACC /* Turret.cpp */,
+				1FBDC4551A37878700B10ACC /* Turret.h */,
 				1F51FC1C1A3245EE008EEAA1 /* AppStage.cpp */,
 				1F51FC1D1A3245EE008EEAA1 /* AppStage.h */,
 				1F51FC1E1A3245EE008EEAA1 /* Essentials.h */,
@@ -245,7 +325,7 @@
 				1FB8F8461A2D16ED00DC1B59 /* PBXTargetDependency */,
 				1FB8F8481A2D16ED00DC1B59 /* PBXTargetDependency */,
 			);
-			name = "LudumDare31";
+			name = LudumDare31;
 			productName = ld31;
 			productReference = 1F9E825018C92E3000BF7B00 /* LudumDare31.app */;
 			productType = "com.apple.product-type.application";
@@ -361,8 +441,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FBDC4641A37878700B10ACC /* Torch.cpp in Sources */,
+				1FBDC45B1A37878700B10ACC /* Item.cpp in Sources */,
 				1F51FC1F1A3245EE008EEAA1 /* AppStage.cpp in Sources */,
+				1FBDC4601A37878700B10ACC /* ldWorld.cpp in Sources */,
+				1FBDC4571A37878700B10ACC /* Door.cpp in Sources */,
+				1FBDC4631A37878700B10ACC /* Monster.cpp in Sources */,
+				1FBDC4611A37878700B10ACC /* Mine.cpp in Sources */,
+				1FBDC4561A37878700B10ACC /* Creature.cpp in Sources */,
+				1FBDC4621A37878700B10ACC /* Missile.cpp in Sources */,
+				1FBDC45E1A37878700B10ACC /* ldTile.cpp in Sources */,
+				1FBDC45F1A37878700B10ACC /* ldTileTemplate.cpp in Sources */,
+				1FBDC4651A37878700B10ACC /* Turret.cpp in Sources */,
+				1FBDC45D1A37878700B10ACC /* ldPlayerController.cpp in Sources */,
+				1FBDC45C1A37878700B10ACC /* ldActor.cpp in Sources */,
 				1FB8F8501A2D177900DC1B59 /* main.cpp in Sources */,
+				1FBDC4581A37878700B10ACC /* HUD.cpp in Sources */,
+				1FBDC45A1A37878700B10ACC /* Inventory.cpp in Sources */,
+				1FBDC4591A37878700B10ACC /* Human.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
