@@ -28,17 +28,20 @@ namespace ld
 	
 	void Missile::onTouched( ldActor& other )
 	{
-		if( other.isMonster() && other.alive() )
+		if( alive() )
 		{
-			other.receiveDamage( 1.0f );
-			die();
-		}
-		else if( auto item = other.as< Item >() )
-		{
-			if( item->placed() && item->blocksMonsters() )
+			if( other.isMonster() && other.alive() )
 			{
 				other.receiveDamage( 1.0f );
 				die();
+			}
+			else if( auto item = other.as< Item >() )
+			{
+				if( item->placed() && item->blocksMonsters() )
+				{
+					other.receiveDamage( 1.0f );
+					die();
+				}
 			}
 		}
 	}

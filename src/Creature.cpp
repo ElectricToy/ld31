@@ -331,6 +331,7 @@ namespace ld
 		
 		// Flip to face step direction.
 		//
+		const auto oldScale = scale();
 		if( dir.x > 0 )
 		{
 			scale( 1 );		// TODO!!! presumes that nothing else is monkeying with scale.
@@ -339,7 +340,11 @@ namespace ld
 		{
 			scale( -1, 1 );
 		}
-		recordPreviousState();
+		
+		if( scale() != oldScale )
+		{
+			recordPreviousState();
+		}
 		
 		// Refuse if there's a wall there.
 		//

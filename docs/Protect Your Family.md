@@ -11,15 +11,18 @@ Toughness (amount of damage required to kill)
 
 # Tasks
 
-Make nice map area more useful -- good for treasure, e.g.
+BUG: Turrets should stop working after game over. (Else they kill the last human's attacker and you have a live human after the end.)
+
+Make "raked" map area more useful -- good for treasure, e.g.
 
 Fix computeStageDimensions. Will need fairly drastic fix, I think.
 
-More monster types
+More monster types -- at least fast+weak/slow+strong
+
+Show no-go and no-place areas
 
 Art
-    Monsters
-    Variety -- at least fast+weak/slow+strong
+    Animations    
     Logo
 
 HUD
@@ -27,6 +30,8 @@ HUD
     Game logo (UL corner)
 
 SFX
+    Torch fizzle
+    A monster appears
     Monster steps, grunts
     Grind sounds
     Human screams when picked up
@@ -39,6 +44,11 @@ SFX
     Countdown
 
 Music
+    Clock or drum like
+    Faded enough to not grate
+    Ominous, I think. But with folksy, plaintiff element, like uilleann pipes or other Irish/medieval instrument.
+    Pretty long: at least 2–3 minutes ideally. But watch out for megabytage.
+    provide mute through pause
 
 Bonus
     Pause button/options/restart

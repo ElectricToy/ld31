@@ -232,7 +232,7 @@
 						<passthrough>
 							<keyframe>
 							</keyframe>
-							<keyframe rel-s="4.5">
+							<keyframe rel-s="3">
 								<child name="$1"><color>Invisible</color></child>
 								<tween type="QuadEaseOut" />
 							</keyframe>

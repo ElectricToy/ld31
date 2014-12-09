@@ -17,19 +17,19 @@
 		<jumpImpulseScale>0</jumpImpulseScale>
 
 		<dropItemWeights>[
-			{ TorchConfigured, 4 },
+			{ TorchConfigured, 5 },
 			{ DoorWood, 2 },
 			{ DoorIron, 1 },
 			{ BlockGravel, 3 },
 			{ BlockBrick, 2 },
 			{ BlockStone, 1 },
-			{ MineConfigured, 4 },
+			{ MineConfigured, 3 },
 			{ TurretConfigured, 5 },
 		]</dropItemWeights>
 	</class>
 
 	<class name="Troll" extends="MonsterDefault">
-		<stepSpeed>1.5</stepSpeed>
+		<stepSpeed>2</stepSpeed>
 		<grindDamage>1</grindDamage>
 		<health>1</health>
 	</class>

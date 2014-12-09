@@ -168,21 +168,24 @@ namespace ld
 	
 	void ldActor::die()
 	{
-		m_alive = false;
-		
-		m_diedTime = world().time();
-		
-		if( m_lightSource )
+		if( alive() )
 		{
-			m_lightSource->destroyWithAnimation();
-			m_lightSource = nullptr;
-		}
+			m_alive = false;
+			
+			m_diedTime = world().time();
+			
+			if( m_lightSource )
+			{
+				m_lightSource->destroyWithAnimation();
+				m_lightSource = nullptr;
+			}
 
-		if( m_dieEmitterClass )
-		{
-			auto particles = createObject< ParticleEmitter >( *m_dieEmitterClass );
-			particles->position( position() );
-			parent()->addChild( particles );
+			if( m_dieEmitterClass )
+			{
+				auto particles = createObject< ParticleEmitter >( *m_dieEmitterClass );
+				particles->position( position() );
+				parent()->addChild( particles );
+			}
 		}
 	}
 	

@@ -33,7 +33,7 @@ namespace
 		auto object = createObject< T >();		// TODO
 	}
 
-	const int INITIAL_SETUP_TIME_SECONDS = 100;
+	const int INITIAL_SETUP_TIME_SECONDS = 60;
 	const int SECONDS_PER_PHASE = 120;
 	
 	const TimeType SECONDS_PER_COUNT = 2.5;
@@ -42,10 +42,10 @@ namespace
 	
 	const std::vector< std::pair< int, int >> PHASE_SPAWN_DELAY_RANGE =
 	{
-		{ 60, 10 },		// seconds, delta
-		{ 45, 10 },
-		{ 30, 10 },
-		{ 16, 5 },
+		{ 40, 10 },		// seconds, delta
+		{ 35, 10 },
+		{ 20, 5 },
+		{ 12, 5 },
 		{ 8, 2 },
 	};
 }
