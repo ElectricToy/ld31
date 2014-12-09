@@ -1,3 +1,5 @@
+This project, including all code and assets, is (c) Copyright 2014 Jeff Wofford.
+
 Although I'm making the source code available to be read, I reserve all rights to this project.
 
 In particular, please do not create a game based on this code (or any derivations of this code) and 
