@@ -187,6 +187,8 @@ namespace ld
 	
 	void Monster::die()
 	{
+		playSound( "troll_death01", position() );
+		
 		// Drop treasure.
 		//
 		if( pctChance( m_pctChanceToDrop ))

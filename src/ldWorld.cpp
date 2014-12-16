@@ -291,6 +291,14 @@ namespace ld
 
 			Super::updateCamera();
 		}
+		
+		// Update listener position.
+		//
+		if( AudioSystem::ready() )
+		{
+			auto viewBounds = globalToLocal( stage().stageBounds() );
+			AudioSystem::instance().setListenerPosition( viewBounds.midpoint() );
+		}
 	}
 	
 	void ldWorld::updateChildDepths()
@@ -558,6 +566,7 @@ namespace ld
 			if( monsterClass )
 			{
 				stage().as< AppStage >()->hud().showMessage( "A Monster approaches.", "MonsterMessagePopup" );
+				playSound( "alert01" );
 				
 				const auto& myTileGrid = tileGrid();
 				

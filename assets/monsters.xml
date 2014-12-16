@@ -10,6 +10,9 @@
 		
 		<texture>Texture'troll'</texture>
 
+		<groundSoundName>monster_scratch01</groundSoundName>
+		<stepSoundNames>["troll_step01", "troll_step02"]</stepSoundNames>
+
 		<groundedDrag>32</groundedDrag>
 		<airDrag>32</airDrag>
 		<airControl>1</airControl>

@@ -50,6 +50,7 @@ namespace ld
 	private:
 		
 		DVAR( int, m_controlPriority, 0 );
+		DVAR( bool, m_male, false );
 		
 	};
 	

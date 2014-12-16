@@ -24,6 +24,8 @@ namespace ld
 		
 		virtual void onAddedToStage() override;
 
+		virtual void die() override;
+		
 	protected:
 		
 	private:

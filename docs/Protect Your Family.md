@@ -67,6 +67,8 @@ SFX
     New wave   (bell toll)
     Countdown
     New item provided
+    Crossbow fire
+    Missile break
 
 Music
     Dark, sparkly (lights)

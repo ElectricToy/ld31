@@ -26,7 +26,7 @@ namespace ld
 		
 		if( AudioSystem::ready() )
 		{
-			AudioSystem::instance().setDefaultAttenuationRange( Range< float >( 4.0f, 8.0f ));
+			AudioSystem::instance().setDefaultAttenuationRange( Range< float >( WORLD_PER_TILE * 4.0f, WORLD_PER_TILE * 100.0f ));
 			m_musicManager = createObject< MusicManager >();
 		}
 	}

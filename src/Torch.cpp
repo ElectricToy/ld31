@@ -75,8 +75,14 @@ namespace ld
 		
 		// Randomize lifespan.
 		//
-		m_deathTime = stage().time() + randInRange( 60 * 5, 60 * 15 );
+		m_deathTime = stage().time() + 60 * randInRange( 5, 15 );
 	}
-	
+
+	void Torch::die()
+	{
+		playSound( "torch_fizzle", position() );
+		
+		Super::die();
+	}
 }
 

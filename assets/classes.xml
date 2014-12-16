@@ -173,7 +173,9 @@
 		
 		<dimensions>15</dimensions>
 		<grindDamage>8</grindDamage>
-		
+
+		<groundSoundName>human_scratch01</groundSoundName>
+
 		<groundedDrag>32</groundedDrag>
 		<airDrag>32</airDrag>
 		<airControl>1</airControl>
@@ -269,9 +271,9 @@
 		
 		<playerControllerClass>ldPlayerController</playerControllerClass>
 		<camera><object class="Camera">
-			<focalPoint>448,320</focalPoint>
-			<zoomRatio>4</zoomRatio>
-			<targetZoomRatio>4</targetZoomRatio>
+			<focalPoint>456,328</focalPoint>
+<!--			<zoomRatio>2</zoomRatio>-->
+<!--			<targetZoomRatio>2</targetZoomRatio>-->
 		</object></camera>
 		
 		<children>
@@ -295,6 +297,7 @@
 				<friendlyName>Buddy</friendlyName>
 				<texture>Texture'kid2'</texture>
 				<position>488,360</position>
+				<male>true</male>
 				
 				<stepSpeed>6</stepSpeed>
 				<grindDamage>10</grindDamage>
@@ -324,6 +327,7 @@
 				<friendlyName>John</friendlyName>
 				<texture>Texture'dad'</texture>
 				<position>448,320</position>
+				<male>true</male>
 				
 				<stepSpeed>6</stepSpeed>
 				<grindDamage>8</grindDamage>

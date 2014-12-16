@@ -16,6 +16,7 @@ namespace
 {
 	const real MIN_DIST_TO_TOUCH_NODE = 2.0f;
 	const real MIN_DIST_TO_TOUCH_NODE_SQUARED = MIN_DIST_TO_TOUCH_NODE * MIN_DIST_TO_TOUCH_NODE;
+	const TimeType GRIND_SOUND_REPEAT_DELAY = 0.35;
 }
 
 namespace ld
@@ -30,6 +31,8 @@ namespace ld
 	DEFINE_DVAR( Creature, TimeType, m_thoughtSpeedHz );
 	DEFINE_DVAR( Creature, real, m_grindDamage );
 	DEFINE_DVAR( Creature, real, m_normalLightRadius );
+	DEFINE_VAR( Creature, std::string, m_groundSoundName );
+	DEFINE_VAR( Creature, std::vector< std::string >, m_stepSoundNames );
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Creature )
 
@@ -389,6 +392,12 @@ namespace ld
 				// Done stepping.
 				//
 				stopStepping();
+				
+				if( !m_stepSoundNames.empty() && pctChance( 25 ))
+				{
+					const auto stepSoundName = randomElement( m_stepSoundNames );					
+					playSound( stepSoundName, position() );
+				}
 			}
 		}
 	}
@@ -422,6 +431,12 @@ namespace ld
 		{
 			ASSERT( item->alive() );
 			item->receiveDamage( grindDamage() * stage().secondsPerFrame() );
+			
+			if( !m_groundSoundName.empty() && m_lastGrindSoundTime + GRIND_SOUND_REPEAT_DELAY < world().time() )
+			{
+				m_lastGrindSoundTime = world().time();
+				playSound( m_groundSoundName, position() );
+			}
 		}
 	}
 

@@ -13,7 +13,7 @@
 	
 	<class name="AudioCueLoaderConfigured" extends="AudioCueLoader">
 		<basePath>assets/audio/</basePath>
-		<extension>wav</extension>
+		<extension>mp3</extension>
 		<maxSimultaneousSounds>8</maxSimultaneousSounds>
 	</class>
 	

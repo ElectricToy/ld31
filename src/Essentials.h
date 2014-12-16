@@ -124,7 +124,7 @@ namespace ld
 		}
 	}
 	
-	inline fr::Sound::ptr playSound( const std::string& cueName, const vec2& pos )
+	inline fr::Sound::ptr playSound( const std::string& cueName, const vec2& pos = vec2::ZERO )
 	{
 		auto sound = fr::AudioSystem::playSound( cueName );
 		if( sound )

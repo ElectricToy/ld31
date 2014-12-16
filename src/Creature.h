@@ -91,6 +91,10 @@ namespace ld
 		DVAR( TimeType, m_thoughtSpeedHz, 1 );
 		DVAR( real, m_grindDamage, 0 );
 		DVAR( real, m_normalLightRadius, 0 );
+		VAR( std::string, m_groundSoundName );
+		VAR( std::vector< std::string >, m_stepSoundNames );
+		
+		TimeType m_lastGrindSoundTime = -1;
 		
 		vec2 m_facingDirection = vec2( 1, 0 );
 		
