@@ -60,6 +60,8 @@ namespace ld
 		VAR( fr::DisplayObjectContainer::ptr, m_cracksHost );
 		DVAR( bool, m_mayBePlaced, true );
 		VAR( ClassInfo::cptr, m_provisionFlashLightSourceClass );
+		DVAR( real, m_placedRotation, 30 );
+		DVAR( vec2, m_placedScale, vec2( 0.75f ));
 		
 		fr::MovieClip::ptr m_cracks;
 	};

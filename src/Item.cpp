@@ -23,6 +23,8 @@ namespace ld
 	DEFINE_VAR( Item, fr::DisplayObjectContainer::ptr, m_cracksHost );
 	DEFINE_DVAR( Item, bool, m_mayBePlaced );
 	DEFINE_VAR( Item, ClassInfo::cptr, m_provisionFlashLightSourceClass );
+	DEFINE_DVAR( Item, real, m_placedRotation );
+	DEFINE_DVAR( Item, vec2, m_placedScale );
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Item )
 	
@@ -126,8 +128,8 @@ namespace ld
 	{
 		if( !placed )
 		{
-			scale( 0.75f );
-			rotation( 30 );
+			scale( m_placedScale );
+			rotation( m_placedRotation );
 		}
 		else
 		{

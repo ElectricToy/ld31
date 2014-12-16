@@ -269,7 +269,7 @@
 		
 		<playerControllerClass>ldPlayerController</playerControllerClass>
 		<camera><object class="Camera">
-			<rectBounds></rectBounds>
+			<focalPoint>448,320</focalPoint>
 			<zoomRatio>4</zoomRatio>
 			<targetZoomRatio>4</targetZoomRatio>
 		</object></camera>

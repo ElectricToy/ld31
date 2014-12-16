@@ -103,6 +103,9 @@
 		<blocksHumans>false</blocksHumans>
 		<blocksMonsters>false</blocksMonsters>
 		<mayBePlaced>false</mayBePlaced>
+		
+		<placedRotation>0</placedRotation>
+		<placedScale>1</placedScale>
 
 		<dieEmitterClass>ItemBreakParticles</dieEmitterClass>
 		<suppressesHolderLight>true</suppressesHolderLight>
