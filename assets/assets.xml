@@ -62,9 +62,10 @@
 	<object class="AudioCueLoaderConfigured" name="alert01"><rangeGain>0.25</rangeGain></object>
 	<object class="AudioCueLoaderConfigured" name="torch_fizzle"><rangePitch>(0.9,1.1)</rangePitch></object>
 	<object class="AudioCueLoaderConfigured" name="monster_scratch01"><rangeGain>0.25</rangeGain><rangePitch>(0.75,1.25)</rangePitch></object>
-	<object class="AudioCueLoaderConfigured" name="human_scratch01"><rangeGain>0.25</rangeGain><rangePitch>(0.75,1.25)</rangePitch></object>
+	<object class="AudioCueLoaderConfigured" name="human_scratch01"><rangeGain>0.1</rangeGain><rangePitch>(0.75,1.25)</rangePitch></object>
 	<object class="AudioCueLoaderConfigured" name="troll_step01"><rangeGain>0.25,0.3</rangeGain><rangePitch>(0.75,1.25)</rangePitch></object>
 	<object class="AudioCueLoaderConfigured" name="troll_step02"><rangeGain>0.1,0.15</rangeGain><rangePitch>(0.75,1.25)</rangePitch></object>
+	<object class="AudioCueLoaderConfigured" name="troll_death01"><rangeGain>1</rangeGain><rangePitch>(0.75,1.25)</rangePitch></object>
 	
 	<!-- Shaders -->	
 
