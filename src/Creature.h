@@ -68,7 +68,7 @@ namespace ld
 		
 		virtual real currentStepSpeed() const;
 
-		void pursueTilePath( const fr::TileGrid::Path& path );
+		void pursueTilePath( const fr::FreshTileGrid::Path& path );
 		
 		virtual void updateAI() {}
 		
@@ -94,7 +94,7 @@ namespace ld
 		
 		vec2 m_facingDirection = vec2( 1, 0 );
 		
-		fr::TileGrid::WorldSpacePath m_worldSpacePath;
+		fr::FreshTileGrid::WorldSpacePath m_worldSpacePath;
 		
 		FRESH_DECLARE_CALLBACK( Creature, onTimeToThink, fr::Event )
 	};

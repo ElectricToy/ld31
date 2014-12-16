@@ -206,7 +206,7 @@
 			]</itemClassWeights>
 	</class>
 
-	<class name="TileGridDefault" extends="TileGrid">
+	<class name="TileGridDefault" extends="FreshTileGrid">
 		<tileClass>ldTile</tileClass>
 		<texture>Texture'tile_atlas'</texture>
 		<atlasSubdivisions>2,1</atlasSubdivisions>

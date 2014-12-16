@@ -10,7 +10,7 @@
 #define FreshApp_ldTileTemplate_h
 
 #include "Essentials.h"
-#include "TileGrid.h"
+#include "FreshTileGrid.h"
 
 namespace ld
 {

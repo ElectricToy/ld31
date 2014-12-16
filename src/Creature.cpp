@@ -427,7 +427,7 @@ namespace ld
 
 	void Creature::travelTo( const vec2& pos )
 	{
-		TileGrid::Path path;
+		FreshTileGrid::Path path;
 		tileGrid().findClosestPath( position(), pos, path, WORLD_PER_TILE * 0.4f );
 		
 		// The first element, if any, is where I am already.
@@ -456,7 +456,7 @@ namespace ld
 		}
 	}
 	
-	void Creature::pursueTilePath( const fr::TileGrid::Path& path )
+	void Creature::pursueTilePath( const fr::FreshTileGrid::Path& path )
 	{
 		m_worldSpacePath.clear();
 		tileGrid().convertToWorldSpacePath( path.begin(), path.end(), std::back_inserter( m_worldSpacePath ));

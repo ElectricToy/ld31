@@ -13,7 +13,7 @@
 #include "Item.h"
 #include "ldTile.h"
 #include "Monster.h"
-#include "PlayerController.h"
+#include "FreshPlayerController.h"
 #include "HUD.h"
 #include "Mine.h"
 #include "Torch.h"
@@ -186,6 +186,9 @@ namespace ld
 		
 		Super::onBeginPlay();
 		
+		// Play music.
+		//
+		
 		// Visit all tiles in the tilegrid that are capable of holding treasures,
 		// and spawn them.
 		//
@@ -232,9 +235,9 @@ namespace ld
 		return vec2::ZERO;
 	}
 	
-	TileGrid& ldWorld::tileGrid() const
+	FreshTileGrid& ldWorld::tileGrid() const
 	{
-		const auto child = getChildByName< TileGrid >( "" );
+		const auto child = getChildByName< FreshTileGrid >( "" );
 		ASSERT( child );
 		return *child;
 	}
@@ -292,7 +295,7 @@ namespace ld
 		
 		ASSERT( numChildren() > 0 );
 		
-		TileGrid::ptr myTileGrid = &tileGrid();
+		FreshTileGrid::ptr myTileGrid = &tileGrid();
 		Lighting::ptr myLighting = lighting();
 
 		sortChildren( [&]( DisplayObject::ptr a, DisplayObject::ptr b )
@@ -442,7 +445,7 @@ namespace ld
 				
 				if( currentPlayer )
 				{
-					currentPlayer->controller( createObject< PlayerController >( *m_playerControllerClass ));
+					currentPlayer->controller( createObject< FreshPlayerController >( *m_playerControllerClass ));
 					ASSERT( currentPlayer->isPlayer() );
 					ASSERT( player() == currentPlayer );
 					

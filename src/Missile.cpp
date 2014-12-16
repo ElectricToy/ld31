@@ -38,6 +38,12 @@ namespace ld
 		return false;
 	}
 	
+	void Missile::facingDirection( const vec2& facingDirection_ )
+	{
+		m_facingDirection = facingDirection_;
+		rotation( m_facingDirection.angle() );
+	}
+	
 	void Missile::onLanded( const vec2& hitNormal )
 	{
 		onBumpedWall( hitNormal );
@@ -64,7 +70,6 @@ namespace ld
 	{
 		Super::update();
 		
-		rotation( m_facingDirection.angle() );
 		position( position() + m_facingDirection * 4 );
 		
 		if( nUpdates() > 40 )

@@ -54,6 +54,12 @@
 	
 	<!-- Sounds -->
 	
+	<object class="AudioCueLoaderConfigured" name="music_theme">
+		<extension>mp3</extension>
+		<maxSimultaneousSounds>1</maxSimultaneousSounds>
+		<doLoop>true</doLoop>
+	</object>
+	
 	<!-- Shaders -->	
 
 </objects>

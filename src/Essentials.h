@@ -115,6 +115,24 @@ namespace ld
 		);
 		
 	}
+	
+	inline void positionSound( fr::Sound::ptr sound, const vec2& pos )
+	{
+		if( sound )
+		{
+			sound->position( vec3( pos.x, pos.y, 5.0f ));
+		}
+	}
+	
+	inline fr::Sound::ptr playSound( const std::string& cueName, const vec2& pos )
+	{
+		auto sound = fr::AudioSystem::playSound( cueName );
+		if( sound )
+		{
+			positionSound( sound, pos );
+		}
+		return sound;
+	}
 }
 
 #endif

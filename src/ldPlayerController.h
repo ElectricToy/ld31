@@ -10,17 +10,17 @@
 #define FreshApp_ldPlayerController_h
 
 #include "Essentials.h"
-#include "PlayerController.h"
+#include "FreshPlayerController.h"
 
 namespace ld
 {
 	
-	class ldPlayerController : public fr::PlayerController
+	class ldPlayerController : public fr::FreshPlayerController
 	{
-		FRESH_DECLARE_CLASS( ldPlayerController, PlayerController );
+		FRESH_DECLARE_CLASS( ldPlayerController, FreshPlayerController );
 	public:
 		
-		virtual void possess( fr::Actor& actor ) override;
+		virtual void possess( fr::FreshActor& actor ) override;
 
 		virtual void update() override;
 		

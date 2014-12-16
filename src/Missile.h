@@ -20,7 +20,8 @@ namespace ld
 		FRESH_DECLARE_CLASS( Missile, ldActor );
 	public:
 		
-		SYNTHESIZE( vec2, facingDirection )
+		SYNTHESIZE_GET( vec2, facingDirection )
+		void facingDirection( const vec2& facingDirection_ );
 		
 		virtual void onTouched( ldActor& other ) override;
 		

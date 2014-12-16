@@ -18,7 +18,7 @@ namespace ld
 	
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldPlayerController )
 
-	void ldPlayerController::possess( Actor& host_ )
+	void ldPlayerController::possess( FreshActor& host_ )
 	{
 		Super::possess( host_ );		
 	}

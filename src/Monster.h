@@ -40,6 +40,7 @@ namespace ld
 		DVAR( real, m_giveUpPursuingRadius, WORLD_PER_TILE * 32 );
 		VAR( ldActor::wptr, m_pursueee );
 		VAR( fr::Vector2i, m_exitDestination );
+		DVAR( real, m_pctChanceToDrop, 75 );
 		VAR( ClassWeights, m_dropItemWeights );
 		DVAR( Range< size_t >, m_numDropItemsRange, Range< size_t >( 0, 2 ));
 		

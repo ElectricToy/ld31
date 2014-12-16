@@ -10,7 +10,7 @@
 #include "ldTile.h"
 #include "ldWorld.h"
 #include "Stage.h"
-#include "TileGrid.h"
+#include "FreshTileGrid.h"
 #include "Creature.h"
 #include "ParticleEmitter.h"
 using namespace fr;
@@ -111,7 +111,7 @@ namespace ld
 		return *ancestor;
 	}
 	
-	TileGrid& ldActor::tileGrid() const
+	FreshTileGrid& ldActor::tileGrid() const
 	{
 		return world().tileGrid();
 	}

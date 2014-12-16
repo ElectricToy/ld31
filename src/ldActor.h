@@ -10,9 +10,9 @@
 #define FreshApp_ldActor_h
 
 #include "Essentials.h"
-#include "Actor.h"
-#include "TileGrid.h"
-#include "ActorController.h"
+#include "FreshActor.h"
+#include "FreshTileGrid.h"
+#include "FreshActorController.h"
 #include "Lighting.h"
 
 namespace ld
@@ -20,9 +20,9 @@ namespace ld
 	class ldWorld;
 	class Creature;
 	
-	class ldActor : public fr::Actor
+	class ldActor : public fr::FreshActor
 	{
-		FRESH_DECLARE_CLASS( ldActor, Actor );
+		FRESH_DECLARE_CLASS( ldActor, FreshActor );
 	public:
 		
 		SYNTHESIZE_GET( bool, alive );
@@ -76,7 +76,7 @@ namespace ld
 		DVAR( Color, m_lightColor, Color::White );
 
 		ldWorld& world() const;
-		fr::TileGrid& tileGrid() const;
+		fr::FreshTileGrid& tileGrid() const;
 		
 	private:
 

@@ -27,6 +27,7 @@ namespace ld
 	DEFINE_DVAR( Monster, real, m_beginPursuingRadius );
 	DEFINE_DVAR( Monster, real, m_giveUpPursuingRadius );
 	DEFINE_VAR( Monster, fr::Vector2i, m_exitDestination );
+	DEFINE_DVAR( Monster, real, m_pctChanceToDrop );
 	DEFINE_VAR( Monster, ClassWeights, m_dropItemWeights );
 	DEFINE_DVAR( Monster, Range< size_t >, m_numDropItemsRange );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Monster )
@@ -188,26 +189,28 @@ namespace ld
 	{
 		// Drop treasure.
 		//
-		const size_t nItemsToDrop = randInRange( m_numDropItemsRange );
-		
-		for( size_t i = 0; i < nItemsToDrop; ++i )
+		if( pctChance( m_pctChanceToDrop ))
 		{
-			ClassInfo::cptr itemClass = randomClass( m_dropItemWeights );
+			const size_t nItemsToDrop = randInRange( m_numDropItemsRange );
 			
-			// Are there enough weapons out there?
-			//
-			if( world().countActors< Mine >() + world().countActors< Turret >() < 2 )
+			for( size_t i = 0; i < nItemsToDrop; ++i )
 			{
-				itemClass = randomWeaponClass();
-			}
+				ClassInfo::cptr itemClass = randomClass( m_dropItemWeights );
+				
+				// Are there enough weapons out there?
+				//
+				if( world().countActors< Mine >() + world().countActors< Turret >() < 2 )
+				{
+					itemClass = randomWeaponClass();
+				}
 
-			if( itemClass )
-			{
-				world().createItemNear( *itemClass, position() );
+				if( itemClass )
+				{
+					world().createItemNear( *itemClass, position() );
+				}
 			}
-			
 		}
-
+		
 		if( doUpdate() )
 		{
 			world().scheduleCallback( FRESH_CALLBACK( onTimeToDisappear ), TIME_TO_DISAPPEAR );

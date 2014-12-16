@@ -17,21 +17,16 @@ BUG: Repeatedly mashing the fire key while pointing any direction but right with
 Post Mortem
     Xcode/clang has gotten far more unstable
     Restart of idea
-    Statistics: changes over the weekend.
-
-
-Add embedded version. This almost works, but keyboard doesn't. DEBUG preventDefault() in an iFrame.
+    Statistics: changes over the weekend
+    Emotionally difficult to detach
 
 Port to iOS
     Controls
     Remove key hints
 
 Maybe Android version
-Play LD games
 
 Distribute X number of items randomly in suitable tiles, rather than asking each tile, to keep things more consistent.
-
-BUG: Turrets should stop working after game over. (Else they kill the last human's attacker and you have a live human after the end.)
 
 Make "raked" map area more useful -- good for treasure, e.g.
 
@@ -48,21 +43,33 @@ HUD
     Game logo (UL corner)
 
 SFX
-    Torch fizzle
-    A monster appears
-    Monster steps, grunts
-    Grind sounds
-    Human screams when picked up
+    X Torch fizzle
+    X A monster appears
+    X Troll steps
+    X Troll changes mind
+    X Troll groans
+    X Troll dies
+    X Grind sounds
+    X Human screams when picked up
+    X Human scream when "perished"
+    Human "phew" when rescued
     Explosions
     Door open/close
-    Place things
-    Thing destroyed by grinding
-    Monster grunts when changing destination significantly
-    New wave
+    Place block
+    Drop block
+    Place door
+    Drop door
+    Place mine
+    Drop mine
+    Place=drop turret
+    Pickup thing
+    Block destroyed by grinding
+    New wave   (bell toll)
     Countdown
     New item provided
 
 Music
+    Dark, sparkly (lights)
     Clock or drum like
     Faded enough to not grate
     Ominous, I think. But with folksy, plaintiff element, like uilleann pipes or other Irish/medieval instrument.
@@ -191,3 +198,4 @@ XXX Reduce the initial number of at-home items to make a more adaptive situation
 
 XXX Fix computeStageDimensions. Will need fairly drastic fix, I think.
 
+XXX BUG: Turrets should stop working after game over. (Else they kill the last human's attacker and you have a live human after the end.)

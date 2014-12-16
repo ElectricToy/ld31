@@ -10,8 +10,8 @@
 #define FreshApp_ldWorld_h
 
 #include "Essentials.h"
-#include "World.h"
-#include "TileGrid.h"
+#include "FreshWorld.h"
+#include "FreshTileGrid.h"
 #include "ldActor.h"
 #include "TimeServer.h"
 
@@ -21,15 +21,15 @@ namespace ld
 	class Item;
 	class ldTile;
 	
-	class ldWorld : public fr::World, public fr::TimeServer
+	class ldWorld : public fr::FreshWorld, public fr::TimeServer
 	{
-		FRESH_DECLARE_CLASS( ldWorld, World );
+		FRESH_DECLARE_CLASS( ldWorld, FreshWorld );
 	public:
 		
 		// From TimeServer
 		virtual TimeType time() const override;
 		
-		fr::TileGrid& tileGrid() const;
+		fr::FreshTileGrid& tileGrid() const;
 		
 		SmartPtr< Human > player();
 		SmartPtr< const Human > player() const;

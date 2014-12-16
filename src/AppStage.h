@@ -12,6 +12,12 @@
 #include "Essentials.h"
 #include "Stage.h"
 
+namespace fr
+{
+	class MusicManager;
+	class GameCenter;
+}
+
 namespace ld
 {
 	class HUD;
@@ -36,6 +42,10 @@ namespace ld
 		VAR( ClassInfo::cptr, m_worldClass );
 		
 		fr::DisplayPackage::ptr m_worldPackage;
+
+		SmartPtr< fr::MusicManager > m_musicManager;
+		
+		std::unique_ptr< fr::GameCenter > m_gameCenter;
 	};
 	
 }

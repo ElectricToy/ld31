@@ -32,8 +32,7 @@ namespace ld
 	{
 		Super::bePickedUpBy( other );
 		
-		m_facingDirection = other.facingDirection();
-		rotation( m_facingDirection.angle() );
+		facingDirection( other.facingDirection() );
 		
 		return vec2::ZERO;
 	}
@@ -42,8 +41,7 @@ namespace ld
 	{
 		Super::beDroppedBy( other );
 		
-		m_facingDirection = other.facingDirection();
-		rotation( m_facingDirection.angle() );
+		facingDirection( other.facingDirection() );
 	}
 	
 	void Turret::beUsedBy( Creature& other )
@@ -62,7 +60,7 @@ namespace ld
 
 		if( !isPickedUp() )
 		{
-			if( !m_facingDirection.isZero() )
+			if( world().isGameActive() && !m_facingDirection.isZero() )
 			{
 				// Shoot automatically.
 				//
@@ -98,9 +96,10 @@ namespace ld
 					ASSERT( !step.isZero() );
 					
 					Vector2i tilePos = tileGrid().worldToTileSpace( position() );
+					const Vector2i endTile = tileGrid().worldToTileSpace( target->position() );
 					
 					bool clear = true;
-					for( int i = 0; i < TURRET_RANGE_TILES; ++i )
+					for( ; tilePos != endTile; tilePos += step )
 					{
 						const auto& tile = tileGrid().getTile( tilePos );
 						if( tile.isSolid() )
@@ -108,8 +107,6 @@ namespace ld
 							clear = false;
 							break;
 						}
-						
-						tilePos += step;
 					}
 					
 					if( clear )
@@ -122,8 +119,7 @@ namespace ld
 		else
 		{
 			ASSERT( holder() );
-			m_facingDirection = holder()->facingDirection();
-			rotation( m_facingDirection.angle() );
+			facingDirection( holder()->facingDirection() );
 		}
 	}
 	
@@ -150,6 +146,11 @@ namespace ld
 			}
 		}
 	}
-	
+
+	void Turret::facingDirection( const vec2& facingDirection_ )
+	{
+		m_facingDirection = facingDirection_;
+		rotation( m_facingDirection.angle() );
+	}
 }
 
