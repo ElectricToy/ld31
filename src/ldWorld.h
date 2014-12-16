@@ -150,6 +150,8 @@ namespace ld
 		}
 
 		void updateChildDepths();
+		
+		virtual void updateCamera() override {}	// Don't do the usual.
 
 	private:
 		

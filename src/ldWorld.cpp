@@ -282,6 +282,15 @@ namespace ld
 		}
 		
 		updateChildDepths();
+		
+		if( auto cam = camera() )
+		{
+			cam->setTarget( player() );
+			cam->setClampingBounds( tileGrid().getMinimalBoundsWorldSpace( -8 ) );
+			cam->setScreenSize( stage().stageDimensions() );
+
+			Super::updateCamera();
+		}
 	}
 	
 	void ldWorld::updateChildDepths()
@@ -448,6 +457,11 @@ namespace ld
 					currentPlayer->controller( createObject< FreshPlayerController >( *m_playerControllerClass ));
 					ASSERT( currentPlayer->isPlayer() );
 					ASSERT( player() == currentPlayer );
+					
+					if( auto cam = camera() )
+					{
+						cam->setTarget( currentPlayer );
+					}
 					
 					// We only do this on later characters because otherwise it's too noisy at the beginning.
 					//
