@@ -13,8 +13,8 @@ using namespace fr;
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( Missile )
-	DEFINE_DVAR( Missile, vec2, m_facingDirection );
-	DEFINE_DVAR( Missile, real, m_damage );
+	DEFINE_VAR( Missile, vec2, m_facingDirection );
+	DEFINE_VAR( Missile, real, m_damage );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Missile )
 
 	bool Missile::wouldCollideWith( const ldActor& other )

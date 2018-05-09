@@ -25,12 +25,12 @@ namespace ld
 	
 	DEFINE_VAR( Creature, vec2, m_stepDirection );
 	DEFINE_VAR( Creature, vec2, m_stepStart );
-	DEFINE_DVAR( Creature, real, m_stepSpeed );
+	DEFINE_VAR( Creature, real, m_stepSpeed );
 	DEFINE_VAR( Creature, Inventory::ptr, m_inventory );
 	DEFINE_VAR( Creature, ldActor::ptr, m_heldActor );
-	DEFINE_DVAR( Creature, TimeType, m_thoughtSpeedHz );
-	DEFINE_DVAR( Creature, real, m_grindDamage );
-	DEFINE_DVAR( Creature, real, m_normalLightRadius );
+	DEFINE_VAR( Creature, TimeType, m_thoughtSpeedHz );
+	DEFINE_VAR( Creature, real, m_grindDamage );
+	DEFINE_VAR( Creature, real, m_normalLightRadius );
 	DEFINE_VAR( Creature, std::string, m_groundSoundName );
 	DEFINE_VAR( Creature, std::vector< std::string >, m_stepSoundNames );
 

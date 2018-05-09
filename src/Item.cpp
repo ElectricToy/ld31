@@ -16,15 +16,15 @@ namespace ld
 {	
 	FRESH_DEFINE_CLASS( Item )
 	
-	DEFINE_DVAR( Item, bool, m_placed );
-	DEFINE_DVAR( Item, real, m_navDistanceScalar );
-	DEFINE_DVAR( Item, bool, m_blocksHumans );
-	DEFINE_DVAR( Item, bool, m_blocksMonsters );
+	DEFINE_VAR( Item, bool, m_placed );
+	DEFINE_VAR( Item, real, m_navDistanceScalar );
+	DEFINE_VAR( Item, bool, m_blocksHumans );
+	DEFINE_VAR( Item, bool, m_blocksMonsters );
 	DEFINE_VAR( Item, fr::DisplayObjectContainer::ptr, m_cracksHost );
-	DEFINE_DVAR( Item, bool, m_mayBePlaced );
+	DEFINE_VAR( Item, bool, m_mayBePlaced );
 	DEFINE_VAR( Item, ClassInfo::cptr, m_provisionFlashLightSourceClass );
-	DEFINE_DVAR( Item, real, m_placedRotation );
-	DEFINE_DVAR( Item, vec2, m_placedScale );
+	DEFINE_VAR( Item, real, m_placedRotation );
+	DEFINE_VAR( Item, vec2, m_placedScale );
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Item )
 	

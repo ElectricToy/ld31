@@ -56,23 +56,17 @@ namespace ld
 {	
 	FRESH_DEFINE_CLASS( ldWorld )
 	DEFINE_VAR( ldWorld, ClassInfo::cptr, m_playerControllerClass );
-	DEFINE_DVAR( ldWorld, int, m_lastActiveUpdate );
-	DEFINE_DVAR( ldWorld, bool, m_playerHasMoved );
-	DEFINE_DVAR( ldWorld, size_t, m_minInitialTorches );
-	DEFINE_DVAR( ldWorld, size_t, m_minInitialTurrets );
-	DEFINE_DVAR( ldWorld, size_t, m_minInitialMines );
-	DEFINE_DVAR( ldWorld, int, m_nextSpawnTime );
-	DEFINE_DVAR( ldWorld, int, m_countdown );
+	DEFINE_VAR( ldWorld, int, m_lastActiveUpdate );
+	DEFINE_VAR( ldWorld, bool, m_playerHasMoved );
+	DEFINE_VAR( ldWorld, size_t, m_minInitialTorches );
+	DEFINE_VAR( ldWorld, size_t, m_minInitialTurrets );
+	DEFINE_VAR( ldWorld, size_t, m_minInitialMines );
+	DEFINE_VAR( ldWorld, int, m_nextSpawnTime );
+	DEFINE_VAR( ldWorld, int, m_countdown );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTOR_INERT( ldWorld )
 	
 	FRESH_CUSTOM_STANDARD_CONSTRUCTOR_NAMING( ldWorld )
-	,	TimeServer( createObject< CallbackScheduler >() )
 	{}
-
-	TimeType ldWorld::time() const
-	{
-		return nUpdates() / stage().frameRate();
-	}
 	
 	size_t ldWorld::numFreeHumans() const
 	{

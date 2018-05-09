@@ -21,13 +21,10 @@ namespace ld
 	class Item;
 	class ldTile;
 	
-	class ldWorld : public fr::FreshWorld, public fr::TimeServer
+	class ldWorld : public fr::FreshWorld
 	{
 		FRESH_DECLARE_CLASS( ldWorld, FreshWorld );
 	public:
-		
-		// From TimeServer
-		virtual TimeType time() const override;
 		
 		fr::FreshTileGrid& tileGrid() const;
 		
@@ -137,7 +134,7 @@ namespace ld
 			
 			while( current < desired )
 			{
-				auto item = fr::createObject< ItemT >( *getClass( className ));
+				auto item = fr::createObject< ItemT >( *fr::getClass( className ));
 				item->position( findOpenItemSpawnPosition() );
 				addChildAt( item, afterTileGrid );
 				dev_trace( "Provided a " << item->className() << " at " << item->position() );
@@ -167,10 +164,10 @@ namespace ld
 		
 		size_t m_lastSpawnPhase = -1;
 		
-		FRESH_DECLARE_CALLBACK( ldWorld, onTimeToProvide, fr::Event )
-		FRESH_DECLARE_CALLBACK( ldWorld, onTimeForPreparationWarning, fr::Event )
-		FRESH_DECLARE_CALLBACK( ldWorld, onTimeForCountdown, fr::Event )
-		FRESH_DECLARE_CALLBACK( ldWorld, onTimeToShowCount, fr::Event )
+		FRESH_DECLARE_CALLBACK( ldWorld, onTimeToProvide, fr::Event );
+		FRESH_DECLARE_CALLBACK( ldWorld, onTimeForPreparationWarning, fr::Event );
+		FRESH_DECLARE_CALLBACK( ldWorld, onTimeForCountdown, fr::Event );
+		FRESH_DECLARE_CALLBACK( ldWorld, onTimeToShowCount, fr::Event );
 		
 	};
 	

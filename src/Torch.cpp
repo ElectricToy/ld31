@@ -18,8 +18,8 @@ namespace
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( Torch )
-	DEFINE_DVAR( Torch, real, m_maxLightRadius );
-	DEFINE_DVAR( Torch, TimeType, m_deathTime );
+	DEFINE_VAR( Torch, real, m_maxLightRadius );
+	DEFINE_VAR( Torch, TimeType, m_deathTime );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Torch )
 	
 	void Torch::update()

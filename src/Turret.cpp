@@ -23,9 +23,9 @@ namespace
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( Turret )
-	DEFINE_DVAR( Turret, size_t, m_ammo );
-	DEFINE_DVAR( Turret, vec2, m_facingDirection );
-	DEFINE_DVAR( Turret, TimeType, m_nextEarliestShootTime );
+	DEFINE_VAR( Turret, size_t, m_ammo );
+	DEFINE_VAR( Turret, vec2, m_facingDirection );
+	DEFINE_VAR( Turret, TimeType, m_nextEarliestShootTime );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Turret )
 
 	vec2 Turret::bePickedUpBy( Creature& other )

@@ -100,7 +100,7 @@ namespace ld
 		
 		fr::FreshTileGrid::WorldSpacePath m_worldSpacePath;
 		
-		FRESH_DECLARE_CALLBACK( Creature, onTimeToThink, fr::Event )
+		FRESH_DECLARE_CALLBACK( Creature, onTimeToThink, fr::Event );
 	};
 	
 }

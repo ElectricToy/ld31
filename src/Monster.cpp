@@ -22,14 +22,14 @@ namespace
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( Monster )
-	DEFINE_DVAR( Monster, real, m_awarenessRadius );
+	DEFINE_VAR( Monster, real, m_awarenessRadius );
 	DEFINE_VAR( Monster, ldActor::wptr, m_pursueee );
-	DEFINE_DVAR( Monster, real, m_beginPursuingRadius );
-	DEFINE_DVAR( Monster, real, m_giveUpPursuingRadius );
+	DEFINE_VAR( Monster, real, m_beginPursuingRadius );
+	DEFINE_VAR( Monster, real, m_giveUpPursuingRadius );
 	DEFINE_VAR( Monster, fr::Vector2i, m_exitDestination );
-	DEFINE_DVAR( Monster, real, m_pctChanceToDrop );
+	DEFINE_VAR( Monster, real, m_pctChanceToDrop );
 	DEFINE_VAR( Monster, ClassWeights, m_dropItemWeights );
-	DEFINE_DVAR( Monster, Range< size_t >, m_numDropItemsRange );
+	DEFINE_VAR( Monster, Range< size_t >, m_numDropItemsRange );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Monster )
 	
 	bool Monster::canPickup( const ldActor& other ) const

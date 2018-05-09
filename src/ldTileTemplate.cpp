@@ -13,9 +13,9 @@ namespace ld
 {	
 	FRESH_DEFINE_CLASS( ldTileTemplate )
 	DEFINE_VAR( ldTileTemplate, ClassWeights, m_itemClassWeights );
-	DEFINE_DVAR( ldTileTemplate, real, m_pctChanceToSpawn );
-	DEFINE_DVAR( ldTileTemplate, bool, m_mayReceiveItem );
-	DEFINE_DVAR( ldTileTemplate, bool, m_isMonsterSpawner );
+	DEFINE_VAR( ldTileTemplate, real, m_pctChanceToSpawn );
+	DEFINE_VAR( ldTileTemplate, bool, m_mayReceiveItem );
+	DEFINE_VAR( ldTileTemplate, bool, m_isMonsterSpawner );
 
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldTileTemplate )
 	

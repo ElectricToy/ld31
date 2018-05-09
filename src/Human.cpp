@@ -16,8 +16,8 @@ using namespace fr;
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( Human )
-	DEFINE_DVAR( Human, int, m_controlPriority );
-	DEFINE_DVAR( Human, bool, m_male );
+	DEFINE_VAR( Human, int, m_controlPriority );
+	DEFINE_VAR( Human, bool, m_male );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Human )
 
 	int Human::desiredDepth() const

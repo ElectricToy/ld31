@@ -18,24 +18,24 @@ using namespace fr;
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( ldActor )
-	DEFINE_DVAR( ldActor, vec2, m_carryOffset );
-	DEFINE_DVAR( ldActor, vec2, m_carryScale );
-	DEFINE_DVAR( ldActor, angle, m_carryRotation );
-	DEFINE_DVAR( ldActor, vec2, m_precarryScale );
-	DEFINE_DVAR( ldActor, real, m_health );
-	DEFINE_DVAR( ldActor, real, m_maxHealth );
-	DEFINE_DVAR( ldActor, bool, m_alive );
-	DEFINE_DVAR( ldActor, bool, m_suppressesHolderLight );
-	DEFINE_DVAR( ldActor, bool, m_dropsWhenUsed );
-	DEFINE_DVAR( ldActor, bool, m_pushesHolderWhenUsed );
-	DEFINE_DVAR( ldActor, int, m_desiredDepth );
+	DEFINE_VAR( ldActor, vec2, m_carryOffset );
+	DEFINE_VAR( ldActor, vec2, m_carryScale );
+	DEFINE_VAR( ldActor, angle, m_carryRotation );
+	DEFINE_VAR( ldActor, vec2, m_precarryScale );
+	DEFINE_VAR( ldActor, real, m_health );
+	DEFINE_VAR( ldActor, real, m_maxHealth );
+	DEFINE_VAR( ldActor, bool, m_alive );
+	DEFINE_VAR( ldActor, bool, m_suppressesHolderLight );
+	DEFINE_VAR( ldActor, bool, m_dropsWhenUsed );
+	DEFINE_VAR( ldActor, bool, m_pushesHolderWhenUsed );
+	DEFINE_VAR( ldActor, int, m_desiredDepth );
 	DEFINE_VAR( ldActor, WeakPtr< Creature >, m_holder );
-	DEFINE_DVAR( ldActor, TimeType, m_diedTime );
+	DEFINE_VAR( ldActor, TimeType, m_diedTime );
 	DEFINE_VAR( ldActor, ClassInfo::cptr, m_lightClass );
-	DEFINE_DVAR( ldActor, real, m_lightWobble );
-	DEFINE_DVAR( ldActor, real, m_lightWobbleLerp );
-	DEFINE_DVAR( ldActor, real, m_lightRadius );
-	DEFINE_DVAR( ldActor, Color, m_lightColor );
+	DEFINE_VAR( ldActor, real, m_lightWobble );
+	DEFINE_VAR( ldActor, real, m_lightWobbleLerp );
+	DEFINE_VAR( ldActor, real, m_lightRadius );
+	DEFINE_VAR( ldActor, Color, m_lightColor );
 	DEFINE_VAR( ldActor, ClassInfo::cptr, m_dieEmitterClass );
 	DEFINE_VAR( ldActor, std::string, m_friendlyName );
 

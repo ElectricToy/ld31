@@ -55,7 +55,7 @@ namespace ld
 		
 		bool m_wasGameOver = false;
 		
-		FRESH_DECLARE_CALLBACK( HUD, onStageKeyUp, fr::EventKeyboard )
+		FRESH_DECLARE_CALLBACK( HUD, onStageKeyUp, fr::EventKeyboard );
 	};
 	
 }

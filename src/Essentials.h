@@ -12,7 +12,6 @@
 #include "FreshVector.h"
 #include "Color.h"
 #include "Object.h"
-#include "PropertyTraits.h"
 #include "ObjectPtr.h"
 #include "CommandProcessor.h"
 #include "MovieClip.h"

@@ -36,7 +36,7 @@ namespace ld
 		DVAR( bool, m_harmsHumans, true );
 		DVAR( TimeType, m_fuseDuration, 1.35 );
 
-		FRESH_DECLARE_CALLBACK( Mine, onTimeToExplode, fr::Event )
+		FRESH_DECLARE_CALLBACK( Mine, onTimeToExplode, fr::Event );
 	};
 	
 }

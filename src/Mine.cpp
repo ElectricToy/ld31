@@ -20,11 +20,11 @@ namespace
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( Mine )
-	DEFINE_DVAR( Mine, real, m_dangerRadius );
-	DEFINE_DVAR( Mine, real, m_explodeRadius );
-	DEFINE_DVAR( Mine, real, m_maxDamage );
-	DEFINE_DVAR( Mine, bool, m_harmsHumans );
-	DEFINE_DVAR( Mine, TimeType, m_fuseDuration );
+	DEFINE_VAR( Mine, real, m_dangerRadius );
+	DEFINE_VAR( Mine, real, m_explodeRadius );
+	DEFINE_VAR( Mine, real, m_maxDamage );
+	DEFINE_VAR( Mine, bool, m_harmsHumans );
+	DEFINE_VAR( Mine, TimeType, m_fuseDuration );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Mine )
 	
 	rect Mine::dangerArea() const

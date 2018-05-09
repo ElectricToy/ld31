@@ -26,8 +26,8 @@ namespace ld
 		
 	private:
 		
-		FRESH_DECLARE_CALLBACK( ldPlayerController, onStageKeyDown, fr::EventKeyboard )
-		FRESH_DECLARE_CALLBACK( ldPlayerController, onStageKeyUp, fr::EventKeyboard )
+		FRESH_DECLARE_CALLBACK( ldPlayerController, onStageKeyDown, fr::EventKeyboard ) override;
+		FRESH_DECLARE_CALLBACK( ldPlayerController, onStageKeyUp, fr::EventKeyboard ) override;
 
 	};
 	
