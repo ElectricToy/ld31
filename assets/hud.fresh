@@ -1,0 +1,529 @@
+// ld31 HUD 
+
+
+class HUDButton extends SimpleButton {
+	isDragEnabled "false"
+	scale "0.25"
+	passthrough [
+		object keyframe {
+			label "out"
+			children [
+				object child "$1" {
+				}
+			]
+		}
+		object keyframe {
+			label "disabled"
+			children [
+				object child "$1" {
+					color "80808080"
+				}
+			]
+		}
+		object keyframe {
+			label "down"
+			children [
+				object child "$1" {
+					colorAdditive "00333333"
+				}
+			]
+		}
+		object keyframe {
+			label "up"
+			children [
+				object child "$1" {
+				}
+			]
+		}
+	]
+}
+
+class KeyHint extends Sprite {
+	position "-104,50"
+}
+
+class Clock extends DisplayObjectContainer {
+	children [
+		object Sprite $^_survived {
+			position "0"
+			scale "0.25"
+			texture "Texture'ui_survived'"
+		}
+
+		object TextField $^_clocktext {
+			position "0,16"
+
+			text "00:00:00"
+
+			font "Font'pixelberry8'"
+			fontSize "28"
+			alignment "Centered"
+			verticalAlignment "Middle"
+			isTouchEnabled "false"
+		}
+
+	]
+}
+
+class MessagePopup extends UIPopup {
+	isTouchEnabled "false"
+	defaultShowDuration "0.25"
+	defaultHideDuration "6"
+	startHidden "true"
+	startBecomeShown "true"
+	children [
+		object TextField $^_messagetext {
+			font "Font'uni05_53_8'"
+			color "ff37b1ff"
+			fontSize "28"
+			alignment "Centered"
+			verticalAlignment "Middle"
+			isTouchEnabled "false"
+		}
+	]
+}
+
+class MonsterMessagePopup extends MessagePopup {
+	defaultShowDuration "1"
+	position "0,-16"
+	color "ffff1800"
+	children [
+		object TextField $^_messagetext {
+			font "Font'uni05_53_8'"
+			lineHeight "0.6"
+			fontSize "48"
+			alignment "Centered"
+			verticalAlignment "Middle"
+			isTouchEnabled "false"
+		}
+	]
+}
+
+class PreparationWarning extends MonsterMessagePopup {
+	defaultShowDuration "3"
+	position "0,-80"
+}
+
+class NewHumanMessagePopup extends MonsterMessagePopup {
+	color "Green"
+}
+
+class NewWaveMessagePopup extends MonsterMessagePopup {
+	defaultShowDuration "4"
+	hiddenTranslation "0,120"
+	position "0,-80"
+	color "ff9106d9"
+	children [
+		object MovieClip $^_pulsar {
+			children [
+				object TextField $^_messagetext {
+					font "Font'uni05_53_8'"
+					fontSize "80"
+					alignment "Centered"
+					verticalAlignment "Middle"
+					isTouchEnabled "false"
+				}
+			]
+
+			passthrough [
+				object keyframe {
+					children [
+						object child "$1" {
+
+							colorAdditive "Black"
+						}
+					]
+					tween object SinEaseIn {
+					}
+
+				}
+				object keyframe {
+					rel_s "1"
+					children [
+						object child "$1" {
+
+							colorAdditive "White"
+						}
+					]
+					tween object SinEaseOut {
+					}
+
+				}
+				object keyframe {
+					rel_s "1"
+					children [
+						object child "$1" {
+
+							colorAdditive "Black"
+						}
+					]
+				}
+			]
+		}
+	]
+}
+
+class HUDConfigured extends HUD {
+	inheritParentFrame "true"
+	children [
+
+		// Control buttons 
+
+		object DisplayObjectContainer $^_controls {
+			ignoreFrameAttachment "false"
+			parentFrameAttachPoint "1,1"
+			children [
+
+				object HUDButton $^_take {
+					position "0"
+					onTapCallee "HUDConfigured'theHud'"
+					onTapCalleeMethodExpression "onButtonTake"
+					children [
+						object Sprite {
+							texture "Texture'ui_button_take'"
+							children [
+								object KeyHint {
+									texture "Texture'ui_button_keyhint_z'"
+								}
+							]
+						}
+					]
+				}
+
+				object HUDButton $^_drop {
+					position "0,38"
+					onTapCallee "HUDConfigured'theHud'"
+					onTapCalleeMethodExpression "onButtonDrop"
+					children [
+						object Sprite {
+							texture "Texture'ui_button_drop'"
+							children [
+								object KeyHint {
+									texture "Texture'ui_button_keyhint_x'"
+								}
+							]
+						}
+					]
+				}
+
+				object HUDButton $^_use {
+					position "0,76"
+					onTapCallee "HUDConfigured'theHud'"
+					onTapCalleeMethodExpression "onButtonUse"
+					children [
+						object Sprite {
+							texture "Texture'ui_button_use'"
+							children [
+								object KeyHint {
+									texture "Texture'ui_button_keyhint_c'"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+
+		// CLOCK 
+
+		object Clock $^_clock {
+			ignoreFrameAttachment "false"
+			parentFrameAttachPoint "1,1"
+		}
+
+		object DisplayObjectContainer $^_messagehost {
+			ignoreFrameAttachment "false"
+			parentFrameAttachPoint "0,1"
+		}
+
+		// GAME START 
+
+		object UIPopup $^_startup {
+
+			isTouchEnabled "false"
+			defaultShowDuration "0"
+			defaultHideDuration "2"
+			startHidden "false"
+			children [
+				object MovieClip $^_movement {
+					position "0,-100"
+					scale "0.25"
+					children [
+						object MovieClip $^_pulsar {
+							children [
+								object Sprite {
+									texture "Texture'ui_hint_movement'"
+								}
+							]
+
+							passthrough [
+								object keyframe {
+									children [
+										object child "$1" {
+
+											color "Yellow"
+										}
+									]
+									tween object SinEaseIn {
+									}
+
+								}
+								object keyframe {
+									rel_s "2"
+									children [
+										object child "$1" {
+
+											color "Red"
+										}
+									]
+									tween object SinEaseOut {
+									}
+
+								}
+								object keyframe {
+									rel_s "2"
+									children [
+										object child "$1" {
+
+											color "Yellow"
+										}
+									]
+								}
+							]
+						}
+					]
+
+					isLooping "false"
+					passthrough [
+						object keyframe {
+							children [
+							]
+						}
+						object keyframe {
+							rel_s "3"
+							children [
+								object child "$1" {
+
+									color "Invisible"
+								}
+							]
+							tween object QuadEaseOut {
+							}
+
+						}
+						object keyframe {
+							rel_s "6"
+							children [
+								object child "$1" {
+
+								}
+							]
+						}
+					]
+				}
+
+				object MovieClip $^_goal {
+					position "0,104"
+					scale "0.25"
+					children [
+						object Sprite {
+							texture "Texture'ui_hint_goal'"
+						}
+					]
+
+					passthrough [
+						object keyframe {
+							children [
+								object child "$1" {
+
+									color "Blue"
+								}
+							]
+							tween object Linear {
+							}
+
+						}
+						object keyframe {
+							rel_s "1.3"
+							children [
+								object child "$1" {
+
+									color "Green"
+								}
+							]
+							tween object Linear {
+							}
+
+						}
+						object keyframe {
+							rel_s "1.3"
+							children [
+								object child "$1" {
+
+									color "ff004020"
+								}
+							]
+							tween object Linear {
+							}
+
+						}
+						object keyframe {
+							rel_s "1.3"
+							children [
+								object child "$1" {
+
+									color "Blue"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+
+		object DisplayObjectContainer $^_gameover {
+			children [
+
+				object TextField $^_messagetext {
+					position "4,-280"
+					color "ff8fe100"
+					font "Font'uni05_53_8'"
+					fontSize "80"
+					alignment "Centered"
+					verticalAlignment "Middle"
+					isTouchEnabled "false"
+					text "Well done."
+				}
+
+				object Clock $^_finalclock {
+					scale "3"
+					position "0,-200"
+				}
+
+				object HUDButton $^_again {
+					position "0,150"
+					onTapCallee "HUDConfigured'theHud'"
+					onTapCalleeMethodExpression "onButtonPlay"
+					children [
+						object Sprite {
+							texture "Texture'ui_button_again'"
+							children [
+								object KeyHint $^_hint {
+									texture "Texture'ui_button_keyhint_z'"
+									position "-350,150"
+								}
+							]
+						}
+					]
+				}
+
+			]
+		}
+
+	]
+
+	isPlaying "false"
+	isLooping "false"
+
+	passthrough [
+		object keyframe {
+			label "playing"
+			children [
+				object child "$^_controls" {
+
+					position "-48,-150"
+				}
+				object child "$^_clock" {
+
+					position "-48,-35"
+				}
+				object child "$^_startup" {
+
+					position "-32,0"
+				}
+				object child "$^_messagehost" {
+
+					position "-32,-24"
+				}
+
+			]
+		}
+		object keyframe {
+			label "gameover"
+			children [
+				object child "$^_controls" {
+
+					position "-48,-150"
+				}
+				object child "$^_clock" {
+
+					position "-48,-35"
+				}
+				object child "$^_startup" {
+
+					position "-32,0"
+				}
+				object child "$^_messagehost" {
+
+					position "-32,-24"
+				}
+				object child "$^_gameover" {
+
+					position "-32,0"
+					scale "0.75"
+					color "Invisible"
+				}
+			]
+			tween object QuadEaseInOut {
+			}
+
+		}
+		object keyframe {
+			rel_s "2.0"
+			children [
+				object child "$^_controls" {
+
+					color "Black"
+					scale "0.75"
+					position "120,-150"
+				}
+				object child "$^_clock" {
+
+					color "Black"
+					scale "0.75"
+					position "120,60"
+				}
+				object child "$^_startup" {
+
+					position "-32,0"
+					color "Invisible"
+				}
+				object child "$^_messagehost" {
+
+					position "-32,24"
+					color "Black"
+				}
+				object child "$^_gameover" {
+
+					position "-32,0"
+				}
+
+			]
+		}
+
+		object keyframe {
+			rel_s "0.5"
+			children [
+				object child "$^_gameover" {
+
+					position "-32,0"
+				}
+			]
+		}
+
+	]
+
+}
+
+
+

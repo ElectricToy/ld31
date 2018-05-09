@@ -111,6 +111,8 @@ namespace ld
 		vec2 findOpenItemSpawnPosition() const;
 		
 		size_t currentSpawnPhase() const;
+		
+		virtual void updateActors( const std::vector< fr::SmartPtr< fr::FreshActor > >& actors ) override;
 
 	protected:
 		

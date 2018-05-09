@@ -1,0 +1,15 @@
+// platformer Normal Stage 
+
+// TODO had root attribute: root="AppStage'theStage'"		
+object AppStage theStage {
+	stageDimensions "960,640"
+	worldClass "WorldDefault"
+
+	children [
+		object HUDConfigured theHud {
+		}
+	]
+
+}
+
+

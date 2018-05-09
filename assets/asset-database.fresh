@@ -1,0 +1,16 @@
+// Megadventure 
+
+
+object AssetClassMap {
+	map {
+		Texture TextureLoaderConfigured
+		AudioCue AudioCueLoaderConfigured
+		Font FontLoaderConfigured
+	}
+}
+
+include assets/asset-classes.fresh
+
+include assets/assets.fresh
+
+

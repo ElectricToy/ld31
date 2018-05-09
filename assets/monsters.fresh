@@ -1,0 +1,38 @@
+// ld31 monsters 
+
+
+class MonsterDefault extends Monster {
+	desiredDepth "100"
+	dimensions "15"
+
+	texture "Texture'troll'"
+
+	groundSoundName "monster_scratch01"
+	stepSoundNames ["troll_step01", "troll_step02"]
+
+	groundedDrag "32"
+	airDrag "32"
+	airControl "1"
+	controllerImpulseScale "4000"
+	jumpImpulseScale "0"
+
+	dropItemWeights << EOF
+		[
+			{ TorchConfigured, 5 },
+			{ DoorWood, 2 },
+			{ DoorIron, 1 },
+			{ BlockGravel, 3 },
+			{ BlockBrick, 2 },
+			{ BlockStone, 1 },
+			{ MineConfigured, 2 },
+			{ TurretConfigured, 5 },
+	]EOF
+}
+
+class Troll extends MonsterDefault {
+	stepSpeed "2"
+	grindDamage "1"
+	health "1"
+}
+
+

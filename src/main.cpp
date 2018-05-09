@@ -13,7 +13,7 @@ int main( int argc, char* argv[] )
 {
 	pushRandomGeneratorRandomized();
 	
-	ApplicationStaged app( "assets/config.xml" );
+	ApplicationStaged app( "assets/config.fresh" );
 	int retVal = app.runMainLoop( argc, argv );
 	
     return retVal;

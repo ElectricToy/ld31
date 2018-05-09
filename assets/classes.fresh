@@ -1,0 +1,352 @@
+// ld31 classes 
+
+
+const color TorchLight ffff9900
+
+class TorchFlame extends MovieClip {
+	animFramesPerSecond "12"
+	passthrough [
+		object keyframe {
+			texture "Texture'torch_flame'"
+			textureWindow "0,0,0.25,1"
+		}
+		object keyframe {
+			texture "Texture'torch_flame'"
+			textureWindow "0.25,0,0.5,1"
+		}
+		object keyframe {
+			texture "Texture'torch_flame'"
+			textureWindow "0.5,0,0.75,1"
+		}
+		object keyframe {
+			texture "Texture'torch_flame'"
+			textureWindow "0.75,0,1,1"
+		}
+	]
+}
+
+class TorchBase extends MovieClip {
+	animFramesPerSecond "12"
+	passthrough [
+		object keyframe {
+			texture "Texture'torch_base'"
+			textureWindow "0,0,0.25,1"
+		}
+		object keyframe {
+			texture "Texture'torch_base'"
+			textureWindow "0.25,0,0.5,1"
+		}
+		object keyframe {
+			texture "Texture'torch_base'"
+			textureWindow "0.5,0,0.75,1"
+		}
+		object keyframe {
+			texture "Texture'torch_base'"
+			textureWindow "0.75,0,1,1"
+		}
+	]
+}
+
+class TorchGraphic extends DisplayObjectContainer {
+	children [
+		object TorchBase $^_base {
+		}
+		object TorchFlame $^_flame {
+		}
+	]
+}
+
+class Cracks extends MovieClip {
+	isPlaying "false"
+	isLooping "false"
+	color "ff808080"
+	passthrough [
+		object keyframe {
+			texture "Texture'cracks'"
+			textureWindow "0,0,0.125,1"
+		}
+		object keyframe {
+			texture "Texture'cracks'"
+			textureWindow "0.125,0,0.25,1"
+		}
+		object keyframe {
+			texture "Texture'cracks'"
+			textureWindow "0.25,0,0.375,1"
+		}
+		object keyframe {
+			texture "Texture'cracks'"
+			textureWindow "0.375,0,0.5,1"
+		}
+		object keyframe {
+			texture "Texture'cracks'"
+			textureWindow "0.5,0,0.625,1"
+		}
+	]
+}
+
+class ItemBreakParticles extends ParticleEmitter {
+	particleTexture "Texture'debris'"
+	cycleDuration "1.5"
+	destroyWhenAllDead "true"
+	rectSpawnArea "(-4,-6,4,6)"
+	baseScale "12"
+	particleForce "0,-30.0"
+	spawnScaleRange "((0.25),(1.0))"
+	spawnSpeedRange "(0,1)"
+	velocityDamping "0.1"
+	startingParticles "20"
+	creationSpawnBurst "true"
+	creationPauseAfterBurst "true"
+	vecKeyframesScale << EOF
+		[
+			{0, (0)},
+			{0.15, (1)},
+			{1, (0)},
+	] EOF
+	perParticleColorRange "(Gray,White)"
+}
+
+class ExplosionParticles extends ParticleEmitter {
+	particleTexture "Texture'white_simple'"
+	cycleDuration "1.5"
+	destroyWhenAllDead "true"
+	baseScale "4"
+	spawnScaleRange "((0.25),(1.0))"
+	spawnSpeedRange "(0,10)"
+	velocityDamping "0.06"
+	startingParticles "160"
+	creationSpawnBurst "true"
+	creationPauseAfterBurst "true"
+	vecKeyframesScale << EOF
+		[
+			{0, (0)},
+			{0.15, (1)},
+			{1, (0)},
+	] EOF
+	perParticleColorRange "(Red,Yellow)"
+	perFrameColorFlickerRange "(Red,White)"
+
+}
+
+class LightSourceConfigured extends LightSource {
+	lightMask "LightMask'$^_host_light_mask'"
+	gradientHost "Sprite'$^_host_light_gradient'"
+	overlay "Sprite'$^_overlay'"
+
+	overlayRadiusScalar "0.9"
+
+	children [
+		object DisplayObjectContainer $^_host {
+			maskStencilReadMode "MaskExclusive"
+			mask object LightMask $^_light_mask {
+				shaderProgram "ShaderProgram'SP_Pos2Only'"
+				mesh object SimpleMesh {}
+			}
+
+			children [
+				object Sprite $^_light_gradient {
+					shaderProgram "ShaderProgram'SP_LightDiffuse'"
+					blendMode "Add"
+					texture "Texture'light_glow'"
+				}
+			]
+		}
+		object Sprite $^_overlay {
+			shaderProgram "ShaderProgram'SP_LightDiffuse'"
+			blendMode "Add"
+			texture "Texture'light_glow'"
+		}
+	]
+}
+
+class LightTorch extends LightSourceConfigured {
+	color "TorchLight"
+	radius "200"
+}
+
+include assets/items.fresh
+include assets/monsters.fresh
+
+class HumanDefault extends Human {
+	carryOffset "3,-3"
+	// when being carried 
+
+	dimensions "15"
+	grindDamage "8"
+
+	groundSoundName "human_scratch01"
+
+	groundedDrag "32"
+	airDrag "32"
+	airControl "1"
+	controllerImpulseScale "4000"
+	jumpImpulseScale "0"
+
+	lightClass "LightTorch"
+	lightColor "TorchLight"
+	normalLightRadius "200"
+	lightRadius "200"
+	lightWobble "32"
+	lightWobbleLerp "0.1"
+}
+
+class FloorTileTemplate extends ldTileTemplate {
+	atlasSubTexture "0,0"
+	isSolid "false"
+	mayReceiveItem "true"
+	doesBlockLight "false"
+	pctChanceToSpawn "0"
+	itemClassWeights << EOF [
+		{ TorchConfigured, 6 },
+		{ DoorWood, 5 },
+		{ DoorIron, 1 },
+		{ BlockGravel, 6 },
+		{ BlockBrick, 4 },
+		{ BlockStone, 2 },
+		{ MineConfigured, 1 },
+		{ TurretConfigured, 2 },
+	] EOF
+}
+
+class TileGridDefault extends FreshTileGrid {
+	tileClass "ldTile"
+	texture "Texture'tile_atlas'"
+	atlasSubdivisions "2,1"
+	texturesSubdivisionsPerTile "1"
+	tileSize "16"
+
+	templates [
+		object FloorTileTemplate floor_basic {
+			creationColor "ffeaeaea"
+		}
+		object FloorTileTemplate floor_tool_spawn_1 {
+			creationColor "ff079000"
+			pctChanceToSpawn "5"
+		}
+		object FloorTileTemplate floor_tool_spawn_2 {
+			creationColor "ff42ff00"
+			pctChanceToSpawn "8"
+		}
+		object FloorTileTemplate floor_tool_spawn_home {
+			creationColor "ffccff00"
+			pctChanceToSpawn "35"
+			itemClassWeights << EOF [
+					{ DoorWood, 3 },
+					{ DoorIron, 1 },
+					{ BlockGravel, 5 },
+					{ BlockBrick, 3 },
+					{ BlockStone, 1 },
+					{ MineConfigured, 1 },
+					{ TurretConfigured, 2 },
+			] EOF
+		}
+		object FloorTileTemplate floor_monster_spawn {
+			creationColor "ff7e00f3"
+			isMonsterSpawner "true"
+			mayReceiveItem "false"
+		}
+		object FloorTileTemplate floor_immutable {
+			creationColor "fff17c3d"
+			mayReceiveItem "false"
+		}
+		object ldTileTemplate wall_immutable {
+			atlasSubTexture "1,0"
+			creationColor "ff444444"
+			mayReceiveItem "false"
+		}
+		object ldTileTemplate wall_really_immutable {
+			atlasSubTexture "1,0"
+			creationColor "ffc65112"
+			mayReceiveItem "false"
+		}
+	]
+}
+
+
+class WorldDefault extends ldWorld {
+	position "-496,-336"
+	gravity "0"
+
+	playerControllerClass "ldPlayerController"
+	camera object Camera {
+		focalPoint "456,328"
+		zoomRatio 1
+		targetZoomRatio 1
+	}
+
+
+	children [
+
+		object TileGridDefault $^_tileGrid {
+			creationGridImage "Texture'level001'"
+		}
+
+		object HumanDefault $^_kid3 {
+			controlPriority "0"
+			friendlyName "Alice"
+			texture "Texture'kid3'"
+			position "520,360"
+
+			stepSpeed "10"
+			grindDamage "4"
+		}
+
+		object HumanDefault $^_kid2 {
+			controlPriority "1"
+			friendlyName "Buddy"
+			texture "Texture'kid2'"
+			position "488,360"
+			male "true"
+
+			stepSpeed "6"
+			grindDamage "10"
+		}
+		object HumanDefault $^_kid1 {
+			controlPriority "2"
+			friendlyName "Myra"
+			texture "Texture'kid1'"
+			position "456,360"
+
+			stepSpeed "9"
+			grindDamage "5"
+		}
+
+		object HumanDefault $^_mom {
+			controlPriority "3"
+			friendlyName "Claire"
+			texture "Texture'mom'"
+			position "424,360"
+
+			stepSpeed "8"
+			grindDamage "6"
+		}
+
+		object HumanDefault $^_dad {
+			controlPriority "4"
+			friendlyName "John"
+			texture "Texture'dad'"
+			position "448,320"
+			male "true"
+
+			stepSpeed "6"
+			grindDamage "8"
+		}
+
+		object Lighting $^_lighting {
+			ambientColor "Black"
+			tileGrid "TileGridDefault'$^^_tileGrid'"
+			children [
+				object LightSourceConfigured $^_light_home {
+					position "448,320"
+					color "ffff9060"
+					radius "400"
+				}
+			]
+		}
+	]
+}
+
+include assets/hud.fresh
+
+
+

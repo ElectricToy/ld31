@@ -353,6 +353,11 @@ namespace ld
 					 } );
 	}
 	
+	void ldWorld::updateActors( const std::vector< SmartPtr< FreshActor > >& actors )
+	{
+		// Do nothing.
+	}
+	
 	void ldWorld::updateActorCollisions()
 	{
 		// Build list of actors.

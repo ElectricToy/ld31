@@ -1,0 +1,14 @@
+// ld31 Application Configuration - Any Platform 
+
+object AppStageConfig config {
+	desiredTitle "LudumDare31"
+	documentsSubfolder "The Electric Toy Co/ld31"
+	logFileName "runlog.txt"
+	desiredFramesPerSecond "60"
+	desiredWindowRect "0, 0, 1440, 960"
+	classPath "assets/classes.fresh"
+	stringTablePath "assets/strings.fresh"
+	assetDatabasePath "assets/asset-database.fresh"
+	stageManifestPath "assets/stage.fresh"
+}
+

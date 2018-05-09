@@ -1,0 +1,11 @@
+// ld31 strings 
+
+
+object StringTable strings {
+	table << EOF
+		{
+		"AppTitle" = "ld31"
+	}EOF
+}
+
+

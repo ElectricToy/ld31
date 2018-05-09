@@ -1,0 +1,160 @@
+// ld31 items 
+
+
+class ProvisionFlashLightSource extends LightSourceConfigured {
+	color "ff0040e0"
+	radius "32"
+}
+
+class DoorBase extends Door {
+
+	desiredDepth "-100"
+	isPlaying "false"
+	blocksHumans "false"
+	blocksMonsters "true"
+
+	provisionFlashLightSourceClass "ProvisionFlashLightSource"
+	dieEmitterClass "ItemBreakParticles"
+
+	cracksHost "DisplayObjectContainer'$^_cracksHost'"
+
+	children [
+		object DisplayObjectContainer $^_cracksHost {
+		}
+	]
+}
+
+class DoorWood extends DoorBase {
+	navDistanceScalar "5"
+	maxHealth "20"
+	health "20"
+
+	passthrough [
+		object keyframe {
+			label "closed"
+			texture "Texture'door'"
+			textureWindow "0,0,0.5,1"
+			children [
+				object child "$1" {}
+			]
+		}
+		object keyframe {
+			label "open"
+			texture "Texture'door'"
+			textureWindow "0.5,0,1,1"
+		}
+	]
+}
+
+class DoorIron extends DoorBase {
+	navDistanceScalar "10"
+	maxHealth "50"
+	health "50"
+	passthrough [
+		object keyframe {
+			label "closed"
+			texture "Texture'door_iron'"
+			textureWindow "0,0,0.5,1"
+			children [
+				object child "$1" {}
+			]
+		}
+		object keyframe {
+			label "open"
+			texture "Texture'door_iron'"
+			textureWindow "0.5,0,1,1"
+		}
+	]
+}
+
+class BlockBase extends Item {
+	desiredDepth "-1000"
+	blocksHumans "true"
+	blocksMonsters "true"
+	pushesHolderWhenUsed "true"
+
+	provisionFlashLightSourceClass "ProvisionFlashLightSource"
+	dieEmitterClass "ItemBreakParticles"
+
+	navDistanceScalar "30"
+
+	texture "Texture'blocks'"
+}
+
+class BlockGravel extends BlockBase {
+	navDistanceScalar "6"
+	textureWindow "0,0,0.25,1"
+	maxHealth "30"
+	health "30"
+}
+
+class BlockBrick extends BlockBase {
+	navDistanceScalar "15"
+	textureWindow "0.25,0,0.5,1"
+	maxHealth "60"
+	health "60"
+}
+
+class BlockStone extends BlockBase {
+	navDistanceScalar "25"
+	textureWindow "0.5,0,0.75,1"
+	maxHealth "100"
+	health "100"
+}
+
+class TorchConfigured extends Torch {
+	desiredDepth "-50"
+
+	blocksHumans "false"
+	blocksMonsters "false"
+	mayBePlaced "false"
+
+	placedRotation "0"
+	placedScale "1"
+
+	dieEmitterClass "ItemBreakParticles"
+	suppressesHolderLight "true"
+
+	lightClass "LightTorch"
+	lightRadius "100"
+	lightColor "Red"
+	lightWobble "16"
+
+	children [
+		object TorchGraphic {
+		}
+	]
+}
+
+class MineConfigured extends Mine {
+	desiredDepth "-75"
+	texture "Texture'mine'"
+	blocksHumans "false"
+	blocksMonsters "false"
+
+	provisionFlashLightSourceClass "ProvisionFlashLightSource"
+	dieEmitterClass "ExplosionParticles"
+
+	lightClass "LightTorch"
+	lightColor "Red"
+	lightWobble "0"
+}
+
+class TurretArrow extends Missile {
+	desiredDepth "1000"
+	texture "Texture'missile'"
+	dieEmitterClass "ItemBreakParticles"
+	dimensions "14,2"
+}
+
+class TurretConfigured extends Turret {
+	desiredDepth "-25"
+	texture "Texture'turret'"
+	blocksHumans "false"
+	blocksMonsters "false"
+	dropsWhenUsed "false"
+
+	provisionFlashLightSourceClass "ProvisionFlashLightSource"
+	dieEmitterClass "ItemBreakParticles"
+}
+
