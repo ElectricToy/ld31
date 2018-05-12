@@ -526,7 +526,8 @@ namespace ld
 		{
 			// Yes.
 			//
-			spawnMonster();
+			// TODO!!!
+//			spawnMonster();
 			
 			const auto& range = PHASE_SPAWN_DELAY_RANGE.at( phase );
 			m_nextSpawnTime = timePlayedSeconds() + range.first + randInRange( -range.second, range.second );

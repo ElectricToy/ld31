@@ -25,7 +25,7 @@ class DoorBase extends Door {
 }
 
 class DoorWood extends DoorBase {
-	navDistanceScalar "5"
+	navDistanceScalar "20"
 	maxHealth "20"
 	health "20"
 
@@ -47,7 +47,7 @@ class DoorWood extends DoorBase {
 }
 
 class DoorIron extends DoorBase {
-	navDistanceScalar "10"
+	navDistanceScalar "50"
 	maxHealth "50"
 	health "50"
 	passthrough [
@@ -82,21 +82,21 @@ class BlockBase extends Item {
 }
 
 class BlockGravel extends BlockBase {
-	navDistanceScalar "6"
+	navDistanceScalar "30"
 	textureWindow "0,0,0.25,1"
 	maxHealth "30"
 	health "30"
 }
 
 class BlockBrick extends BlockBase {
-	navDistanceScalar "15"
+	navDistanceScalar "60"
 	textureWindow "0.25,0,0.5,1"
 	maxHealth "60"
 	health "60"
 }
 
 class BlockStone extends BlockBase {
-	navDistanceScalar "25"
+	navDistanceScalar "100"
 	textureWindow "0.5,0,0.75,1"
 	maxHealth "100"
 	health "100"
