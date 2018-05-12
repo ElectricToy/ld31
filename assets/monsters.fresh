@@ -2,8 +2,10 @@
 
 
 class MonsterDefault extends Monster {
+	controller object FreshActorController {}
+
 	desiredDepth "100"
-	dimensions "15"
+	dimensions "8"
 
 	texture "Texture'troll'"
 

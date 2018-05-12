@@ -23,7 +23,6 @@ namespace ld
 		SYNTHESIZE_GET( int, controlPriority );
 		
 		virtual int desiredDepth() const override;
-
 		
 		virtual real lightWobble() const override;
 		virtual real normalLightRadius() const override;
@@ -31,7 +30,7 @@ namespace ld
 		virtual bool canPickup( const ldActor& other ) const override;
 		
 		virtual bool isHuman() const override { return true; }
-		virtual bool isPlayer() const override;
+		SYNTHESIZE( bool, isPlayer );
 
 		virtual bool canStep( const vec2& dir ) const override;		
 		
@@ -51,6 +50,7 @@ namespace ld
 		
 		DVAR( int, m_controlPriority, 0 );
 		DVAR( bool, m_male, false );
+		DVAR( bool, m_isPlayer, false );
 		
 	};
 	

@@ -181,7 +181,7 @@ namespace ld
 		
 		if( !destination.isZero() )
 		{
-			travelTo( destination );
+			controller()->travelTo( destination );
 		}
 	}
 	

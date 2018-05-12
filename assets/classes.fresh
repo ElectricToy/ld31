@@ -168,10 +168,12 @@ include assets/items.fresh
 include assets/monsters.fresh
 
 class HumanDefault extends Human {
+	controller object ldPlayerController {}
+
 	carryOffset "3,-3"
 	// when being carried 
 
-	dimensions "15"
+	dimensions "12"
 	grindDamage "8"
 
 	groundSoundName "human_scratch01"
@@ -188,6 +190,7 @@ class HumanDefault extends Human {
 	lightRadius "200"
 	lightWobble "32"
 	lightWobbleLerp "0.1"
+
 }
 
 class FloorTileTemplate extends ldTileTemplate {
@@ -267,7 +270,6 @@ class WorldDefault extends ldWorld {
 	position "-496,-336"
 	gravity "0"
 
-	playerControllerClass "ldPlayerController"
 	camera object Camera {
 		focalPoint "456,328"
 		zoomRatio 1

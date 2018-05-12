@@ -19,6 +19,8 @@ namespace ld
 	{
 		FRESH_DECLARE_CLASS( ldPlayerController, FreshPlayerController );
 	public:
+
+		virtual void updateMovementControls() override;
 		
 	private:
 		

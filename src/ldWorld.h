@@ -156,7 +156,6 @@ namespace ld
 
 	private:
 		
-		VAR( ClassInfo::cptr, m_playerControllerClass );
 		DVAR( int, m_lastActiveUpdate, 0 );
 		DVAR( bool, m_playerHasMoved, false );
 		DVAR( size_t, m_minInitialTorches, 4 );

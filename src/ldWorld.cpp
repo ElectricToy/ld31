@@ -55,7 +55,6 @@ namespace
 namespace ld
 {	
 	FRESH_DEFINE_CLASS( ldWorld )
-	DEFINE_VAR( ldWorld, ClassInfo::cptr, m_playerControllerClass );
 	DEFINE_VAR( ldWorld, int, m_lastActiveUpdate );
 	DEFINE_VAR( ldWorld, bool, m_playerHasMoved );
 	DEFINE_VAR( ldWorld, size_t, m_minInitialTorches );
@@ -362,7 +361,7 @@ namespace ld
 	{
 		if( auto thePlayer = player() )
 		{
-			thePlayer->travelTo( event.location() );
+			thePlayer->controller()->travelTo( event.location() );
 		}
 	}
 
@@ -431,59 +430,56 @@ namespace ld
 	
 	void ldWorld::pickActiveHuman()
 	{
-		if( m_playerControllerClass )
+		Human::ptr currentPlayer = player();
+		
+		const bool hadPlayer = currentPlayer != nullptr;
+		
+		if( currentPlayer )
 		{
-			Human::ptr currentPlayer = player();
-			
-			const bool hadPlayer = currentPlayer != nullptr;
+			if( !currentPlayer->alive() || currentPlayer->isPickedUp() )
+			{
+				// Can't use this one anymore.
+				//
+				currentPlayer->isPlayer( false );
+				ASSERT( !currentPlayer->isPlayer() );
+				ASSERT( !player() );
+				currentPlayer = nullptr;
+			}
+		}
+		
+		// Do we need a new player?
+		//
+		if( !currentPlayer )
+		{
+			// Pick one.
+			//
+			forEachChild< Human >( [&]( Human& human )
+								  {
+									  if( human.alive() && !human.isPickedUp() )
+									  {
+										  if( !currentPlayer || human.controlPriority() > currentPlayer->controlPriority() )
+										  {
+											  currentPlayer = &human;
+										  }
+									  }
+								  } );
 			
 			if( currentPlayer )
 			{
-				if( !currentPlayer->alive() || currentPlayer->isPickedUp() )
-				{
-					// Can't use this one anymore.
-					//
-					currentPlayer->controller( nullptr );
-					ASSERT( !currentPlayer->isPlayer() );
-					ASSERT( !player() );
-					currentPlayer = nullptr;
-				}
-			}
-			
-			// Do we need a new player?
-			//
-			if( !currentPlayer )
-			{
-				// Pick one.
-				//
-				forEachChild< Human >( [&]( Human& human )
-									  {
-										  if( human.alive() && !human.isPickedUp() )
-										  {
-											  if( !currentPlayer || human.controlPriority() > currentPlayer->controlPriority() )
-											  {
-												  currentPlayer = &human;
-											  }
-										  }
-									  } );
+				currentPlayer->isPlayer( true );
+				ASSERT( currentPlayer->isPlayer() );
+				ASSERT( player() == currentPlayer );
 				
-				if( currentPlayer )
+				if( auto cam = camera() )
 				{
-					currentPlayer->controller( createObject< FreshPlayerController >( *m_playerControllerClass ));
-					ASSERT( currentPlayer->isPlayer() );
-					ASSERT( player() == currentPlayer );
-					
-					if( auto cam = camera() )
-					{
-						cam->setTarget( currentPlayer );
-					}
-					
-					// We only do this on later characters because otherwise it's too noisy at the beginning.
-					//
-					if( hadPlayer )
-					{
-						stage().as< AppStage >()->hud().showMessage( createString( "You are " << currentPlayer->friendlyName() << "." ), "NewHumanMessagePopup" );
-					}
+					cam->setTarget( currentPlayer );
+				}
+				
+				// We only do this on later characters because otherwise it's too noisy at the beginning.
+				//
+				if( hadPlayer )
+				{
+					stage().as< AppStage >()->hud().showMessage( createString( "You are " << currentPlayer->friendlyName() << "." ), "NewHumanMessagePopup" );
 				}
 			}
 		}

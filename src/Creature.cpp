@@ -67,8 +67,8 @@ namespace ld
 	vec2 Creature::bePickedUpBy( Creature& other )
 	{
 		ASSERT( !isPickedUp() );
+		controller()->stopTravel();
 		stopStepping();
-		stopTravel();
 		dropHeldActor();
 		return Super::bePickedUpBy( other );
 	}
@@ -423,7 +423,7 @@ namespace ld
 	void Creature::grind( const vec2& dir )
 	{
 		ASSERT( dir.x == 0 || dir.y == 0 );
-		ASSERT( dir.lengthSquared() == 1.0f );
+		ASSERT( isEqual( dir.lengthSquared(), 1.0f, 0.01f ));
 		
 		m_facingDirection = dir;
 		
@@ -442,48 +442,9 @@ namespace ld
 		}
 	}
 
-	void Creature::travelTo( const vec2& pos )
-	{
-		if( !alive() || isPickedUp() ) return;
-		
-		FreshTileGrid::Path path;
-		tileGrid().findClosestPath( position(), pos, path, WORLD_PER_TILE * 0.4f );
-		
-		// The first element, if any, is where I am already.
-		if( !path.empty() )
-		{
-			path.erase( path.begin() );
-		}
-		
-		pursueTilePath( path );
-	}
-	
-	void Creature::stopTravel()
-	{
-		m_worldSpacePath.clear();
-	}
-	
-	vec2 Creature::travelDestination() const
-	{
-		if( m_worldSpacePath.empty() )
-		{
-			return vec2::ZERO;
-		}
-		else
-		{
-			return m_worldSpacePath.back();
-		}
-	}
-	
-	void Creature::pursueTilePath( const fr::FreshTileGrid::Path& path )
-	{
-		m_worldSpacePath.clear();
-		tileGrid().convertToWorldSpacePath( path.begin(), path.end(), std::back_inserter( m_worldSpacePath ));		
-	}
-
 	void Creature::die()
 	{
-		stopTravel();
+		controller()->stopTravel();
 		
 		dropHeldActor();
 		

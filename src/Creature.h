@@ -56,10 +56,6 @@ namespace ld
 		
 		virtual void onBeginPlay() override;
 		
-		void travelTo( const vec2& pos );
-		void stopTravel();
-		vec2 travelDestination() const;
-		
 	protected:
 		
 		virtual real grindDamage() const;

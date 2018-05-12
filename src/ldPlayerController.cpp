@@ -18,10 +18,28 @@ namespace ld
 	
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldPlayerController )
 
+	void ldPlayerController::updateMovementControls()
+	{
+		if( const auto myHost = host()->as< Human >() )
+		{
+			if( !myHost->isPlayer() )
+			{
+				return;
+			}
+			
+			Super::updateMovementControls();
+		}			
+	}
+	
 	FRESH_DEFINE_CALLBACK( ldPlayerController, onStageKeyDown, EventKeyboard )
 	{
 		if( const auto myHost = host()->as< Human >() )
 		{
+			if( !myHost->isPlayer() )
+			{
+				return;
+			}
+			
 			switch( event.key() )
 			{
 				case Keyboard::Z:

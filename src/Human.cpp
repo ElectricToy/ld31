@@ -18,6 +18,7 @@ namespace ld
 	FRESH_DEFINE_CLASS( Human )
 	DEFINE_VAR( Human, int, m_controlPriority );
 	DEFINE_VAR( Human, bool, m_male );
+	DEFINE_VAR( Human, bool, m_isPlayer );
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( Human )
 
 	int Human::desiredDepth() const
@@ -52,11 +53,6 @@ namespace ld
 	bool Human::canPickup( const ldActor& other ) const
 	{
 		return isPlayer() && other.isItem() && Super::canPickup( other );
-	}
-	
-	bool Human::isPlayer() const
-	{
-		return controller() != nullptr;
 	}
 	
 	bool Human::canStep( const vec2& dir ) const
@@ -98,7 +94,7 @@ namespace ld
 			// At home?
 			//
 			if( !HOME_INNER_BOUNDS.doesEnclose( position() ) &&
-			    !HOME_INNER_BOUNDS.doesEnclose( travelDestination() ))
+			    !HOME_INNER_BOUNDS.doesEnclose( controller()->travelDestination() ))
 			{
 				// Nope. Definitely move.
 				//
@@ -129,7 +125,7 @@ namespace ld
 						
 						if( !actorsHere )
 						{
-							travelTo( destination );
+							controller()->travelTo( destination );
 						}
 					}
 				}
