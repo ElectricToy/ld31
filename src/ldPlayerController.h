@@ -20,10 +20,6 @@ namespace ld
 		FRESH_DECLARE_CLASS( ldPlayerController, FreshPlayerController );
 	public:
 		
-		virtual void possess( fr::FreshActor& actor ) override;
-
-		virtual void update() override;
-		
 	private:
 		
 		FRESH_DECLARE_CALLBACK( ldPlayerController, onStageKeyDown, fr::EventKeyboard ) override;

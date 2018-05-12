@@ -116,6 +116,8 @@ namespace ld
 
 	protected:
 		
+		virtual void onTapped( const fr::EventTouch& event ) override;
+		
 		void updateActorCollisions();
 		void checkCollision( ldActor& a, ldActor& b );
 		virtual void maybeSpawnMonsters();

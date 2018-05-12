@@ -18,41 +18,6 @@ namespace ld
 	
 	FRESH_IMPLEMENT_STANDARD_CONSTRUCTORS( ldPlayerController )
 
-	void ldPlayerController::possess( FreshActor& host_ )
-	{
-		Super::possess( host_ );		
-	}
-	
-	void ldPlayerController::update()
-	{
-		if( const auto myHost = host()->as< Human >() )
-		{
-			vec2 movementImpulse;
-			
-			if( Keyboard::isKeyDown( Keyboard::LeftArrow ) || Keyboard::isKeyDown( Keyboard::A ))
-			{
-				movementImpulse.x -= 1;
-			}
-			if( Keyboard::isKeyDown( Keyboard::RightArrow ) || Keyboard::isKeyDown( Keyboard::D ))
-			{
-				movementImpulse.x += 1;
-			}
-			if( Keyboard::isKeyDown( Keyboard::UpArrow ) || Keyboard::isKeyDown( Keyboard::W ))
-			{
-				movementImpulse.y -= 1;
-			}
-			if( Keyboard::isKeyDown( Keyboard::DownArrow ) || Keyboard::isKeyDown( Keyboard::S ))
-			{
-				movementImpulse.y += 1;
-			}
-			
-			if( !movementImpulse.isZero() )
-			{
-				myHost->applyControllerImpulse( movementImpulse );
-			}
-		}
-	}
-	
 	FRESH_DEFINE_CALLBACK( ldPlayerController, onStageKeyDown, EventKeyboard )
 	{
 		if( const auto myHost = host()->as< Human >() )

@@ -68,6 +68,7 @@ namespace ld
 	{
 		ASSERT( !isPickedUp() );
 		stopStepping();
+		stopTravel();
 		dropHeldActor();
 		return Super::bePickedUpBy( other );
 	}
@@ -296,6 +297,7 @@ namespace ld
 				}
 			}
 			
+			stepToPursue.snapToMajorAxis();
 			stepToPursue.normalize();
 			ASSERT( !stepToPursue.isZero() );
 			beginStepping( stepToPursue );
@@ -330,7 +332,7 @@ namespace ld
 		ASSERT( !isPickedUp() );
 		ASSERT( !isStepping() );
 		ASSERT( dir.x == 0 || dir.y == 0 );
-		ASSERT( dir.lengthSquared() == 1 );
+		ASSERT( isEqual( dir.lengthSquared(), 1.0f, 0.01f ));
 		
 		// Flip to face step direction.
 		//
@@ -442,6 +444,8 @@ namespace ld
 
 	void Creature::travelTo( const vec2& pos )
 	{
+		if( !alive() || isPickedUp() ) return;
+		
 		FreshTileGrid::Path path;
 		tileGrid().findClosestPath( position(), pos, path, WORLD_PER_TILE * 0.4f );
 		
@@ -474,8 +478,7 @@ namespace ld
 	void Creature::pursueTilePath( const fr::FreshTileGrid::Path& path )
 	{
 		m_worldSpacePath.clear();
-		tileGrid().convertToWorldSpacePath( path.begin(), path.end(), std::back_inserter( m_worldSpacePath ));
-		
+		tileGrid().convertToWorldSpacePath( path.begin(), path.end(), std::back_inserter( m_worldSpacePath ));		
 	}
 
 	void Creature::die()

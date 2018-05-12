@@ -358,6 +358,14 @@ namespace ld
 		// Do nothing.
 	}
 	
+	void ldWorld::onTapped( const fr::EventTouch& event )
+	{
+		if( auto thePlayer = player() )
+		{
+			thePlayer->travelTo( event.location() );
+		}
+	}
+
 	void ldWorld::updateActorCollisions()
 	{
 		// Build list of actors.
